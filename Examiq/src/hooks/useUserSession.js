@@ -78,10 +78,11 @@ function calcStreak(currentStreak, streakLastDate) {
 
 function defaultSession() {
   return {
-    name: 'Użytkownik',
+    name: '',           // pusty — użytkownik jeszcze nie ustawił nicku
+    isNew: true,        // flaga: pokaż ekran powitalny
     lastActive: todayISO(),
-    streak: 1,
-    streakLastDate: todayISO(),
+    streak: 0,
+    streakLastDate: null,
   };
 }
 
@@ -116,10 +117,16 @@ export function useUserSession() {
     });
   }, []);
 
-  // Zmiana nazwy użytkownika
+  // Zmiana nazwy użytkownika (pierwsze ustawienie czyści flagę isNew i startuje streak)
   const setName = useCallback((name) => {
-    updateSession({ name: name.trim() || 'Użytkownik' });
-  }, [updateSession]);
+    const trimmed = name.trim() || 'Użytkownik';
+    const isFirstTime = session.isNew;
+    updateSession({
+      name: trimmed,
+      isNew: false,
+      ...(isFirstTime ? { streak: 1, streakLastDate: todayISO() } : {}),
+    });
+  }, [session, updateSession]);
 
   // Zapisz wynik egzaminu + zaktualizuj streak + postęp per kategoria
   const saveExamResult = useCallback(({ score, total, duration, category = 'all', questions = [] }) => {
