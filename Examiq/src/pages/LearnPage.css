@@ -1,0 +1,59 @@
+/* Formatowanie do snippetów (pytań otwartych itp.) */
+
+.code-snippet {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+  text-align: left;
+}
+
+.code-snippet code {
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  display: block;
+  white-space: pre;
+  text-align: left;
+  text-indent: 0;
+  padding: 0;
+  margin: 0;
+  color: #d4d4d4;
+}
+
+.code-snippet::before {
+  content: attr(data-lang);
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #555;
+  margin-bottom: 0.4rem;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kw   { color: #c586c0; }          /* keyword:  function, const, if, for, class */
+.fn   { color: #dcdcaa; }          /* function: log, fetch, findMax            */
+.tp   { color: #4ec9b0; }          /* type:     String, List, Vec, Animal       */
+.st   { color: #ce9178; }          /* string:   "hello", `template`             */
+.nm   { color: #b5cea8; }          /* number:   0, 42, 3.7f                     */
+.cm   { color: #6a9955; font-style: italic; } /* comment: // ... */
+
+.gap {
+  display: inline-block;
+  min-width: 60px;
+  border-bottom: 2px solid #569cd6;
+  color: #569cd6;
+  font-style: italic;
+  margin: 0 2px;
+}
+
+.code-snippet pre {
+  margin: 0;
+  padding: 1rem;
+  text-indent: 0;
+}

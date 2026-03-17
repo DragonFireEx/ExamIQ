@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Który z wymienionych elementów stanowi przykład zbiorowej ochrony?",
+    "options": {
+      "A": "Zatyczki do uszu",
+      "B": "Okulary ochronne",
+      "C": "Kask ochronny",
+      "D": "Ekran akustyczny"
+    },
+    "answer": "D",
+    "explanation": "Środki ochrony zbiorowej chronią grupę pracowników bez konieczności indywidualnego stosowania. Ekran akustyczny chroni wszystkich w pomieszczeniu. Zatyczki, okulary i kask to środki ochrony indywidualnej."
+  },
+  {
+    "id": 2,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Środowiskiem dedykowanym do tworzenia aplikacji mobilnych dla urządzeń Apple, wykorzystującym języki Swift i Objective-C, jest:",
+    "options": {
+      "A": "NetBeans",
+      "B": "Android Studio",
+      "C": "XCode",
+      "D": "React Native"
+    },
+    "answer": "C",
+    "explanation": "XCode to oficjalne IDE firmy Apple do tworzenia aplikacji na iOS, macOS, watchOS i tvOS. Android Studio to IDE Google dla Androida. NetBeans to ogólne IDE, a React Native to framework cross-platform."
+  },
+  {
+    "id": 3,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Który aspekt projektu aplikacji jest kluczowy dla zabezpieczenia danych użytkowników?",
+    "options": {
+      "A": "Tworzenie prostych formularzy do rejestracji",
+      "B": "Koncentracja na wyglądzie interfejsu użytkownika",
+      "C": "Zastosowanie zaawansowanych systemów ochrony",
+      "D": "Pominięcie testowania aplikacji w etapie produkcji"
+    },
+    "answer": "C",
+    "explanation": "Kluczowe jest zastosowanie zaawansowanych systemów ochrony: szyfrowania, uwierzytelniania, autoryzacji, walidacji danych i ochrony przed atakami (XSS, SQL Injection itp.)."
+  },
+  {
+    "id": 4,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Jak najlepiej przełożyć oczekiwania klienta na dokumentację techniczną dla programistów?",
+    "options": {
+      "A": "Rozmawiając wyłącznie z zespołem programistów",
+      "B": "Opracowując wizualne makiety bez dokładnych opisów",
+      "C": "Pomijając szczegółowe wymagania techniczne",
+      "D": "Tworząc szczegółowy dokument z funkcjami oraz wymaganiami technicznymi"
+    },
+    "answer": "D",
+    "explanation": "Właściwym sposobem jest stworzenie dokumentu SRS (Software Requirements Specification) zawierającego funkcje, przypadki użycia i wymagania techniczne, eliminując nieporozumienia między klientem a programistami."
+  },
+  {
+    "id": 5,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Które z wymienionych działań stanowi zagrożenie dla emocjonalnego dobrostanu człowieka w sieci?",
+    "options": {
+      "A": "Zła postawa podczas pracy przy komputerze",
+      "B": "Nadmierne korzystanie z mediów społecznościowych",
+      "C": "Cyberstalking",
+      "D": "Przesyłanie niezaszyfrowanych plików"
+    },
+    "answer": "C",
+    "explanation": "Cyberstalking to uporczywe nękanie i śledzenie ofiary w internecie, co bezpośrednio zagraża emocjonalnemu dobrostanowi i bezpieczeństwu psychicznemu. Pozostałe opcje dotyczą zdrowia fizycznego lub bezpieczeństwa danych."
+  },
+  {
+    "id": 6,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Które z wymienionych środowisk programistycznych jest rekomendowane do tworzenia aplikacji w języku Python z użyciem frameworka Django?",
+    "options": {
+      "A": "Unity",
+      "B": "PyCharm",
+      "C": "Android Studio",
+      "D": "XCode"
+    },
+    "answer": "B",
+    "explanation": "PyCharm (JetBrains) to IDE dedykowane Pythonowi z wbudowanym wsparciem dla Django: inspekcja kodu, podpowiedzi, debugger, zarządzanie wirtualnymi środowiskami i integracja z bazami danych."
+  },
+  {
+    "id": 7,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Programista aplikacji mobilnych chce przekwalifikować się na Full-Stack Developer. Wskaż kurs, który powinien wybrać:",
+    "options": {
+      "A": "Complete JavaScript React, SQL, Node.js Course",
+      "B": "Mastering Cross-platform Developping",
+      "C": "Ultimate C# Series from Beginner to Advanced",
+      "D": "Raster and Vector Graphics with Adobe"
+    },
+    "answer": "A",
+    "explanation": "Full-Stack Developer musi znać frontend (React/JavaScript), backend (Node.js) i bazy danych (SQL). Kurs A obejmuje wszystkie te technologie w jednym."
+  },
+  {
+    "id": 8,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest JWT (JSON Web Token)?",
+    "options": {
+      "A": "Kompaktowy format do bezpiecznego przekazywania informacji między stronami jako obiekt JSON",
+      "B": "Biblioteka JavaScript do manipulacji danymi JSON",
+      "C": "Protokół do przesyłania danych JSON przez sieć",
+      "D": "Format zapisu danych w bazach NoSQL"
+    },
+    "answer": "A",
+    "explanation": "JWT to otwarty standard (RFC 7519) definiujący kompaktowy, samodzielny sposób bezpiecznego przekazywania informacji jako obiekt JSON. Używany głównie do uwierzytelniania i autoryzacji w aplikacjach webowych."
+  },
+  {
+    "id": 9,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Jaką kategorię własności intelektualnej reprezentują znaki towarowe?",
+    "options": {
+      "A": "Dobra niematerialne",
+      "B": "Własność przemysłowa",
+      "C": "Prawa pokrewne",
+      "D": "Autorskie prawa majątkowe"
+    },
+    "answer": "B",
+    "explanation": "Znaki towarowe należą do własności przemysłowej, obok patentów, wzorów użytkowych i przemysłowych. Chronione są przepisami prawa własności przemysłowej, a nie prawa autorskiego."
+  },
+  {
+    "id": 10,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Które z poniższych nie jest systemem kontroli wersji?",
+    "options": {
+      "A": "MongoDB",
+      "B": "SVN",
+      "C": "Git",
+      "D": "Mercurial"
+    },
+    "answer": "A",
+    "explanation": "MongoDB to nierelacyjna baza danych (NoSQL), nie system kontroli wersji. Git, SVN (Subversion) i Mercurial to systemy kontroli wersji służące do śledzenia zmian w kodzie źródłowym."
+  },
+  {
+    "id": 11,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Celem zastosowania wzorca Obserwator w tworzeniu aplikacji WEB jest:",
+    "options": {
+      "A": "informowanie obiektów o modyfikacji stanu innych obiektów",
+      "B": "monitorowanie działań użytkownika oraz generowanie wyjątków",
+      "C": "dostosowanie interfejsu użytkownika do różnych kategorii użytkowników",
+      "D": "zarządzanie funkcjami synchronicznymi w kodzie aplikacji"
+    },
+    "answer": "A",
+    "explanation": "Wzorzec Obserwator (Observer) definiuje zależność jeden-do-wielu: gdy obiekt Subject zmienia stan, wszystkie zależne obiekty Observers są automatycznie powiadamiane i aktualizowane."
+  },
+  {
+    "id": 12,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Jakie narzędzie najlepiej sprawdza się w przekształcaniu liczby szesnastkowej na binarną?",
+    "options": {
+      "A": "Aplikacja internetowa",
+      "B": "Program do edycji tekstu",
+      "C": "Program do arkuszy kalkulacyjnych",
+      "D": "Kalkulator programisty"
+    },
+    "answer": "D",
+    "explanation": "Kalkulator programisty (dostępny w Windows i Linux) jest dedykowanym narzędziem do konwersji między systemami liczbowymi: dziesiętnym, szesnastkowym, binarnym i ósemkowym — jednym kliknięciem."
+  },
+  {
+    "id": 13,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co oznacza pojęcie TDD w kontekście programowania?",
+    "options": {
+      "A": "Test-Driven Development - praktyka pisania testów przed implementacją kodu",
+      "B": "Task Deployment Diagram - schemat wdrażania zadań w projekcie",
+      "C": "Technical Design Document - dokumentacja techniczna projektu",
+      "D": "Type Definition Document - dokumentacja typów danych w aplikacji"
+    },
+    "answer": "A",
+    "explanation": "TDD (Test-Driven Development) to metodologia, w której najpierw pisze się testy jednostkowe (które początkowo nie przechodzą), a następnie implementuje minimalny kod je spełniający. Cykl: Red → Green → Refactor."
+  },
+  {
+    "id": 14,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Które z wymienionych działań zwiększa bezpieczeństwo transakcji online?",
+    "options": {
+      "A": "Nieaktualizowanie oprogramowania przeglądarki",
+      "B": "Weryfikowanie certyfikatów SSL na stronach zajmujących się transakcjami",
+      "C": "Zastosowanie publicznego Wi-Fi do logowania się na konto bankowe",
+      "D": "Udostępnianie informacji o karcie kredytowej w e-mailach"
+    },
+    "answer": "B",
+    "explanation": "Weryfikacja certyfikatu SSL (obecność kłódki HTTPS) potwierdza tożsamość strony i szyfrowanie połączenia. Pozostałe opcje to przykłady złych praktyk bezpieczeństwa."
+  },
+  {
+    "id": 15,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Która z wymienionych topologii sieci wykazuje cechę, że wszystkie urządzenia są połączone jednym kablem?",
+    "options": {
+      "A": "Topologia pierścienia",
+      "B": "Topologia gwiazdy",
+      "C": "Topologia magistrali",
+      "D": "Topologia siatki"
+    },
+    "answer": "C",
+    "explanation": "W topologii magistrali (bus) wszystkie urządzenia podłączone są do jednego wspólnego kabla. Awaria kabla unieruchamia całą sieć. W topologii gwiazdy urządzenia łączą się przez centralny przełącznik."
+  },
+  {
+    "id": 16,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Jakie elementy powinny być uwzględnione w scenariuszu testów aplikacji?",
+    "options": {
+      "A": "Dokładne wytyczne dotyczące realizacji kodu",
+      "B": "Strategia wdrożenia aplikacji w środowisku produkcyjnym",
+      "C": "Dokumentacja techniczna oprogramowania",
+      "D": "Zestaw kroków do testowania, oczekiwanych rezultatów oraz warunków początkowych"
+    },
+    "answer": "D",
+    "explanation": "Scenariusz testowy (test case) zawiera: warunki wstępne (preconditions), kroki testowe, oczekiwane wyniki, dane testowe i kryteria zaliczenia. Nie jest to dokumentacja wdrożeniowa ani techniczna."
+  },
+  {
+    "id": 17,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "W jakiej metodzie zarządzania projektami nacisk kładzie się na ograniczenie marnotrawstwa?",
+    "options": {
+      "A": "Waterfall",
+      "B": "Prototypowy",
+      "C": "Scrum",
+      "D": "Kanban"
+    },
+    "answer": "D",
+    "explanation": "Kanban pochodzi z japońskiego systemu produkcji Toyota (Lean Manufacturing) i kładzie nacisk na eliminację marnotrawstwa, wizualizację przepływu pracy i ograniczenie liczby zadań w toku (WIP limits)."
+  },
+  {
+    "id": 18,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Jak oddziaływanie monotonnego środowiska pracy może wpłynąć na organizm człowieka?",
+    "options": {
+      "A": "Obniżenie koncentracji oraz zwiększone ryzyko popełniania błędów",
+      "B": "Wzrost poziomu motywacji",
+      "C": "Zwiększenie odporności na stres",
+      "D": "Poprawa kondycji fizycznej"
+    },
+    "answer": "A",
+    "explanation": "Monotonia prowadzi do zmęczenia psychicznego, spadku koncentracji, znudzenia i senności, co bezpośrednio zwiększa ryzyko popełniania błędów. Jest szczególnie niebezpieczna w pracy wymagającej ciągłej uwagi."
+  },
+  {
+    "id": 19,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Co to jest kontener Docker?",
+    "options": {
+      "A": "Lekka, samodzielna jednostka oprogramowania, która zawiera wszystko, co aplikacja potrzebuje do uruchomienia",
+      "B": "Narzędzie do automatycznego testowania interfejsów użytkownika",
+      "C": "System zarządzania bazami danych NoSQL",
+      "D": "Graficzny interfejs do zarządzania kodem aplikacji webowych"
+    },
+    "answer": "A",
+    "explanation": "Kontener Docker to lekka, izolowana jednostka uruchomieniowa zawierająca kod aplikacji, środowisko uruchomieniowe, biblioteki i zależności. Działa identycznie niezależnie od systemu operacyjnego hosta."
+  },
+  {
+    "id": 20,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Która z metod zarządzania projektem jest oparta na przyrostach realizowanych w sposób iteracyjny?",
+    "options": {
+      "A": "Model prototypowy",
+      "B": "Model spiralny",
+      "C": "Metodyki zwinne (Agile)",
+      "D": "Model wodospadowy (waterfall)"
+    },
+    "answer": "C",
+    "explanation": "Metodyki zwinne (Agile) opierają się na iteracyjnym i przyrostowym wytwarzaniu oprogramowania. Projekt dzielony jest na krótkie sprinty/iteracje, po każdej z nich dostarczany jest działający przyrost produktu."
+  },
+  {
+    "id": 21,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Co robi poniższy kod JavaScript i jak nazywa się zastosowany mechanizm?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">function</span> <span class=\"fn\">makeCounter</span>() {\n  <span class=\"kw\">let</span> count = <span class=\"nm\">0</span>;\n  <span class=\"kw\">return</span> <span class=\"kw\">function</span>() {\n    count++;\n    <span class=\"kw\">return</span> count;\n  };\n}\n\n<span class=\"kw\">const</span> counter = <span class=\"fn\">makeCounter</span>();\nconsole.<span class=\"fn\">log</span>(<span class=\"fn\">counter</span>()); <span class=\"cm\">// ?</span>\nconsole.<span class=\"fn\">log</span>(<span class=\"fn\">counter</span>()); <span class=\"cm\">// ?</span></code></pre>",
+    "answer": "Kod tworzy funkcję-licznik z użyciem domknięcia (closure). makeCounter zwraca wewnętrzną funkcję mającą dostęp do zmiennej count. Kolejne wywołania counter() zwrócą 1, 2.",
+    "explanation": "Closure to mechanizm, w którym funkcja wewnętrzna zachowuje dostęp do zmiennych z zakresu funkcji zewnętrznej nawet po jej zakończeniu. Zmienna count nie jest resetowana między wywołaniami."
+  },
+  {
+    "id": 22,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę tak, aby funkcja fetchData poprawnie obsługiwała błędy przy użyciu async/await:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">async</span> <span class=\"kw\">function</span> <span class=\"fn\">fetchData</span>(url) {\n  <span class=\"kw\">try</span> {\n    <span class=\"kw\">const</span> res = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n    <span class=\"kw\">if</span> (!res.ok) <span class=\"kw\">throw</span> <span class=\"kw\">new</span> <span class=\"tp\">Error</span>(res.statusText);\n    <span class=\"kw\">return</span> <span class=\"kw\">await</span> res.<span class=\"fn\">json</span>();\n  } <span class=\"gap\">___</span> (err) {\n    console.<span class=\"fn\">error</span>(<span class=\"st\">\"Błąd:\"</span>, err.message);\n  }\n}</code></pre>",
+    "answer": "catch",
+    "explanation": "Blok try/catch obsługuje wyjątki w async/await. Po bloku try musi wystąpić catch(err) przechwytujący rzucony błąd — w tym przypadku rzucany przez throw new Error()."
+  },
+  {
+    "id": 23,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane w konsoli? Wyjaśnij dlaczego.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> obj = {\n  name: <span class=\"st\">\"Alice\"</span>,\n  greet: () => {\n    console.<span class=\"fn\">log</span>(<span class=\"st\">`Hello, ${{this.name}}`</span>);\n  }\n};\nobj.<span class=\"fn\">greet</span>();</code></pre>",
+    "answer": "Hello, undefined — arrow function nie ma własnego this. Dziedziczy this z zakresu leksykalnego (globalnego), gdzie name nie istnieje.",
+    "explanation": "Arrow functions nie tworzą własnego kontekstu this. W odróżnieniu od function(), this w arrow function wskazuje na this z miejsca definicji, nie wywołania."
+  },
+  {
+    "id": 24,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod ma wypisać liczby od 1 do 5. Znajdź i opisz błąd, podaj poprawną wersję:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">for</span> (<span class=\"kw\">let</span> i = <span class=\"nm\">0</span>; i < <span class=\"nm\">5</span>; i++) {\n  console.<span class=\"fn\">log</span>(i);\n}</code></pre>",
+    "answer": "Pętla zaczyna od i=0 i wypisuje 0,1,2,3,4 zamiast 1,2,3,4,5. Poprawna wersja: let i = 1; i <= 5.",
+    "explanation": "Off-by-one error — warunek i < 5 przy i=0 pomija wartość 5 i zaczyna od 0. Poprawka: for (let i = 1; i <= 5; i++)."
+  },
+  {
+    "id": 25,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Co zwróci poniższa funkcja Python dla wywołania process([1,2,3,4,5,6])? Wyjaśnij mechanizm.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">process</span>(numbers):\n    <span class=\"kw\">return</span> [x ** <span class=\"nm\">2</span> <span class=\"kw\">for</span> x <span class=\"kw\">in</span> numbers <span class=\"kw\">if</span> x % <span class=\"nm\">2</span> == <span class=\"nm\">0</span>]\n\nresult = <span class=\"fn\">process</span>([<span class=\"nm\">1</span>,<span class=\"nm\">2</span>,<span class=\"nm\">3</span>,<span class=\"nm\">4</span>,<span class=\"nm\">5</span>,<span class=\"nm\">6</span>])\n<span class=\"fn\">print</span>(result)</code></pre>",
+    "answer": "[4, 16, 36] — funkcja filtruje parzyste liczby i podnosi je do kwadratu używając list comprehension.",
+    "explanation": "List comprehension [x**2 for x in numbers if x%2==0] filtruje parzyste (2,4,6) i podnosi do kwadratu: 4, 16, 36."
+  },
+  {
+    "id": 26,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby dekorator timer zachował oryginalną nazwę i docstring owijowanej funkcji:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> time\n<span class=\"kw\">import</span> functools\n\n<span class=\"kw\">def</span> <span class=\"fn\">timer</span>(func):\n    <span class=\"gap\">___</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">wrapper</span>(*args, **kwargs):\n        start = time.<span class=\"fn\">time</span>()\n        result = <span class=\"fn\">func</span>(*args, **kwargs)\n        <span class=\"fn\">print</span>(<span class=\"st\">f\"Czas: {{time.time() - start:.4f}}s\"</span>)\n        <span class=\"kw\">return</span> result\n    <span class=\"kw\">return</span> wrapper</code></pre>",
+    "answer": "@functools.wraps(func)",
+    "explanation": "@functools.wraps(func) kopiuje metadane (nazwę, docstring) z oryginalnej funkcji do wrappera. Bez tego func.__name__ zwróciłoby 'wrapper' zamiast nazwy oryginalnej funkcji."
+  },
+  {
+    "id": 27,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane po trzykrotnym wywołaniu append_to()? Wyjaśnij zaskakujące zachowanie.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">append_to</span>(element, to=[]):\n    to.<span class=\"fn\">append</span>(element)\n    <span class=\"kw\">return</span> to\n\n<span class=\"fn\">print</span>(<span class=\"fn\">append_to</span>(<span class=\"nm\">1</span>))\n<span class=\"fn\">print</span>(<span class=\"fn\">append_to</span>(<span class=\"nm\">2</span>))\n<span class=\"fn\">print</span>(<span class=\"fn\">append_to</span>(<span class=\"nm\">3</span>))</code></pre>",
+    "answer": "[1]\n[1, 2]\n[1, 2, 3] — domyślna wartość [] jest tworzona raz przy definicji funkcji i współdzielona między wywołaniami.",
+    "explanation": "Mutable default argument — lista [] jako domyślny argument jest tworzona raz i mutowana przy każdym wywołaniu. Poprawna wersja: def append_to(element, to=None): if to is None: to = []"
+  },
+  {
+    "id": 28,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Funkcja ma zwracać sumę tylko dodatnich liczb. return jest wcięty wewnątrz pętli — opisz błąd i podaj poprawną wersję:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">sum_positive</span>(numbers):\n    total = <span class=\"nm\">0</span>\n    <span class=\"kw\">for</span> n <span class=\"kw\">in</span> numbers:\n        <span class=\"kw\">if</span> n > <span class=\"nm\">0</span>:\n            total += n\n            <span class=\"kw\">return</span> total <span class=\"cm\"># błąd: za dużo wcięcia!</span>\n\n<span class=\"fn\">print</span>(<span class=\"fn\">sum_positive</span>([<span class=\"nm\">-1</span>, <span class=\"nm\">2</span>, <span class=\"nm\">-3</span>, <span class=\"nm\">4</span>]))\n<span class=\"cm\"># oczekiwane: 6, otrzymane: 2</span></code></pre>",
+    "answer": "return total jest wcięty wewnątrz bloku if wewnątrz pętli — funkcja zwraca po napotkaniu pierwszej dodatniej liczby (2). Poprawka: return total powinno być na poziomie funkcji, po zakończeniu pętli.",
+    "explanation": "W Pythonie wcięcie decyduje o przynależności kodu do bloku. Return wewnątrz pętli/if przerywa działanie funkcji natychmiast. Prawidłowo: return total wyrównany z for."
+  },
+  {
+    "id": 29,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij, co robi poniższa metoda Java i dlaczego użyto generyków zamiast konkretnego typu:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">public static</span> &lt;T <span class=\"kw\">extends</span> <span class=\"tp\">Comparable</span>&lt;T&gt;&gt; T <span class=\"fn\">findMax</span>(<span class=\"tp\">List</span>&lt;T&gt; list) {\n    T max = list.<span class=\"fn\">get</span>(<span class=\"nm\">0</span>);\n    <span class=\"kw\">for</span> (T item : list) {\n        <span class=\"kw\">if</span> (item.<span class=\"fn\">compareTo</span>(max) > <span class=\"nm\">0</span>) {\n            max = item;\n        }\n    }\n    <span class=\"kw\">return</span> max;\n}</code></pre>",
+    "answer": "findMax zwraca maksymalny element z listy dowolnego typu T implementującego Comparable. Generyki pozwalają na jedną implementację dla Integer, String, Double itp.",
+    "explanation": "<T extends Comparable<T>> gwarantuje, że typ T ma metodę compareTo(). Bez generyków trzeba byłoby pisać osobne metody dla każdego typu lub używać Object z niebezpiecznym rzutowaniem."
+  },
+  {
+    "id": 30,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby zasób BufferedReader był automatycznie zamknięty po użyciu (Java 7+):",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"gap\">___</span> (<span class=\"tp\">BufferedReader</span> br = <span class=\"kw\">new</span> <span class=\"tp\">BufferedReader</span>(<span class=\"kw\">new</span> <span class=\"tp\">FileReader</span>(<span class=\"st\">\"plik.txt\"</span>))) {\n    <span class=\"tp\">String</span> line;\n    <span class=\"kw\">while</span> ((line = br.<span class=\"fn\">readLine</span>()) != <span class=\"kw\">null</span>) {\n        <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(line);\n    }\n} <span class=\"kw\">catch</span> (<span class=\"tp\">IOException</span> e) {\n    e.<span class=\"fn\">printStackTrace</span>();\n}</code></pre>",
+    "answer": "try",
+    "explanation": "try-with-resources (Java 7+) automatycznie wywołuje close() na zasobach implementujących AutoCloseable po zakończeniu bloku, nawet gdy wystąpi wyjątek. Eliminuje potrzebę finally z ręcznym zamknięciem."
+  },
+  {
+    "id": 31,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane po wykonaniu poniższego kodu Java? Wyjaśnij kolejność wywołań konstruktorów.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">class</span> <span class=\"tp\">Animal</span> {\n    <span class=\"tp\">Animal</span>() { <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(<span class=\"st\">\"Animal\"</span>); }\n}\n<span class=\"kw\">class</span> <span class=\"tp\">Dog</span> <span class=\"kw\">extends</span> <span class=\"tp\">Animal</span> {\n    <span class=\"tp\">Dog</span>() { <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(<span class=\"st\">\"Dog\"</span>); }\n}\n<span class=\"kw\">class</span> <span class=\"tp\">Labrador</span> <span class=\"kw\">extends</span> <span class=\"tp\">Dog</span> {\n    <span class=\"tp\">Labrador</span>() { <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(<span class=\"st\">\"Labrador\"</span>); }\n}\n\n<span class=\"kw\">new</span> <span class=\"tp\">Labrador</span>();</code></pre>",
+    "answer": "Animal\nDog\nLabrador — konstruktory wywoływane są od klasy bazowej do pochodnej, bo każdy konstruktor niejawnie wywołuje super() na początku.",
+    "explanation": "W Javie konstruktor pochodnej niejawnie wywołuje super() jako pierwszą instrukcję. Łańcuch: Object → Animal → Dog → Labrador."
+  },
+  {
+    "id": 32,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod rzuca NullPointerException. Wskaż gdzie i podaj dwa sposoby naprawy:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"tp\">String</span> name = <span class=\"kw\">null</span>;\n<span class=\"kw\">if</span> (name.<span class=\"fn\">equals</span>(<span class=\"st\">\"Admin\"</span>)) {\n    <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(<span class=\"st\">\"Witaj, Adminie!\"</span>);\n}</code></pre>",
+    "answer": "name.equals() rzuca NPE gdy name == null. Naprawa 1: odwrócić — \"Admin\".equals(name). Naprawa 2: if (name != null && name.equals(\"Admin\")).",
+    "explanation": "Bezpieczny wzorzec: umieść stałą po lewej stronie equals() — \"Admin\".equals(name) nigdy nie rzuci NPE nawet gdy name jest null."
+  },
+  {
+    "id": 33,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między obiema wersjami funkcji swap w C++. Która działa poprawnie i dlaczego?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"cm\">// Wersja A — przekazanie przez wartość</span>\n<span class=\"kw\">void</span> <span class=\"fn\">swapA</span>(<span class=\"kw\">int</span> a, <span class=\"kw\">int</span> b) {\n    <span class=\"kw\">int</span> tmp = a; a = b; b = tmp;\n}\n\n<span class=\"cm\">// Wersja B — przekazanie przez referencję</span>\n<span class=\"kw\">void</span> <span class=\"fn\">swapB</span>(<span class=\"kw\">int</span> &amp;a, <span class=\"kw\">int</span> &amp;b) {\n    <span class=\"kw\">int</span> tmp = a; a = b; b = tmp;\n}</code></pre>",
+    "answer": "Wersja A nie działa — przekazuje kopie zmiennych, oryginały zostają niezmienione. Wersja B działa — & to referencja, modyfikuje oryginalne zmienne.",
+    "explanation": "Przekazanie przez wartość tworzy lokalne kopie. Referencja (&) to alias oryginalnej zmiennej — każda zmiana wewnątrz funkcji wpływa na zmienną w miejscu wywołania."
+  },
+  {
+    "id": 34,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby destruktor klasy Base zapobiegał wyciekowi pamięci przy polimorficznym usuwaniu obiektów:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">class</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    <span class=\"gap\">___</span> ~<span class=\"tp\">Base</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">virtual</span> <span class=\"kw\">void</span> <span class=\"fn\">show</span>() = <span class=\"nm\">0</span>;\n};\n\n<span class=\"kw\">class</span> <span class=\"tp\">Derived</span> : <span class=\"kw\">public</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    ~<span class=\"tp\">Derived</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">void</span> <span class=\"fn\">show</span>() { <span class=\"cm\">/* ... */</span> }\n};</code></pre>",
+    "answer": "virtual",
+    "explanation": "Bez virtual przed destruktorem Base, usunięcie Derived przez wskaźnik Base* wywołuje tylko ~Base() — pomija ~Derived() i powoduje wyciek pamięci. Virtual destruktor gwarantuje poprawny łańcuch destrukcji."
+  },
+  {
+    "id": 35,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane po wykonaniu tego kodu C++? Wyjaśnij jak działa przeciążanie operatora.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">class</span> <span class=\"tp\">Vec</span> {\n<span class=\"kw\">public</span>:\n    <span class=\"kw\">int</span> x, y;\n    <span class=\"tp\">Vec</span>(<span class=\"kw\">int</span> x, <span class=\"kw\">int</span> y) : x(x), y(y) {}\n    <span class=\"tp\">Vec</span> <span class=\"kw\">operator</span>+(<span class=\"kw\">const</span> <span class=\"tp\">Vec</span> &amp;v) {\n        <span class=\"kw\">return</span> <span class=\"tp\">Vec</span>(x + v.x, y + v.y);\n    }\n};\n\n<span class=\"tp\">Vec</span> a(<span class=\"nm\">1</span>,<span class=\"nm\">2</span>), b(<span class=\"nm\">3</span>,<span class=\"nm\">4</span>);\n<span class=\"tp\">Vec</span> c = a + b;\nstd::cout &lt;&lt; c.x &lt;&lt; <span class=\"st\">\" \"</span> &lt;&lt; c.y;</code></pre>",
+    "answer": "4 6 — operator+ dodaje odpowiadające współrzędne: x=1+3=4, y=2+4=6.",
+    "explanation": "Przeciążanie operatorów pozwala definiować zachowanie operatorów (+, -, ==) dla własnych typów. Operator+ zwraca nowy Vec z sumą współrzędnych."
+  },
+  {
+    "id": 36,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod powoduje wyciek pamięci. Wskaż problem i podaj dwie możliwe naprawy:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">void</span> <span class=\"fn\">createArray</span>() {\n    <span class=\"kw\">int</span>* arr = <span class=\"kw\">new</span> <span class=\"kw\">int</span>[<span class=\"nm\">10</span>];\n    arr[<span class=\"nm\">0</span>] = <span class=\"nm\">42</span>;\n    <span class=\"cm\">// funkcja kończy się — pamięć nigdy nie zwolniona</span>\n}</code></pre>",
+    "answer": "Brak delete[] arr przed końcem funkcji. Naprawa 1: dodać delete[] arr. Naprawa 2: użyć std::vector<int> arr(10) — zwalnia się automatycznie (RAII).",
+    "explanation": "Każde new[] musi mieć delete[]. Nowoczesne C++ preferuje RAII — std::vector, std::unique_ptr — zwalniają zasoby automatycznie przy wyjściu ze scope'u."
+  },
+  {
+    "id": 37,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Podaj dokładną kolejność wypisów i wyjaśnij dlaczego taka, a nie inna:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code>console.<span class=\"fn\">log</span>(<span class=\"st\">\"1\"</span>);\n\n<span class=\"fn\">setTimeout</span>(() => console.<span class=\"fn\">log</span>(<span class=\"st\">\"2\"</span>), <span class=\"nm\">0</span>);\n\n<span class=\"kw\">new</span> <span class=\"tp\">Promise</span>((resolve) => {\n    <span class=\"fn\">resolve</span>();\n}).<span class=\"fn\">then</span>(() => console.<span class=\"fn\">log</span>(<span class=\"st\">\"3\"</span>));\n\nconsole.<span class=\"fn\">log</span>(<span class=\"st\">\"4\"</span>);</code></pre>",
+    "answer": "1, 4, 3, 2 — kod synchroniczny (1,4) → microtask queue: Promise.then (3) → macrotask queue: setTimeout (2).",
+    "explanation": "Event loop: najpierw cały synchroniczny kod, potem microtask queue (Promise.then, queueMicrotask), dopiero potem macrotask queue (setTimeout, setInterval). setTimeout z 0ms trafia do macrotask."
+  },
+  {
+    "id": 38,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby funkcja była generatorem zwracającym kolejne liczby Fibonacciego:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">fibonacci</span>():\n    a, b = <span class=\"nm\">0</span>, <span class=\"nm\">1</span>\n    <span class=\"kw\">while</span> <span class=\"kw\">True</span>:\n        <span class=\"gap\">___</span> a\n        a, b = b, a + b\n\n<span class=\"kw\">for</span> n <span class=\"kw\">in</span> <span class=\"fn\">fibonacci</span>():\n    <span class=\"kw\">if</span> n > <span class=\"nm\">100</span>: <span class=\"kw\">break</span>\n    <span class=\"fn\">print</span>(n)</code></pre>",
+    "answer": "yield",
+    "explanation": "yield zamienia funkcję w generator — zatrzymuje wykonanie, zwraca wartość i wznawia od tego miejsca przy kolejnym next(). Generator nie trzyma wszystkich wartości w pamięci naraz."
+  },
+  {
+    "id": 39,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby stream zwrócił listę imion dłuższych niż 4 znaki, posortowanych alfabetycznie:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; names = <span class=\"tp\">List</span>.<span class=\"fn\">of</span>(<span class=\"st\">\"Anna\"</span>, <span class=\"st\">\"Bartosz\"</span>, <span class=\"st\">\"Ola\"</span>, <span class=\"st\">\"Krzysztof\"</span>);\n\n<span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; result = names.<span class=\"fn\">stream</span>()\n    .<span class=\"fn\">filter</span>(n -> n.<span class=\"fn\">length</span>() > <span class=\"nm\">4</span>)\n    .<span class=\"gap\">___</span>()\n    .<span class=\"fn\">collect</span>(<span class=\"tp\">Collectors</span>.<span class=\"fn\">toList</span>());</code></pre>",
+    "answer": "sorted",
+    "explanation": "Stream API: filter() filtruje elementy, sorted() sortuje naturalnie (alfabetycznie dla String), collect(Collectors.toList()) zbiera do listy. Wynik: [Bartosz, Krzysztof]."
+  },
+  {
+    "id": 40,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij co robi poniższy szablon funkcji w C++ i jaką ma przewagę nad wersją bez template:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">template</span> &lt;<span class=\"kw\">typename</span> T&gt;\nT <span class=\"fn\">clamp</span>(T value, T minVal, T maxVal) {\n    <span class=\"kw\">if</span> (value < minVal) <span class=\"kw\">return</span> minVal;\n    <span class=\"kw\">if</span> (value > maxVal) <span class=\"kw\">return</span> maxVal;\n    <span class=\"kw\">return</span> value;\n}\n\n<span class=\"cm\">// użycie:</span>\n<span class=\"fn\">clamp</span>(<span class=\"nm\">15</span>, <span class=\"nm\">0</span>, <span class=\"nm\">10</span>);       <span class=\"cm\">// → 10</span>\n<span class=\"fn\">clamp</span>(<span class=\"nm\">3.7f</span>, <span class=\"nm\">0.0f</span>, <span class=\"nm\">5.0f</span>);  <span class=\"cm\">// → 3.7f</span></code></pre>",
+    "answer": "clamp ogranicza wartość do zakresu [minVal, maxVal]. Template pozwala na jedną implementację dla int, float, double itp. — kompilator generuje odpowiednią wersję dla każdego typu.",
+    "explanation": "Szablony (templates) to generics w C++ — kod generowany w czasie kompilacji dla każdego użytego typu (type-safe, bez narzutu runtime). Bez template potrzebne byłyby osobne funkcje dla int, float itd."
+  }
+]

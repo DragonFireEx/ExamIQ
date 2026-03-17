@@ -1,15 +1,19 @@
 // pages/HomePage.jsx
-// Strona główna aplikacji z komponentami Header, HeroSection i Footer
+// Strona główna aplikacji z wszystkimi sekcjami
 
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
+import FeaturesSection from '../components/FeaturesSection';
+import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
 
 function HomePage() {
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0d1117' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#faf9ff' }}>
       <Header />
       <HeroSection />
+      <FeaturesSection />
+      <CallToActionSection />
       <Footer />
     </div>
   );
