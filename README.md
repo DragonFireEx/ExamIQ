@@ -1,4 +1,3 @@
-
 ![Logo](https://i.imgur.com/AyJgXyI.png)
 
 
@@ -11,6 +10,8 @@
 
 - [@DragonFireEx](https://github.com/DragonFireEx)
 - [@Filekk](https://github.com/Filekk)
+- [@PIotrr23](https://github.com/PIotrr23)
+- [@BartoszBartoszewski](https://github.com/BartoszBartoszewski)
 
 
 ## License
