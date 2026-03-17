@@ -11,7 +11,7 @@ function Footer() {
       textAlign: 'center',
       borderTop: '1px solid #5a3ec7'
     }}>
-      <p>&copy; 2024 ExamIQ. Wszystkie prawa zastrzeżone.</p>
+      <p>&copy; 2026 ExamIQ. Wszystkie prawa zastrzeżone.</p>
       <div style={{ marginTop: '1rem' }}>
         <a href="#" style={{
           color: 'white',

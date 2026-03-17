@@ -4,6 +4,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
+
 const NAV_LINKS = [
   { path: '/',       label: 'Home'      },
   { path: '/learn',  label: 'Nauka'     },
@@ -33,17 +34,8 @@ export default function Header() {
     }}>
 
       {/* LOGO */}
-      <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <img src="/default_jamiq.png" alt="ExamIQ Logo" style={{ width: 36, height: 36 }} />
-        <span style={{
-          fontSize: '1.5rem',
-          fontWeight: 800,
-          background: 'linear-gradient(135deg, #7c3aed, #a78bfa)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          letterSpacing: '-0.5px',
-        }}>ExamIQ</span>
+      <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+        <img src="/landscape_jamiq.png" alt="ExamIQ Logo" style={{ height: 40, width: 'auto' }} />
       </Link>
 
       {/* DESKTOP NAV */}

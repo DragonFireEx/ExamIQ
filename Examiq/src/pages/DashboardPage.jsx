@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
+import Header from '../components/Header';
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -374,7 +375,7 @@ export default function DashboardPage() {
   const [showReset, setShowReset] = useState(false);
 
   const startExam = (count, category) => {
-    let pool = category === 'all' ? [...questions] : questions.filter(q => q.category === category);
+    let pool = category === 'all' ? [...questions] && questions.filter(q => q.type === 'closed') : questions.filter(q => q.category === 'category') && questions.filter(q => q.type === 'closed');
     pool = pool.sort(() => Math.random() - 0.5).slice(0, count);
     setExamPool(pool);
     setExamCategory(category);
@@ -395,22 +396,7 @@ export default function DashboardPage() {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff,#ede9fe 40%,#e0e7ff)', fontFamily: "'Sora',sans-serif" }}>
 
       {/* NAV */}
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(167,139,250,0.15)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontSize: '1.3rem', fontWeight: 800, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>ExamIQ</span>
-          </Link>
-          <nav style={{ display: 'flex', gap: 4 }}>
-            {[['/', 'Home'], ['/learn', 'Nauka'], ['/exam', 'Dashboard'], ['/about', 'O nas']].map(([path, label]) => (
-              <Link key={path} to={path} style={{ textDecoration: 'none', padding: '0.4rem 0.9rem', borderRadius: 8, fontSize: '0.875rem', fontWeight: 600, color: path === '/exam' ? '#7c3aed' : '#6b7280', background: path === '/exam' ? 'rgba(124,58,237,0.1)' : 'transparent' }}>{label}</Link>
-            ))}
-          </nav>
-        </div>
-        <div style={{ background: 'rgba(124,58,237,0.08)', borderRadius: 99, padding: '0.4rem 0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span>🔥</span>
-          <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#7c3aed' }}>{session.streak} dni z rzędu</span>
-        </div>
-      </header>
+      <Header />
 
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2.5rem 2rem' }}>
 

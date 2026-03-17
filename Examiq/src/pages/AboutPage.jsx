@@ -6,6 +6,7 @@
 //   <Route path="/about" element={<AboutPage />} />
 
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 const AUTHORS = [
   { name: 'Marcel Turwanicki',  role: 'FullStack',      emoji: '💻' },
@@ -50,34 +51,7 @@ export default function AboutPage() {
       fontFamily: "'Sora', sans-serif",
     }}>
 
-      {/* NAV */}
-      <header style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '1rem 2rem',
-        background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(167,139,250,0.15)',
-        position: 'sticky', top: 0, zIndex: 100,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{
-              fontSize: '1.3rem', fontWeight: 800,
-              background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            }}>ExamIQ</span>
-          </Link>
-          <nav style={{ display: 'flex', gap: 4 }}>
-            {[['/', 'Home'], ['/learn', 'Nauka'], ['/exam', 'Dashboard'], ['/about', 'O nas']].map(([path, label]) => (
-              <Link key={path} to={path} style={{
-                textDecoration: 'none', padding: '0.4rem 0.9rem',
-                borderRadius: 8, fontSize: '0.875rem', fontWeight: 600,
-                color: path === '/about' ? '#7c3aed' : '#6b7280',
-                background: path === '/about' ? 'rgba(124,58,237,0.1)' : 'transparent',
-              }}>{label}</Link>
-            ))}
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '4rem 2rem 6rem' }}>
 
