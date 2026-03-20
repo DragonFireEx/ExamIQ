@@ -1,6 +1,5 @@
 // components/AnimatedBackground.jsx
 // Statyczne tło — cs_pattern_rotated.svg na cały ekran
-
 export default function AnimatedBackground() {
   return (
     <div style={{
