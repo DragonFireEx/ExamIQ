@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 const AUTHORS = [
-  { name: 'Marcel Turwanicki',  role: 'FullStack',      emoji: '💻' },
-  { name: 'Filip Czepiel', role: 'FullStack',     emoji: '🧠' },
+  { name: 'Marcel Turwanicki',  role: 'FullStack / DevOps',      emoji: '💻' },
+  { name: 'Filip Czepiel', role: 'FullStack / DevOps',     emoji: '🧠' },
   { name: 'Piotr Lipiński', role: 'Design & UX / DevOps / Docs',             emoji: '🎨' },
 ];
 
