@@ -1,0 +1,332 @@
+[
+  {
+    "id": "p001",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Liczby pierwsze w zakresie",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika dwie liczby całkowite: początek i koniec zakresu (zakres 2–1000).\n2. Wyświetla wszystkie liczby pierwsze z tego zakresu, każdą w osobnej linii.\n3. Na końcu wyświetla komunikat: \"Znaleziono X liczb pierwszych\" (X to ich liczba).\n\nPrzykład dla zakresu 10–30:\n13\n17\n19\n23\n29\nZnaleziono 5 liczb pierwszych",
+    "hints": [
+      "Liczba pierwsza jest podzielna tylko przez 1 i przez siebie",
+      "Sprawdzaj dzielniki do pierwiastka kwadratowego z liczby",
+      "Użyj pętli zagnieżdżonej lub funkcji pomocniczej is_prime()"
+    ],
+    "evaluation_criteria": [
+      "Program poprawnie pobiera dwa zakresy od użytkownika",
+      "Algorytm sprawdzania pierwszości działa poprawnie (brak fałszywych wyników)",
+      "Wszystkie liczby pierwsze z zakresu są wyświetlane",
+      "Na końcu wyświetlany jest poprawny komunikat z licznikiem",
+      "Kod jest czytelny i logicznie zorganizowany"
+    ],
+    "example_input": "10\n30",
+    "example_output": "13\n17\n19\n23\n29\nZnaleziono 5 liczb pierwszych"
+  },
+  {
+    "id": "p002",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Kalkulator ONP (Odwrotna Notacja Polska)",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika wyrażenie w Odwrotnej Notacji Polskiej (np. '3 4 + 2 *').\n2. Oblicza wynik za pomocą stosu.\n3. Obsługuje operatory: +, -, *, /\n4. Wyświetla wynik w formacie: \"Wynik: X\"\n5. W przypadku dzielenia przez zero wyświetla: \"Błąd: dzielenie przez zero\"\n\nPrzykład:\nWprowadź wyrażenie ONP: 5 1 2 + 4 * + 3 -\nWynik: 14",
+    "hints": [
+      "Użyj listy/tablicy jako stosu (push = append, pop = pop)",
+      "Tokenizuj wejście split-em",
+      "Gdy napotkasz liczbę — wrzuć na stos; gdy operator — zdejmij dwa elementy, oblicz, wrzuć wynik"
+    ],
+    "evaluation_criteria": [
+      "Program poprawnie odczytuje wyrażenie ONP",
+      "Algorytm stosu jest zaimplementowany prawidłowo",
+      "Wszystkie 4 operatory działają poprawnie",
+      "Obsługa dzielenia przez zero z komunikatem błędu",
+      "Program zwraca prawidłowy wynik dla podanego przykładu"
+    ],
+    "example_input": "5 1 2 + 4 * + 3 -",
+    "example_output": "Wynik: 14"
+  },
+  {
+    "id": "p003",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Szyfr Cezara",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika tekst do zaszyfrowania.\n2. Pobiera klucz (liczbę całkowitą 1–25).\n3. Szyfruje tekst szyfrem Cezara (przesunięcie liter o podaną wartość).\n4. Wyświetla zaszyfrowany tekst.\n5. Następnie automatycznie go deszyfruje i wyświetla odszyfrowany tekst.\n6. Wielkie i małe litery zachowują swój rejestr. Znaki niebędące literami pozostają bez zmian.\n\nPrzykład:\nTekst: Hello World!\nKlucz: 3\nZaszyfrowany: Khoor Zruog!\nOdszyfrowany: Hello World!",
+    "hints": [
+      "Użyj ord() i chr() (Python) lub rzutowania na int (C++/Java) do operacji na znakach",
+      "Pamiętaj o zawijaniu: z→a (modulo 26)",
+      "Sprawdź osobno czy znak jest wielką czy małą literą"
+    ],
+    "evaluation_criteria": [
+      "Szyfrowanie działa poprawnie dla liter małych i wielkich",
+      "Zawijanie alfabetu działa (np. z+3 = c)",
+      "Znaki specjalne i spacje są zachowane bez zmian",
+      "Deszyfrowanie zwraca oryginalny tekst",
+      "Program wyświetla oba wyniki w odpowiednim formacie"
+    ],
+    "example_input": "Hello World!\n3",
+    "example_output": "Zaszyfrowany: Khoor Zruog!\nOdszyfrowany: Hello World!"
+  },
+  {
+    "id": "p004",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Sortowanie bąbelkowe z licznikiem",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika liczbę elementów n (max 20).\n2. Pobiera n liczb całkowitych.\n3. Sortuje je algorytmem sortowania bąbelkowego (bubble sort) — nie używaj wbudowanych funkcji sort!\n4. Wyświetla tablicę po każdym pełnym przebiegu (iteracji zewnętrznej pętli).\n5. Na końcu wyświetla: \"Posortowano w X przebiegach\" oraz finalną posortowaną tablicę.\n\nPrzykład dla [5, 3, 8, 1, 2]:\nPrzebieg 1: [3, 5, 1, 2, 8]\nPrzebieg 2: [3, 1, 2, 5, 8]\nPrzebieg 3: [1, 2, 3, 5, 8]\nPrzebieg 4: [1, 2, 3, 5, 8]\nPosortowano w 4 przebiegach\nWynik: [1, 2, 3, 5, 8]",
+    "hints": [
+      "Bubble sort: porównuj sąsiednie elementy i zamieniaj jeśli są w złej kolejności",
+      "Zewnętrzna pętla: n-1 razy; wewnętrzna: n-1-i razy",
+      "Możesz dodać optymalizację z flagą 'zamieniono' — ale wyświetlaj każdy przebieg"
+    ],
+    "evaluation_criteria": [
+      "Implementacja bubble sort bez użycia wbudowanego sort",
+      "Dane wejściowe pobierane poprawnie",
+      "Wyświetlanie tablicy po każdym przebiegu",
+      "Finalny wynik jest posortowany rosnąco",
+      "Licznik przebiegów jest poprawny"
+    ],
+    "example_input": "5\n5 3 8 1 2",
+    "example_output": "Przebieg 1: [3, 5, 1, 2, 8]\nPrzebieg 2: [3, 1, 2, 5, 8]\nPrzebieg 3: [1, 2, 3, 5, 8]\nPrzebieg 4: [1, 2, 3, 5, 8]\nPosortowano w 4 przebiegach\nWynik: [1, 2, 3, 5, 8]"
+  },
+  {
+    "id": "p005",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Rekurencja — silnia i Fibonacci",
+    "description": "Napisz program konsolowy, który:\n1. Wyświetla menu:\n   1. Silnia\n   2. Ciąg Fibonacciego\n   3. Wyjście\n2. Dla opcji 1: pobiera n i oblicza n! rekurencyjnie, wyświetla wynik.\n3. Dla opcji 2: pobiera n i wyświetla n pierwszych wyrazów ciągu Fibonacciego (też rekurencyjnie).\n4. Menu działa w pętli aż użytkownik wybierze opcję 3.\n5. Obsługuje błędne dane (n < 0 lub n > 15 dla silni, n > 20 dla Fib).\n\nPrzykład dla silni n=5:\nn! = 120\n\nPrzykład dla Fib n=7:\n0 1 1 2 3 5 8",
+    "hints": [
+      "Silnia: fact(n) = n * fact(n-1), przypadek bazowy: fact(0) = 1",
+      "Fibonacci: fib(n) = fib(n-1) + fib(n-2), przypadki bazowe: fib(0)=0, fib(1)=1",
+      "Użyj pętli while True z break lub warunkiem na opcję 3"
+    ],
+    "evaluation_criteria": [
+      "Menu działa w pętli i obsługuje opcję wyjścia",
+      "Silnia zaimplementowana rekurencyjnie i zwraca poprawne wyniki",
+      "Fibonacci zaimplementowany rekurencyjnie i wyświetla n wyrazów",
+      "Obsługa błędnych zakresów (za duże n)",
+      "Program nie wyrzuca wyjątku dla poprawnych danych"
+    ],
+    "example_input": "1\n5\n2\n7\n3",
+    "example_output": "n! = 120\n0 1 1 2 3 5 8"
+  },
+  {
+    "id": "p006",
+    "category": "Przetwarzanie danych",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Analiza wyników uczniów",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika liczbę uczniów n (max 30).\n2. Dla każdego ucznia pobiera: imię oraz oceny z 5 przedmiotów (liczby 1–6).\n3. Oblicza i wyświetla:\n   a) Średnią ocen każdego ucznia (zaokrągloną do 2 miejsc po przecinku)\n   b) Najlepszego ucznia (najwyższa średnia)\n   c) Najgorszego ucznia (najniższa średnia)\n   d) Średnią całej klasy\n4. Wyświetla listę uczniów posortowaną malejąco wg średniej.\n\nPrzykład wyświetlenia:\nAnna: 4.80\nPiotr: 3.60\n...\nNajlepszy: Anna (4.80)\nNajgorszy: Piotr (3.60)\nŚrednia klasy: 4.20",
+    "hints": [
+      "Przechowuj dane w liście słowników lub liście list",
+      "Do sortowania możesz użyć wbudowanego sort z key=",
+      "Pamiętaj o walidacji ocen (1-6)"
+    ],
+    "evaluation_criteria": [
+      "Program poprawnie pobiera dane dla n uczniów",
+      "Średnie są obliczane i wyświetlane poprawnie",
+      "Najlepszy i najgorszy uczeń są identyfikowani prawidłowo",
+      "Lista jest posortowana malejąco wg średniej",
+      "Średnia klasy jest obliczona poprawnie"
+    ],
+    "example_input": "2\nAnna\n5 5 4 5 5\nPiotr\n4 3 4 3 4",
+    "example_output": "Anna: 4.80\nPiotr: 3.60\nNajlepszy: Anna (4.80)\nNajgorszy: Piotr (3.60)\nŚrednia klasy: 4.20"
+  },
+  {
+    "id": "p007",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Wyszukiwanie binarne",
+    "description": "Napisz program konsolowy, który:\n1. Generuje posortowaną tablicę n losowych liczb całkowitych z zakresu 1–100 (n podaje użytkownik, max 20).\n2. Wyświetla wygenerowaną tablicę.\n3. Pobiera od użytkownika liczbę do wyszukania.\n4. Przeprowadza wyszukiwanie binarne — wyświetla każdy krok (aktualny środek, lewa i prawa granica).\n5. Wyświetla wynik: indeks znalezionego elementu lub komunikat o nieznalezieniu.\n\nPrzykład kroku:\nKrok 1: szukam w [1..10], środek=5, wartość=34\nKrok 2: szukam w [6..10], środek=8, wartość=67\n...\nZnaleziono: 67 na indeksie 7",
+    "hints": [
+      "Wyszukiwanie binarne: lewo=0, prawo=n-1, środek=(lewo+prawo)//2",
+      "Jeśli arr[mid] < szukana: lewo = mid+1; jeśli > szukana: prawo = mid-1",
+      "Do generowania losowych liczb użyj random i posortuj"
+    ],
+    "evaluation_criteria": [
+      "Tablica jest generowana losowo i posortowana",
+      "Algorytm binarny (nie liniowy!) jest zaimplementowany",
+      "Każdy krok wyszukiwania jest wyświetlany",
+      "Wynik zawiera indeks elementu lub komunikat o braku",
+      "Kod nie używa wbudowanej funkcji wyszukiwania"
+    ],
+    "example_input": "10\n67",
+    "example_output": "Tablica: [4, 12, 23, 34, 45, 56, 67, 78, 89, 95]\nKrok 1: szukam w [0..9], środek=4, wartość=45\nKrok 2: szukam w [5..9], środek=7, wartość=78\nKrok 3: szukam w [5..6], środek=5, wartość=56\nKrok 4: szukam w [6..6], środek=6, wartość=67\nZnaleziono: 67 na indeksie 6"
+  },
+  {
+    "id": "p008",
+    "category": "Przetwarzanie tekstu",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Walidacja i analiza hasła",
+    "description": "Napisz program konsolowy, który:\n1. Pobiera od użytkownika hasło.\n2. Sprawdza czy spełnia wymagania:\n   - Min. 8 znaków\n   - Przynajmniej jedna wielka litera\n   - Przynajmniej jedna mała litera\n   - Przynajmniej jedna cyfra\n   - Przynajmniej jeden znak specjalny (!@#$%^&*)\n3. Wyświetla listę spełnionych i niespełnionych wymagań.\n4. Ocenia siłę hasła: Słabe / Średnie / Silne / Bardzo silne\n   (0-2 wymagania: Słabe, 3: Średnie, 4: Silne, 5: Bardzo silne)\n5. Pyta czy użytkownik chce sprawdzić kolejne hasło (pętla).\n\nPrzykład:\nHasło: Tajne123!\n[OK] Min. 8 znaków\n[OK] Wielka litera\n[OK] Mała litera\n[OK] Cyfra\n[OK] Znak specjalny\nSiła hasła: Bardzo silne",
+    "hints": [
+      "Użyj funkcji any() z generatorem lub pętli do sprawdzenia warunków",
+      "Znaki specjalne zdefiniuj jako string: '!@#$%^&*'",
+      "Zliczaj spełnione warunki do oceny siły"
+    ],
+    "evaluation_criteria": [
+      "Wszystkie 5 warunków jest sprawdzanych poprawnie",
+      "Wyświetlenie statusu [OK]/[BRAK] dla każdego wymagania",
+      "Ocena siły hasła odpowiada liczbie spełnionych warunków",
+      "Program działa w pętli dla kolejnych haseł",
+      "Kod jest czytelny i nie zawiera błędów logicznych"
+    ],
+    "example_input": "Tajne123!",
+    "example_output": "[OK] Min. 8 znaków\n[OK] Wielka litera\n[OK] Mała litera\n[OK] Cyfra\n[OK] Znak specjalny\nSiła hasła: Bardzo silne"
+  },
+  {
+    "id": "p009",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Konwersja systemu liczbowego",
+    "description": "Napisz program konsolowy z menu:\n1. Dziesiętny → Binarny\n2. Dziesiętny → Szesnastkowy\n3. Binarny → Dziesiętny\n4. Szesnastkowy → Dziesiętny\n5. Wyjście\n\nWymagania:\n- Nie używaj wbudowanych funkcji konwersji (bin(), hex(), int(x,16) itp.)\n- Implementuj algorytmy konwersji ręcznie (dzielenie przez podstawę)\n- Obsługuj liczby ujemne\n- Wyświetlaj kroki konwersji (kolejne dzielenia)\n\nPrzykład opcja 1, wejście 42:\nKrok 1: 42 / 2 = 21 reszta 0\nKrok 2: 21 / 2 = 10 reszta 1\nKrok 3: 10 / 2 = 5 reszta 0\nKrok 4: 5 / 2 = 2 reszta 1\nKrok 5: 2 / 2 = 1 reszta 0\nKrok 6: 1 / 2 = 0 reszta 1\nWynik: 42(10) = 101010(2)",
+    "hints": [
+      "Konwersja na bin: dziel przez 2, zapisuj reszty, odwróć kolejność",
+      "Konwersja hex: zamiast cyfr 10-15 użyj liter A-F",
+      "Konwersja z bin: mnóż cyfry przez potęgi 2 od prawej"
+    ],
+    "evaluation_criteria": [
+      "Menu działa poprawnie dla wszystkich opcji",
+      "Algorytmy konwersji są zaimplementowane ręcznie (bez bin/hex/int)",
+      "Kroki konwersji są wyświetlane",
+      "Obsługa liczb ujemnych",
+      "Wyniki są poprawne matematycznie"
+    ],
+    "example_input": "1\n42",
+    "example_output": "Krok 1: 42 / 2 = 21 reszta 0\nKrok 2: 21 / 2 = 10 reszta 1\nKrok 3: 10 / 2 = 5 reszta 0\nKrok 4: 5 / 2 = 2 reszta 1\nKrok 5: 2 / 2 = 1 reszta 0\nKrok 6: 1 / 2 = 0 reszta 1\nWynik: 42(10) = 101010(2)"
+  },
+  {
+    "id": "p010",
+    "category": "Struktury danych",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Stos i kolejka — symulacja",
+    "description": "Napisz program konsolowy, który symuluje działanie stosu i kolejki.\nMenu:\n1. Operacje na stosie\n   - push (dodaj)\n   - pop (zdejmij)\n   - peek (podejrzyj wierzchołek)\n   - wyświetl\n2. Operacje na kolejce\n   - enqueue (dodaj)\n   - dequeue (zdejmij z przodu)\n   - front (podejrzyj przód)\n   - wyświetl\n3. Wyjście\n\nImplementuj struktury BEZ użycia wbudowanych klas (własna implementacja z listą/tablicą).\nObsługuj błędy: pop/dequeue z pustej struktury → stosowny komunikat.\n\nPrzykład:\n[STOS] push 5 → [5]\n[STOS] push 3 → [5, 3]\n[STOS] pop → zdjęto: 3, stos: [5]\n[KOLEJKA] enqueue 7 → [7]\n[KOLEJKA] dequeue → zdjęto: 7, kolejka: []",
+    "hints": [
+      "Stos: wstawiaj i zdejmuj z końca listy (LIFO)",
+      "Kolejka: wstawiaj na koniec, zdejmuj z początku (FIFO)",
+      "Możesz zaimplementować jako klasy (Stack, Queue) z metodami"
+    ],
+    "evaluation_criteria": [
+      "Stos implementuje LIFO poprawnie",
+      "Kolejka implementuje FIFO poprawnie",
+      "Obsługa błędów dla pustych struktur",
+      "Brak użycia wbudowanych klas kolejki/stosu (deque, Queue itp.)",
+      "Menu działa poprawnie dla obu struktur"
+    ],
+    "example_input": "1\npush 5\npush 3\npop\n2\nenqueue 7\ndequeue\n3",
+    "example_output": "[STOS] push 5 → [5]\n[STOS] push 3 → [5, 3]\n[STOS] pop → zdjęto: 3, stos: [5]\n[KOLEJKA] enqueue 7 → [7]\n[KOLEJKA] dequeue → zdjęto: 7, kolejka: []"
+  },
+  {
+    "id": "p011",
+    "category": "Przetwarzanie danych",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Faktura — obliczenia podatkowe",
+    "description": "Napisz program konsolowy, który generuje prostą fakturę:\n1. Pobiera nazwę firmy wystawiającej fakturę.\n2. Pobiera liczbę pozycji na fakturze (max 10).\n3. Dla każdej pozycji: nazwa towaru, cena netto, ilość, stawka VAT (7 lub 23%).\n4. Oblicza i wyświetla fakturę w formie tabeli:\n   - Lp. | Nazwa | Ilość | Cena netto | VAT% | Kwota VAT | Cena brutto\n5. Na końcu wyświetla sumę netto, sumę VAT i sumę brutto.\n6. Zapisuje fakturę do pliku faktura.txt\n\nPrzykład wiersza:\n1 | Laptop | 2 | 2500.00 | 23% | 1150.00 | 6150.00",
+    "hints": [
+      "Kwota VAT = cena_netto * ilość * (vat/100)",
+      "Cena brutto = cena_netto * ilość + kwota_VAT",
+      "Do zapisu do pliku użyj open('faktura.txt', 'w') i write()"
+    ],
+    "evaluation_criteria": [
+      "Dane wejściowe są pobierane poprawnie dla każdej pozycji",
+      "Obliczenia VAT i brutto są matematycznie poprawne",
+      "Tabela jest sformatowana czytelnie",
+      "Sumy końcowe (netto, VAT, brutto) są poprawne",
+      "Faktura jest zapisywana do pliku faktura.txt"
+    ],
+    "example_input": "FirmaTech Sp. z o.o.\n1\nLaptop\n2500.00\n2\n23",
+    "example_output": "Lp. | Nazwa  | Ilość | Cena netto | VAT% | Kwota VAT | Cena brutto\n1   | Laptop | 2     | 2500.00    | 23%  | 1150.00   | 6150.00\n---\nSuma netto: 5000.00 zł\nSuma VAT:   1150.00 zł\nSuma brutto:6150.00 zł"
+  },
+  {
+    "id": "p012",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "NWD i NWW — algorytm Euklidesa",
+    "description": "Napisz program konsolowy, który:\n1. Wyświetla menu:\n   1. NWD dwóch liczb\n   2. NWW dwóch liczb\n   3. NWD i NWW dla listy liczb\n   4. Wyjście\n2. Dla opcji 1 i 2: pobiera dwie liczby całkowite, oblicza wynik algorytmem Euklidesa, wyświetla kroki.\n3. Dla opcji 3: pobiera n liczb, oblicza NWD i NWW dla całej listy.\n4. Nie używaj wbudowanych funkcji math.gcd!\n\nPrzykład opcja 1, liczby 48 i 18:\nKrok 1: NWD(48, 18) → 48 mod 18 = 12\nKrok 2: NWD(18, 12) → 18 mod 12 = 6\nKrok 3: NWD(12, 6) → 12 mod 6 = 0\nNWD(48, 18) = 6",
+    "hints": [
+      "Algorytm Euklidesa: NWD(a,b) = NWD(b, a mod b), gdy b=0 → wynik to a",
+      "NWW(a,b) = (a*b) / NWD(a,b)",
+      "NWD listy: stosuj NWD parami: NWD(NWD(a,b),c) itd."
+    ],
+    "evaluation_criteria": [
+      "Algorytm Euklidesa zaimplementowany bez math.gcd",
+      "Kroki obliczeń są wyświetlane",
+      "NWW jest obliczane na podstawie NWD",
+      "Opcja 3 działa dla listy dowolnej długości",
+      "Menu działa poprawnie w pętli"
+    ],
+    "example_input": "1\n48\n18",
+    "example_output": "Krok 1: NWD(48, 18) → 48 mod 18 = 12\nKrok 2: NWD(18, 12) → 18 mod 12 = 6\nKrok 3: NWD(12, 6) → 12 mod 6 = 0\nNWD(48, 18) = 6"
+  },
+  {
+    "id": "p013",
+    "category": "Przetwarzanie tekstu",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Anagram i palindrom",
+    "description": "Napisz program konsolowy z menu:\n1. Sprawdź czy słowo jest palindromem\n2. Sprawdź czy dwa słowa są anagramami\n3. Znajdź wszystkie anagramy słowa na liście\n4. Wyjście\n\nWymagania:\n- Ignoruj wielkość liter i spacje\n- Dla palindromu: wyświetl które pozycje nie pasują\n- Dla anagramu: wyświetl posortowane litery obu słów\n- Opcja 3: wczytuje n słów od użytkownika, szuka anagramów podanego słowa\n\nPrzykład opcja 1:\nSłowo: kajak\nk-a-j-a-k: pozycja 1='k'==pozycja 5='k' ✓\n...\nWynik: TAK, 'kajak' jest palindromem",
+    "hints": [
+      "Palindrom: porównaj słowo z jego odwróceniem",
+      "Anagram: posortuj litery obu słów i porównaj",
+      "Ignorowanie wielkości liter: użyj .lower()"
+    ],
+    "evaluation_criteria": [
+      "Sprawdzanie palindromu działa poprawnie (ignoruje wielkość liter)",
+      "Sprawdzanie anagramu działa poprawnie",
+      "Wyświetlenie szczegółów porównania (pozycje/posortowane litery)",
+      "Opcja 3 szuka anagramów na liście",
+      "Menu działa w pętli"
+    ],
+    "example_input": "1\nkajak",
+    "example_output": "Sprawdzam: k-a-j-a-k\nPozycja 1 ('k') == Pozycja 5 ('k') ✓\nPozycja 2 ('a') == Pozycja 4 ('a') ✓\nŚrodek: 'j'\nWynik: TAK, 'kajak' jest palindromem"
+  },
+  {
+    "id": "p014",
+    "category": "Struktury danych",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Mini baza danych — lista kontaktów",
+    "description": "Napisz program konsolowy — prostą bazę kontaktów:\nMenu:\n1. Dodaj kontakt (imię, nazwisko, telefon, email)\n2. Wyświetl wszystkie kontakty (tabela posortowana wg nazwiska)\n3. Wyszukaj kontakt (po imieniu lub nazwisku)\n4. Usuń kontakt (po nazwisku)\n5. Zapisz do pliku kontakty.txt\n6. Wczytaj z pliku kontakty.txt\n7. Wyjście\n\nWymagania:\n- Walidacja numeru telefonu (9 cyfr)\n- Walidacja email (zawiera '@' i '.')\n- Obsługa błędu: brak pliku przy wczytywaniu\n\nPrzykład wyświetlenia:\nLp. | Imię    | Nazwisko | Telefon   | Email\n1   | Anna    | Kowalska | 123456789 | anna@wp.pl",
+    "hints": [
+      "Przechowuj kontakty jako listę słowników lub obiektów",
+      "Walidacja telefonu: sprawdź len==9 i czy wszystkie znaki to cyfry",
+      "Zapis/odczyt pliku: użyj formatu CSV lub własnego separatora"
+    ],
+    "evaluation_criteria": [
+      "Wszystkie operacje CRUD działają poprawnie",
+      "Walidacja telefonu (9 cyfr) i email (@, .)",
+      "Sortowanie wg nazwiska przy wyświetlaniu",
+      "Zapis i odczyt pliku działają",
+      "Obsługa błędu braku pliku"
+    ],
+    "example_input": "1\nAnna\nKowalska\n123456789\nanna@wp.pl\n2\n7",
+    "example_output": "Dodano kontakt: Anna Kowalska\nLp. | Imię | Nazwisko | Telefon   | Email\n1   | Anna | Kowalska | 123456789 | anna@wp.pl"
+  },
+  {
+    "id": "p015",
+    "category": "Algorytmika",
+    "difficulty": "medium",
+    "language": "any",
+    "title": "Gra — zgadnij liczbę (z AI-podpowiedziami)",
+    "description": "Napisz program konsolowy — grę 'Zgadnij liczbę':\n1. Program losuje liczbę z zakresu 1–100.\n2. Gracz ma ograniczoną liczbę prób (10).\n3. Po każdej próbie program mówi: za mało / za dużo / trafiony.\n4. Program wyświetla po każdej próbie: ile prób pozostało i aktualny zawężony zakres.\n5. Po wygranej lub przegranej: statystyki (liczba prób, odchylenie od wyniku).\n6. Ranking: program zapamiętuje 5 najlepszych wyników (min. prób) w pliku ranking.txt i wyświetla go na początku.\n\nPrzykład tury:\nZakres: [1..100] | Próby pozostałe: 10\nPodaj liczbę: 50\nZa mało!\nZakres: [51..100] | Próby pozostałe: 9",
+    "hints": [
+      "Do losowania użyj random.randint(1, 100)",
+      "Aktualizuj dolną/górną granicę zakresu po każdej próbie",
+      "Ranking w pliku: odczytaj, dodaj wynik, posortuj, zapisz top 5"
+    ],
+    "evaluation_criteria": [
+      "Losowanie i sprawdzanie odpowiedzi działa poprawnie",
+      "Zawężanie zakresu jest aktualizowane po każdej próbie",
+      "Limit prób jest egzekwowany",
+      "Statystyki po zakończeniu gry są wyświetlane",
+      "Ranking jest zapisywany i wczytywany z pliku"
+    ],
+    "example_input": "50\n75\n63",
+    "example_output": "Zakres: [1..100] | Próby pozostałe: 10\nZa mało!\nZakres: [51..100] | Próby pozostałe: 9\nZa mało!\nZakres: [76..100] | Próby pozostałe: 8"
+  }
+]

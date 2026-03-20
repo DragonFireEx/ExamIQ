@@ -1,20 +1,53 @@
 // components/Header.jsx
-// Nagłówek z poprawną nawigacją i responsywnym menu
+// Nagłówek z menu rozwijanym "Nauka" (Teoria / Praktyka)
 
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-
+import { useState, useRef, useEffect } from 'react';
 
 const NAV_LINKS = [
-  { path: '/',       label: 'Home'      },
-  { path: '/learn',  label: 'Nauka'     },
-  { path: '/exam',   label: 'Dashboard' },
-  { path: '/about',  label: 'O nas'     },
+  { path: '/',      label: 'Home'      },
+  { path: '/exam',  label: 'Dashboard' },
+  { path: '/about', label: 'O nas'     },
+];
+
+const LEARN_LINKS = [
+  { path: '/learn/teoria',   label: 'Teoria' },
+  { path: '/learn/praktyka', label: 'Praktyka' },
 ];
 
 export default function Header() {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen,     setMenuOpen]     = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const isLearnActive = location.pathname.startsWith('/learn');
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const navLinkStyle = (active) => ({
+    textDecoration: 'none',
+    padding: '0.45rem 1rem',
+    borderRadius: 10,
+    fontSize: '0.9rem',
+    fontWeight: active ? 700 : 600,
+    color: active ? '#7c3aed' : '#6b7280',
+    background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
+    border: active ? '1px solid rgba(124,58,237,0.2)' : '1px solid transparent',
+    transition: 'all 0.15s',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.3rem',
+    cursor: 'pointer',
+  });
 
   return (
     <header style={{
@@ -39,36 +72,98 @@ export default function Header() {
       </Link>
 
       {/* DESKTOP NAV */}
-      <nav style={{ display: 'flex', gap: '0.25rem' }}>
-        {NAV_LINKS.map(({ path, label }) => {
-          const active = location.pathname === path;
-          return (
-            <Link key={path} to={path} style={{
-              textDecoration: 'none',
-              padding: '0.45rem 1rem',
-              borderRadius: 10,
-              fontSize: '0.9rem',
-              fontWeight: active ? 700 : 600,
-              color: active ? '#7c3aed' : '#6b7280',
-              background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
-              border: active ? '1px solid rgba(124,58,237,0.2)' : '1px solid transparent',
-              transition: 'all 0.15s',
+      <nav style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+        {/* Home */}
+        <Link to="/"
+          style={navLinkStyle(location.pathname === '/')}
+          onMouseEnter={e => { if (location.pathname !== '/') { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
+          onMouseLeave={e => { if (location.pathname !== '/') { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
+        >Home</Link>
+
+        {/* DROPDOWN: Nauka */}
+        <div ref={dropdownRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => setDropdownOpen(o => !o)}
+            style={{
+              ...navLinkStyle(isLearnActive),
+              background: isLearnActive ? 'rgba(124,58,237,0.1)' : dropdownOpen ? 'rgba(124,58,237,0.06)' : 'transparent',
+              border: isLearnActive ? '1px solid rgba(124,58,237,0.2)' : '1px solid transparent',
+              fontFamily: "'Sora', sans-serif",
             }}
-            onMouseEnter={e => {
-              if (!active) {
-                e.currentTarget.style.color = '#7c3aed';
-                e.currentTarget.style.background = 'rgba(124,58,237,0.06)';
-              }
-            }}
-            onMouseLeave={e => {
-              if (!active) {
-                e.currentTarget.style.color = '#6b7280';
-                e.currentTarget.style.background = 'transparent';
-              }
-            }}
-            >{label}</Link>
-          );
-        })}
+            onMouseEnter={e => { if (!isLearnActive) { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
+            onMouseLeave={e => { if (!isLearnActive && !dropdownOpen) { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
+          >
+            Nauka
+            <span style={{
+              fontSize: '0.6rem',
+              transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s',
+              marginLeft: '0.1rem',
+              opacity: 0.7,
+            }}>▼</span>
+          </button>
+
+          {dropdownOpen && (
+            <div style={{
+              position: 'absolute',
+              top: 'calc(100% + 8px)',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: 'rgba(245,243,255,0.97)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(124,58,237,0.18)',
+              borderRadius: 14,
+              boxShadow: '0 8px 32px rgba(124,58,237,0.15)',
+              padding: '0.5rem',
+              minWidth: 160,
+              animation: 'dropIn 0.18s ease',
+            }}>
+              {LEARN_LINKS.map(({ path, label, icon }) => {
+                const active = location.pathname === path;
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    onClick={() => setDropdownOpen(false)}
+                    style={{
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.6rem',
+                      padding: '0.6rem 0.9rem',
+                      borderRadius: 10,
+                      fontSize: '0.9rem',
+                      fontWeight: active ? 700 : 600,
+                      color: active ? '#7c3aed' : '#4b5563',
+                      background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
+                      transition: 'all 0.12s',
+                    }}
+                    onMouseEnter={e => { if (!active) { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.07)'; } }}
+                    onMouseLeave={e => { if (!active) { e.currentTarget.style.color = '#4b5563'; e.currentTarget.style.background = 'transparent'; } }}
+                  >
+                    <span style={{ fontSize: '1rem' }}>{icon}</span>
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Dashboard */}
+        <Link to="/exam"
+          style={navLinkStyle(location.pathname === '/exam')}
+          onMouseEnter={e => { if (location.pathname !== '/exam') { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
+          onMouseLeave={e => { if (location.pathname !== '/exam') { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
+        >Dashboard</Link>
+
+        {/* O nas */}
+        <Link to="/about"
+          style={navLinkStyle(location.pathname === '/about')}
+          onMouseEnter={e => { if (location.pathname !== '/about') { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
+          onMouseLeave={e => { if (location.pathname !== '/about') { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
+        >O nas</Link>
       </nav>
 
       {/* CTA button desktop */}
@@ -88,7 +183,7 @@ export default function Header() {
         >Mój dashboard →</button>
       </Link>
 
-      {/* HAMBURGER — mobile only via CSS */}
+      {/* HAMBURGER */}
       <button
         onClick={() => setMenuOpen(o => !o)}
         style={{
@@ -117,24 +212,57 @@ export default function Header() {
         }}
         className="mobile-menu"
         >
-          {NAV_LINKS.map(({ path, label }) => {
+          {[{ path: '/', label: 'Home' }].map(({ path, label }) => {
             const active = location.pathname === path;
             return (
-              <Link key={path} to={path}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  textDecoration: 'none',
-                  padding: '0.75rem 1rem',
-                  borderRadius: 12,
-                  fontSize: '1rem',
-                  fontWeight: active ? 700 : 600,
-                  color: active ? '#7c3aed' : '#4b5563',
-                  background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
-                  display: 'block',
-                }}
-              >{label}</Link>
+              <Link key={path} to={path} onClick={() => setMenuOpen(false)} style={{
+                textDecoration: 'none', padding: '0.75rem 1rem',
+                borderRadius: 12, fontSize: '1rem',
+                fontWeight: active ? 700 : 600,
+                color: active ? '#7c3aed' : '#4b5563',
+                background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
+                display: 'block',
+              }}>{label}</Link>
             );
           })}
+
+          <div style={{
+            padding: '0.4rem 1rem 0.2rem',
+            fontSize: '0.7rem', fontWeight: 700, color: '#9ca3af',
+            textTransform: 'uppercase', letterSpacing: '0.1em',
+          }}>Nauka</div>
+
+          {LEARN_LINKS.map(({ path, label, icon }) => {
+            const active = location.pathname === path;
+            return (
+              <Link key={path} to={path} onClick={() => setMenuOpen(false)} style={{
+                textDecoration: 'none',
+                padding: '0.65rem 1rem 0.65rem 1.5rem',
+                borderRadius: 12, fontSize: '0.95rem',
+                fontWeight: active ? 700 : 600,
+                color: active ? '#7c3aed' : '#4b5563',
+                background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
+                display: 'flex', alignItems: 'center', gap: '0.5rem',
+              }}>
+                <span>{icon}</span>{label}
+              </Link>
+            );
+          })}
+
+          {[{ path: '/exam', label: 'Dashboard' }, { path: '/about', label: 'O nas' }].map(({ path, label }) => {
+            const active = location.pathname === path;
+            return (
+              <Link key={path} to={path} onClick={() => setMenuOpen(false)} style={{
+                textDecoration: 'none', padding: '0.75rem 1rem',
+                borderRadius: 12, fontSize: '1rem',
+                fontWeight: active ? 700 : 600,
+                color: active ? '#7c3aed' : '#4b5563',
+                background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
+                display: 'block',
+              }}>{label}</Link>
+            );
+          })}
+
           <Link to="/exam" onClick={() => setMenuOpen(false)} style={{ textDecoration: 'none', marginTop: '0.5rem' }}>
             <button style={{
               width: '100%', padding: '0.8rem',
@@ -148,6 +276,10 @@ export default function Header() {
       )}
 
       <style>{`
+        @keyframes dropIn {
+          from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+          to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
         @media (max-width: 768px) {
           .hamburger-btn { display: block !important; }
           nav, .desktop-cta { display: none !important; }

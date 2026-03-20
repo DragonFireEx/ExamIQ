@@ -163,7 +163,7 @@ function QuizScreen({ config, onFinish }) {
     try {
       const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
       // POPRAWKA: właściwa nazwa modelu Gemini
-      const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+      const model = ai.getGenerativeModel({ model: 'gemini-flash-latest' });
       const prompt = `Jesteś weryfikatorem odpowiedzi na pytania egzaminacyjne z IT (egzamin INF04).\n\nPytanie: ${question}\nWzorcowa odpowiedź: ${correctAnswer}\nOdpowiedź ucznia: ${userAnswer}\n\nOceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identycznego brzmienia — liczy się sens i kluczowe pojęcia techniczne. Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
       const result = await model.generateContent(prompt);
       const text = result.response.text().trim().toUpperCase();
