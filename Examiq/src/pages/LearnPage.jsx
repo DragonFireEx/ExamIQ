@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import '../App.css'; // dodany import globalnych stylów
 
 const JAMIQ_HAPPY = '/happy_jamiq.png';
 const JAMIQ_SAD   = '/sad_jamiq.png';
@@ -26,36 +27,25 @@ function SetupScreen({ onStart }) {
   const maxCount = Math.min(available, 40);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
+    <div className="learn-page">
       <Header />
-      <div style={{ maxWidth: 560, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
+      <div className="learn-container">
 
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center',
-            background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)',
-            borderRadius: 99, padding: '0.4rem 1.1rem', marginBottom: '1.2rem',
-          }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <div className="learn-badge">
+            <span className="learn-badge-text">
               Tryb nauki
             </span>
           </div>
-          <h1 style={{ fontSize: 'clamp(2rem,5vw,2.8rem)', fontWeight: 900, color: '#3b0764', margin: 0, letterSpacing: '-1px', lineHeight: 1.1 }}>
+          <h1 className="learn-title">
             Skonfiguruj quiz
           </h1>
-          <p style={{ color: '#6b7280', marginTop: '0.75rem', fontSize: '0.95rem' }}>
+          <p className="learn-subtitle">
             Dostępnych pytań: <strong style={{ color: '#7c3aed' }}>{available}</strong>
           </p>
         </div>
 
-        <div style={{
-          background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(124,58,237,0.12)',
-          borderRadius: 24, padding: '2rem',
-          boxShadow: '0 4px 32px rgba(124,58,237,0.08)',
-          display: 'flex', flexDirection: 'column', gap: '2rem',
-        }}>
-
+        <div className="learn-card">
           {/* Liczba pytań */}
           <div>
             <label style={{ display: 'block', color: '#374151', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem' }}>
@@ -64,32 +54,31 @@ function SetupScreen({ onStart }) {
             <input
               type="range" min={1} max={maxCount} value={Math.min(count, maxCount)}
               onChange={e => setCount(+e.target.value)}
-              style={{ width: '100%', accentColor: '#7c3aed', cursor: 'pointer' }}
+              className="learn-range"
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.3rem' }}>
-              <span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>1</span>
-              <span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>{maxCount}</span>
+            <div className="learn-range-labels">
+              <span className="learn-range-label">1</span>
+              <span className="learn-range-label">{maxCount}</span>
             </div>
           </div>
 
           {/* Czas */}
           <div>
             <label style={{ display: 'block', color: '#374151', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Czas na pytanie</label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8 }}>
+            <div className="learn-option-group learn-option-group-4">
               {[
                 { val: 'none', label: '∞',   sub: 'bez limitu' },
                 { val: '15',   label: '15s',  sub: 'szybki' },
                 { val: '30',   label: '30s',  sub: 'normalny' },
                 { val: '60',   label: '60s',  sub: 'spokojny' },
               ].map(opt => (
-                <button key={opt.val} onClick={() => setTimeMode(opt.val)} style={{
-                  padding: '0.75rem 0.5rem', borderRadius: 12, textAlign: 'center',
-                  border: timeMode === opt.val ? '1.5px solid #7c3aed' : '1.5px solid rgba(124,58,237,0.12)',
-                  background: timeMode === opt.val ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.6)',
-                  cursor: 'pointer', transition: 'all 0.15s', fontFamily: "'Sora', sans-serif",
-                }}>
-                  <div style={{ fontWeight: 800, fontSize: '1rem', color: timeMode === opt.val ? '#7c3aed' : '#9ca3af' }}>{opt.label}</div>
-                  <div style={{ fontSize: '0.68rem', marginTop: 2, color: timeMode === opt.val ? '#a78bfa' : '#c4b5fd' }}>{opt.sub}</div>
+                <button key={opt.val} onClick={() => setTimeMode(opt.val)}
+                  className={`learn-option-btn ${timeMode === opt.val ? 'learn-option-btn-active' : ''}`}
+                  style={{
+                    color: timeMode === opt.val ? '#7c3aed' : '#9ca3af',
+                  }}>
+                  <div className="learn-option-label" style={{ color: timeMode === opt.val ? '#7c3aed' : '#9ca3af' }}>{opt.label}</div>
+                  <div className="learn-option-sub" style={{ color: timeMode === opt.val ? '#a78bfa' : '#c4b5fd' }}>{opt.sub}</div>
                 </button>
               ))}
             </div>
@@ -98,36 +87,26 @@ function SetupScreen({ onStart }) {
           {/* Typ */}
           <div>
             <label style={{ display: 'block', color: '#374151', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Typ pytań</label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
+            <div className="learn-option-group learn-option-group-3">
               {[
                 { val: 'both',   label: '🎲 Oba typy' },
                 { val: 'closed', label: '🔘 Zamknięte' },
                 { val: 'open',   label: '✏️ Otwarte' },
               ].map(opt => (
-                <button key={opt.val} onClick={() => setTypeMode(opt.val)} style={{
-                  padding: '0.75rem 0.5rem', borderRadius: 12, fontWeight: 600, fontSize: '0.85rem',
-                  border: typeMode === opt.val ? '1.5px solid #7c3aed' : '1.5px solid rgba(124,58,237,0.12)',
-                  background: typeMode === opt.val ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.6)',
-                  color: typeMode === opt.val ? '#7c3aed' : '#6b7280',
-                  cursor: 'pointer', transition: 'all 0.15s', fontFamily: "'Sora', sans-serif",
-                }}>{opt.label}</button>
+                <button key={opt.val} onClick={() => setTypeMode(opt.val)}
+                  className={`learn-option-btn ${typeMode === opt.val ? 'learn-option-btn-active' : ''}`}
+                  style={{
+                    color: typeMode === opt.val ? '#7c3aed' : '#6b7280',
+                  }}>
+                  {opt.label}
+                </button>
               ))}
             </div>
           </div>
 
           <button
             onClick={() => onStart({ count: Math.min(count, maxCount), timeLimit: timeMode === 'none' ? null : +timeMode, typeMode })}
-            style={{
-              width: '100%', padding: '1rem',
-              background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
-              color: '#fff', border: 'none', borderRadius: 14,
-              fontWeight: 800, fontSize: '1.05rem', cursor: 'pointer',
-              fontFamily: "'Sora', sans-serif",
-              boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
-              transition: 'transform 0.15s, box-shadow 0.15s',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(124,58,237,0.45)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)';   e.currentTarget.style.boxShadow = '0 4px 20px rgba(124,58,237,0.3)'; }}
+            className="learn-button-primary"
           >
             Rozpocznij quiz →
           </button>
@@ -230,76 +209,48 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
   const timerColor = timerPct > 0.5 ? '#16a34a' : timerPct > 0.25 ? '#d97706' : '#dc2626';
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
+    <div className="learn-page">
       <Header />
 
       {/* PROGRESS BAR */}
-      <div style={{ position: 'relative', height: 5, background: 'rgba(124,58,237,0.1)' }}>
-        <div style={{
-          position: 'absolute', left: 0, top: 0, bottom: 0,
-          width: `${progress * 100}%`,
-          background: 'linear-gradient(90deg,#7c3aed,#a78bfa)',
-          transition: 'width 0.5s cubic-bezier(0.4,0,0.2,1)',
-          boxShadow: '0 0 10px rgba(124,58,237,0.4)',
-        }} />
-        <div style={{
-          position: 'absolute', top: -3, left: `${progress * 100}%`, transform: 'translateX(-50%)',
-          width: 11, height: 11, borderRadius: '50%',
-          background: '#7c3aed', boxShadow: '0 0 8px rgba(124,58,237,0.6)',
-          transition: 'left 0.5s cubic-bezier(0.4,0,0.2,1)',
-        }} />
+      <div className="learn-progress-bar-container">
+        <div className="learn-progress-bar-fill" style={{ width: `${progress * 100}%` }} />
+        <div className="learn-progress-thumb" style={{ left: `${progress * 100}%` }} />
       </div>
 
-      <div style={{ maxWidth: 640, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
+      <div className="learn-container-wide">
 
         {/* TOPBAR */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
-          <span style={{ color: '#9ca3af', fontSize: '0.85rem', fontWeight: 600 }}>
-            Pytanie <span style={{ color: '#7c3aed', fontWeight: 800 }}>{idx + 1}</span> / {pool.length}
+        <div className="learn-topbar">
+          <span className="learn-counter">
+            Pytanie <span className="learn-counter-highlight">{idx + 1}</span> / {pool.length}
           </span>
           <div style={{ display: 'flex', gap: 10 }}>
             {/* STREAK */}
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 5,
-              background: showFlame ? 'rgba(245,158,11,0.12)' : 'rgba(255,255,255,0.7)',
-              border: showFlame ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(124,58,237,0.12)',
-              borderRadius: 99, padding: '0.3rem 0.8rem', transition: 'all 0.3s',
-            }}>
-              <span style={{
-                fontSize: '1rem', display: 'inline-block',
-                filter: showFlame ? 'none' : 'grayscale(1) opacity(0.3)',
-                animation: showFlame ? 'flameDance 0.5s ease' : 'none',
-                transition: 'filter 0.3s',
-              }}>🔥</span>
-              <span style={{ fontSize: '0.82rem', fontWeight: 800, color: showFlame ? '#d97706' : '#c4b5fd', transition: 'color 0.3s' }}>{streak}</span>
+            <div className={`learn-streak ${showFlame ? 'learn-streak-active' : ''}`}>
+              <span className="learn-streak-icon" style={{ filter: showFlame ? 'none' : 'grayscale(1) opacity(0.3)', animation: showFlame ? 'flameDance 0.5s ease' : 'none' }}>🔥</span>
+              <span className="learn-streak-count" style={{ color: showFlame ? '#d97706' : '#c4b5fd' }}>{streak}</span>
             </div>
             {/* TIMER */}
             {config.timeLimit && (
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 5,
+              <div className="learn-timer" style={{
                 background: timerPct > 0.5 ? 'rgba(22,163,74,0.08)' : timerPct > 0.25 ? 'rgba(217,119,6,0.08)' : 'rgba(220,38,38,0.08)',
                 border: `1px solid ${timerPct > 0.5 ? 'rgba(22,163,74,0.25)' : timerPct > 0.25 ? 'rgba(217,119,6,0.25)' : 'rgba(220,38,38,0.25)'}`,
-                borderRadius: 99, padding: '0.3rem 0.8rem', transition: 'all 0.3s',
                 animation: timerPulse && !revealed ? 'timerBlink 0.5s infinite' : 'none',
               }}>
                 <span style={{ fontSize: '0.85rem' }}>⏱</span>
-                <span style={{ fontWeight: 900, fontSize: '1rem', color: timerColor, minWidth: 24, textAlign: 'center' }}>{timeLeft}</span>
+                <span className="learn-timer-value" style={{ color: timerColor }}>{timeLeft}</span>
               </div>
             )}
           </div>
         </div>
 
         {/* PYTANIE */}
-        <div style={{
-          background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(124,58,237,0.1)',
-          borderRadius: 20, padding: '1.75rem', marginBottom: '1.25rem',
-          boxShadow: '0 2px 16px rgba(124,58,237,0.06)',
-        }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.75rem' }}>
+        <div className="learn-card-sm">
+          <div className="learn-question-category">
             {q.category}
           </div>
-          <p style={{ color: '#1f2937', fontWeight: 600, fontSize: '1.05rem', lineHeight: 1.7, margin: 0 }}>{q.question}</p>
+          <p className="learn-question-text">{q.question}</p>
           {q.snippet && <div dangerouslySetInnerHTML={{ __html: q.snippet }} style={{ marginTop: '1rem' }} />}
         </div>
 
@@ -310,37 +261,24 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
               const isRight  = revealed && key === q.answer;
               const isWrong  = revealed && key === selected && key !== q.answer;
               const isDimmed = revealed && key !== q.answer && key !== selected;
+              let optionClass = 'learn-option';
+              if (revealed) optionClass += ' learn-option-disabled';
+              if (isRight) optionClass += ' learn-option-correct';
+              else if (isWrong) optionClass += ' learn-option-wrong';
+              else if (isDimmed) optionClass += ' learn-option-dimmed';
+
+              const letterClass = `learn-option-letter ${isRight ? 'learn-option-letter-correct' : isWrong ? 'learn-option-letter-wrong' : ''}`;
+
               return (
                 <button key={key} onClick={() => { if (!revealed) { setSelected(key); handleReveal(key === q.answer); } }}
-                  disabled={revealed} style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  padding: '0.9rem 1.1rem', borderRadius: 14, textAlign: 'left',
-                  fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: '0.9rem',
-                  cursor: revealed ? 'default' : 'pointer', transition: 'all 0.15s',
-                  background: isRight  ? 'rgba(22,163,74,0.1)'
-                            : isWrong  ? 'rgba(220,38,38,0.1)'
-                            : isDimmed ? 'rgba(255,255,255,0.4)'
-                            : 'rgba(255,255,255,0.85)',
-                  border: isRight  ? '1.5px solid rgba(22,163,74,0.5)'
-                        : isWrong  ? '1.5px solid rgba(220,38,38,0.5)'
-                        : isDimmed ? '1px solid rgba(124,58,237,0.06)'
-                        : '1px solid rgba(124,58,237,0.12)',
-                  color: isRight  ? '#166534'
-                       : isWrong  ? '#991b1b'
-                       : isDimmed ? '#c4b5fd'
-                       : '#374151',
-                  boxShadow: revealed ? 'none' : '0 1px 4px rgba(124,58,237,0.06)',
-                }}
-                onMouseEnter={e => { if (!revealed) { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.35)'; e.currentTarget.style.transform = 'translateX(5px)'; } }}
-                onMouseLeave={e => { if (!revealed) { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.12)'; e.currentTarget.style.transform = 'translateX(0)'; } }}
+                  className={optionClass}
+                  style={{
+                    boxShadow: revealed ? 'none' : '0 1px 4px rgba(124,58,237,0.06)',
+                  }}
+                  onMouseEnter={e => { if (!revealed) { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.35)'; e.currentTarget.style.transform = 'translateX(5px)'; } }}
+                  onMouseLeave={e => { if (!revealed) { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.12)'; e.currentTarget.style.transform = 'translateX(0)'; } }}
                 >
-                  <span style={{
-                    minWidth: 30, height: 30, borderRadius: 8, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 900, fontSize: '0.8rem',
-                    background: isRight ? 'rgba(22,163,74,0.15)' : isWrong ? 'rgba(220,38,38,0.15)' : 'rgba(124,58,237,0.08)',
-                    color: isRight ? '#166534' : isWrong ? '#991b1b' : '#7c3aed',
-                  }}>{key}</span>
+                  <span className={letterClass}>{key}</span>
                   {val}
                 </button>
               );
@@ -356,30 +294,16 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
               disabled={revealed || isChecking} rows={3}
               placeholder="Wpisz odpowiedź... (Ctrl+Enter aby sprawdzić)"
               onKeyDown={e => { if (e.key === 'Enter' && e.ctrlKey) handleOpenSubmit(); }}
+              className={`learn-textarea ${revealed ? (isCorrect ? 'learn-textarea-correct' : 'learn-textarea-wrong') : ''}`}
               style={{
-                width: '100%', padding: '1rem', boxSizing: 'border-box',
-                background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(8px)',
-                border: revealed
-                  ? (isCorrect ? '1.5px solid rgba(22,163,74,0.5)' : '1.5px solid rgba(220,38,38,0.5)')
-                  : '1.5px solid rgba(124,58,237,0.2)',
-                borderRadius: 14, color: '#1f2937',
-                fontFamily: "'Sora', sans-serif", fontSize: '0.95rem',
-                resize: 'vertical', outline: 'none', transition: 'border-color 0.2s',
                 opacity: isChecking ? 0.7 : 1,
               }}
             />
             {!revealed && (
               <button onClick={handleOpenSubmit}
-                disabled={!openAnswer.trim() || isChecking} style={{
-                marginTop: 8, padding: '0.65rem 1.5rem',
-                background: openAnswer.trim() && !isChecking ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : 'rgba(124,58,237,0.08)',
-                border: 'none', borderRadius: 10,
-                color: openAnswer.trim() && !isChecking ? '#fff' : '#c4b5fd',
-                fontWeight: 700, fontSize: '0.85rem',
-                cursor: openAnswer.trim() && !isChecking ? 'pointer' : 'default',
-                fontFamily: "'Sora', sans-serif", transition: 'all 0.15s',
-                display: 'flex', alignItems: 'center', gap: 8,
-              }}>
+                disabled={!openAnswer.trim() || isChecking}
+                className={`learn-check-button ${openAnswer.trim() && !isChecking ? 'learn-check-button-active' : 'learn-check-button-disabled'}`}
+              >
                 {isChecking ? (
                   <>
                     <span style={{ display: 'inline-block', animation: 'spin 0.8s linear infinite', fontSize: '0.9rem' }}>⏳</span>
@@ -393,28 +317,22 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
 
         {/* FEEDBACK */}
         {revealed && (
-          <div style={{
-            borderRadius: 20, overflow: 'hidden', marginBottom: '1.25rem',
-            border: isCorrect ? '1px solid rgba(22,163,74,0.3)' : '1px solid rgba(220,38,38,0.3)',
-            background: isCorrect ? 'rgba(22,163,74,0.06)' : 'rgba(220,38,38,0.06)',
-            boxShadow: isCorrect ? '0 4px 20px rgba(22,163,74,0.1)' : '0 4px 20px rgba(220,38,38,0.1)',
-            animation: 'slideUp 0.3s ease',
-          }}>
-            <div style={{ display: 'flex', gap: '1rem', padding: '1.25rem', alignItems: 'flex-start' }}>
+          <div className={`learn-feedback ${isCorrect ? 'learn-feedback-correct' : 'learn-feedback-wrong'}`}>
+            <div className="learn-feedback-content">
               <img src={isCorrect ? JAMIQ_HAPPY : JAMIQ_SAD} alt="Jamiq"
-                style={{ width: 68, height: 68, objectFit: 'contain', flexShrink: 0, animation: 'jamiqPop 0.5s ease' }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: isCorrect ? '#166534' : '#991b1b', marginBottom: '0.4rem' }}>
+                className="learn-feedback-image" />
+              <div className="learn-feedback-text">
+                <div className={`learn-feedback-header ${isCorrect ? 'learn-feedback-header-correct' : 'learn-feedback-header-wrong'}`}>
                   {isCorrect
                     ? (streak >= 2 ? `🔥 Streak ×${streak}! Świetnie!` : '✓ Poprawna odpowiedź!')
                     : `✗ Błąd${q.type === 'closed' ? ` — poprawna: ${q.answer}` : ''}`}
                 </div>
                 {q.type === 'open' && !isCorrect && (
-                  <div style={{ color: '#7c3aed', fontSize: '0.83rem', marginBottom: '0.4rem', fontWeight: 600 }}>
+                  <div className="learn-feedback-answer">
                     Wzorcowa odpowiedź: {q.answer}
                   </div>
                 )}
-                <p style={{ color: isCorrect ? '#166534' : '#7f1d1d', fontSize: '0.87rem', lineHeight: 1.65, margin: 0, opacity: 0.85 }}>
+                <p className={`learn-feedback-explanation ${isCorrect ? 'learn-feedback-explanation-correct' : 'learn-feedback-explanation-wrong'}`}>
                   {q.explanation}
                 </p>
               </div>
@@ -424,48 +342,13 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
 
         {/* NASTĘPNE */}
         {revealed && (
-          <button onClick={handleNext} style={{
-            width: '100%', padding: '1rem',
-            background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
-            color: '#fff', border: 'none', borderRadius: 14,
-            fontWeight: 800, fontSize: '1rem', cursor: 'pointer',
-            fontFamily: "'Sora', sans-serif",
-            boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
-            animation: 'slideUp 0.3s ease',
-            transition: 'transform 0.15s, box-shadow 0.15s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(124,58,237,0.45)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)';   e.currentTarget.style.boxShadow = '0 4px 20px rgba(124,58,237,0.3)'; }}
-          >
+          <button onClick={handleNext} className="learn-button-primary" style={{ fontSize: '1rem' }}>
             {idx + 1 >= pool.length ? 'Zobacz wyniki →' : 'Następne pytanie →'}
           </button>
         )}
       </div>
 
       <style>{`
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(12px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes jamiqPop {
-          0%  { transform: scale(0.5) rotate(-10deg); opacity: 0; }
-          65% { transform: scale(1.15) rotate(4deg); opacity: 1; }
-          100% { transform: scale(1) rotate(0deg); }
-        }
-        @keyframes flameDance {
-          0%   { transform: scale(1); }
-          35%  { transform: scale(1.6) rotate(-12deg); }
-          70%  { transform: scale(1.2) rotate(6deg); }
-          100% { transform: scale(1); }
-        }
-        @keyframes timerBlink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.45; }
-        }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
         pre.code-snippet {
           background: rgba(124,58,237,0.05) !important;
           border: 1px solid rgba(124,58,237,0.12);
@@ -505,104 +388,69 @@ function ResultsScreen({ results, onRestart }) {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
+    <div className="learn-page">
       <Header />
-      <div style={{ maxWidth: 600, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
+      <div className="learn-container-results">
 
         {/* JAMIQ */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem', animation: 'riseIn 0.5s ease' }}>
+        <div className="learn-results-jamiq">
           <img
             src={pct >= 75 ? JAMIQ_HAPPY : pct >= 50 ? JAMIQ_SAD : JAMIQ_ANGRY}
             alt="Jamiq"
             style={{ width: 110, height: 110, objectFit: 'contain', animation: 'jamiqPop 0.6s ease' }}
           />
-          <div style={{ marginTop: '0.5rem', fontSize: '1.6rem', letterSpacing: 4 }}>
+          <div className="learn-results-stars">
             {'⭐'.repeat(stars)}{'☆'.repeat(3 - stars)}
           </div>
-          <h1 style={{
-            fontSize: 'clamp(2.5rem,8vw,4rem)', fontWeight: 900,
-            color: passed ? '#166534' : '#991b1b',
-            margin: '0.4rem 0 0', letterSpacing: '-2px', lineHeight: 1,
-          }}>{pct}%</h1>
-          <p style={{ color: passed ? '#16a34a' : '#dc2626', margin: '0.4rem 0 0', fontWeight: 700, fontSize: '1rem' }}>
+          <h1 className={`learn-results-percent ${passed ? 'learn-results-pass' : 'learn-results-fail'}`}>{pct}%</h1>
+          <p className={`learn-results-status ${passed ? 'learn-results-status-pass' : 'learn-results-status-fail'}`}>
             {passed ? '🎉 Zaliczono! Próg 75% osiągnięty.' : '😓 Nie zaliczono — próg to 75%'}
           </p>
-          <p style={{ color: '#9ca3af', margin: '0.2rem 0 0', fontSize: '0.82rem' }}>Wynik zapisano w historii</p>
+          <p className="learn-results-saved">Wynik zapisano w historii</p>
         </div>
 
         {/* KARTY STAT */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: '1.5rem', animation: 'riseIn 0.6s ease' }}>
+        <div className="learn-stats-grid">
           {[
             { label: 'Poprawne',   val: correct,        color: '#166534', bg: 'rgba(22,163,74,0.08)',   border: 'rgba(22,163,74,0.2)' },
             { label: 'Błędne',     val: total - correct, color: '#991b1b', bg: 'rgba(220,38,38,0.08)',  border: 'rgba(220,38,38,0.2)' },
             { label: 'Wszystkich', val: total,           color: '#5b21b6', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.2)' },
           ].map(s => (
-            <div key={s.label} style={{
-              background: s.bg, border: `1px solid ${s.border}`,
-              borderRadius: 16, padding: '1.2rem', textAlign: 'center',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: 900, color: s.color }}>{s.val}</div>
-              <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: 4 }}>{s.label}</div>
+            <div key={s.label} className="learn-stat-card" style={{ background: s.bg, border: `1px solid ${s.border}` }}>
+              <div className="learn-stat-value" style={{ color: s.color }}>{s.val}</div>
+              <div className="learn-stat-label">{s.label}</div>
             </div>
           ))}
         </div>
 
         {/* PASEK */}
-        <div style={{
-          background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(124,58,237,0.1)', borderRadius: 16, padding: '1.5rem',
-          marginBottom: '1.5rem', boxShadow: '0 2px 12px rgba(124,58,237,0.06)',
-          animation: 'riseIn 0.7s ease',
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-            <span style={{ color: '#6b7280', fontSize: '0.82rem', fontWeight: 600 }}>Wynik końcowy</span>
-            <span style={{ color: '#7c3aed', fontSize: '0.82rem', fontWeight: 700 }}>próg 75%</span>
+        <div className="learn-result-bar">
+          <div className="learn-result-bar-header">
+            <span className="learn-result-bar-label">Wynik końcowy</span>
+            <span className="learn-result-bar-threshold">próg 75%</span>
           </div>
-          <div style={{ background: 'rgba(124,58,237,0.08)', borderRadius: 99, height: 12, position: 'relative', overflow: 'hidden' }}>
-            <div style={{
-              height: '100%', width: `${pct}%`, borderRadius: 99,
-              background: passed ? 'linear-gradient(90deg,#16a34a,#4ade80)' : 'linear-gradient(90deg,#dc2626,#f87171)',
-              transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)',
-              boxShadow: passed ? '0 0 10px rgba(22,163,74,0.4)' : '0 0 10px rgba(220,38,38,0.4)',
-            }} />
-            <div style={{
-              position: 'absolute', top: -2, left: '75%', transform: 'translateX(-50%)',
-              width: 2, height: 16, background: '#7c3aed', borderRadius: 1,
-            }} />
+          <div className="learn-result-bar-bg">
+            <div className={`learn-result-bar-fill ${passed ? 'learn-result-bar-fill-pass' : 'learn-result-bar-fill-fail'}`} style={{ width: `${pct}%` }} />
+            <div className="learn-result-bar-marker" />
           </div>
         </div>
 
         {/* LISTA */}
-        <div style={{
-          background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(124,58,237,0.1)', borderRadius: 16, padding: '1.5rem',
-          marginBottom: '1.5rem', maxHeight: 300, overflowY: 'auto',
-          boxShadow: '0 2px 12px rgba(124,58,237,0.06)',
-          animation: 'riseIn 0.8s ease',
-        }}>
-          <h3 style={{ color: '#374151', fontWeight: 700, margin: '0 0 1rem', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+        <div className="learn-answers-list">
+          <h3 className="learn-answers-title">
             Przegląd odpowiedzi
           </h3>
           {results.map((r, i) => (
-            <div key={i} style={{
-              display: 'flex', gap: 10, alignItems: 'flex-start',
-              padding: '0.65rem 0',
-              borderBottom: i < results.length - 1 ? '1px solid rgba(124,58,237,0.06)' : 'none',
-            }}>
-              <span style={{
-                minWidth: 22, height: 22, borderRadius: 6, flexShrink: 0, marginTop: 2,
-                background: r.correct ? 'rgba(22,163,74,0.12)' : 'rgba(220,38,38,0.12)',
-                color: r.correct ? '#166534' : '#991b1b',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '0.72rem', fontWeight: 900,
-              }}>{r.correct ? '✓' : '✗'}</span>
-              <div style={{ flex: 1 }}>
-                <p style={{ color: r.correct ? '#9ca3af' : '#374151', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>
+            <div key={i} className="learn-answer-item">
+              <span className={`learn-answer-icon ${r.correct ? 'learn-answer-icon-correct' : 'learn-answer-icon-wrong'}`}>
+                {r.correct ? '✓' : '✗'}
+              </span>
+              <div className="learn-answer-text">
+                <p className="learn-answer-question">
                   {r.q.question.slice(0, 90)}{r.q.question.length > 90 ? '…' : ''}
                 </p>
                 {!r.correct && (
-                  <p style={{ color: '#7c3aed', fontSize: '0.75rem', margin: '2px 0 0', fontWeight: 600 }}>
+                  <p className="learn-answer-correct">
                     ✓ {r.q.answer}
                   </p>
                 )}
@@ -613,30 +461,13 @@ function ResultsScreen({ results, onRestart }) {
 
         {/* PRZYCISKI */}
         <div style={{ display: 'flex', gap: 10, animation: 'riseIn 0.9s ease' }}>
-          <button onClick={onRestart} style={{
-            flex: 1, padding: '1rem',
-            background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
-            color: '#fff', border: 'none', borderRadius: 14,
-            fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer',
-            fontFamily: "'Sora', sans-serif",
-            boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
-            transition: 'transform 0.15s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-          >Zagraj ponownie</button>
+          <button onClick={onRestart} className="learn-button-outline">
+            Zagraj ponownie
+          </button>
           <Link to="/exam" style={{ flex: 1, textDecoration: 'none' }}>
-            <button style={{
-              width: '100%', padding: '1rem',
-              background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(124,58,237,0.2)',
-              color: '#7c3aed', borderRadius: 14,
-              fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
-              fontFamily: "'Sora', sans-serif", transition: 'all 0.15s',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; }}
-            >Dashboard →</button>
+            <button className="learn-button-secondary">
+              Dashboard →
+            </button>
           </Link>
         </div>
       </div>
