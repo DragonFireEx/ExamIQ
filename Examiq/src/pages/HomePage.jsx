@@ -49,8 +49,8 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { value: '40+', label: 'pytań w bazie' },
-  { value: '6',   label: 'kategorii tematycznych' },
+  { value: '200+', label: 'pytań w bazie' },
+  { value: '9',   label: 'kategorii tematycznych' },
   { value: '75%', label: 'próg zaliczenia' },
   { value: '∞',   label: 'prób egzaminacyjnych' },
 ];
