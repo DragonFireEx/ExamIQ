@@ -130,6 +130,13 @@ export function useUserSession() {
 
   // Zapisz wynik egzaminu + zaktualizuj streak + postęp per kategoria
   const saveExamResult = useCallback(({ score, total, duration, category = 'all', questions = [] }) => {
+    // GUARD: blokuj duplikaty — jeśli ostatni wpis ma ten sam wynik/total/czas, pomiń
+    const existing = lsGet(LS_HISTORY, []);
+    const last = existing[existing.length - 1];
+    if (last && last.score === score && last.total === total && last.duration === duration && last.category === category) {
+      return; // duplikat — React StrictMode podwójne wywołanie
+    }
+
     // 1. Historia
     const newEntry = {
       date: todayISO(),
@@ -138,7 +145,7 @@ export function useUserSession() {
       duration,
       category,
     };
-    const updatedHistory = [...lsGet(LS_HISTORY, []), newEntry];
+    const updatedHistory = [...existing, newEntry];
     lsSet(LS_HISTORY, updatedHistory);
     setHistory(updatedHistory);
 

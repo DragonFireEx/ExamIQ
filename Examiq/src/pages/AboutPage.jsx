@@ -10,7 +10,7 @@ import Header from '../components/Header';
 
 const AUTHORS = [
   { name: 'Marcel Turwanicki',  role: 'FullStack',      emoji: '💻' },
-  { name: 'Filip Czepiej', role: 'FullStack',     emoji: '🧠' },
+  { name: 'Filip Czepiel', role: 'FullStack',     emoji: '🧠' },
   { name: 'Piotr Lipiński', role: 'Design & UX / DevOps / Docs',             emoji: '🎨' },
 ];
 
