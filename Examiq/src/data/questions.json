@@ -478,5 +478,2025 @@
     "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">template</span> &lt;<span class=\"kw\">typename</span> T&gt;\nT <span class=\"fn\">clamp</span>(T value, T minVal, T maxVal) {\n    <span class=\"kw\">if</span> (value < minVal) <span class=\"kw\">return</span> minVal;\n    <span class=\"kw\">if</span> (value > maxVal) <span class=\"kw\">return</span> maxVal;\n    <span class=\"kw\">return</span> value;\n}\n\n<span class=\"cm\">// użycie:</span>\n<span class=\"fn\">clamp</span>(<span class=\"nm\">15</span>, <span class=\"nm\">0</span>, <span class=\"nm\">10</span>);       <span class=\"cm\">// → 10</span>\n<span class=\"fn\">clamp</span>(<span class=\"nm\">3.7f</span>, <span class=\"nm\">0.0f</span>, <span class=\"nm\">5.0f</span>);  <span class=\"cm\">// → 3.7f</span></code></pre>",
     "answer": "clamp ogranicza wartość do zakresu [minVal, maxVal]. Template pozwala na jedną implementację dla int, float, double itp. — kompilator generuje odpowiednią wersję dla każdego typu.",
     "explanation": "Szablony (templates) to generics w C++ — kod generowany w czasie kompilacji dla każdego użytego typu (type-safe, bez narzutu runtime). Bez template potrzebne byłyby osobne funkcje dla int, float itd."
+  },
+  {
+    "id": 41,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Które polecenie SQL służy do usunięcia wszystkich wierszy z tabeli bez usuwania jej struktury?",
+    "options": {
+      "A": "DROP TABLE",
+      "B": "DELETE FROM",
+      "C": "TRUNCATE TABLE",
+      "D": "REMOVE TABLE"
+    },
+    "answer": "C",
+    "explanation": "TRUNCATE TABLE usuwa wszystkie wiersze z tabeli szybciej niż DELETE (nie loguje każdego wiersza) i nie usuwa struktury tabeli. DROP TABLE usuwa całą tabelę wraz ze strukturą. DELETE FROM bez WHERE też usuwa wszystkie wiersze, ale jest wolniejszy i można go cofnąć transakcją."
+  },
+  {
+    "id": 42,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Co oznacza relacja 'wiele do wielu' w bazach danych relacyjnych?",
+    "options": {
+      "A": "Jeden rekord w tabeli A może być powiązany z wieloma rekordami w tabeli B, ale nie odwrotnie",
+      "B": "Wiele rekordów tabeli A może być powiązanych z wieloma rekordami tabeli B",
+      "C": "Każdy rekord tabeli A jest powiązany dokładnie z jednym rekordem tabeli B",
+      "D": "Tabela A nie może mieć powiązań z tabelą B"
+    },
+    "answer": "B",
+    "explanation": "Relacja wiele-do-wielu (M:N) oznacza, że wiele rekordów w tabeli A może być powiązanych z wieloma rekordami w tabeli B. Implementuje się ją przez tabelę pośrednią (junction table) zawierającą klucze obce obu tabel."
+  },
+  {
+    "id": 43,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Który typ złączenia (JOIN) zwraca tylko wiersze, które mają dopasowanie w obu tabelach?",
+    "options": {
+      "A": "LEFT JOIN",
+      "B": "RIGHT JOIN",
+      "C": "FULL OUTER JOIN",
+      "D": "INNER JOIN"
+    },
+    "answer": "D",
+    "explanation": "INNER JOIN zwraca tylko te wiersze, dla których istnieje dopasowanie w obu tabelach. LEFT JOIN zwraca wszystkie wiersze lewej tabeli, RIGHT JOIN — prawej, a FULL OUTER JOIN — wszystkie wiersze z obu tabel."
+  },
+  {
+    "id": 44,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Czym jest indeks w bazie danych?",
+    "options": {
+      "A": "Kopią zapasową tabeli",
+      "B": "Strukturą danych przyspieszającą wyszukiwanie rekordów",
+      "C": "Ograniczeniem unikalności wartości w kolumnie",
+      "D": "Widokiem (VIEW) na wybraną tabelę"
+    },
+    "answer": "B",
+    "explanation": "Indeks to dodatkowa struktura danych (najczęściej B-tree) tworzona na kolumnie/kolumnach tabeli, która przyspiesza operacje SELECT kosztem wolniejszych INSERT/UPDATE/DELETE i dodatkowej przestrzeni dyskowej."
+  },
+  {
+    "id": 45,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Jaka jest różnica między klauzulami WHERE a HAVING w SQL?",
+    "options": {
+      "A": "WHERE filtruje wiersze przed grupowaniem, HAVING filtruje grupy po GROUP BY",
+      "B": "WHERE działa tylko na liczbach, HAVING na tekstach",
+      "C": "WHERE jest nowszą wersją HAVING",
+      "D": "Obie klauzule działają identycznie"
+    },
+    "answer": "A",
+    "explanation": "WHERE filtruje wiersze przed agregacją (GROUP BY), HAVING filtruje grupy wynikające z GROUP BY. WHERE nie może używać funkcji agregujących (SUM, COUNT), HAVING może."
+  },
+  {
+    "id": 46,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Co oznacza właściwość ACID w kontekście transakcji bazodanowych?",
+    "options": {
+      "A": "Atomicity, Consistency, Isolation, Durability",
+      "B": "Authenticity, Clarity, Integrity, Distribution",
+      "C": "Access, Control, Index, Data",
+      "D": "Aggregation, Compression, Integration, Dependency"
+    },
+    "answer": "A",
+    "explanation": "ACID to zbiór właściwości gwarantujących niezawodność transakcji: Atomicity (niepodzielność), Consistency (spójność), Isolation (izolacja), Durability (trwałość). Zapewniają poprawność danych nawet przy awariach."
+  },
+  {
+    "id": 47,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Która normalna forma eliminuje zależności przechodnie między atrybutami niepierwszymi?",
+    "options": {
+      "A": "1NF",
+      "B": "2NF",
+      "C": "3NF",
+      "D": "4NF"
+    },
+    "answer": "C",
+    "explanation": "Trzecia postać normalna (3NF) eliminuje zależności przechodnie — atrybuty niekluczowe muszą zależeć wyłącznie od klucza głównego, nie od innych atrybutów niekluczowych. 2NF eliminuje częściowe zależności od klucza złożonego."
+  },
+  {
+    "id": 48,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Baza danych MongoDB należy do kategorii:",
+    "options": {
+      "A": "Relacyjnych baz danych (RDBMS)",
+      "B": "Dokumentowych baz danych (NoSQL)",
+      "C": "Grafowych baz danych",
+      "D": "Kolumnowych baz danych"
+    },
+    "answer": "B",
+    "explanation": "MongoDB to dokumentowa baza NoSQL przechowująca dane w formacie BSON (Binary JSON). Nie używa tabel ani relacji. Inne typy NoSQL to grafowe (Neo4j), kolumnowe (Cassandra), klucz-wartość (Redis)."
+  },
+  {
+    "id": 49,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "W modelu OSI, na której warstwie działa protokół IP?",
+    "options": {
+      "A": "Warstwa 2 (łącza danych)",
+      "B": "Warstwa 3 (sieciowa)",
+      "C": "Warstwa 4 (transportowa)",
+      "D": "Warstwa 7 (aplikacji)"
+    },
+    "answer": "B",
+    "explanation": "Protokół IP (Internet Protocol) działa na warstwie 3 (sieciowej) modelu OSI. Odpowiada za adresowanie logiczne i routing pakietów. TCP/UDP działają na warstwie 4, a HTTP/SMTP na warstwie 7."
+  },
+  {
+    "id": 50,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Czym różni się protokół TCP od UDP?",
+    "options": {
+      "A": "TCP jest szybszy, UDP zapewnia niezawodność",
+      "B": "TCP zapewnia niezawodne połączenie z potwierdzeniami, UDP jest bezpołączeniowy i szybszy",
+      "C": "TCP działa tylko w sieciach lokalnych, UDP w internecie",
+      "D": "Oba protokoły działają identycznie"
+    },
+    "answer": "B",
+    "explanation": "TCP (Transmission Control Protocol) nawiązuje połączenie (3-way handshake), zapewnia kolejność i potwierdzenia dostarczenia pakietów. UDP (User Datagram Protocol) jest bezpołączeniowy, szybszy, bez gwarancji dostarczenia — używany w streamingu, VoIP, DNS."
+  },
+  {
+    "id": 51,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Jaki jest domyślny port protokołu HTTPS?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "8080",
+      "D": "22"
+    },
+    "answer": "B",
+    "explanation": "HTTPS działa na porcie 443. HTTP używa portu 80, SSH portu 22, a port 8080 często używany jest jako alternatywny port HTTP w środowiskach deweloperskich."
+  },
+  {
+    "id": 52,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest NAT (Network Address Translation)?",
+    "options": {
+      "A": "Protokół szyfrowania połączeń sieciowych",
+      "B": "Technika mapowania prywatnych adresów IP na publiczny adres IP",
+      "C": "System nazw domenowych",
+      "D": "Algorytm routingu pakietów"
+    },
+    "answer": "B",
+    "explanation": "NAT mapuje wiele prywatnych adresów IP (np. 192.168.x.x) na jeden publiczny adres IP. Pozwala wielu urządzeniom w sieci lokalnej korzystać z jednego publicznego adresu IP i jest powszechnie używany w routerach domowych."
+  },
+  {
+    "id": 53,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Które polecenie w systemie Linux wyświetla aktywne połączenia sieciowe?",
+    "options": {
+      "A": "ifconfig",
+      "B": "netstat",
+      "C": "traceroute",
+      "D": "nslookup"
+    },
+    "answer": "B",
+    "explanation": "netstat (lub nowszy ss) wyświetla aktywne połączenia sieciowe, otwarte porty i statystyki interfejsów. ifconfig konfiguruje interfejsy, traceroute śledzi trasę pakietów, nslookup odpytuje DNS."
+  },
+  {
+    "id": 54,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest DNS (Domain Name System)?",
+    "options": {
+      "A": "System szyfrowania komunikacji sieciowej",
+      "B": "System tłumaczący nazwy domenowe na adresy IP",
+      "C": "Protokół dynamicznego przydzielania adresów IP",
+      "D": "Firewall filtrujący ruch sieciowy"
+    },
+    "answer": "B",
+    "explanation": "DNS to rozproszony system tłumaczący czytelne dla człowieka nazwy domenowe (np. google.com) na adresy IP (np. 142.250.74.46). Działa jak książka telefoniczna internetu. DHCP przydziela adresy IP."
+  },
+  {
+    "id": 55,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Czym jest wirtualizacja w kontekście systemów operacyjnych?",
+    "options": {
+      "A": "Technika kompresji plików systemowych",
+      "B": "Uruchamianie wielu wirtualnych maszyn na jednym fizycznym serwerze",
+      "C": "Szyfrowanie dysków twardych",
+      "D": "Zarządzanie pamięcią podręczną procesora"
+    },
+    "answer": "B",
+    "explanation": "Wirtualizacja pozwala uruchamiać wiele systemów operacyjnych (VM) na jednym fizycznym hoście za pomocą hypervisora (np. VMware, Hyper-V, KVM). Zwiększa wykorzystanie zasobów i ułatwia zarządzanie infrastrukturą."
+  },
+  {
+    "id": 56,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Które z poniższych jest przykładem systemu plików używanego w systemie Linux?",
+    "options": {
+      "A": "NTFS",
+      "B": "FAT32",
+      "C": "ext4",
+      "D": "APFS"
+    },
+    "answer": "C",
+    "explanation": "ext4 (Fourth Extended Filesystem) to dominujący system plików w Linuksie. NTFS to system plików Windows, FAT32 to starszy system plików kompatybilny wieloplatformowo, APFS to system plików Apple."
+  },
+  {
+    "id": 57,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest atak SQL Injection?",
+    "options": {
+      "A": "Atak polegający na przeładowaniu serwera zapytaniami",
+      "B": "Wstrzykiwanie złośliwego kodu SQL do formularzy aplikacji w celu manipulacji bazą danych",
+      "C": "Kradzież sesji użytkownika przez sieć",
+      "D": "Atak na szyfrowanie protokołu HTTPS"
+    },
+    "answer": "B",
+    "explanation": "SQL Injection polega na wstrzyknięciu złośliwego kodu SQL przez pola formularza lub parametry URL. Napastnik może odczytywać, modyfikować lub usuwać dane. Ochrona: parametryzowane zapytania (prepared statements), ORM, walidacja wejścia."
+  },
+  {
+    "id": 58,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Czym jest atak XSS (Cross-Site Scripting)?",
+    "options": {
+      "A": "Atakiem polegającym na podszywaniu się pod serwer DNS",
+      "B": "Wstrzykiwaniem złośliwego skryptu do strony wyświetlanej innym użytkownikom",
+      "C": "Atakiem brute-force na hasła użytkowników",
+      "D": "Przechwyceniem sesji przez atak MITM"
+    },
+    "answer": "B",
+    "explanation": "XSS polega na wstrzyknięciu skryptu (JavaScript) do treści strony, który wykonuje się w przeglądarce innych użytkowników. Może kraść ciasteczka, sesje lub przekierowywać użytkowników. Ochrona: escapowanie danych wyjściowych, Content Security Policy (CSP)."
+  },
+  {
+    "id": 59,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest uwierzytelnianie dwuskładnikowe (2FA)?",
+    "options": {
+      "A": "Użycie dwóch różnych haseł do logowania",
+      "B": "Weryfikacja tożsamości za pomocą dwóch niezależnych metod (np. hasło + kod SMS)",
+      "C": "Logowanie przez dwa różne urządzenia jednocześnie",
+      "D": "Szyfrowanie hasła algorytmem SHA-256"
+    },
+    "answer": "B",
+    "explanation": "2FA wymaga potwierdzenia tożsamości dwiema niezależnymi metodami z różnych kategorii: coś wiesz (hasło), coś masz (telefon/token), coś jesteś (biometria). Znacznie zwiększa bezpieczeństwo nawet przy wycieku hasła."
+  },
+  {
+    "id": 60,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Jaka jest główna różnica między szyfrowaniem symetrycznym a asymetrycznym?",
+    "options": {
+      "A": "Szyfrowanie symetryczne używa jednego klucza, asymetryczne pary kluczy (publiczny/prywatny)",
+      "B": "Szyfrowanie symetryczne jest bezpieczniejsze od asymetrycznego",
+      "C": "Szyfrowanie asymetryczne jest szybsze od symetrycznego",
+      "D": "Szyfrowanie symetryczne jest używane tylko w HTTPS"
+    },
+    "answer": "A",
+    "explanation": "Szyfrowanie symetryczne (AES) używa jednego klucza do szyfrowania i deszyfrowania — szybkie, ale wymaga bezpiecznego przekazania klucza. Asymetryczne (RSA) używa pary kluczy: publiczny do szyfrowania, prywatny do deszyfrowania. HTTPS używa obu."
+  },
+  {
+    "id": 61,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest atak CSRF (Cross-Site Request Forgery)?",
+    "options": {
+      "A": "Przechwycenie niezaszyfrowanego ruchu sieciowego",
+      "B": "Nakłonienie zalogowanego użytkownika do wykonania niezamierzonych akcji w aplikacji",
+      "C": "Atak na algorytm szyfrowania AES",
+      "D": "Skanowanie portów serwera w poszukiwaniu luk"
+    },
+    "answer": "B",
+    "explanation": "CSRF nakłania zalogowanego użytkownika (mającego aktywną sesję) do wysłania fałszywego żądania do aplikacji. Ochrona: tokeny CSRF, nagłówek SameSite dla ciasteczek, weryfikacja Origin/Referer."
+  },
+  {
+    "id": 62,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Czym jest hash (skrót kryptograficzny) hasła?",
+    "options": {
+      "A": "Zaszyfrowaną wersją hasła, którą można odszyfrować",
+      "B": "Jednokierunkową funkcją przekształcającą hasło w ciąg znaków stałej długości",
+      "C": "Skróconą wersją hasła do celów przechowywania",
+      "D": "Kopią hasła przechowywaną w cookie"
+    },
+    "answer": "B",
+    "explanation": "Funkcja hash (SHA-256, bcrypt, Argon2) przekształca hasło w ciąg stałej długości w sposób jednokierunkowy — nie można odtworzyć hasła z hasha. Do porównywania haszuje się podane hasło i porównuje z przechowywanym hashem."
+  },
+  {
+    "id": 63,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Czym jest retrospektywa w metodyce Scrum?",
+    "options": {
+      "A": "Spotkaniem z klientem na początku projektu",
+      "B": "Spotkaniem zespołu po sprincie służącym analizie procesu i wprowadzaniu usprawnień",
+      "C": "Dokumentem opisującym wymagania projektu",
+      "D": "Codziennym spotkaniem zespołu scrumowego"
+    },
+    "answer": "B",
+    "explanation": "Retrospektywa (Sprint Retrospective) odbywa się po każdym sprincie. Zespół analizuje co poszło dobrze, co można poprawić i jakie działania podjąć. To mechanizm ciągłego doskonalenia procesu (kaizen)."
+  },
+  {
+    "id": 64,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Jaką rolę pełni Product Owner w Scrumie?",
+    "options": {
+      "A": "Prowadzi codzienne spotkania Scrum",
+      "B": "Zarządza Product Backlogiem i reprezentuje interesy klienta",
+      "C": "Odpowiada za techniczne aspekty wytwarzania produktu",
+      "D": "Testuje oprogramowanie przed każdym releasem"
+    },
+    "answer": "B",
+    "explanation": "Product Owner zarządza Product Backlogiem: priorytetyzuje elementy, definiuje kryteria akceptacji i reprezentuje interesy interesariuszy wobec zespołu. To on decyduje CO budować, a Scrum Master dba o JAK."
+  },
+  {
+    "id": 65,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Co to jest diagram Gantta?",
+    "options": {
+      "A": "Schemat przepływu danych w aplikacji",
+      "B": "Harmonogram projektu przedstawiający zadania i ich czasy trwania na osi czasu",
+      "C": "Diagram klas w UML",
+      "D": "Mapa zależności między komponentami systemu"
+    },
+    "answer": "B",
+    "explanation": "Diagram Gantta to wykres słupkowy przedstawiający harmonogram projektu: zadania, ich czas trwania, daty rozpoczęcia/zakończenia i zależności. Powszechnie używany w metodyce Waterfall i tradycznym zarządzaniu projektami."
+  },
+  {
+    "id": 66,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Czym jest MVP (Minimum Viable Product)?",
+    "options": {
+      "A": "Najbardziej wartościowym pracownikiem projektu",
+      "B": "Produktem z minimalnym zestawem funkcji pozwalającym zebrać feedback od użytkowników",
+      "C": "Finalną wersją produktu gotową do sprzedaży",
+      "D": "Dokumentacją techniczną projektu"
+    },
+    "answer": "B",
+    "explanation": "MVP to wersja produktu z minimalnym zestawem funkcji niezbędnych do potwierdzenia hipotezy biznesowej i zebrania feedbacku od prawdziwych użytkowników. Minimalizuje ryzyko i koszty przed pełnym rozwojem."
+  },
+  {
+    "id": 67,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Ile wynosi czas trwania sprintu w metodyce Scrum?",
+    "options": {
+      "A": "Od 1 do 4 tygodni",
+      "B": "Zawsze 2 tygodnie",
+      "C": "Od 1 do 6 miesięcy",
+      "D": "Jeden miesiąc kalendarzowy"
+    },
+    "answer": "A",
+    "explanation": "Według Scrum Guide, sprint trwa od 1 do 4 tygodni (maksymalnie miesiąc). W praktyce najczęściej wybierane są sprinty 2-tygodniowe. Długość sprintu powinna być stała przez cały projekt."
+  },
+  {
+    "id": 68,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Co oznacza termin 'scope creep' w zarządzaniu projektami?",
+    "options": {
+      "A": "Stopniowe przekraczanie budżetu projektu",
+      "B": "Niekontrolowane rozrastanie się zakresu projektu poza pierwotne założenia",
+      "C": "Metodę estymacji zadań",
+      "D": "Rotację zespołu podczas trwania projektu"
+    },
+    "answer": "B",
+    "explanation": "Scope creep (pełzanie zakresu) to niekontrolowane dodawanie wymagań i funkcji bez formalnego przeglądu wpływu na czas i budżet. Jest jedną z głównych przyczyn przekroczenia budżetu i terminów projektów IT."
+  },
+  {
+    "id": 69,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co oznacza zasada SOLID — litera S?",
+    "options": {
+      "A": "Single Responsibility Principle — klasa powinna mieć tylko jeden powód do zmiany",
+      "B": "Secure Object Lifecycle Interface Design",
+      "C": "Static Object Linking and Integration Design",
+      "D": "Software Object Layered Interface Design"
+    },
+    "answer": "A",
+    "explanation": "S w SOLID to Single Responsibility Principle: każda klasa/moduł powinna mieć dokładnie jedną odpowiedzialność i jeden powód do zmiany. Zwiększa czytelność i ułatwia testowanie kodu."
+  },
+  {
+    "id": 70,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Czym jest wzorzec projektowy Singleton?",
+    "options": {
+      "A": "Wzorcem tworzącym wiele instancji klasy",
+      "B": "Wzorcem gwarantującym, że klasa ma tylko jedną instancję globalnie dostępną",
+      "C": "Wzorcem do tworzenia rodzin powiązanych obiektów",
+      "D": "Wzorcem strukturalnym łączącym interfejsy"
+    },
+    "answer": "B",
+    "explanation": "Singleton gwarantuje istnienie dokładnie jednej instancji danej klasy i zapewnia globalny punkt dostępu do tej instancji. Używany np. dla połączeń z bazą danych, konfiguracji aplikacji, loggera."
+  },
+  {
+    "id": 71,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co to jest architektura MVC?",
+    "options": {
+      "A": "Model-View-Controller — wzorzec rozdzielający dane, interfejs i logikę sterowania",
+      "B": "Multi-Version Control — system zarządzania wersjami",
+      "C": "Module-Value-Class — wzorzec organizacji modułów",
+      "D": "Main-View-Component — podejście do budowy komponentów"
+    },
+    "answer": "A",
+    "explanation": "MVC to wzorzec architektoniczny dzielący aplikację na Model (dane i logika biznesowa), View (prezentacja) i Controller (obsługa żądań, koordynacja). Ułatwia testowanie i utrzymanie kodu."
+  },
+  {
+    "id": 72,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Czym jest API REST?",
+    "options": {
+      "A": "Protokołem szyfrowania danych",
+      "B": "Stylem architektonicznym dla usług webowych opartym na protokole HTTP",
+      "C": "Frameworkiem JavaScript do budowy interfejsów użytkownika",
+      "D": "Bazą danych klucz-wartość"
+    },
+    "answer": "B",
+    "explanation": "REST (Representational State Transfer) to styl architektoniczny dla API webowych: używa metod HTTP (GET, POST, PUT, DELETE), bezstanowych połączeń i zasobów identyfikowanych przez URI. Alternatywy: GraphQL, gRPC, SOAP."
+  },
+  {
+    "id": 73,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Który wzorzec projektowy należy do grupy wzorców kreacyjnych?",
+    "options": {
+      "A": "Decorator",
+      "B": "Observer",
+      "C": "Factory Method",
+      "D": "Facade"
+    },
+    "answer": "C",
+    "explanation": "Factory Method to wzorzec kreacyjny definiujący interfejs tworzenia obiektów. Decorator i Facade to wzorce strukturalne, Observer to wzorzec behawioralny. Inne kreacyjne: Abstract Factory, Builder, Prototype, Singleton."
+  },
+  {
+    "id": 74,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Ile bitów ma jeden bajt?",
+    "options": {
+      "A": "4",
+      "B": "8",
+      "C": "16",
+      "D": "32"
+    },
+    "answer": "B",
+    "explanation": "Jeden bajt (byte) składa się z 8 bitów. Bit to najmniejsza jednostka informacji (0 lub 1). 1 KB = 1024 B, 1 MB = 1024 KB, 1 GB = 1024 MB."
+  },
+  {
+    "id": 75,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest kompilator?",
+    "options": {
+      "A": "Program tłumaczący kod źródłowy na kod maszynowy przed wykonaniem",
+      "B": "Program wykonujący kod źródłowy linia po linii w czasie rzeczywistym",
+      "C": "Narzędzie do zarządzania zależnościami projektu",
+      "D": "Edytor kodu źródłowego z podświetlaniem składni"
+    },
+    "answer": "A",
+    "explanation": "Kompilator tłumaczy cały kod źródłowy na kod maszynowy (lub pośredni) przed wykonaniem. Interpreter wykonuje kod linia po linii. Java używa kompilatora (do bytecode) i JVM (interpreter/JIT)."
+  },
+  {
+    "id": 76,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest licencja open source?",
+    "options": {
+      "A": "Licencja pozwalająca wyłącznie na przeglądanie kodu źródłowego",
+      "B": "Licencja umożliwiająca swobodne używanie, modyfikowanie i dystrybucję oprogramowania",
+      "C": "Licencja zastrzeżona dla firm komercyjnych",
+      "D": "Licencja wymagająca opłat za każde użycie oprogramowania"
+    },
+    "answer": "B",
+    "explanation": "Licencje open source (np. MIT, GPL, Apache) pozwalają na dostęp do kodu źródłowego, jego modyfikację i redystrybucję. Różnią się warunkami: GPL wymaga udostępnienia modyfikacji na tych samych warunkach, MIT jest bardzo permisywna."
+  },
+  {
+    "id": 77,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Jakie promieniowanie emitują monitory LCD/LED, które może wpływać na rytm dobowy?",
+    "options": {
+      "A": "Promieniowanie UV",
+      "B": "Niebieskie światło (blue light)",
+      "C": "Promieniowanie rentgenowskie",
+      "D": "Podczerwień"
+    },
+    "answer": "B",
+    "explanation": "Monitory LCD/LED emitują niebieskie światło, które hamuje produkcję melatoniny i zaburza rytm dobowy. Zaleca się używanie trybu nocnego/filtrów niebieskiego światła wieczorem oraz robienie przerw metodą 20-20-20."
+  },
+  {
+    "id": 78,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Które urządzenie odpowiada za konwersję sygnału cyfrowego z komputera na analogowy sygnał telefoniczny?",
+    "options": {
+      "A": "Router",
+      "B": "Switch",
+      "C": "Modem",
+      "D": "Hub"
+    },
+    "answer": "C",
+    "explanation": "Modem (modulator-demodulator) konwertuje sygnał cyfrowy komputera na analogowy do przesyłu przez linię telefoniczną i odwrotnie. Router kieruje ruchem sieciowym. Switch łączy urządzenia w sieci LAN."
+  },
+  {
+    "id": 79,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest test regresji?",
+    "options": {
+      "A": "Test sprawdzający nowe funkcjonalności systemu",
+      "B": "Test weryfikujący, że istniejące funkcje nadal działają poprawnie po wprowadzeniu zmian",
+      "C": "Test obciążeniowy sprawdzający wydajność",
+      "D": "Test penetracyjny bezpieczeństwa aplikacji"
+    },
+    "answer": "B",
+    "explanation": "Testy regresji sprawdzają, czy zmiany w kodzie (nowe funkcje, poprawki bugów) nie zepsuły istniejącej funkcjonalności. Są kluczowe przy ciągłej integracji (CI). Najlepiej automatyzować je od początku projektu."
+  },
+  {
+    "id": 80,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Czym jest Code Review (przegląd kodu)?",
+    "options": {
+      "A": "Automatyczną analizą kodu przez kompilator",
+      "B": "Procesem, w którym inni deweloperzy przeglądają kod przed włączeniem go do głównej gałęzi",
+      "C": "Narzędziem do mierzenia pokrycia kodu testami",
+      "D": "Dokumentacją generowaną automatycznie z komentarzy w kodzie"
+    },
+    "answer": "B",
+    "explanation": "Code review to praktyka, w której jeden lub więcej deweloperów przegląda zmiany kodu innego programisty przed merge'em. Zwiększa jakość kodu, wykrywa błędy wcześnie i wspiera transfer wiedzy w zespole."
+  },
+  {
+    "id": 81,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co mierzy pokrycie kodu (code coverage)?",
+    "options": {
+      "A": "Liczbę linii kodu w projekcie",
+      "B": "Procent kodu źródłowego wykonanego podczas testów",
+      "C": "Liczbę błędów znalezionych w testach",
+      "D": "Czas wykonania testów jednostkowych"
+    },
+    "answer": "B",
+    "explanation": "Code coverage to metryka procentowa wskazująca, jaka część kodu jest wykonywana podczas testów. Wysoki coverage (np. 80%+) zwiększa pewność, że testy sprawdzają większość scenariuszy. Nie gwarantuje jednak braku błędów."
+  },
+  {
+    "id": 82,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Czym różnią się testy jednostkowe od integracyjnych?",
+    "options": {
+      "A": "Testy jednostkowe testują pojedyncze funkcje/klasy, integracyjne testują współpracę komponentów",
+      "B": "Testy integracyjne są szybsze od jednostkowych",
+      "C": "Testy jednostkowe wymagają uruchomienia całej aplikacji",
+      "D": "Nie ma różnicy między tymi typami testów"
+    },
+    "answer": "A",
+    "explanation": "Testy jednostkowe (unit tests) testują izolowane fragmenty kodu (funkcje, klasy) z użyciem mocków. Testy integracyjne sprawdzają współpracę wielu komponentów — np. serwisu z bazą danych. Testy E2E testują cały system."
+  },
+  {
+    "id": 83,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Czym jest CI/CD w kontekście wytwarzania oprogramowania?",
+    "options": {
+      "A": "Code Inspection / Code Deployment — narzędzie do analizy statycznej",
+      "B": "Continuous Integration / Continuous Delivery — automatyzacja budowania, testowania i wdrażania",
+      "C": "Client Interface / Customer Design — metodyka projektowania UX",
+      "D": "Cloud Infrastructure / Cloud Distribution — zarządzanie zasobami chmurowymi"
+    },
+    "answer": "B",
+    "explanation": "CI/CD automatyzuje pipeline wytwarzania oprogramowania: CI integruje i testuje kod przy każdym commit (np. GitHub Actions, Jenkins), CD automatycznie wdraża przetestowany kod na środowisko produkcyjne lub staging."
+  },
+  {
+    "id": 84,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Co to jest npm?",
+    "options": {
+      "A": "Edytor kodu dla Node.js",
+      "B": "Menedżer pakietów dla środowiska Node.js i JavaScript",
+      "C": "Framework testowy dla aplikacji JavaScript",
+      "D": "System kontroli wersji dla projektów JavaScript"
+    },
+    "answer": "B",
+    "explanation": "npm (Node Package Manager) to domyślny menedżer pakietów dla Node.js. Pozwala instalować, aktualizować i zarządzać bibliotekami JavaScript. Alternatywy: yarn, pnpm. Konfiguracja w pliku package.json."
+  },
+  {
+    "id": 85,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Do czego służy plik .gitignore?",
+    "options": {
+      "A": "Przechowywania hasła do repozytorium Git",
+      "B": "Definiowania plików i folderów, które Git ma ignorować i nie śledzić",
+      "C": "Konfiguracji ustawień użytkownika w Git",
+      "D": "Listy commitów do cofnięcia"
+    },
+    "answer": "B",
+    "explanation": ".gitignore zawiera wzorce plików i katalogów, które Git powinien pomijać (np. node_modules/, .env, *.log, build/). Pozwala uniknąć przypadkowego commitowania poufnych danych lub plików tymczasowych."
+  },
+  {
+    "id": 86,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Co to jest Webpack?",
+    "options": {
+      "A": "Framework CSS do stylizacji komponentów",
+      "B": "Bundler modułów JavaScript łączący pliki projektu w zoptymalizowane paczki",
+      "C": "Narzędzie do zarządzania kontenerami Docker",
+      "D": "Biblioteka do testowania aplikacji React"
+    },
+    "answer": "B",
+    "explanation": "Webpack to bundler modułów: łączy wiele plików JS/CSS/obrazów w zoptymalizowane paczki (bundles) gotowe do wysłania do przeglądarki. Obsługuje tree-shaking, code splitting i hot module replacement. Alternatywy: Vite, Parcel, esbuild."
+  },
+  {
+    "id": 87,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest rekurencja w programowaniu?",
+    "options": {
+      "A": "Wywoływanie innej funkcji wewnątrz bieżącej",
+      "B": "Technika, w której funkcja wywołuje samą siebie",
+      "C": "Pętla wykonująca operacje na tablicach",
+      "D": "Mechanizm dziedziczenia w programowaniu obiektowym"
+    },
+    "answer": "B",
+    "explanation": "Rekurencja to technika, w której funkcja wywołuje samą siebie do momentu osiągnięcia warunku bazowego (base case). Używana w algorytmach: DFS, sortowanie przez scalanie, obliczanie silni. Bez warunku bazowego prowadzi do nieskończonej rekurencji i przepełnienia stosu."
+  },
+  {
+    "id": 88,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Czym jest programowanie funkcyjne?",
+    "options": {
+      "A": "Paradygmatem opartym na klasach i obiektach",
+      "B": "Paradygmatem traktującym obliczenia jako ewaluację funkcji matematycznych, unikającym zmiany stanu i efektów ubocznych",
+      "C": "Stylem programowania sekwencyjnego z użyciem procedur",
+      "D": "Podejściem do tworzenia interfejsów użytkownika"
+    },
+    "answer": "B",
+    "explanation": "Programowanie funkcyjne opiera się na czystych funkcjach (bez efektów ubocznych), niemutowalnych danych i funkcjach wyższego rzędu. Reprezentatywne języki: Haskell, Erlang. JavaScript i Python wspierają elementy FP."
+  },
+  {
+    "id": 89,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest polimorfizm w programowaniu obiektowym?",
+    "options": {
+      "A": "Mechanizm ukrywania szczegółów implementacji klasy",
+      "B": "Zdolność obiektów różnych klas do reagowania na te same komunikaty w różny sposób",
+      "C": "Możliwość dziedziczenia atrybutów z klasy nadrzędnej",
+      "D": "Tworzenie wielu instancji tej samej klasy"
+    },
+    "answer": "B",
+    "explanation": "Polimorfizm pozwala traktować obiekty różnych klas przez wspólny interfejs, gdzie każda klasa implementuje metody po swojemu. Np. klasy Kot i Pies dziedziczące po Zwierzę mogą mieć różne implementacje metody wydajDzwiek()."
+  },
+  {
+    "id": 90,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Która struktura danych działa na zasadzie LIFO (Last In, First Out)?",
+    "options": {
+      "A": "Kolejka (Queue)",
+      "B": "Stos (Stack)",
+      "C": "Lista (List)",
+      "D": "Drzewo binarne (Binary Tree)"
+    },
+    "answer": "B",
+    "explanation": "Stos (Stack) realizuje LIFO — ostatni element dodany jest pierwszym pobieranym. Operacje: push (dodaj), pop (usuń i zwróć), peek (podejrzyj). Kolejka realizuje FIFO. Stos używany jest np. w wywołaniach funkcji i cofaniu operacji."
+  },
+  {
+    "id": 91,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "fill",
+    "question": "Uzupełnij zapytanie, aby pobrać imiona klientów i łączną sumę ich zamówień, uwzględniając tylko klientów z sumą powyżej 1000:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> c.name, <span class=\"fn\">SUM</span>(o.amount) <span class=\"kw\">AS</span> total\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">JOIN</span> orders o <span class=\"kw\">ON</span> c.id = o.customer_id\n<span class=\"kw\">GROUP BY</span> c.name\n<span class=\"gap\">___</span> <span class=\"fn\">SUM</span>(o.amount) > <span class=\"nm\">1000</span>;</code></pre>",
+    "answer": "HAVING",
+    "explanation": "HAVING filtruje wyniki po agregacji GROUP BY. Nie można tu użyć WHERE, bo WHERE działa przed grupowaniem i nie może odwoływać się do funkcji agregujących jak SUM()."
+  },
+  {
+    "id": 92,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "output",
+    "question": "Ile wierszy zwróci to zapytanie i dlaczego?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> *\n<span class=\"kw\">FROM</span> employees\n<span class=\"kw\">WHERE</span> department_id = <span class=\"kw\">NULL</span>;</code></pre>",
+    "answer": "Zero wierszy — porównanie z NULL używając = zawsze zwraca UNKNOWN, nie TRUE. Poprawna wersja: WHERE department_id IS NULL.",
+    "explanation": "NULL w SQL oznacza brak wartości. Żadne porównanie = NULL nie jest TRUE — wynikiem jest zawsze UNKNOWN. Do sprawdzania NULL służy operator IS NULL lub IS NOT NULL."
+  },
+  {
+    "id": 93,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między PRIMARY KEY a UNIQUE w SQL. Czy mogą mieć wartość NULL?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">CREATE TABLE</span> users (\n    id      <span class=\"tp\">INT</span> <span class=\"kw\">PRIMARY KEY</span>,\n    email   <span class=\"tp\">VARCHAR</span>(<span class=\"nm\">255</span>) <span class=\"kw\">UNIQUE</span>,\n    username <span class=\"tp\">VARCHAR</span>(<span class=\"nm\">100</span>) <span class=\"kw\">UNIQUE</span>\n);</code></pre>",
+    "answer": "PRIMARY KEY: unikalny + NOT NULL, jedna na tabelę. UNIQUE: unikalny, ale może być NULL (w większości RDBMS wiele NULL-i jest dozwolonych), może być wiele na tabelę.",
+    "explanation": "PRIMARY KEY to identyfikator wiersza — musi być unikalny i niepusty. UNIQUE zapewnia unikalność wartości, ale dopuszcza NULL. Tabela może mieć wiele kolumn UNIQUE, ale tylko jeden PRIMARY KEY."
+  },
+  {
+    "id": 94,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "debug",
+    "question": "Poniższe zapytanie ma zwrócić pracowników zarabiających więcej niż średnia. Znajdź i popraw błąd:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> name, salary\n<span class=\"kw\">FROM</span> employees\n<span class=\"kw\">WHERE</span> salary > <span class=\"fn\">AVG</span>(salary);</code></pre>",
+    "answer": "Błąd: nie można używać funkcji agregujących AVG() w klauzuli WHERE. Poprawna wersja: WHERE salary > (SELECT AVG(salary) FROM employees).",
+    "explanation": "Funkcje agregujące (AVG, SUM, COUNT) nie mogą być używane bezpośrednio w WHERE. Rozwiązaniem jest podzapytanie (subquery): WHERE salary > (SELECT AVG(salary) FROM employees)."
+  },
+  {
+    "id": 95,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby sprawdzić czy klient złożył jakiekolwiek zamówienia (podzapytanie EXISTS):",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> name\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">WHERE</span> <span class=\"gap\">___</span> (\n    <span class=\"kw\">SELECT</span> <span class=\"nm\">1</span>\n    <span class=\"kw\">FROM</span> orders o\n    <span class=\"kw\">WHERE</span> o.customer_id = c.id\n);</code></pre>",
+    "answer": "EXISTS",
+    "explanation": "EXISTS zwraca TRUE jeśli podzapytanie zwróci choć jeden wiersz. Jest wydajniejszy niż IN dla dużych zbiorów, bo zatrzymuje się po znalezieniu pierwszego dopasowania. NOT EXISTS sprawdza brak powiązanych rekordów."
+  },
+  {
+    "id": 96,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "explain",
+    "question": "Wyjaśnij, co robi poniższe polecenie Linux i do czego służy każda jego część:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>grep -r <span class=\"st\">\"ERROR\"</span> /var/log/ | sort | uniq -c | sort -rn | head -<span class=\"nm\">10</span></code></pre>",
+    "answer": "Wyszukuje rekurencyjnie 'ERROR' w logach, sortuje, liczy powtórzenia (uniq -c), sortuje malejąco po liczbie, wyświetla 10 najczęstszych. Typowe narzędzie diagnostyczne w Linux.",
+    "explanation": "Pipeline: grep -r szuka tekstu rekurencyjnie → sort porządkuje linie (wymóg uniq) → uniq -c zlicza duplikaty → sort -rn sortuje malejąco numerycznie → head -10 bierze pierwsze 10."
+  },
+  {
+    "id": 97,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę w skrypcie bash, aby nadać plikowi uprawnienia do wykonania dla właściciela:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code><span class=\"gap\">___</span> +x skrypt.sh\n./skrypt.sh</code></pre>",
+    "answer": "chmod",
+    "explanation": "chmod (change mode) zmienia uprawnienia pliku. +x dodaje prawo wykonania (execute). chmod 755 skrypt.sh to odpowiednik: właściciel ma pełne prawa, reszta ma read+execute. ls -l wyświetla aktualne uprawnienia."
+  },
+  {
+    "id": 98,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "explain",
+    "question": "Co przedstawia poniższy wynik polecenia i jak odczytać uprawnienia pliku?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>-rwxr-xr-- 1 alice devs 4096 Jan 15 10:30 app.sh</code></pre>",
+    "answer": "-rwxr-xr--: zwykły plik, właściciel alice: rwx (odczyt+zapis+wykonanie), grupa devs: r-x (odczyt+wykonanie), pozostali: r-- (tylko odczyt). Rozmiar 4096 B.",
+    "explanation": "Format ls -l: typ pliku (-/d/l), uprawnienia właściciela (rwx), grupy (r-x), pozostałych (r--). r=odczyt, w=zapis, x=wykonanie, -=brak. Cyfry ósemkowe: rwx=7, r-x=5, r--=4, czyli 754."
+  },
+  {
+    "id": 99,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "debug",
+    "question": "Poniższy skrypt bash ma wypisać liczby 1–5 oddzielone spacją. Znajdź i popraw błąd:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>for i in 1 2 3 4 5\ndo\n  echo $i\ndone</code></pre>",
+    "answer": "echo $i wypisuje każdą liczbę w osobnej linii. Aby wypisać w jednej linii z przestrzenią, użyj: echo -n \"$i \" lub printf \"%d \" $i; echo wewnątrz pętli z opcją -n.",
+    "explanation": "echo domyślnie dodaje znak nowej linii po każdej wartości. Opcja -n pomija końcowy newline. Alternatywnie: echo \"${array[@]}\" lub printf '%d ' {1..5}; echo."
+  },
+  {
+    "id": 100,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "output",
+    "question": "Jaki będzie wynik tego polecenia i co oznacza każda kolumna?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>df -h /</code></pre>",
+    "answer": "Wyświetla użycie systemu plików dla katalogu głównego (/) w czytelnym formacie (-h: human-readable). Kolumny: Filesystem, Size, Used, Avail, Use%, Mounted on.",
+    "explanation": "df (disk free) pokazuje miejsce na dysku. -h wyświetla w GB/MB zamiast bloków. Krytyczne gdy Use% > 90% — może powodować problemy z systemem. Podobne: du -sh katalog (rozmiar katalogu)."
+  },
+  {
+    "id": 101,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "explain",
+    "question": "Wyjaśnij, dlaczego poniższy kod PHP jest podatny na SQL Injection i jak go zabezpieczyć:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"php\"><code><span class=\"cm\">// Niebezpieczny kod</span>\n$id = $_GET['id'];\n$query = <span class=\"st\">\"SELECT * FROM users WHERE id = $id\"</span>;\n$result = mysqli_query($conn, $query);</code></pre>",
+    "answer": "Podatność: id z URL wstrzykiwane bezpośrednio do SQL. Atakujący może podać '1 OR 1=1' lub 'DROP TABLE users'. Naprawa: prepared statements z parametrami (?): $stmt = $conn->prepare('SELECT * FROM users WHERE id = ?'); $stmt->bind_param('i', $id);",
+    "explanation": "Prepared statements oddzielają kod SQL od danych — parametry są traktowane jako dane, nie kod. Alternatywa: PDO z named params (:id). Dodatkowe zabezpieczenie: walidacja i rzutowanie typów (intval($id))."
+  },
+  {
+    "id": 102,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby poprawnie zahashować hasło i je zweryfikować w Python z użyciem bezpiecznej biblioteki:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> bcrypt\n\npassword = b<span class=\"st\">\"moje_haslo\"</span>\nhashed = bcrypt.<span class=\"fn\">hashpw</span>(password, bcrypt.<span class=\"fn\">gensalt</span>())\n\n<span class=\"kw\">if</span> bcrypt.<span class=\"gap\">___</span>(password, hashed):\n    <span class=\"fn\">print</span>(<span class=\"st\">\"Hasło poprawne\"</span>)</code></pre>",
+    "answer": "checkpw",
+    "explanation": "bcrypt.checkpw(password, hashed) bezpiecznie porównuje hasło z hashem uwzględniając sól (salt). Bcrypt jest zaprojektowany do hashowania haseł — jest celowo powolny, utrudniając ataki brute-force. Nie używaj MD5/SHA do haseł."
+  },
+  {
+    "id": 103,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "explain",
+    "question": "Co robi poniższy middleware Express.js i przed jakim atakiem chroni?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> helmet = <span class=\"fn\">require</span>(<span class=\"st\">\"helmet\"</span>);\napp.<span class=\"fn\">use</span>(<span class=\"fn\">helmet</span>());\napp.<span class=\"fn\">use</span>(<span class=\"fn\">helmet</span>.<span class=\"fn\">contentSecurityPolicy</span>({\n  directives: {\n    defaultSrc: [<span class=\"st\">\"'self'\"</span>],\n    scriptSrc: [<span class=\"st\">\"'self'\"</span>]\n  }\n}));</code></pre>",
+    "answer": "Helmet ustawia nagłówki HTTP bezpieczeństwa. Content Security Policy (CSP) ogranicza skąd mogą być ładowane zasoby — tu tylko z własnej domeny ('self'). Chroni głównie przed XSS i injection atakami.",
+    "explanation": "Helmet automatycznie ustawia nagłówki: X-Frame-Options (clickjacking), X-XSS-Protection, Strict-Transport-Security (HSTS), X-Content-Type-Options. CSP whitelist zasobów uniemożliwia wykonanie wstrzykniętych skryptów."
+  },
+  {
+    "id": 104,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "debug",
+    "question": "Poniższy kod JWT ma lukę bezpieczeństwa. Wskaż ją i wyjaśnij ryzyko:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> token = jwt.<span class=\"fn\">sign</span>(\n  { userId: user.id, role: <span class=\"st\">\"admin\"</span> },\n  <span class=\"st\">\"secret\"</span>,\n  { expiresIn: <span class=\"st\">\"30d\"</span> }\n);</code></pre>",
+    "answer": "Dwa problemy: (1) klucz 'secret' jest zbyt prosty — łatwy do odgadnięcia. Użyć długiego losowego klucza (np. 256-bit). (2) expiresIn: '30d' to zbyt długo dla tokenów z rolą admin — skrócić do 15m-1h, stosować refresh tokens.",
+    "explanation": "Słaby klucz podpisywania JWT może być złamany brute-force. Długi czas wygasania zwiększa okno ataku przy wycieku tokenu. Dobra praktyka: tajny klucz z env zmiennych, krótki TTL, mechanizm unieważniania tokenów."
+  },
+  {
+    "id": 105,
+    "type": "open",
+    "category": "Zarządzanie projektem",
+    "taskType": "explain",
+    "question": "Wyjaśnij schemat priorytetyzacji MoSCoW w kontekście zarządzania backlogiem:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>M - Must have\nS - Should have\nC - Could have\nW - Won't have (this time)</code></pre>",
+    "answer": "Must have: wymagania krytyczne bez których produkt nie działa. Should have: ważne, ale można dostarczyć później. Could have: miłe, ale opcjonalne. Won't have: świadomie odłożone na później lub wykluczone.",
+    "explanation": "MoSCoW to technika priorytetyzacji pomagająca skupić się na tym co najważniejsze. Przy ograniczonym czasie/budżecie: Must musi być dostarczone, Should powinno być, Could zależy od zasobów, Won't jest poza scope bieżącej iteracji."
+  },
+  {
+    "id": 106,
+    "type": "open",
+    "category": "Zarządzanie projektem",
+    "taskType": "fill",
+    "question": "Uzupełnij brakujący element definicji User Story w formacie Connextra:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Jako [rola użytkownika]\nChcę [cel / funkcja]\n<span class=\"gap\">___</span> [korzyść / wartość biznesowa]</code></pre>",
+    "answer": "Aby / Tak żebym mógł / So that",
+    "explanation": "Format User Story: 'Jako [kto] Chcę [co] Aby [dlaczego]'. Trzecia część (korzyść) jest najważniejsza — definiuje wartość biznesową i pomaga zespołowi zrozumieć cel funkcji, nie tylko jej implementację."
+  },
+  {
+    "id": 107,
+    "type": "open",
+    "category": "Zarządzanie projektem",
+    "taskType": "explain",
+    "question": "Co oznacza 'Definition of Done' w Scrumie i dlaczego jest ważna?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Definition of Done (DoD):\n☑ Kod napisany i zrecenzowany\n☑ Testy jednostkowe przechodzą (>80% coverage)\n☑ Testy integracyjne przechodzą\n☑ Dokumentacja zaktualizowana\n☑ Deploy na środowisko staging\n☑ Akceptacja Product Ownera</code></pre>",
+    "answer": "DoD to uzgodnione przez zespół kryteria, które musi spełnić każdy element backlogu by uznać go za ukończony. Zapobiega nagromadzeniu długu technicznego i niedomówień co do 'gotowości' funkcji.",
+    "explanation": "Bez DoD 'skończone' ma różne znaczenia dla różnych osób. DoD zapewnia spójną jakość dostarczonego kodu i jest kontraktem wewnętrznym zespołu. Różni się od kryteriów akceptacji (które są specyficzne dla każdego Story)."
+  },
+  {
+    "id": 108,
+    "type": "open",
+    "category": "Projektowanie aplikacji",
+    "taskType": "explain",
+    "question": "Wyjaśnij zasadę Open/Closed (literę O z SOLID) na podstawie poniższego przykładu:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"cm\"># Źle — trzeba modyfikować klasę przy każdym nowym typie</span>\n<span class=\"kw\">class</span> <span class=\"tp\">DiscountCalc</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">calculate</span>(self, user_type, price):\n        <span class=\"kw\">if</span> user_type == <span class=\"st\">\"vip\"</span>: <span class=\"kw\">return</span> price * <span class=\"nm\">0.8</span>\n        <span class=\"kw\">if</span> user_type == <span class=\"st\">\"regular\"</span>: <span class=\"kw\">return</span> price * <span class=\"nm\">0.95</span>\n        <span class=\"kw\">return</span> price</code></pre>",
+    "answer": "Zasada O/C: klasy powinny być otwarte na rozszerzenie, zamknięte na modyfikację. Rozwiązanie: każdy typ rabatu to osobna klasa implementująca interfejs Discount. Dodanie nowego typu nie wymaga zmiany DiscountCalc.",
+    "explanation": "Zamiast if/elif dodawać nowe klasy: class VipDiscount(Discount): def apply(self, price): return price * 0.8. DiscountCalc przyjmuje dowolny obiekt Discount. Nowe typy rabatów dodaje się bez zmiany istniejącego kodu."
+  },
+  {
+    "id": 109,
+    "type": "open",
+    "category": "Projektowanie aplikacji",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby poprawnie zaimplementować wzorzec Dekorator w Pythonie:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">Coffee</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self): <span class=\"kw\">return</span> <span class=\"nm\">5</span>\n\n<span class=\"kw\">class</span> <span class=\"tp\">MilkDecorator</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(self, <span class=\"gap\">___</span>):\n        self._coffee = coffee\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self):\n        <span class=\"kw\">return</span> self._coffee.<span class=\"fn\">cost</span>() + <span class=\"nm\">2</span></code></pre>",
+    "answer": "coffee",
+    "explanation": "Wzorzec Dekorator opakowuje obiekt bazowy (Coffee) dodając nowe zachowanie. MilkDecorator przyjmuje dowolny obiekt z metodą cost() i rozszerza jego funkcjonalność. Można łączyć dekoratory: MilkDecorator(SugarDecorator(Coffee()))."
+  },
+  {
+    "id": 110,
+    "type": "open",
+    "category": "Projektowanie aplikacji",
+    "taskType": "output",
+    "question": "Co zostanie wypisane i jakie problemy ma ta implementacja Singletona w Python?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">Config</span>:\n    _instance = <span class=\"kw\">None</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__new__</span>(cls):\n        <span class=\"kw\">if</span> cls._instance <span class=\"kw\">is</span> <span class=\"kw\">None</span>:\n            cls._instance = <span class=\"fn\">super</span>().<span class=\"fn\">__new__</span>(cls)\n        <span class=\"kw\">return</span> cls._instance\n\na = <span class=\"tp\">Config</span>()\nb = <span class=\"tp\">Config</span>()\n<span class=\"fn\">print</span>(a <span class=\"kw\">is</span> b)</code></pre>",
+    "answer": "True — obie zmienne wskazują na tę samą instancję. Problem: nie jest thread-safe bez blokady (Lock) — w środowisku wielowątkowym mogą powstać dwie instancje jednocześnie.",
+    "explanation": "Singleton przez __new__: jeśli _instance jest None, tworzy nową instancję, w przeciwnym razie zwraca istniejącą. W środowiskach wielowątkowych dodać threading.Lock() wokół sprawdzenia i tworzenia instancji."
+  },
+  {
+    "id": 111,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane? Wyjaśnij mechanizm prototype chain w JavaScript.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">function</span> <span class=\"tp\">Animal</span>(name) {\n  <span class=\"kw\">this</span>.name = name;\n}\n<span class=\"tp\">Animal</span>.prototype.<span class=\"fn\">speak</span> = <span class=\"kw\">function</span>() {\n  <span class=\"kw\">return</span> <span class=\"st\">`${this.name} mówi coś`</span>;\n};\n\n<span class=\"kw\">const</span> dog = <span class=\"kw\">new</span> <span class=\"tp\">Animal</span>(<span class=\"st\">\"Rex\"</span>);\nconsole.<span class=\"fn\">log</span>(dog.<span class=\"fn\">speak</span>());\nconsole.<span class=\"fn\">log</span>(dog.<span class=\"fn\">hasOwnProperty</span>(<span class=\"st\">\"speak\"</span>));</code></pre>",
+    "answer": "'Rex mówi coś' i false — speak() nie jest własną właściwością dog (false), lecz dziedziczy przez prototype chain z Animal.prototype.",
+    "explanation": "Prototype chain: gdy dog.speak() jest wywoływane, JS szuka speak na dog (nie ma), potem na Animal.prototype (jest). hasOwnProperty() sprawdza tylko własne właściwości obiektu, nie dziedziczone."
+  },
+  {
+    "id": 112,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod ma wyznaczyć n-tą liczbę Fibonacciego rekurencyjnie. Jaki ma problem wydajnościowy i jak go rozwiązać?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">fib</span>(n):\n    <span class=\"kw\">if</span> n <= <span class=\"nm\">1</span>:\n        <span class=\"kw\">return</span> n\n    <span class=\"kw\">return</span> <span class=\"fn\">fib</span>(n-<span class=\"nm\">1</span>) + <span class=\"fn\">fib</span>(n-<span class=\"nm\">2</span>)\n\nprint(<span class=\"fn\">fib</span>(<span class=\"nm\">40</span>))</code></pre>",
+    "answer": "Problem: złożoność O(2^n) — fib(40) wykonuje ~2 mld wywołań z powodu wielokrotnego obliczania tych samych wartości. Rozwiązanie: memoizacja (@functools.lru_cache) lub iteracja (O(n) czasu, O(1) pamięci).",
+    "explanation": "Bez memoizacji fib(5) oblicza fib(3) dwukrotnie, fib(2) trzykrotnie itd. @lru_cache(maxsize=None) zapamięta wyniki. Wersja iteracyjna: a, b = 0, 1; for _ in range(n): a, b = b, a+b."
+  },
+  {
+    "id": 113,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Co robi poniższy kod JavaScript i jaka jest różnica między Promise.all a Promise.race?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> p1 = <span class=\"fn\">fetch</span>(<span class=\"st\">\"/api/users\"</span>);\n<span class=\"kw\">const</span> p2 = <span class=\"fn\">fetch</span>(<span class=\"st\">\"/api/products\"</span>);\n<span class=\"kw\">const</span> p3 = <span class=\"fn\">fetch</span>(<span class=\"st\">\"/api/orders\"</span>);\n\n<span class=\"kw\">const</span> [users, products, orders] =\n  <span class=\"kw\">await</span> <span class=\"tp\">Promise</span>.<span class=\"fn\">all</span>([p1, p2, p3]);</code></pre>",
+    "answer": "Promise.all wykonuje 3 requesty równolegle i czeka aż WSZYSTKIE się zakończą — zwraca tablicę wyników. Jeden błąd odrzuca całość. Promise.race rozwiązuje się gdy PIERWSZY Promise się zakończy (sukcesem lub błędem).",
+    "explanation": "Promise.all: równoległość bez sekwencji, efektywniejsze niż await po kolei. Jeśli jeden request się posypie, all się odrzuca. Promise.allSettled() ignoruje błędy. Promise.race: timeout pattern — kto pierwszy, ten lepszy."
+  },
+  {
+    "id": 114,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby klasa Stack w JavaScript poprawnie enkapsulowała wewnętrzną tablicę (prywatne pole):",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">class</span> <span class=\"tp\">Stack</span> {\n  <span class=\"gap\">___</span>items = [];\n\n  <span class=\"fn\">push</span>(item) { <span class=\"kw\">this</span>.#items.<span class=\"fn\">push</span>(item); }\n  <span class=\"fn\">pop</span>()  { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.<span class=\"fn\">pop</span>(); }\n  <span class=\"kw\">get</span> <span class=\"fn\">size</span>() { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.length; }\n}</code></pre>",
+    "answer": "#",
+    "explanation": "Prywatne pola klasy w JS oznacza się # (ES2022). #items nie jest dostępna spoza klasy — próba dostępu rzuca SyntaxError. To prawdziwa enkapsulacja, w odróżnieniu od konwencji podkreślenia _items."
+  },
+  {
+    "id": 115,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co wypisze poniższy kod Python? Wyjaśnij działanie *args i **kwargs.",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">describe</span>(*args, **kwargs):\n    <span class=\"fn\">print</span>(args)\n    <span class=\"fn\">print</span>(kwargs)\n\n<span class=\"fn\">describe</span>(<span class=\"nm\">1</span>, <span class=\"nm\">2</span>, <span class=\"nm\">3</span>, name=<span class=\"st\">\"Alice\"</span>, age=<span class=\"nm\">30</span>)</code></pre>",
+    "answer": "(1, 2, 3)\n{'name': 'Alice', 'age': 30}\n— *args zbiera pozycyjne argumenty do krotki, **kwargs zbiera nazwane argumenty do słownika.",
+    "explanation": "*args: dowolna liczba argumentów pozycyjnych jako tuple. **kwargs: dowolna liczba argumentów nazwanych jako dict. Przydatne do tworzenia elastycznych API i dekoratorów. Kolejność: def f(a, *args, **kwargs)."
+  },
+  {
+    "id": 116,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod Java nie kompiluje się. Wskaż błąd i wyjaśnij dlaczego:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">interface</span> <span class=\"tp\">Drawable</span> {\n    <span class=\"kw\">void</span> <span class=\"fn\">draw</span>();\n}\n\n<span class=\"kw\">class</span> <span class=\"tp\">Circle</span> <span class=\"kw\">implements</span> <span class=\"tp\">Drawable</span> {\n    <span class=\"kw\">int</span> radius;\n    <span class=\"tp\">Circle</span>(<span class=\"kw\">int</span> r) { <span class=\"kw\">this</span>.radius = r; }\n    <span class=\"cm\">// brak implementacji draw()</span>\n}</code></pre>",
+    "answer": "Błąd: Circle deklaruje implements Drawable, ale nie implementuje metody draw(). Albo dodaj implementację: @Override public void draw() { ... }, albo oznacz Circle jako abstract.",
+    "explanation": "Klasa implementująca interfejs musi dostarczyć implementację wszystkich jego metod abstrakcyjnych. Wyjątek: klasa abstract może odkładać implementację na podklasy. Kompilator zgłosi błąd 'Circle is not abstract and does not override abstract method draw()'."
+  },
+  {
+    "id": 117,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij, co robi poniższy kod C++ i dlaczego użyto smart pointer zamiast surowego wskaźnika:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">#include</span> <span class=\"st\">&lt;memory&gt;</span>\n\n<span class=\"kw\">void</span> <span class=\"fn\">processData</span>() {\n    <span class=\"kw\">auto</span> data = std::<span class=\"fn\">make_unique</span>&lt;<span class=\"tp\">int</span>[]&gt;(<span class=\"nm\">1000</span>);\n    <span class=\"cm\">// używaj data jak zwykłej tablicy</span>\n    data[<span class=\"nm\">0</span>] = <span class=\"nm\">42</span>;\n} <span class=\"cm\">// data automatycznie zwolnione tutaj</span></code></pre>",
+    "answer": "unique_ptr zarządza tablicą 1000 int-ów. Przy wyjściu ze scope (return, wyjątek) destruktor unique_ptr automatycznie wywołuje delete[]. Eliminuje potrzebę ręcznego delete[] i wycieków pamięci.",
+    "explanation": "RAII (Resource Acquisition Is Initialization): zasób (pamięć) jest zwalniany automatycznie przez destruktor. unique_ptr gwarantuje jednego właściciela. shared_ptr pozwala na wielu właścicieli (reference counting). Preferuj smart pointers nad new/delete."
+  },
+  {
+    "id": 118,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby wyrażenie lambda posortowało listę słowników po kluczu 'age' malejąco:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code>people = [\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Alice\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">30</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Bob\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">25</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Carol\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">35</span>}\n]\n\nsorted_people = <span class=\"fn\">sorted</span>(people, key=<span class=\"gap\">___</span>, reverse=<span class=\"kw\">True</span>)</code></pre>",
+    "answer": "lambda x: x['age']",
+    "explanation": "Funkcja key= w sorted() przyjmuje funkcję jednoargumentową zwracającą wartość do porównania. Lambda jest anonimową funkcją jednolinijkową. Alternatywa: from operator import itemgetter; key=itemgetter('age')."
+  },
+  {
+    "id": 119,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane i dlaczego wynik może zaskoczyć?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code>console.<span class=\"fn\">log</span>(<span class=\"nm\">0.1</span> + <span class=\"nm\">0.2</span> === <span class=\"nm\">0.3</span>);\nconsole.<span class=\"fn\">log</span>(<span class=\"nm\">0.1</span> + <span class=\"nm\">0.2</span>);\nconsole.<span class=\"fn\">log</span>(<span class=\"tp\">Math</span>.<span class=\"fn\">abs</span>(<span class=\"nm\">0.1</span> + <span class=\"nm\">0.2</span> - <span class=\"nm\">0.3</span>) < <span class=\"tp\">Number</span>.EPSILON);</code></pre>",
+    "answer": "false, 0.30000000000000004, true — liczby zmiennoprzecinkowe IEEE 754 mają skończoną precyzję. Poprawne porównanie: używaj Number.EPSILON jako epsilon dla float.",
+    "explanation": "IEEE 754 double precision reprezentuje liczby binarnie — 0.1 i 0.2 nie mają skończonej reprezentacji binarnej. Wynik 0.1+0.2 ma błąd zaokrąglenia. Rozwiązanie: Math.abs(a-b) < Number.EPSILON lub biblioteka Decimal.js."
+  },
+  {
+    "id": 120,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między deep copy a shallow copy na podstawie poniższego kodu:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> copy\n\noriginal = [[<span class=\"nm\">1</span>, <span class=\"nm\">2</span>], [<span class=\"nm\">3</span>, <span class=\"nm\">4</span>]]\nshallow = copy.<span class=\"fn\">copy</span>(original)\ndeep = copy.<span class=\"fn\">deepcopy</span>(original)\n\noriginal[<span class=\"nm\">0</span>].<span class=\"fn\">append</span>(<span class=\"nm\">99</span>)\n<span class=\"fn\">print</span>(shallow[<span class=\"nm\">0</span>])\n<span class=\"fn\">print</span>(deep[<span class=\"nm\">0</span>])</code></pre>",
+    "answer": "[1, 2, 99] — shallow kopiuje referencje do wewnętrznych list, więc modyfikacja oryginału wpływa na shallow. [1, 2] — deepcopy tworzy niezależne kopie wszystkich zagnieżdżonych obiektów.",
+    "explanation": "Shallow copy: nowy kontener, ale te same obiekty wewnętrzne (referencje). Deep copy: rekurencyjnie kopiuje wszystko — zmiany w oryginale nie wpływają na kopię. Dla płaskich list list[:] lub list() wystarczy, dla zagnieżdżonych potrzeba deepcopy."
+  },
+  {
+    "id": 121,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Co to jest widok (VIEW) w SQL?",
+    "options": {
+      "A": "Fizyczna kopia tabeli na dysku",
+      "B": "Wirtualna tabela będąca wynikiem zapisanego zapytania SELECT",
+      "C": "Indeks przyspieszający operacje JOIN",
+      "D": "Procedura składowana zwracająca dane"
+    },
+    "answer": "B",
+    "explanation": "VIEW to wirtualna tabela oparta na zapytaniu SELECT. Dane nie są przechowywane fizycznie (za wyjątkiem Materialized View). VIEW upraszcza złożone zapytania, ukrywa szczegóły struktury i może ograniczać dostęp do kolumn."
+  },
+  {
+    "id": 122,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Który typ klucza obcego (FOREIGN KEY) zapobiega usunięciu rekordu rodzica, jeśli istnieją powiązane rekordy potomne?",
+    "options": {
+      "A": "ON DELETE CASCADE",
+      "B": "ON DELETE SET NULL",
+      "C": "ON DELETE RESTRICT",
+      "D": "ON DELETE SET DEFAULT"
+    },
+    "answer": "C",
+    "explanation": "ON DELETE RESTRICT (domyślne zachowanie w większości RDBMS) blokuje usunięcie rekordu rodzica, jeśli istnieją powiązane rekordy. CASCADE usuwa też potomne rekordy, SET NULL ustawia klucz obcy na NULL."
+  },
+  {
+    "id": 123,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest load balancer (równoważnik obciążenia)?",
+    "options": {
+      "A": "Urządzenie szyfrujące ruch sieciowy",
+      "B": "System rozdzielający ruch sieciowy między wiele serwerów",
+      "C": "Program monitorujący zużycie procesora",
+      "D": "Protokół synchronizacji czasu w sieci"
+    },
+    "answer": "B",
+    "explanation": "Load balancer dystrybuuje przychodzące żądania między wiele serwerów backendowych, zwiększając dostępność i skalowalność. Algorytmy: Round Robin, Least Connections, IP Hash. Przykłady: Nginx, HAProxy, AWS ELB."
+  },
+  {
+    "id": 124,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest SSH (Secure Shell)?",
+    "options": {
+      "A": "Protokół przesyłania plików przez sieć",
+      "B": "Kryptograficzny protokół zdalnego dostępu do systemów",
+      "C": "Protokół zarządzania pocztą elektroniczną",
+      "D": "System monitorowania infrastruktury sieciowej"
+    },
+    "answer": "B",
+    "explanation": "SSH to szyfrowany protokół zdalnego logowania i zarządzania systemami (port 22). Zastąpił niezabezpieczony Telnet. Używa kryptografii asymetrycznej do uwierzytelniania (klucze publiczny/prywatny)."
+  },
+  {
+    "id": 125,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co to jest dependency injection (wstrzykiwanie zależności)?",
+    "options": {
+      "A": "Technika importowania zewnętrznych bibliotek",
+      "B": "Wzorzec, w którym zależności obiektu są dostarczane z zewnątrz, a nie tworzone wewnętrznie",
+      "C": "Automatyczne testowanie zależności między klasami",
+      "D": "Mechanizm dziedziczenia wielu klas"
+    },
+    "answer": "B",
+    "explanation": "Dependency Injection: zamiast klasy tworzącej swoje zależności (new Service()), otrzymuje je z zewnątrz (przez konstruktor, setter lub framework). Ułatwia testowanie (mockowanie), zwiększa luźne powiązanie (loose coupling)."
+  },
+  {
+    "id": 126,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest garbage collector (GC) w językach programowania?",
+    "options": {
+      "A": "Narzędzie do usuwania zbędnych plików z dysku",
+      "B": "Mechanizm automatycznego zarządzania pamięcią i zwalniania nieużywanej pamięci",
+      "C": "Program optymalizujący czas wykonania kodu",
+      "D": "Debugger wykrywający błędy w kodzie"
+    },
+    "answer": "B",
+    "explanation": "Garbage Collector automatycznie identyfikuje i zwalnia pamięć zajmowaną przez obiekty, do których nie ma już żadnych referencji. Używany w Java, Python, C#, JavaScript. C/C++ wymaga ręcznego zarządzania pamięcią."
+  },
+  {
+    "id": 127,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Która struktura danych zapewnia dostęp do elementu w czasie O(1) przy znajomości klucza?",
+    "options": {
+      "A": "Lista linkowana",
+      "B": "Drzewo binarne",
+      "C": "Tablica haszująca (hash map)",
+      "D": "Kolejka priorytetowa"
+    },
+    "answer": "C",
+    "explanation": "Tablica haszująca (HashMap, dict w Python, Map w JS) zapewnia dostęp O(1) średnio przez obliczenie indeksu z klucza funkcją haszującą. W przypadku kolizji dostęp może być O(n), ale jest to rzadkie przy dobrej funkcji hash."
+  },
+  {
+    "id": 128,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co oznacza notacja Big O — O(log n)?",
+    "options": {
+      "A": "Algorytm wykonuje stałą liczbę operacji niezależnie od danych wejściowych",
+      "B": "Algorytm wykonuje operacje proporcjonalne do logarytmu rozmiaru danych wejściowych",
+      "C": "Algorytm ma złożoność kwadratową",
+      "D": "Algorytm jest wykładniczo wolny"
+    },
+    "answer": "B",
+    "explanation": "O(log n) to złożoność logarytmiczna — liczba operacji rośnie logarytmicznie z rozmiarem danych. Typowe algorytmy: binary search, operacje na zrównoważonym BST. Dla n=1000000: log₂(n) ≈ 20 operacji."
+  },
+  {
+    "id": 129,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest mock w testach jednostkowych?",
+    "options": {
+      "A": "Test sprawdzający interfejs użytkownika",
+      "B": "Fałszywy obiekt zastępujący zależności w testach, kontrolujący ich zachowanie",
+      "C": "Narzędzie do mierzenia wydajności aplikacji",
+      "D": "Scenariusz testowy opisujący oczekiwane zachowanie systemu"
+    },
+    "answer": "B",
+    "explanation": "Mock to testowy substytut obiektu z kontrolowanym zachowaniem. Pozwala izolować testowany kod od zewnętrznych zależności (baza danych, API, e-mail). Frameworki: Mockito (Java), unittest.mock (Python), Jest mocks (JS)."
+  },
+  {
+    "id": 130,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Do czego służy komenda 'git rebase' i czym różni się od 'git merge'?",
+    "options": {
+      "A": "Rebase i merge działają identycznie",
+      "B": "Rebase przenosi commity na szczyt innej gałęzi tworząc liniową historię, merge łączy gałęzie zachowując historię rozgałęzień",
+      "C": "Merge jest szybszy od rebase",
+      "D": "Rebase służy do cofania zmian, merge do ich łączenia"
+    },
+    "answer": "B",
+    "explanation": "git rebase przepisuje historię commitów przenosząc je na szczyt gałęzi docelowej — tworzy czystą, liniową historię. git merge tworzy commit scalenia zachowując pełną historię. Zasada: nie rebazuj publicznych gałęzi."
+  },
+  {
+    "id": 131,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Ile wynosi maksymalna długość adresu IPv4?",
+    "options": {
+      "A": "16 bitów",
+      "B": "32 bity",
+      "C": "64 bity",
+      "D": "128 bitów"
+    },
+    "answer": "B",
+    "explanation": "Adres IPv4 ma 32 bity (4 bajty) zapisane jako cztery oktety dziesiętne (np. 192.168.1.1). Daje to maksymalnie ~4,3 miliarda unikalnych adresów — już wyczerpane. IPv6 używa 128 bitów."
+  },
+  {
+    "id": 132,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest RAM w komputerze?",
+    "options": {
+      "A": "Stałe przechowywanie danych po wyłączeniu zasilania",
+      "B": "Szybka pamięć ulotna używana do tymczasowego przechowywania danych przez procesor",
+      "C": "Procesor zarządzający dostępem do dysku",
+      "D": "Układ odpowiedzialny za renderowanie grafiki"
+    },
+    "answer": "B",
+    "explanation": "RAM (Random Access Memory) to szybka, ulotna pamięć operacyjna — dane tracimy po wyłączeniu zasilania. Procesor korzysta z RAM do przechowywania aktualnie przetwarzanych danych. Dysk (HDD/SSD) to trwałe przechowywanie."
+  },
+  {
+    "id": 133,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest penetration testing (pentest)?",
+    "options": {
+      "A": "Automatyczne skanowanie kodu w poszukiwaniu błędów",
+      "B": "Symulowany atak na system w celu wykrycia luk bezpieczeństwa",
+      "C": "Testy wydajnościowe serwera pod obciążeniem",
+      "D": "Weryfikacja zgodności aplikacji ze standardami ISO"
+    },
+    "answer": "B",
+    "explanation": "Penetration testing to autoryzowany symulowany atak na system (aplikację, sieć, infrastrukturę) przeprowadzany przez etycznych hakerów w celu znalezienia i raportowania luk bezpieczeństwa przed ich eksploatacją przez prawdziwych atakujących."
+  },
+  {
+    "id": 134,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Co to jest burndown chart w Scrumie?",
+    "options": {
+      "A": "Schemat zależności między zadaniami",
+      "B": "Wykres przedstawiający pozostałą pracę do wykonania w sprincie w czasie",
+      "C": "Diagram ryzyk projektu",
+      "D": "Zestawienie kompetencji członków zespołu"
+    },
+    "answer": "B",
+    "explanation": "Burndown chart wizualizuje postęp sprintu: oś X to czas (dni sprintu), oś Y to pozostała praca (story points lub godziny). Idealna linia to prosta malejąca do zera. Odchylenia wskazują na problemy lub zmiany zakresu."
+  },
+  {
+    "id": 135,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Do czego służy plik package.json w projekcie Node.js?",
+    "options": {
+      "A": "Przechowywania zmiennych środowiskowych projektu",
+      "B": "Konfiguracji metadanych projektu, zależności i skryptów npm",
+      "C": "Definiowania struktury bazy danych",
+      "D": "Konfiguracji serwera HTTP"
+    },
+    "answer": "B",
+    "explanation": "package.json zawiera: metadane projektu (name, version), zależności (dependencies, devDependencies), skrypty npm (start, test, build) i konfigurację narzędzi. Jest rdzeniem każdego projektu Node.js/JavaScript."
+  },
+  {
+    "id": 136,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co to jest mikroserwisowa architektura aplikacji?",
+    "options": {
+      "A": "Aplikacja składająca się z jednego dużego deploymentu",
+      "B": "Styl architektoniczny, w którym aplikacja składa się z małych, niezależnie wdrażanych serwisów",
+      "C": "Framework do budowy interfejsów mobilnych",
+      "D": "Metoda testowania małych fragmentów kodu"
+    },
+    "answer": "B",
+    "explanation": "Architektura mikroserwisowa dzieli aplikację na małe, autonomiczne serwisy z własną bazą danych, komunikujące się przez API (REST/gRPC/message queue). Zalety: niezależne skalowanie, technologiczna różnorodność. Wady: złożoność operacyjna."
+  },
+  {
+    "id": 137,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest interface w Javie?",
+    "options": {
+      "A": "Klasa z prywatnym konstruktorem",
+      "B": "Kontrakt definiujący metody, które klasa implementująca musi dostarczyć",
+      "C": "Klasa abstrakcyjna z jedną metodą",
+      "D": "Mechanizm wielokrotnego dziedziczenia w Java"
+    },
+    "answer": "B",
+    "explanation": "Interface w Java to kontrakt (zbiór sygnatur metod), który klasy implementujące muszą spełnić. Od Java 8 interfejsy mogą mieć metody default i static. Klasa może implementować wiele interfejsów (w przeciwieństwie do extends)."
+  },
+  {
+    "id": 138,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co robi operator spread (...) w JavaScript?",
+    "options": {
+      "A": "Tworzy kopię głęboką obiektu",
+      "B": "Rozpakowuje elementy tablicy lub obiektu w miejscu jego użycia",
+      "C": "Łączy asynchroniczne operacje",
+      "D": "Deklaruje prywatne pole klasy"
+    },
+    "answer": "B",
+    "explanation": "Spread operator (...) rozpakowuje iterowalny obiekt: [...arr1, ...arr2] scala tablice, {...obj1, ...obj2} scala obiekty (shallow). Używany też w wywołaniach funkcji: Math.max(...numbers). Rest parameter (...) działa odwrotnie."
+  },
+  {
+    "id": 139,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Czym jest testy E2E (end-to-end)?",
+    "options": {
+      "A": "Testami sprawdzającymi pojedyncze funkcje bez zależności zewnętrznych",
+      "B": "Testami weryfikującymi cały przepływ użytkownika od interfejsu do bazy danych",
+      "C": "Testami obciążeniowymi symulującymi wielu użytkowników",
+      "D": "Testami bezpieczeństwa aplikacji webowej"
+    },
+    "answer": "B",
+    "explanation": "Testy E2E symulują rzeczywiste scenariusze użytkownika przez pełen stos aplikacji (UI → backend → baza danych). Narzędzia: Cypress, Playwright, Selenium. Najwolniejsze i najtrudniejsze w utrzymaniu, ale dają największe zaufanie."
+  },
+  {
+    "id": 140,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest OWASP Top 10?",
+    "options": {
+      "A": "Lista 10 najlepszych narzędzi do testowania aplikacji",
+      "B": "Standard lista 10 najkrytyczniejszych zagrożeń bezpieczeństwa aplikacji webowych",
+      "C": "Protokół szyfrowania dla aplikacji mobilnych",
+      "D": "Certyfikat bezpieczeństwa dla programistów"
+    },
+    "answer": "B",
+    "explanation": "OWASP Top 10 to lista 10 najważniejszych klas luk bezpieczeństwa aplikacji webowych, publikowana przez Open Web Application Security Project. Zawiera m.in. Injection, Broken Authentication, XSS, Insecure Design, SSRF. Jest standardem branżowym."
+  },
+  {
+    "id": 141,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane i wyjaśnij mechanizm hoistingu w JavaScript:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code>console.<span class=\"fn\">log</span>(x);\nconsole.<span class=\"fn\">log</span>(y);\n\n<span class=\"kw\">var</span> x = <span class=\"nm\">5</span>;\n<span class=\"kw\">let</span> y = <span class=\"nm\">10</span>;</code></pre>",
+    "answer": "undefined (nie błąd) dla x, ReferenceError: Cannot access 'y' before initialization dla let y — var jest hoistowany i inicjalizowany undefined, let/const są hoistowane ale nie inicjalizowane (Temporal Dead Zone).",
+    "explanation": "Hoisting: deklaracje var są przenoszone na szczyt scope i inicjalizowane undefined. let/const są przenoszone (hoisted) ale wchodzą w Temporal Dead Zone — dostęp przed deklaracją rzuca ReferenceError."
+  },
+  {
+    "id": 142,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby metoda equals poprawnie porównywała obiekty Person w Java:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">public</span> <span class=\"kw\">boolean</span> <span class=\"fn\">equals</span>(<span class=\"tp\">Object</span> o) {\n    <span class=\"kw\">if</span> (<span class=\"kw\">this</span> == o) <span class=\"kw\">return</span> <span class=\"kw\">true</span>;\n    <span class=\"kw\">if</span> (!(o <span class=\"kw\">instanceof</span> <span class=\"tp\">Person</span>)) <span class=\"kw\">return</span> <span class=\"kw\">false</span>;\n    <span class=\"tp\">Person</span> p = (<span class=\"tp\">Person</span>) o;\n    <span class=\"kw\">return</span> <span class=\"gap\">___</span>.<span class=\"fn\">equals</span>(p.name) && age == p.age;\n}</code></pre>",
+    "answer": "name",
+    "explanation": "Poprawna implementacja equals(): (1) sprawdź identyczność referencji (this == o), (2) sprawdź typ (instanceof), (3) rzutuj i porównaj pola. Zawsze nadpisuj hashCode() razem z equals() — kontrakt: równe obiekty muszą mieć ten sam hashCode."
+  },
+  {
+    "id": 143,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "explain",
+    "question": "Wyjaśnij, co robi poniższe zapytanie SQL i jaką technikę wykorzystuje:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">WITH</span> ranked_sales <span class=\"kw\">AS</span> (\n    <span class=\"kw\">SELECT</span>\n        salesperson,\n        amount,\n        <span class=\"fn\">ROW_NUMBER</span>() <span class=\"kw\">OVER</span> (<span class=\"kw\">ORDER BY</span> amount <span class=\"kw\">DESC</span>) <span class=\"kw\">AS</span> rank\n    <span class=\"kw\">FROM</span> sales\n)\n<span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> ranked_sales <span class=\"kw\">WHERE</span> rank <= <span class=\"nm\">3</span>;</code></pre>",
+    "answer": "CTE (Common Table Expression) z WITH definiuje tymczasowy zestaw wyników. ROW_NUMBER() OVER (...) to funkcja okna przypisująca numer wiersza po posortowaniu. Zapytanie zwraca top 3 sprzedawców po kwocie.",
+    "explanation": "CTE (WITH) to nazwane podzapytanie czytelniejsze od zagnieżdżonego SELECT. Funkcje okna (OVER) operują na zbiorze wierszy bez grupowania. ROW_NUMBER nadaje unikalne numery, RANK może je powtarzać przy remisach."
+  },
+  {
+    "id": 144,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "fill",
+    "question": "Uzupełnij brakujące polecenie, aby zatrzymać i usunąć działający kontener Docker o nazwie 'myapp':",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>docker <span class=\"fn\">stop</span> myapp\ndocker <span class=\"gap\">___</span> myapp</code></pre>",
+    "answer": "rm",
+    "explanation": "docker stop zatrzymuje działający kontener (wysyła SIGTERM, potem SIGKILL). docker rm usuwa zatrzymany kontener. Skrót: docker rm -f myapp (force - zatrzymuje i usuwa). docker ps -a wyświetla wszystkie kontenery (też zatrzymane)."
+  },
+  {
+    "id": 145,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "output",
+    "question": "Co zwróci poniższy kod i dlaczego to przykład podatności na timing attack?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">check_password</span>(user_input, stored_hash):\n    <span class=\"kw\">return</span> user_input == stored_hash\n\n<span class=\"cm\"># vs bezpieczna wersja:</span>\n<span class=\"kw\">import</span> hmac\n<span class=\"kw\">def</span> <span class=\"fn\">safe_check</span>(user_input, stored_hash):\n    <span class=\"kw\">return</span> hmac.<span class=\"fn\">compare_digest</span>(user_input, stored_hash)</code></pre>",
+    "answer": "== porównuje łańcuchy znak po znaku i kończy się przy pierwszej niezgodności — czas odpowiedzi zdradza ile znaków jest poprawnych. hmac.compare_digest zawsze porównuje cały ciąg w stałym czasie (constant time comparison).",
+    "explanation": "Timing attack: atakujący mierzy czas odpowiedzi. Jeśli 'aaaa' trwa dłużej niż 'bbbb' — pierwsze znaki są poprawne. Constant-time comparison eliminuje tę różnicę. Używaj secrets.compare_digest() lub hmac.compare_digest() do porównywania tokenów."
+  },
+  {
+    "id": 146,
+    "type": "open",
+    "category": "Projektowanie aplikacji",
+    "taskType": "explain",
+    "question": "Wyjaśnij wzorzec Repository i dlaczego jest używany w poniższym kodzie:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">UserRepository</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(self, db):\n        self.db = db\n    <span class=\"kw\">def</span> <span class=\"fn\">find_by_id</span>(self, user_id):\n        <span class=\"kw\">return</span> self.db.<span class=\"fn\">query</span>(<span class=\"st\">\"SELECT * FROM users WHERE id=?\"</span>, [user_id])\n    <span class=\"kw\">def</span> <span class=\"fn\">save</span>(self, user):\n        self.db.<span class=\"fn\">execute</span>(<span class=\"st\">\"INSERT INTO users ...\"</span>)</code></pre>",
+    "answer": "Wzorzec Repository abstrahuje dostęp do danych — logika biznesowa nie zna szczegółów zapytań SQL. Zalety: łatwiejsze testowanie (można podmienić na mock DB), możliwość zmiany technologii DB bez modyfikacji logiki.",
+    "explanation": "Repository jest warstwą pośrednią między logiką domeny a warstwą danych. Serwis wywołuje repo.find_by_id(1) — nie wie czy dane są w SQL, MongoDB czy pliku. W testach: repo = FakeUserRepository() z listą in-memory."
+  },
+  {
+    "id": 147,
+    "type": "open",
+    "category": "Testowanie i debugowanie",
+    "taskType": "debug",
+    "question": "Test jednostkowy poniżej zawsze przechodzi, mimo że funkcja jest błędna. Dlaczego i jak to naprawić?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">divide</span>(a, b):\n    <span class=\"kw\">return</span> a * b  <span class=\"cm\"># błąd: powinno być a / b</span>\n\n<span class=\"kw\">def</span> <span class=\"fn\">test_divide</span>():\n    result = <span class=\"fn\">divide</span>(<span class=\"nm\">10</span>, <span class=\"nm\">2</span>)\n    <span class=\"kw\">assert</span> result > <span class=\"nm\">0</span>  <span class=\"cm\"># zbyt słabe sprawdzenie!</span></code></pre>",
+    "answer": "Test sprawdza tylko czy wynik > 0 (10*2=20 > 0, prawda). Nie sprawdza poprawnej wartości. Naprawa: assert result == 5.0 — testuj dokładną wartość, a nie ogólną właściwość.",
+    "explanation": "Słabe asercje to antypattern — test przechodzi mimo błędu. Zasada: testy powinny być precyzyjne i sprawdzać konkretne wartości. Dodaj testy edge case: divide(0, 5)==0, divide(-4, 2)==-2, dzielenie przez zero rzuca ZeroDivisionError."
+  },
+  {
+    "id": 148,
+    "type": "open",
+    "category": "Narzędzia i środowiska",
+    "taskType": "explain",
+    "question": "Co robi poniższy plik Dockerfile i jakie warstwy tworzy?",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"dockerfile\"><code><span class=\"kw\">FROM</span> python:3.11-slim\n<span class=\"kw\">WORKDIR</span> /app\n<span class=\"kw\">COPY</span> requirements.txt .\n<span class=\"kw\">RUN</span> pip install -r requirements.txt\n<span class=\"kw\">COPY</span> . .\n<span class=\"kw\">CMD</span> [\"python\", \"app.py\"]</code></pre>",
+    "answer": "FROM: obraz bazowy Python 3.11. WORKDIR: katalog roboczy. COPY requirements.txt: najpierw tylko requirements (cache layer!). RUN pip install: instalacja zależności. COPY . .: reszta kodu. CMD: domyślne polecenie uruchomienia.",
+    "explanation": "Klucz: COPY requirements.txt osobno przed kodem — Docker cachuje warstwy. Jeśli zmieni się tylko kod (nie requirements.txt), pip install nie jest ponownie wykonywany — szybszy build. Każda instrukcja FROM/COPY/RUN tworzy nową warstwę."
+  },
+  {
+    "id": 149,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby klasa Animal stała się abstrakcyjną klasą bazową uniemożliwiającą bezpośrednie tworzenie instancji:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">from</span> abc <span class=\"kw\">import</span> ABC, abstractmethod\n\n<span class=\"kw\">class</span> <span class=\"tp\">Animal</span>(<span class=\"gap\">___</span>):\n    @abstractmethod\n    <span class=\"kw\">def</span> <span class=\"fn\">speak</span>(self):\n        <span class=\"kw\">pass</span></code></pre>",
+    "answer": "ABC",
+    "explanation": "ABC (Abstract Base Class) z modułu abc uniemożliwia tworzenie instancji klasy z metodami @abstractmethod. Klasy pochodne muszą implementować wszystkie metody abstrakcyjne. Animal() rzuci TypeError. Odpowiednik abstract class w Java."
+  },
+  {
+    "id": 150,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy kod C++ ma problem z zarządzaniem pamięcią. Wskaż błąd i popraw go:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">void</span> <span class=\"fn\">badFunction</span>() {\n    <span class=\"kw\">int</span>* p = <span class=\"kw\">new</span> <span class=\"kw\">int</span>(<span class=\"nm\">42</span>);\n    <span class=\"kw\">delete</span> p;\n    std::cout &lt;&lt; *p;  <span class=\"cm\">// błąd!</span>\n}</code></pre>",
+    "answer": "Use-after-free: wskaźnik p jest dereferencjonowany po delete — niezdefiniowane zachowanie (UB). Naprawa: po delete p; dodaj p = nullptr; i sprawdzaj if (p != nullptr) przed użyciem.",
+    "explanation": "delete zwalnia pamięć, ale wskaźnik nadal przechowuje adres (dangling pointer). Wyłuskanie go to UB — może wypisać losowe dane, crashować lub działać pozornie poprawnie. Wzorzec: p = nullptr po delete; lub używaj unique_ptr."
+  },
+  {
+    "id": 151,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Które polecenie SQL tworzy nową tabelę na podstawie wyników zapytania?",
+    "options": {
+      "A": "INSERT INTO ... SELECT",
+      "B": "CREATE TABLE ... AS SELECT",
+      "C": "SELECT INTO NEW TABLE",
+      "D": "MAKE TABLE FROM SELECT"
+    },
+    "answer": "B",
+    "explanation": "CREATE TABLE ... AS SELECT tworzy nową tabelę i wypełnia ją wynikami zapytania SELECT. Przydatne do tworzenia kopii, tabel tymczasowych lub denormalizowanych widoków. INSERT INTO ... SELECT dodaje wiersze do istniejącej tabeli."
+  },
+  {
+    "id": 152,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest DHCP?",
+    "options": {
+      "A": "Protokół bezpiecznego transferu plików",
+      "B": "Protokół automatycznego przydzielania adresów IP urządzeniom w sieci",
+      "C": "System nazw domenowych",
+      "D": "Protokół szyfrowania poczty e-mail"
+    },
+    "answer": "B",
+    "explanation": "DHCP (Dynamic Host Configuration Protocol) automatycznie przydziela adresy IP, maskę podsieci, bramę domyślną i adresy DNS urządzeniom łączącym się z siecią. Eliminuje potrzebę ręcznej konfiguracji IP na każdym urządzeniu."
+  },
+  {
+    "id": 153,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Czym jest wzorzec Command (polecenie)?",
+    "options": {
+      "A": "Wzorcem do zarządzania stanem aplikacji",
+      "B": "Wzorcem enkapsulującym żądanie jako obiekt, umożliwiając kolejkowanie, cofanie operacji i logowanie",
+      "C": "Wzorcem tworzenia kopii istniejących obiektów",
+      "D": "Wzorcem definiującym hierarchię klas"
+    },
+    "answer": "B",
+    "explanation": "Wzorzec Command zamienia żądanie w obiekt zawierający wszystkie informacje o operacji. Umożliwia: odkładanie na później, kolejkowanie poleceń, cofanie (undo/redo), logowanie historii operacji. Przykłady: edytory tekstu, transakcje."
+  },
+  {
+    "id": 154,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Jaką wartość zwróci typeof null w JavaScript?",
+    "options": {
+      "A": "\"null\"",
+      "B": "\"undefined\"",
+      "C": "\"object\"",
+      "D": "\"boolean\""
+    },
+    "answer": "C",
+    "explanation": "typeof null === 'object' to historyczny błąd w JavaScript z 1995 roku — null powinno zwracać 'null'. Nie naprawiono go ze względu na kompatybilność wsteczną. Sprawdzanie null: x === null (nie typeof x)."
+  },
+  {
+    "id": 155,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest assert w testach?",
+    "options": {
+      "A": "Polecenie zatrzymujące wykonanie testu niezależnie od wyniku",
+      "B": "Instrukcja weryfikująca, że warunek jest spełniony; rzuca wyjątek gdy nie jest",
+      "C": "Komentarz opisujący oczekiwane zachowanie testu",
+      "D": "Metoda wypisująca wyniki testu do konsoli"
+    },
+    "answer": "B",
+    "explanation": "Assert weryfikuje założenie — jeśli warunek jest fałszywy, test kończy się niepowodzeniem (rzuca AssertionError). To podstawowa technika pisania testów: assert result == expected, assert len(items) > 0, assertThrows()."
+  },
+  {
+    "id": 156,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Czym jest linter w kontekście programowania?",
+    "options": {
+      "A": "Narzędziem do minifikacji kodu JavaScript",
+      "B": "Narzędziem analizującym kod statycznie w poszukiwaniu błędów i naruszeń stylu",
+      "C": "Kompilatorem generującym binarny kod maszynowy",
+      "D": "Frameworkiem do testów jednostkowych"
+    },
+    "answer": "B",
+    "explanation": "Linter analizuje kod statycznie (bez uruchamiania) wykrywając potencjalne błędy, złe praktyki i naruszenia stylu kodowania. Przykłady: ESLint (JS/TS), Pylint/Flake8 (Python), Checkstyle (Java). Integruje się z IDE i CI/CD."
+  },
+  {
+    "id": 157,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest algorytm?",
+    "options": {
+      "A": "Program komputerowy napisany w konkretnym języku programowania",
+      "B": "Skończona sekwencja kroków rozwiązująca określony problem lub realizująca zadanie",
+      "C": "Schemat bazy danych",
+      "D": "Metoda kompresji danych"
+    },
+    "answer": "B",
+    "explanation": "Algorytm to precyzyjna, skończona sekwencja kroków prowadząca do rozwiązania problemu. Cechy: skończoność, jednoznaczność, wejście/wyjście, efektywność. Algorytm jest niezależny od języka programowania — można go zapisać w pseudokodzie."
+  },
+  {
+    "id": 158,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Co to jest Sprint Review w Scrumie?",
+    "options": {
+      "A": "Spotkaniem z klientem prezentującym wyniki sprintu i zbierającym feedback",
+      "B": "Wewnętrznym spotkaniem zespołu analizującym proces pracy",
+      "C": "Planowaniem zadań na następny sprint",
+      "D": "Codziennym spotkaniem synchronizacyjnym"
+    },
+    "answer": "A",
+    "explanation": "Sprint Review to spotkanie na końcu sprintu, na którym zespół prezentuje interesariuszom wykonaną pracę (Increment) i zbiera feedback. Różni się od Retrospektywy (wewnętrzna analiza procesu) — Review patrzy na PRODUKT, Retrospektywa na PROCES."
+  },
+  {
+    "id": 159,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest zasada least privilege (najmniejszych uprawnień)?",
+    "options": {
+      "A": "Zasada przyznawania użytkownikom minimalnych uprawnień niezbędnych do wykonania ich zadań",
+      "B": "Szyfrowanie danych przy użyciu najmocniejszego dostępnego algorytmu",
+      "C": "Minimalizacja rozmiaru kodu aplikacji",
+      "D": "Ograniczenie dostępu do internetu na komputerach firmowych"
+    },
+    "answer": "A",
+    "explanation": "Least Privilege Principle: użytkownicy, procesy i systemy powinny mieć tylko minimalne uprawnienia niezbędne do wykonania swojej roli. Ogranicza szkody w przypadku przejęcia konta lub błędu — użytkownik bez uprawnień admina nie może skasować bazy."
+  },
+  {
+    "id": 160,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest event loop w JavaScript?",
+    "options": {
+      "A": "Pętla iterująca przez elementy tablicy",
+      "B": "Mechanizm pozwalający JS obsługiwać operacje asynchroniczne w jednowątkowym środowisku",
+      "C": "System zdarzeń DOM zarządzający kliknięciami",
+      "D": "Generator liczb pseudolosowych"
+    },
+    "answer": "B",
+    "explanation": "Event loop to mechanizm JS sprawdzający call stack i kolejki zadań. Gdy stack jest pusty, pobiera zadania z microtask queue (Promise.then) lub macrotask queue (setTimeout). Pozwala JS być asynchroniczny mimo jednego wątku."
+  },
+  {
+    "id": 161,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co oznacza zasada DRY w programowaniu?",
+    "options": {
+      "A": "Don't Repeat Yourself — każda wiedza powinna mieć jedno, autorytatywne miejsce w systemie",
+      "B": "Dynamic Rendering Yourself — technika renderowania interfejsu",
+      "C": "Develop Rapidly Yesterday — metodologia szybkiego prototypowania",
+      "D": "Dependency Removal Yourself — eliminowanie zależności między klasami"
+    },
+    "answer": "A",
+    "explanation": "DRY: każda logika/wiedza powinna istnieć w jednym miejscu kodu. Duplikacja kodu to antypattern (WET: Write Everything Twice) — zmiana wymaga modyfikacji w wielu miejscach, co prowadzi do niespójności i błędów."
+  },
+  {
+    "id": 162,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Czym jest CDN (Content Delivery Network)?",
+    "options": {
+      "A": "Protokołem przesyłania wideo przez internet",
+      "B": "Siecią serwerów rozmieszczonych geograficznie, dostarczających treści z lokalizacji bliskiej użytkownikowi",
+      "C": "Systemem kopii zapasowych w chmurze",
+      "D": "Narzędziem do zarządzania DNS"
+    },
+    "answer": "B",
+    "explanation": "CDN to globalna sieć serwerów przechowujących kopie statycznych zasobów (obrazy, CSS, JS) i serwujących je z węzła najbliższego użytkownikowi. Skraca czas odpowiedzi, odciąża serwer źródłowy, zwiększa dostępność. Przykłady: Cloudflare, Akamai, AWS CloudFront."
+  },
+  {
+    "id": 163,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest smoke test (test dymny)?",
+    "options": {
+      "A": "Dokładnym testem sprawdzającym każdy aspekt aplikacji",
+      "B": "Szybkim testem weryfikującym, że podstawowe funkcje aplikacji działają po deployu",
+      "C": "Testem bezpieczeństwa szukającym podatności",
+      "D": "Testem porównującym dwie wersje aplikacji"
+    },
+    "answer": "B",
+    "explanation": "Smoke test (sanity test) to zestaw szybkich testów sprawdzających czy aplikacja 'uruchamia się i nie dymi' po nowym deployu. Weryfikuje kluczowe ścieżki (logowanie, strona główna, podstawowe API) przed pełnym zestawem testów."
+  },
+  {
+    "id": 164,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Co to jest środowisko wirtualne (virtualenv) w Python?",
+    "options": {
+      "A": "Maszyna wirtualna do uruchamiania Pythona",
+      "B": "Izolowane środowisko Pythona z własnym zestawem pakietów, niezależne od systemu globalnego",
+      "C": "Edytor kodu dedykowany Pythonowi",
+      "D": "Serwer deweloperski do uruchamiania aplikacji Flask"
+    },
+    "answer": "B",
+    "explanation": "Virtualenv (python -m venv) tworzy izolowane środowisko z własną wersją Pythona i pakietami. Różne projekty mogą używać różnych wersji bibliotek bez konfliktów. Alternatywy: conda, poetry, pipenv. Aktywacja: source venv/bin/activate."
+  },
+  {
+    "id": 165,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest kernel (jądro) systemu operacyjnego?",
+    "options": {
+      "A": "Interfejs graficzny użytkownika",
+      "B": "Centralny komponent OS zarządzający zasobami sprzętowymi i dostarczający usług procesom",
+      "C": "Program antywirusowy chroniący system",
+      "D": "System plików przechowujący dane na dysku"
+    },
+    "answer": "B",
+    "explanation": "Kernel to rdzeń systemu operacyjnego: zarządza pamięcią, procesorem (scheduling), I/O, systemem plików i komunikacją między procesami. Działa w uprzywilejowanym trybie (kernel space). Aplikacje działają w user space i komunikują się z kernelem przez wywołania systemowe (syscalls)."
+  },
+  {
+    "id": 166,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między == a === w JavaScript na podstawie poniższych przykładów:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code>console.<span class=\"fn\">log</span>(<span class=\"nm\">0</span> == <span class=\"st\">\"0\"</span>);   <span class=\"cm\">// ?</span>\nconsole.<span class=\"fn\">log</span>(<span class=\"nm\">0</span> === <span class=\"st\">\"0\"</span>);  <span class=\"cm\">// ?</span>\nconsole.<span class=\"fn\">log</span>(<span class=\"kw\">null</span> == <span class=\"kw\">undefined</span>);   <span class=\"cm\">// ?</span>\nconsole.<span class=\"fn\">log</span>(<span class=\"kw\">null</span> === <span class=\"kw\">undefined</span>);  <span class=\"cm\">// ?</span></code></pre>",
+    "answer": "true, false, true, false — == wykonuje type coercion (konwersję typów), === porównuje bez konwersji (strict equality). null == undefined to wyjątek w specyfikacji JS.",
+    "explanation": "== (abstract equality): konwertuje operandy do wspólnego typu przed porównaniem. === (strict equality): brak konwersji — różne typy zawsze dają false. Zalecenie: zawsze używaj === aby uniknąć nieoczekiwanych konwersji."
+  },
+  {
+    "id": 167,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby deklaracja zmiennej blokowała ponowne przypisanie wartości w JavaScript (ES6+):",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"gap\">___</span> PI = <span class=\"nm\">3.14159</span>;\nPI = <span class=\"nm\">3</span>; <span class=\"cm\">// TypeError: Assignment to constant variable</span></code></pre>",
+    "answer": "const",
+    "explanation": "const deklaruje zmienną, której nie można przypisać ponownie. Uwaga: dla obiektów i tablic const chroni referencję, nie zawartość — const arr = []; arr.push(1) działa. Do prawdziwej niemutowalności: Object.freeze()."
+  },
+  {
+    "id": 168,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "fill",
+    "question": "Uzupełnij zapytanie, aby dodać nowego użytkownika do tabeli i zwrócić nadane mu ID:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">INSERT INTO</span> users (name, email)\n<span class=\"gap\">___</span> (<span class=\"st\">'Jan Kowalski'</span>, <span class=\"st\">'jan@example.com'</span>)\n<span class=\"kw\">RETURNING</span> id;</code></pre>",
+    "answer": "VALUES",
+    "explanation": "VALUES dostarcza dane do INSERT. RETURNING id (PostgreSQL) zwraca wygenerowane ID bez dodatkowego SELECT. W MySQL: LAST_INSERT_ID() po INSERT. Klauzula RETURNING przydatna przy seryjnym wstawianiu powiązanych rekordów."
+  },
+  {
+    "id": 169,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "output",
+    "question": "Co wyświetli to polecenie i do czego służy? Wyjaśnij każdą flagę:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>curl -X POST https://api.example.com/users \\\n  -H <span class=\"st\">\"Content-Type: application/json\"</span> \\\n  -H <span class=\"st\">\"Authorization: Bearer token123\"</span> \\\n  -d <span class=\"st\">'{\"name\": \"Alice\"}'</span></code></pre>",
+    "answer": "Wysyła żądanie HTTP POST do API. -X POST: metoda HTTP. -H: nagłówek (typ treści JSON + autoryzacja Bearer). -d: dane (body) żądania w JSON. Wyświetli odpowiedź serwera (JSON z danymi użytkownika lub błąd).",
+    "explanation": "curl to narzędzie CLI do wysyłania żądań HTTP. Powszechnie używany do testowania API REST. Przydatne flagi: -v (verbose/debug), -o plik (zapis odpowiedzi), -s (silent), --insecure (bez weryfikacji SSL). Alternatywa GUI: Postman, Insomnia."
+  },
+  {
+    "id": 170,
+    "type": "open",
+    "category": "Zarządzanie projektem",
+    "taskType": "explain",
+    "question": "Wyjaśnij technikę estymacji Planning Poker i jej zalety:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Karty: 0, 1, 2, 3, 5, 8, 13, 21, 40, 100, ∞, ?\n\nKrok 1: PO prezentuje User Story\nKrok 2: Dyskusja wyjaśniająca\nKrok 3: Każdy wybiera kartę (ukrytą)\nKrok 4: Odkrycie kart jednocześnie\nKrok 5: Dyskusja przy różnicach → ponowne głosowanie</code></pre>",
+    "answer": "Planning Poker to technika grupowej estymacji story points kartami Fibonacciego. Równoczesne odsłonięcie zapobiega wpływowi pierwszej osoby. Duże różnice wskazują na niezrozumienie zadania i wymagają dyskusji.",
+    "explanation": "Zalety: eliminuje anchoring bias (wpływ pierwszej podanej liczby), angażuje cały zespół, ujawnia niezrozumienie wymagań gdy oceny mocno się różnią. Skala Fibonacciego (1,2,3,5,8...) odzwierciedla niepewność przy dużych zadaniach."
+  },
+  {
+    "id": 171,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "debug",
+    "question": "Poniższy async/await ma problem. Wskaż go i popraw:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">async</span> <span class=\"kw\">function</span> <span class=\"fn\">loadAll</span>() {\n  <span class=\"kw\">const</span> user = <span class=\"kw\">await</span> <span class=\"fn\">fetchUser</span>();\n  <span class=\"kw\">const</span> posts = <span class=\"kw\">await</span> <span class=\"fn\">fetchPosts</span>();\n  <span class=\"kw\">const</span> comments = <span class=\"kw\">await</span> <span class=\"fn\">fetchComments</span>();\n  <span class=\"kw\">return</span> { user, posts, comments };\n}</code></pre>",
+    "answer": "Problem: requesty wykonują się sekwencyjnie (jeden po drugim) mimo że są niezależne. Łączny czas = suma wszystkich czasów. Naprawa: Promise.all([fetchUser(), fetchPosts(), fetchComments()]) — równoległe wykonanie.",
+    "explanation": "await zatrzymuje wykonanie do zakończenia Promise. Sekwencja: user(1s) → posts(1s) → comments(1s) = 3s. Równolegle: Promise.all = max(1s, 1s, 1s) = 1s. Użyj sekwencji tylko gdy kolejny request zależy od wyniku poprzedniego."
+  },
+  {
+    "id": 172,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "output",
+    "question": "Co zwróci poniższe zapytanie? Wyjaśnij jak działa LEFT JOIN z filtrem WHERE:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> c.name, o.amount\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">LEFT JOIN</span> orders o <span class=\"kw\">ON</span> c.id = o.customer_id\n<span class=\"kw\">WHERE</span> o.amount > <span class=\"nm\">100</span>;</code></pre>",
+    "answer": "Paradoks: LEFT JOIN miał zwracać wszystkich klientów (nawet bez zamówień), ale WHERE o.amount > 100 eliminuje wiersze z NULL amount — efektywnie działa jak INNER JOIN. Klientów bez zamówień nie będzie.",
+    "explanation": "Aby zachować klientów bez zamówień przy filtrowaniu: przenieś warunek do ON: LEFT JOIN orders o ON c.id = o.customer_id AND o.amount > 100. WHERE filtruje po JOIN (NULL nie spełnia > 100). ON filtruje podczas joinowania."
+  },
+  {
+    "id": 173,
+    "type": "open",
+    "category": "Sieci i systemy",
+    "taskType": "explain",
+    "question": "Wyjaśnij, co robi poniższy plik docker-compose.yml i jak uruchomić opisaną aplikację:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"yaml\"><code><span class=\"kw\">version:</span> <span class=\"st\">'3.8'</span>\n<span class=\"kw\">services:</span>\n  <span class=\"kw\">web:</span>\n    <span class=\"kw\">build:</span> .\n    <span class=\"kw\">ports:</span>\n      - <span class=\"st\">\"8000:8000\"</span>\n    <span class=\"kw\">depends_on:</span>\n      - db\n  <span class=\"kw\">db:</span>\n    <span class=\"kw\">image:</span> postgres:15\n    <span class=\"kw\">environment:</span>\n      POSTGRES_PASSWORD: secret</code></pre>",
+    "answer": "Definiuje dwa serwisy: web (budowany z lokalnego Dockerfile, port 8000 hosta → 8000 kontenera) i db (obraz Postgres 15 z hasłem). web startuje po db. Uruchomienie: docker-compose up -d.",
+    "explanation": "docker-compose zarządza wielokontenerową aplikacją. depends_on gwarantuje kolejność startu (nie gotowości!). Dla prawdziwej gotowości DB użyj healthcheck lub narzędzia wait-for-it.sh. docker-compose down zatrzymuje i usuwa kontenery."
+  },
+  {
+    "id": 174,
+    "type": "open",
+    "category": "Bezpieczeństwo aplikacji",
+    "taskType": "fill",
+    "question": "Uzupełnij lukę, aby poprawnie skonfigurować CORS w Express.js — zezwalając tylko na żądania z konkretnej domeny:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> cors = <span class=\"fn\">require</span>(<span class=\"st\">\"cors\"</span>);\napp.<span class=\"fn\">use</span>(<span class=\"fn\">cors</span>({\n  <span class=\"gap\">___</span>: <span class=\"st\">\"https://myapp.com\"</span>,\n  methods: [<span class=\"st\">\"GET\"</span>, <span class=\"st\">\"POST\"</span>]\n}));</code></pre>",
+    "answer": "origin",
+    "explanation": "CORS (Cross-Origin Resource Sharing) kontroluje jakie domeny mogą wysyłać żądania do API. origin: 'https://myapp.com' zezwala tylko tej domenie. origin: '*' (wildcard) zezwala wszystkim — niebezpieczne dla chronionych API. Nagłówek: Access-Control-Allow-Origin."
+  },
+  {
+    "id": 175,
+    "type": "open",
+    "category": "Projektowanie aplikacji",
+    "taskType": "debug",
+    "question": "Poniższy kod narusza zasadę Liskov Substitution Principle. Wskaż dlaczego i jak naprawić:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">Bird</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">fly</span>(self):\n        <span class=\"kw\">return</span> <span class=\"st\">\"I can fly\"</span>\n\n<span class=\"kw\">class</span> <span class=\"tp\">Penguin</span>(<span class=\"tp\">Bird</span>):\n    <span class=\"kw\">def</span> <span class=\"fn\">fly</span>(self):\n        <span class=\"kw\">raise</span> <span class=\"tp\">NotImplementedError</span>(<span class=\"st\">\"Penguins can't fly!\"</span>)</code></pre>",
+    "answer": "LSP: podklasa powinna być zastępowalna przez klasę bazową bez zmiany zachowania programu. Penguin.fly() rzuca wyjątek — kod oczekujący Bird nie może bezpiecznie użyć Penguin. Naprawa: Bird nie powinien mieć fly(), zamiast tego FlyingBird extends Bird.",
+    "explanation": "Rozwiązanie: class Bird (ptak), class FlyingBird(Bird) z fly(), class Penguin(Bird) bez fly(). Lub interfejsy: Flyable z fly() implementowany tylko przez ptaki latające. LSP wymaga by podtyp nie zawężał kontraktu klasy bazowej."
+  },
+  {
+    "id": 176,
+    "type": "open",
+    "category": "Testowanie i debugowanie",
+    "taskType": "fill",
+    "question": "Uzupełnij test jednostkowy w pytest, aby sprawdzić czy funkcja rzuca odpowiedni wyjątek:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> pytest\n\n<span class=\"kw\">def</span> <span class=\"fn\">divide</span>(a, b):\n    <span class=\"kw\">if</span> b == <span class=\"nm\">0</span>:\n        <span class=\"kw\">raise</span> <span class=\"tp\">ValueError</span>(<span class=\"st\">\"Cannot divide by zero\"</span>)\n    <span class=\"kw\">return</span> a / b\n\n<span class=\"kw\">def</span> <span class=\"fn\">test_divide_by_zero</span>():\n    <span class=\"kw\">with</span> pytest.<span class=\"gap\">___</span>(<span class=\"tp\">ValueError</span>):\n        <span class=\"fn\">divide</span>(<span class=\"nm\">10</span>, <span class=\"nm\">0</span>)</code></pre>",
+    "answer": "raises",
+    "explanation": "pytest.raises(ExceptionType) jako context manager weryfikuje że blok kodu rzuca oczekiwany wyjątek. Jeśli wyjątek nie zostanie rzucony lub będzie innego typu — test nie przechodzi. Można też sprawdzić treść wyjątku: exc_info.match('Cannot divide')."
+  },
+  {
+    "id": 177,
+    "type": "open",
+    "category": "Programowanie",
+    "taskType": "output",
+    "question": "Co zostanie wypisane i wyjaśnij koncepcję destrukturyzacji w JavaScript:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> { name, age = <span class=\"nm\">25</span>, city = <span class=\"st\">\"Warszawa\"</span> } = {\n  name: <span class=\"st\">\"Alice\"</span>,\n  age: <span class=\"nm\">30</span>\n};\nconsole.<span class=\"fn\">log</span>(name, age, city);</code></pre>",
+    "answer": "Alice 30 Warszawa — destrukturyzacja wyciąga właściwości obiektu do zmiennych. age=25 to wartość domyślna użyta tylko gdy age jest undefined — ale w obiekcie age=30, więc 30. city nie istnieje w obiekcie → użyta wartość domyślna 'Warszawa'.",
+    "explanation": "Destrukturyzacja (ES6): { prop } = obj to skrót dla const prop = obj.prop. Wartości domyślne: { prop = default } są używane gdy prop jest undefined (nie gdy null). Działa też dla tablic: const [first, , third] = [1,2,3]."
+  },
+  {
+    "id": 178,
+    "type": "open",
+    "category": "Bazy danych i SQL",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między optymistycznym a pesymistycznym blokowaniem w bazach danych:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"cm\">-- Pesymistyczne (blokada wiersza)</span>\n<span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> products <span class=\"kw\">WHERE</span> id=1 <span class=\"kw\">FOR UPDATE</span>;\n\n<span class=\"cm\">-- Optymistyczne (sprawdzenie wersji)</span>\n<span class=\"kw\">UPDATE</span> products\n<span class=\"kw\">SET</span> stock = stock - <span class=\"nm\">1</span>, version = version + <span class=\"nm\">1</span>\n<span class=\"kw\">WHERE</span> id=1 <span class=\"kw\">AND</span> version = <span class=\"nm\">5</span>;</code></pre>",
+    "answer": "Pesymistyczne: blokuje wiersz na czas transakcji (FOR UPDATE) — żaden inny nie może edytować. Wolne, ale bezpieczne. Optymistyczne: nie blokuje, sprawdza wersję przy zapisie. Jeśli version zmieniło się (ktoś edytował) — UPDATE nie zmienia wierszy (affected rows = 0) → retry.",
+    "explanation": "Pesymistyczne: dobre przy wielu konfliktach, ryzyko deadlocków. Optymistyczne: dobre przy rzadkich konfliktach, lepsze dla skalowalności. Popularne w aplikacjach webowych: kolumna version lub updated_at do detekcji konfliktów."
+  },
+  {
+    "id": 179,
+    "type": "open",
+    "category": "Narzędzia i środowiska",
+    "taskType": "explain",
+    "question": "Wyjaśnij, czym różnią się te dwa polecenia Git i kiedy używać każdego:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code><span class=\"cm\"># Opcja A</span>\ngit reset --hard HEAD~1\n\n<span class=\"cm\"># Opcja B</span>\ngit revert HEAD</code></pre>",
+    "answer": "reset --hard HEAD~1 usuwa ostatni commit z historii (destructive!) — niebezpieczne na publicznych gałęziach. revert HEAD tworzy nowy commit cofający zmiany z ostatniego commita — bezpieczne, zachowuje historię.",
+    "explanation": "Zasada: nigdy nie używaj git reset --hard na gałęziach udostępnionych innym. git revert jest bezpieczne bo tylko dodaje nowy commit. Inne opcje reset: --soft (zachowuje zmiany w staged), --mixed (zachowuje zmiany unstaged)."
+  },
+  {
+    "id": 180,
+    "type": "open",
+    "category": "Zarządzanie projektem",
+    "taskType": "explain",
+    "question": "Wyjaśnij różnicę między velocity a capacity w Scrumie na podstawie poniższego przykładu:",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Zespół 4 deweloperów\nDni robocze w sprincie: 10\nDni urlopów/spotkań: 6 łącznie\n\nVelocity (3 ostatnie sprinty): 34, 38, 36 SP\nŚrednie velocity: 36 SP</code></pre>",
+    "answer": "Capacity to dostępny czas (10 dni × 4 osób - 6 dni = 34 dni pracy). Velocity to historyczna prędkość wykonanej pracy w story points. Sprint planning: capacity pokazuje ile możemy pracować, velocity ile story points możemy ukończyć.",
+    "explanation": "Velocity (historyczne SP) jest lepszym wskaźnikiem przy planowaniu sprintu niż capacity — uwzględnia naturalną efektywność i overhead. Capacity używane do wykrycia gdy za mało/dużo planujemy względem dostępnych ludzi. Nigdy nie dziel SP przez godziny."
+  },
+  {
+    "id": 181,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest dekorator w Pythonie?",
+    "options": {
+      "A": "Klasa dziedzicząca po innej klasie",
+      "B": "Funkcja opakowująca inną funkcję, modyfikując lub rozszerzając jej zachowanie",
+      "C": "Metoda statyczna klasy",
+      "D": "Mechanizm obsługi wyjątków"
+    },
+    "answer": "B",
+    "explanation": "Dekorator w Pythonie to funkcja przyjmująca inną funkcję i zwracająca nową, opakowującą. Stosowany z @składnią. Przykłady wbudowane: @property, @staticmethod, @classmethod. Własne dekoratory: logowanie, cache, autoryzacja."
+  },
+  {
+    "id": 182,
+    "type": "closed",
+    "category": "Bazy danych i SQL",
+    "question": "Co to jest ORM (Object-Relational Mapping)?",
+    "options": {
+      "A": "Protokół komunikacji między bazą danych a serwerem",
+      "B": "Technika mapowania obiektów z kodu na tabele w bazie relacyjnej",
+      "C": "Format przechowywania danych JSON w bazie SQL",
+      "D": "System tworzenia kopii zapasowych bazy danych"
+    },
+    "answer": "B",
+    "explanation": "ORM automatycznie mapuje obiekty z kodu (klasy) na tabele w bazie relacyjnej, eliminując konieczność pisania SQL. Przykłady: SQLAlchemy (Python), Hibernate (Java), Entity Framework (.NET), Sequelize (Node.js). Wady: N+1 problem, skomplikowane zapytania."
+  },
+  {
+    "id": 183,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Jaki protokół używa port 25?",
+    "options": {
+      "A": "FTP",
+      "B": "HTTP",
+      "C": "SMTP",
+      "D": "IMAP"
+    },
+    "answer": "C",
+    "explanation": "Port 25 to domyślny port SMTP (Simple Mail Transfer Protocol) do przesyłania poczty między serwerami. Port 587 używany jest do przesyłania poczty przez klientów z uwierzytelnieniem. IMAP: 143 (993 SSL), POP3: 110 (995 SSL)."
+  },
+  {
+    "id": 184,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest 'salt' w kontekście hashowania haseł?",
+    "options": {
+      "A": "Klucz symetryczny do szyfrowania bazy danych",
+      "B": "Losowa wartość dodawana do hasła przed hashowaniem, chroniąca przed atakami słownikowymi",
+      "C": "Algorytm kompresji hasła",
+      "D": "Token sesji generowany przy logowaniu"
+    },
+    "answer": "B",
+    "explanation": "Salt to losowa wartość (np. 16 bajtów) generowana osobno dla każdego hasła i dołączana do niego przed hashowaniem. Sprawia, że dwa takie same hasła dają różne hashe, uniemożliwiając ataki z użyciem precomputed tables (rainbow tables)."
+  },
+  {
+    "id": 185,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Czym jest estymacja w Story Points?",
+    "options": {
+      "A": "Miarą czasu potrzebnego do wykonania zadania w godzinach",
+      "B": "Relatywną miarą złożoności i wysiłku potrzebnego do realizacji User Story",
+      "C": "Oceną jakości kodu przez zespół",
+      "D": "Liczbą linii kodu potrzebnych do implementacji funkcji"
+    },
+    "answer": "B",
+    "explanation": "Story Points to relatywna, abstrakcyjna miara złożoności uwzględniająca wysiłek, złożoność i niepewność. Nie są godzinami — SP 2 jest mniej złożone niż SP 5, ale ile godzin zajmie zależy od zespołu. Używa się skali Fibonacciego (1,2,3,5,8,13...)."
+  },
+  {
+    "id": 186,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Co to jest Domain-Driven Design (DDD)?",
+    "options": {
+      "A": "Metodyka testowania oprogramowania",
+      "B": "Podejście projektowe, w którym model dziedziny biznesowej napędza strukturę i projekt oprogramowania",
+      "C": "Framework do budowy aplikacji webowych",
+      "D": "Technika optymalizacji baz danych"
+    },
+    "answer": "B",
+    "explanation": "DDD to podejście architektoniczne skupiające się na modelu domeny biznesowej. Kluczowe koncepty: Bounded Context, Ubiquitous Language, Entity, Value Object, Aggregate, Domain Event. Szczególnie przydatne w złożonych domenach biznesowych."
+  },
+  {
+    "id": 187,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Czym różni się lista (list) od krotki (tuple) w Python?",
+    "options": {
+      "A": "Lista może przechowywać różne typy danych, krotka tylko jeden typ",
+      "B": "Lista jest mutowalna (modyfikowalna), krotka jest niemutowalna",
+      "C": "Krotka jest szybsza do tworzenia, ale lista szybsza do odczytu",
+      "D": "Brak praktycznej różnicy między nimi"
+    },
+    "answer": "B",
+    "explanation": "Lista [] jest mutowalna — można dodawać, usuwać, modyfikować elementy. Krotka () jest niemutowalna — po utworzeniu nie można jej zmienić. Krotki są lekko szybsze, można ich używać jako kluczy słownika (hashable). Używaj krotek dla danych stałych."
+  },
+  {
+    "id": 188,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest test-driven development (TDD) w cyklu Red-Green-Refactor?",
+    "options": {
+      "A": "Red: test przechodzi, Green: kod działa, Refactor: napraw błędy",
+      "B": "Red: napisz test który nie przechodzi, Green: napisz minimalny kod, Refactor: ulepsz kod",
+      "C": "Red: znajdź błąd, Green: popraw go, Refactor: napisz test",
+      "D": "Red: wdróż kod, Green: przetestuj, Refactor: usuń testy"
+    },
+    "answer": "B",
+    "explanation": "Cykl TDD: (1) Red — napisz test opisujący nową funkcję, test nie przechodzi (brak implementacji), (2) Green — napisz MINIMALNY kod żeby test przeszedł, (3) Refactor — popraw jakość kodu bez zmiany zachowania (testy nadal przechodzą)."
+  },
+  {
+    "id": 189,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Czym jest Kubernetes (K8s)?",
+    "options": {
+      "A": "Językiem programowania do zarządzania infrastrukturą",
+      "B": "Platformą do automatycznego wdrażania, skalowania i zarządzania kontenerami",
+      "C": "Bazą danych NoSQL do przechowywania dużych zbiorów danych",
+      "D": "Frameworkiem testowym dla aplikacji mikroserwisowych"
+    },
+    "answer": "B",
+    "explanation": "Kubernetes to system orkiestracji kontenerów: automatyzuje wdrażanie, skalowanie, load balancing i self-healing kontenerów Docker. Kluczowe koncepty: Pod, Deployment, Service, Ingress, ConfigMap. De facto standard w produkcji."
+  },
+  {
+    "id": 190,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest cloud computing (przetwarzanie w chmurze)?",
+    "options": {
+      "A": "Technika szyfrowania danych na dyskach lokalnych",
+      "B": "Dostarczanie zasobów obliczeniowych (serwery, bazy danych, storage) przez internet jako usługi",
+      "C": "System tworzenia kopii zapasowych na zewnętrznych dyskach",
+      "D": "Technologia sieci bezprzewodowej nowej generacji"
+    },
+    "answer": "B",
+    "explanation": "Cloud computing dostarcza zasoby IT (CPU, RAM, storage, bazy danych, AI/ML) przez internet na żądanie z modelem płatności za użycie. Modele: IaaS (infrastruktura), PaaS (platforma), SaaS (oprogramowanie). Dostawcy: AWS, Azure, GCP."
+  },
+  {
+    "id": 191,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest functional interface w Java?",
+    "options": {
+      "A": "Interfejs z wieloma metodami abstrakcyjnymi",
+      "B": "Interfejs z dokładnie jedną metodą abstrakcyjną, używany z wyrażeniami lambda",
+      "C": "Klasa implementująca interfejs Functional",
+      "D": "Interfejs do przetwarzania strumieni danych"
+    },
+    "answer": "B",
+    "explanation": "Functional interface (oznaczony @FunctionalInterface) ma dokładnie jedną metodę abstrakcyjną. Pozwala używać wyrażeń lambda jako jego implementacji. Przykłady: Runnable, Comparator, Function<T,R>, Predicate<T>, Consumer<T>."
+  },
+  {
+    "id": 192,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest DDoS (Distributed Denial of Service)?",
+    "options": {
+      "A": "Wstrzyknięcie złośliwego kodu do bazy danych",
+      "B": "Atak przeładowujący serwer ogromną ilością żądań z wielu źródeł, uniemożliwiający działanie usługi",
+      "C": "Przechwycenie sesji zalogowanego użytkownika",
+      "D": "Atak na algorytm szyfrowania HTTPS"
+    },
+    "answer": "B",
+    "explanation": "DDoS to atak z użyciem botnet (sieci zainfekowanych komputerów) generujący masowy ruch do celu, przepełniając jego zasoby (bandwidth, CPU, RAM). Ochrona: CDN, rate limiting, Web Application Firewall (WAF), scrubbing centers."
+  },
+  {
+    "id": 193,
+    "type": "closed",
+    "category": "Projektowanie aplikacji",
+    "question": "Czym jest wzorzec Adapter (Adapter Pattern)?",
+    "options": {
+      "A": "Wzorcem pozwalającym obiektom o niekompatybilnych interfejsach współpracować ze sobą",
+      "B": "Wzorcem tworzącym nowe obiekty przez kopiowanie prototypu",
+      "C": "Wzorcem zarządzającym cyklem życia obiektów",
+      "D": "Wzorcem definiującym algorytm w klasie bazowej"
+    },
+    "answer": "A",
+    "explanation": "Adapter konwertuje interfejs klasy na inny interfejs oczekiwany przez klienta. Jak przejściówka do gniazdka: umożliwia współpracę klas z niekompatybilnymi interfejsami bez modyfikacji ich kodu. Przydatny przy integracji zewnętrznych bibliotek."
+  },
+  {
+    "id": 194,
+    "type": "closed",
+    "category": "Zarządzanie projektem",
+    "question": "Co oznacza termin 'technical debt' (dług techniczny)?",
+    "options": {
+      "A": "Koszty infrastruktury technicznej projektu",
+      "B": "Koszt przyszłej pracy wynikający z wybrania szybkich, nieoptymalnych rozwiązań teraz",
+      "C": "Licencje na oprogramowanie używane w projekcie",
+      "D": "Budżet przeznaczony na testowanie aplikacji"
+    },
+    "answer": "B",
+    "explanation": "Dług techniczny to metafora: jak dług finansowy, szybkie ale złe decyzje techniczne 'pożyczają' czas teraz, ale trzeba zapłacić 'odsetki' w przyszłości (wolniejszy development, więcej bugów). Zarządzanie długiem: regularne refaktorowanie, code review."
+  },
+  {
+    "id": 195,
+    "type": "closed",
+    "category": "Testowanie i debugowanie",
+    "question": "Co to jest A/B testing?",
+    "options": {
+      "A": "Porównywaniem dwóch algorytmów sortowania",
+      "B": "Testowaniem dwóch wersji funkcji w testach jednostkowych",
+      "C": "Eksperymentem pokazującym różne wersje produktu różnym grupom użytkowników i mierzącym efekty",
+      "D": "Sprawdzaniem kompatybilności aplikacji z różnymi przeglądarkami"
+    },
+    "answer": "C",
+    "explanation": "A/B testing to kontrolowany eksperyment: część użytkowników widzi wersję A, część wersję B. Mierzone są metryki (konwersja, kliknięcia, retencja) i wybierana wersja z lepszym wynikiem. Popularne w UX, marketingu, optymalizacji interfejsu."
+  },
+  {
+    "id": 196,
+    "type": "closed",
+    "category": "Narzędzia i środowiska",
+    "question": "Czym jest Infrastructure as Code (IaC)?",
+    "options": {
+      "A": "Programowaniem infrastruktury sieciowej w języku C",
+      "B": "Zarządzaniem infrastrukturą przez pliki konfiguracyjne zamiast ręcznych operacji",
+      "C": "Kodem źródłowym systemu operacyjnego",
+      "D": "Testowaniem infrastruktury sieciowej automatycznymi skryptami"
+    },
+    "answer": "B",
+    "explanation": "IaC definiuje infrastrukturę (serwery, sieci, bazy danych) w plikach konfiguracyjnych zarządzanych przez systemy kontroli wersji. Umożliwia reprodukowalność, wersjonowanie i automatyzację infrastruktury. Narzędzia: Terraform, Ansible, Pulumi, AWS CloudFormation."
+  },
+  {
+    "id": 197,
+    "type": "closed",
+    "category": "Sieci i systemy",
+    "question": "Co to jest firewall?",
+    "options": {
+      "A": "Program antywirusowy skanujący pliki",
+      "B": "System monitorujący i filtrujący ruch sieciowy według zdefiniowanych reguł",
+      "C": "Serwer przechowujący kopie zapasowe",
+      "D": "Narzędzie do zarządzania certyfikatami SSL"
+    },
+    "answer": "B",
+    "explanation": "Firewall to system bezpieczeństwa filtrujący ruch sieciowy na podstawie reguł (IP, port, protokół, stan połączenia). Typy: packet filter, stateful inspection, application layer (WAF). Może być sprzętowy lub programowy (iptables, nftables, Windows Firewall)."
+  },
+  {
+    "id": 198,
+    "type": "closed",
+    "category": "Podstawy IT i ochrona zdrowia",
+    "question": "Co to jest BIOS/UEFI?",
+    "options": {
+      "A": "System operacyjny dla urządzeń mobilnych",
+      "B": "Oprogramowanie firmware inicjalizujące sprzęt i uruchamiające system operacyjny",
+      "C": "Aplikacja do zarządzania aktualizacjami oprogramowania",
+      "D": "System zarządzania bazą danych"
+    },
+    "answer": "B",
+    "explanation": "BIOS (Basic Input/Output System) / UEFI (Unified Extensible Firmware Interface) to firmware w pamięci ROM płyty głównej. Inicjalizuje sprzęt (POST), konfiguruje urządzenia i uruchamia bootloader systemu operacyjnego. UEFI to nowoczesny następca BIOS."
+  },
+  {
+    "id": 199,
+    "type": "closed",
+    "category": "Programowanie",
+    "question": "Co to jest dziedziczenie (inheritance) w OOP?",
+    "options": {
+      "A": "Mechanizm ukrywania szczegółów implementacji klasy",
+      "B": "Mechanizm pozwalający klasie pochodnej przejąć atrybuty i metody klasy bazowej",
+      "C": "Zdolność obiektu do przybierania wielu form",
+      "D": "Grupowanie danych i metod w jednym module"
+    },
+    "answer": "B",
+    "explanation": "Dziedziczenie pozwala klasie pochodnej (child) przejąć właściwości i metody klasy bazowej (parent) i je rozszerzać lub nadpisywać (override). Tworzy hierarchię klas. Java: extends (klasa), implements (interfejs). Python: class Child(Parent)."
+  },
+  {
+    "id": 200,
+    "type": "closed",
+    "category": "Bezpieczeństwo aplikacji",
+    "question": "Co to jest VPN (Virtual Private Network)?",
+    "options": {
+      "A": "Wirtualna maszyna uruchamiana w sieci prywatnej",
+      "B": "Szyfrowane, prywatne połączenie przez sieć publiczną (internet)",
+      "C": "System zarządzania dostępem w sieciach korporacyjnych",
+      "D": "Protokół przydzielania prywatnych adresów IP"
+    },
+    "answer": "B",
+    "explanation": "VPN tworzy szyfrowany tunel między urządzeniem a serwerem VPN, chroniąc ruch sieciowy i maskując adres IP. Używany do: bezpiecznego połączenia z siecią firmową, omijania geograficznych ograniczeń, ochrony prywatności. Protokoły: OpenVPN, WireGuard, IPSec."
   }
 ]
