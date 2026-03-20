@@ -72,7 +72,7 @@ export default function Header() {
       </nav>
 
       {/* CTA button desktop */}
-      <Link to="/exam" style={{ textDecoration: 'none' }}>
+      <Link to="/exam" style={{ textDecoration: 'none' }} className="desktop-cta">
         <button style={{
           padding: '0.5rem 1.25rem',
           background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
@@ -150,7 +150,7 @@ export default function Header() {
       <style>{`
         @media (max-width: 768px) {
           .hamburger-btn { display: block !important; }
-          nav, header > a:last-of-type button { display: none !important; }
+          nav, .desktop-cta { display: none !important; }
         }
         @media (min-width: 769px) {
           .mobile-menu { display: none !important; }

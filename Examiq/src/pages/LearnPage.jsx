@@ -162,14 +162,9 @@ function QuizScreen({ config, onFinish }) {
   const checkWithGemini = async (question, correctAnswer, userAnswer) => {
     try {
       const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
-      const model = ai.getGenerativeModel({ model: 'gemini-flash-latest' });
-      const prompt = `Jesteś weryfikatorem odpowiedzi na pytania egzaminacyjne z IT (egzamin INF04).
-
-Pytanie: ${question}
-Wzorcowa odpowiedź: ${correctAnswer}
-Odpowiedź ucznia: ${userAnswer}
-
-Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identycznego brzmienia — liczy się sens i kluczowe pojęcia techniczne. Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
+      // POPRAWKA: właściwa nazwa modelu Gemini
+      const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+      const prompt = `Jesteś weryfikatorem odpowiedzi na pytania egzaminacyjne z IT (egzamin INF04).\n\nPytanie: ${question}\nWzorcowa odpowiedź: ${correctAnswer}\nOdpowiedź ucznia: ${userAnswer}\n\nOceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identycznego brzmienia — liczy się sens i kluczowe pojęcia techniczne. Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
       const result = await model.generateContent(prompt);
       const text = result.response.text().trim().toUpperCase();
       return text.startsWith('TAK');
@@ -195,6 +190,7 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
     setResults(prev => [...prev, { q, correct }]);
   }, [q]);
 
+  // POPRAWKA: dodano `revealed` i `handleReveal` do deps
   useEffect(() => {
     if (!config.timeLimit || revealed) return;
     setTimeLeft(config.timeLimit);
@@ -207,7 +203,7 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [idx, config.timeLimit]);
+  }, [idx, config.timeLimit, revealed, handleReveal]);
 
   const handleOpenSubmit = async () => {
     if (revealed || !openAnswer.trim() || isChecking) return;
@@ -258,7 +254,6 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
             Pytanie <span style={{ color: '#7c3aed', fontWeight: 800 }}>{idx + 1}</span> / {pool.length}
           </span>
           <div style={{ display: 'flex', gap: 10 }}>
-            {/* STREAK */}
             <div style={{
               display: 'flex', alignItems: 'center', gap: 5,
               background: showFlame ? 'rgba(245,158,11,0.12)' : 'rgba(255,255,255,0.7)',
@@ -273,7 +268,6 @@ Oceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identyczneg
               }}>🔥</span>
               <span style={{ fontSize: '0.82rem', fontWeight: 800, color: showFlame ? '#d97706' : '#c4b5fd', transition: 'color 0.3s' }}>{streak}</span>
             </div>
-            {/* TIMER */}
             {config.timeLimit && (
               <div style={{
                 display: 'flex', alignItems: 'center', gap: 5,
@@ -509,7 +503,6 @@ function ResultsScreen({ results, onRestart }) {
       <Header />
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
 
-        {/* JAMIQ */}
         <div style={{ textAlign: 'center', marginBottom: '2rem', animation: 'riseIn 0.5s ease' }}>
           <img
             src={pct >= 75 ? JAMIQ_HAPPY : pct >= 50 ? JAMIQ_SAD : JAMIQ_ANGRY}
@@ -530,7 +523,6 @@ function ResultsScreen({ results, onRestart }) {
           <p style={{ color: '#9ca3af', margin: '0.2rem 0 0', fontSize: '0.82rem' }}>Wynik zapisano w historii</p>
         </div>
 
-        {/* KARTY STAT */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: '1.5rem', animation: 'riseIn 0.6s ease' }}>
           {[
             { label: 'Poprawne',   val: correct,        color: '#166534', bg: 'rgba(22,163,74,0.08)',   border: 'rgba(22,163,74,0.2)' },
@@ -548,7 +540,6 @@ function ResultsScreen({ results, onRestart }) {
           ))}
         </div>
 
-        {/* PASEK */}
         <div style={{
           background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(10px)',
           border: '1px solid rgba(124,58,237,0.1)', borderRadius: 16, padding: '1.5rem',
@@ -573,7 +564,6 @@ function ResultsScreen({ results, onRestart }) {
           </div>
         </div>
 
-        {/* LISTA */}
         <div style={{
           background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(10px)',
           border: '1px solid rgba(124,58,237,0.1)', borderRadius: 16, padding: '1.5rem',
@@ -611,7 +601,6 @@ function ResultsScreen({ results, onRestart }) {
           ))}
         </div>
 
-        {/* PRZYCISKI */}
         <div style={{ display: 'flex', gap: 10, animation: 'riseIn 0.9s ease' }}>
           <button onClick={onRestart} style={{
             flex: 1, padding: '1rem',

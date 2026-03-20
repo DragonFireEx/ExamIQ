@@ -58,12 +58,12 @@ function HeroSection() {
               fontWeight: 'bold'
             }}
             onMouseOver={(e) => {
-              e.target.style.transform = 'scale(1.05)';
-              e.target.style.boxShadow = '0 6px 20px rgba(138, 99, 210, 0.4)';
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(138, 99, 210, 0.4)';
             }}
             onMouseOut={(e) => {
-              e.target.style.transform = 'scale(1)';
-              e.target.style.boxShadow = '0 4px 15px rgba(138, 99, 210, 0.3)';
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(138, 99, 210, 0.3)';
             }}
             >
               Rozpocznij naukę 🚀

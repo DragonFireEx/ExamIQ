@@ -3,6 +3,17 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
+import Header from '../components/Header';
+
+// ─── shared glass-card style object ───────────────────────────────────────────
+const glassCard = {
+  background: 'rgba(255,255,255,0.75)',
+  backdropFilter: 'blur(14px)',
+  WebkitBackdropFilter: 'blur(14px)',
+  borderRadius: 22,
+  border: '1px solid rgba(167,139,250,0.2)',
+  boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
+};
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -16,7 +27,6 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' });
 }
 
-// lista unikalnych kategorii
 const ALL_QUESTIONS = questions;
 const CATEGORIES = [...new Set(ALL_QUESTIONS.map(q => q.category))];
 
@@ -54,7 +64,7 @@ function StatCard({ icon, label, value, sub, accent }) {
     <div
       onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
       onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-      style={{ background: accent ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : 'rgba(255,255,255,0.75)', backdropFilter: 'blur(12px)', borderRadius: 18, padding: '1.25rem 1.5rem', border: accent ? 'none' : '1px solid rgba(167,139,250,0.2)', boxShadow: accent ? '0 8px 32px rgba(124,58,237,0.3)' : '0 2px 12px rgba(0,0,0,0.05)', transition: 'transform .2s' }}
+      style={{ background: accent ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : glassCard.background, backdropFilter: glassCard.backdropFilter, WebkitBackdropFilter: glassCard.WebkitBackdropFilter, borderRadius: 18, padding: '1.25rem 1.5rem', border: accent ? 'none' : glassCard.border, boxShadow: accent ? '0 8px 32px rgba(124,58,237,0.3)' : glassCard.boxShadow, transition: 'transform .2s' }}
     >
       <span style={{ fontSize: '1.4rem' }}>{icon}</span>
       <div style={{ fontSize: '1.75rem', fontWeight: 800, color: accent ? '#fff' : '#4c1d95', letterSpacing: '-0.5px', fontFamily: "'Sora',sans-serif", marginTop: 4 }}>{value}</div>
@@ -146,17 +156,14 @@ function QuickExamWidget({ onStart }) {
   const [category, setCategory] = useState('all');
   const [count, setCount] = useState(20);
 
-  // ile pytań dostępnych dla wybranej kategorii
   const poolSize = category === 'all'
     ? ALL_QUESTIONS.length
     : ALL_QUESTIONS.filter(q => q.category === category).length;
 
-  // upewnij się że count nie przekracza dostępnych
   const safeCount = Math.min(count, poolSize);
 
   function handleCategoryChange(newCat) {
     setCategory(newCat);
-    // reset count do sensownej wartości
     const newPoolSize = newCat === 'all'
       ? ALL_QUESTIONS.length
       : ALL_QUESTIONS.filter(q => q.category === newCat).length;
@@ -170,13 +177,12 @@ function QuickExamWidget({ onStart }) {
   }
 
   return (
-    <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(14px)', borderRadius: 22, padding: '1.75rem', border: '1px solid rgba(167,139,250,0.2)', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
+    <div style={{ ...glassCard, padding: '1.75rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1.25rem' }}>
         <span style={{ fontSize: '1.3rem' }}>⚡</span>
         <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#4c1d95', fontFamily: "'Sora',sans-serif" }}>Szybki egzamin</h3>
       </div>
 
-      {/* kategoria */}
       <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Kategoria</label>
       <select
         value={category}
@@ -189,23 +195,16 @@ function QuickExamWidget({ onStart }) {
         ))}
       </select>
 
-      {/* liczba pytań */}
       <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
         Liczba pytań: <strong style={{ color: '#4c1d95' }}>{safeCount}</strong> <span style={{ color: '#9ca3af', fontWeight: 400, textTransform: 'none' }}>z {poolSize}</span>
       </label>
       <input
-        type="number"
-        min={1}
-        max={poolSize}
-        value={safeCount}
+        type="number" min={1} max={poolSize} value={safeCount}
         onChange={e => handleCountChange(e.target.value)}
         style={{ width: '100%', padding: '0.6rem 0.75rem', borderRadius: 10, border: '1.5px solid rgba(167,139,250,0.35)', background: '#f5f3ff', color: '#4c1d95', fontSize: '1rem', fontWeight: 700, outline: 'none', marginBottom: '0.75rem', fontFamily: "'Sora',sans-serif", boxSizing: 'border-box', textAlign: 'center' }}
       />
       <input
-        type="range"
-        min={1}
-        max={poolSize}
-        value={safeCount}
+        type="range" min={1} max={poolSize} value={safeCount}
         onChange={e => handleCountChange(e.target.value)}
         style={{ width: '100%', accentColor: '#7c3aed', marginBottom: '1.25rem', cursor: 'pointer', display: 'block' }}
       />
@@ -227,7 +226,6 @@ function ExamRunner({ pool, category, onFinish }) {
   const [selected, setSelected] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
 
-  // refs — świeże wartości bez closure
   const scoreRef     = useRef(0);
   const resultsRef   = useRef([]);
   const startTime    = useRef(Date.now());
@@ -342,11 +340,9 @@ export default function DashboardPage() {
   const [showReset, setShowReset]       = useState(false);
 
   function startExam(count, category) {
-    // filtruj pytania dla wybranej kategorii
     const base = category === 'all'
       ? ALL_QUESTIONS.slice()
       : ALL_QUESTIONS.filter(q => q.category === category);
-    // losuj i przytnij do count
     const pool = base
       .map(q => ({ q, r: Math.random() }))
       .sort((a, b) => a.r - b.r)
@@ -370,33 +366,24 @@ export default function DashboardPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff,#ede9fe 40%,#e0e7ff)', fontFamily: "'Sora',sans-serif" }}>
 
-      {/* NAV */}
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(167,139,250,0.15)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontSize: '1.3rem', fontWeight: 800, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>ExamIQ</span>
-          </Link>
-          <nav style={{ display: 'flex', gap: 4 }}>
-            {[['/', 'Home'], ['/learn', 'Nauka'], ['/exam', 'Dashboard'], ['/about', 'O nas']].map(([path, label]) => (
-              <Link key={path} to={path} style={{ textDecoration: 'none', padding: '0.4rem 0.9rem', borderRadius: 8, fontSize: '0.875rem', fontWeight: 600, color: path === '/exam' ? '#7c3aed' : '#6b7280', background: path === '/exam' ? 'rgba(124,58,237,0.1)' : 'transparent' }}>{label}</Link>
-            ))}
-          </nav>
-        </div>
-        <div style={{ background: 'rgba(124,58,237,0.08)', borderRadius: 99, padding: '0.4rem 0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span>🔥</span>
-          <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#7c3aed' }}>{session.streak} dni z rzędu</span>
-        </div>
-      </header>
+      {/* POPRAWKA: używamy wspólnego komponentu Header zamiast własnego nav */}
+      <Header />
 
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2.5rem 2rem' }}>
 
-        {/* GREETING */}
+        {/* GREETING + streak */}
         <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#4c1d95', margin: '0 0 0.2rem', letterSpacing: '-0.5px' }}>Cześć, {session.name}! 👋</h1>
             <p style={{ color: '#9ca3af', fontSize: '0.9rem', margin: 0 }}>Ostatnia aktywność: {session.lastActive}</p>
           </div>
-          <NameEditor current={session.name} onSave={setName} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ background: 'rgba(124,58,237,0.08)', borderRadius: 99, padding: '0.4rem 0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span>🔥</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#7c3aed' }}>{session.streak} dni z rzędu</span>
+            </div>
+            <NameEditor current={session.name} onSave={setName} />
+          </div>
         </div>
 
         {/* STAT CARDS */}
@@ -415,7 +402,7 @@ export default function DashboardPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
             {/* chart */}
-            <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(14px)', borderRadius: 22, padding: '1.75rem', border: '1px solid rgba(167,139,250,0.2)', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
+            <div style={{ ...glassCard, padding: '1.75rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                 <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>📈 Ostatnie sesje</h3>
                 {stats.total > 0 && (
@@ -436,7 +423,7 @@ export default function DashboardPage() {
             </div>
 
             {/* category progress */}
-            <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(14px)', borderRadius: 22, padding: '1.75rem', border: '1px solid rgba(167,139,250,0.2)', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
+            <div style={{ ...glassCard, padding: '1.75rem' }}>
               <h3 style={{ margin: '0 0 1.25rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>🗂️ Postęp per kategoria</h3>
               {Object.keys(categoryProgress).length === 0
                 ? <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', padding: '1rem 0' }}>Brak danych — zrób egzamin żeby zobaczyć postęp!</p>
@@ -447,7 +434,7 @@ export default function DashboardPage() {
             </div>
 
             {/* history */}
-            <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(14px)', borderRadius: 22, padding: '1.75rem', border: '1px solid rgba(167,139,250,0.2)', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
+            <div style={{ ...glassCard, padding: '1.75rem' }}>
               <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>📋 Historia egzaminów</h3>
               {history.length === 0
                 ? <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', padding: '1.5rem 0' }}>Brak historii. Zacznij pierwszy egzamin!</p>
@@ -461,10 +448,12 @@ export default function DashboardPage() {
                       </thead>
                       <tbody>
                         {[...history].reverse().map((s, i) => {
+                          // POPRAWKA: stabilny klucz zamiast indeksu
+                          const rowKey = `${s.date}-${s.score}-${s.total}-${i}`;
                           const pct = Math.round((s.score / s.total) * 100);
                           const pass = pct >= 75;
                           return (
-                            <tr key={i}
+                            <tr key={rowKey}
                               onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.03)'}
                               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                               style={{ borderBottom: '1px solid rgba(167,139,250,0.08)', transition: 'background 0.15s' }}>
@@ -494,7 +483,7 @@ export default function DashboardPage() {
             <QuickExamWidget onStart={startExam} />
 
             {/* trenuj kategorię */}
-            <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(14px)', borderRadius: 22, padding: '1.75rem', border: '1px solid rgba(167,139,250,0.2)', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
+            <div style={{ ...glassCard, padding: '1.75rem' }}>
               <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>⚡ Trenuj kategorię</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {CATEGORIES.map(cat => {
