@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { usePageTitle } from '../hooks/usePageTitle';
+import './LearnPage.css'
 
 const JAMIQ_HAPPY = '/happy_jamiq.png';
 const JAMIQ_SAD   = '/sad_jamiq.png';
@@ -162,7 +164,6 @@ function QuizScreen({ config, onFinish }) {
   const checkWithGemini = async (question, correctAnswer, userAnswer) => {
     try {
       const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
-      // POPRAWKA: właściwa nazwa modelu Gemini
       const model = ai.getGenerativeModel({ model: 'gemini-flash-latest' });
       const prompt = `Jesteś weryfikatorem odpowiedzi na pytania egzaminacyjne z IT (egzamin INF04).\n\nPytanie: ${question}\nWzorcowa odpowiedź: ${correctAnswer}\nOdpowiedź ucznia: ${userAnswer}\n\nOceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identycznego brzmienia — liczy się sens i kluczowe pojęcia techniczne. Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
       const result = await model.generateContent(prompt);
@@ -190,7 +191,6 @@ function QuizScreen({ config, onFinish }) {
     setResults(prev => [...prev, { q, correct }]);
   }, [q]);
 
-  // POPRAWKA: dodano `revealed` i `handleReveal` do deps
   useEffect(() => {
     if (!config.timeLimit || revealed) return;
     setTimeLeft(config.timeLimit);
@@ -227,10 +227,9 @@ function QuizScreen({ config, onFinish }) {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
-      <Header />
 
-      {/* PROGRESS BAR */}
-      <div style={{ position: 'relative', height: 5, background: 'rgba(124,58,237,0.1)' }}>
+      {/* PROGRESS BAR — pod headerem, marginTop -5px + z-index wyższy niż header (1000) */}
+      <div style={{ position: 'relative', height: 5, background: 'rgba(124,58,237,0.1)', marginTop: -5, zIndex: 1001 }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0,
           width: `${progress * 100}%`,
@@ -245,6 +244,8 @@ function QuizScreen({ config, onFinish }) {
           transition: 'left 0.5s cubic-bezier(0.4,0,0.2,1)',
         }} />
       </div>
+
+      <Header />
 
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
 
@@ -460,19 +461,7 @@ function QuizScreen({ config, onFinish }) {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
-        pre.code-snippet {
-          background: rgba(124,58,237,0.05) !important;
-          border: 1px solid rgba(124,58,237,0.12);
-          border-radius: 10px; padding: 1rem;
-          overflow-x: auto; font-size: 0.85rem; margin: 0;
-        }
-        .kw  { color: #7c3aed; font-weight: 700; }
-        .fn  { color: #2563eb; }
-        .st  { color: #16a34a; }
-        .nm  { color: #d97706; }
-        .cm  { color: #9ca3af; font-style: italic; }
-        .tp  { color: #7c3aed; }
-        .gap { background: rgba(217,119,6,0.12); color: #b45309; padding: 0 4px; border-radius: 4px; border: 1px dashed #d97706; }
+        /* style snippetów obsługuje learnpage.css */
       `}</style>
     </div>
   );
@@ -648,6 +637,7 @@ function ResultsScreen({ results, onRestart }) {
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function LearnPage() {
+  usePageTitle('Teoria')
   const [phase,   setPhase]   = useState('setup');
   const [config,  setConfig]  = useState(null);
   const [results, setResults] = useState([]);

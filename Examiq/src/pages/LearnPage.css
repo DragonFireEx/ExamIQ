@@ -46,10 +46,13 @@
 .gap {
   display: inline-block;
   min-width: 60px;
-  border-bottom: 2px solid #569cd6;
-  color: #569cd6;
+  background: rgba(217, 119, 6, 0.15);
+  color: #fb923c;
   font-style: italic;
   margin: 0 2px;
+  padding: 0 6px;
+  border-radius: 4px;
+  border: 1.5px dashed #f97316;
 }
 
 .code-snippet pre {

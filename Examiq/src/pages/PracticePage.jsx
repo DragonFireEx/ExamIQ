@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import practiceData from '../data/practice.json';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 const LANG_OPTIONS = [
@@ -1062,6 +1063,7 @@ function SummaryScreen({ feedback, onRestart }) {
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function PracticePage() {
+  usePageTitle('Praktyka')
   const [phase,    setPhase]    = useState('setup');  // 'setup' | 'editor' | 'summary'
   const [config,   setConfig]   = useState(null);
   const [lastFb,   setLastFb]   = useState(null);

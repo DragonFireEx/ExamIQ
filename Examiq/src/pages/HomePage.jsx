@@ -6,6 +6,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 // ─── dane ─────────────────────────────────────────────────────────────────────
 
@@ -65,6 +66,7 @@ const STEPS = [
 // ─── komponenty ───────────────────────────────────────────────────────────────
 
 function StatPill({ value, label }) {
+  usePageTitle('Strona główna')
   return (
     <div style={{
       textAlign: 'center',
@@ -210,7 +212,7 @@ export default function HomePage() {
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(124,58,237,0.5)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(124,58,237,0.4)'; }}
-              >Zacznij naukę 🚀</button>
+              >Zacznij naukę</button>
             </Link>
             <Link to="/exam">
               <button style={{
@@ -224,7 +226,7 @@ export default function HomePage() {
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.borderColor = '#7c3aed'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.8)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.3)'; }}
-              >Mój dashboard →</button>
+              >Panel użytkownika →</button>
             </Link>
           </div>
         </div>
@@ -237,7 +239,7 @@ export default function HomePage() {
           minHeight: 340,
         }}>
           <img
-            src="/curious_jamiq.png"
+            src="/curious_alt_jamiq.png"
             alt="JamIQ"
             style={{ width: 280, height: 280, objectFit: 'contain', position: 'relative', zIndex: 1 }}
             className="bounce"
@@ -456,7 +458,7 @@ export default function HomePage() {
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.25)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                >📊 Mój dashboard</button>
+                >📊 Panel użytkownika</button>
               </Link>
               <Link to="/about">
                 <button style={{
@@ -471,7 +473,7 @@ export default function HomePage() {
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.18)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
-                >ℹ️ O projekcie</button>
+                >ℹ️ O nas</button>
               </Link>
             </div>
           </div>

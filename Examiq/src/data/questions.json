@@ -295,7 +295,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę tak, aby funkcja fetchData poprawnie obsługiwała błędy przy użyciu async/await:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">async</span> <span class=\"kw\">function</span> <span class=\"fn\">fetchData</span>(url) {\n  <span class=\"kw\">try</span> {\n    <span class=\"kw\">const</span> res = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n    <span class=\"kw\">if</span> (!res.ok) <span class=\"kw\">throw</span> <span class=\"kw\">new</span> <span class=\"tp\">Error</span>(res.statusText);\n    <span class=\"kw\">return</span> <span class=\"kw\">await</span> res.<span class=\"fn\">json</span>();\n  } <span class=\"gap\">___</span> (err) {\n    console.<span class=\"fn\">error</span>(<span class=\"st\">\"Błąd:\"</span>, err.message);\n  }\n}</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">async</span> <span class=\"kw\">function</span> <span class=\"fn\">fetchData</span>(url) {\n  <span class=\"kw\">try</span> {\n    <span class=\"kw\">const</span> res = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n    <span class=\"kw\">if</span> (!res.ok) <span class=\"kw\">throw</span> <span class=\"kw\">new</span> <span class=\"tp\">Error</span>(res.statusText);\n    <span class=\"kw\">return</span> <span class=\"kw\">await</span> res.<span class=\"fn\">json</span>();\n  } <span class=\"gap\">\u200b</span> (err) {\n    console.<span class=\"fn\">error</span>(<span class=\"st\">\"Błąd:\"</span>, err.message);\n  }\n}</code></pre>",
     "answer": "catch",
     "explanation": "Blok try/catch obsługuje wyjątki w async/await. Po bloku try musi wystąpić catch(err) przechwytujący rzucony błąd — w tym przypadku rzucany przez throw new Error()."
   },
@@ -335,7 +335,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby dekorator timer zachował oryginalną nazwę i docstring owijowanej funkcji:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> time\n<span class=\"kw\">import</span> functools\n\n<span class=\"kw\">def</span> <span class=\"fn\">timer</span>(func):\n    <span class=\"gap\">___</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">wrapper</span>(*args, **kwargs):\n        start = time.<span class=\"fn\">time</span>()\n        result = <span class=\"fn\">func</span>(*args, **kwargs)\n        <span class=\"fn\">print</span>(<span class=\"st\">f\"Czas: {{time.time() - start:.4f}}s\"</span>)\n        <span class=\"kw\">return</span> result\n    <span class=\"kw\">return</span> wrapper</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> time\n<span class=\"kw\">import</span> functools\n\n<span class=\"kw\">def</span> <span class=\"fn\">timer</span>(func):\n    <span class=\"gap\">\u200b</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">wrapper</span>(*args, **kwargs):\n        start = time.<span class=\"fn\">time</span>()\n        result = <span class=\"fn\">func</span>(*args, **kwargs)\n        <span class=\"fn\">print</span>(<span class=\"st\">f\"Czas: {{time.time() - start:.4f}}s\"</span>)\n        <span class=\"kw\">return</span> result\n    <span class=\"kw\">return</span> wrapper</code></pre>",
     "answer": "@functools.wraps(func)",
     "explanation": "@functools.wraps(func) kopiuje metadane (nazwę, docstring) z oryginalnej funkcji do wrappera. Bez tego func.__name__ zwróciłoby 'wrapper' zamiast nazwy oryginalnej funkcji."
   },
@@ -375,7 +375,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby zasób BufferedReader był automatycznie zamknięty po użyciu (Java 7+):",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"gap\">___</span> (<span class=\"tp\">BufferedReader</span> br = <span class=\"kw\">new</span> <span class=\"tp\">BufferedReader</span>(<span class=\"kw\">new</span> <span class=\"tp\">FileReader</span>(<span class=\"st\">\"plik.txt\"</span>))) {\n    <span class=\"tp\">String</span> line;\n    <span class=\"kw\">while</span> ((line = br.<span class=\"fn\">readLine</span>()) != <span class=\"kw\">null</span>) {\n        <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(line);\n    }\n} <span class=\"kw\">catch</span> (<span class=\"tp\">IOException</span> e) {\n    e.<span class=\"fn\">printStackTrace</span>();\n}</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"gap\">\u200b</span> (<span class=\"tp\">BufferedReader</span> br = <span class=\"kw\">new</span> <span class=\"tp\">BufferedReader</span>(<span class=\"kw\">new</span> <span class=\"tp\">FileReader</span>(<span class=\"st\">\"plik.txt\"</span>))) {\n    <span class=\"tp\">String</span> line;\n    <span class=\"kw\">while</span> ((line = br.<span class=\"fn\">readLine</span>()) != <span class=\"kw\">null</span>) {\n        <span class=\"tp\">System</span>.out.<span class=\"fn\">println</span>(line);\n    }\n} <span class=\"kw\">catch</span> (<span class=\"tp\">IOException</span> e) {\n    e.<span class=\"fn\">printStackTrace</span>();\n}</code></pre>",
     "answer": "try",
     "explanation": "try-with-resources (Java 7+) automatycznie wywołuje close() na zasobach implementujących AutoCloseable po zakończeniu bloku, nawet gdy wystąpi wyjątek. Eliminuje potrzebę finally z ręcznym zamknięciem."
   },
@@ -415,7 +415,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby destruktor klasy Base zapobiegał wyciekowi pamięci przy polimorficznym usuwaniu obiektów:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">class</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    <span class=\"gap\">___</span> ~<span class=\"tp\">Base</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">virtual</span> <span class=\"kw\">void</span> <span class=\"fn\">show</span>() = <span class=\"nm\">0</span>;\n};\n\n<span class=\"kw\">class</span> <span class=\"tp\">Derived</span> : <span class=\"kw\">public</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    ~<span class=\"tp\">Derived</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">void</span> <span class=\"fn\">show</span>() { <span class=\"cm\">/* ... */</span> }\n};</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"cpp\"><code><span class=\"kw\">class</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    <span class=\"gap\">\u200b</span> ~<span class=\"tp\">Base</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">virtual</span> <span class=\"kw\">void</span> <span class=\"fn\">show</span>() = <span class=\"nm\">0</span>;\n};\n\n<span class=\"kw\">class</span> <span class=\"tp\">Derived</span> : <span class=\"kw\">public</span> <span class=\"tp\">Base</span> {\n<span class=\"kw\">public</span>:\n    ~<span class=\"tp\">Derived</span>() { <span class=\"cm\">/* cleanup */</span> }\n    <span class=\"kw\">void</span> <span class=\"fn\">show</span>() { <span class=\"cm\">/* ... */</span> }\n};</code></pre>",
     "answer": "virtual",
     "explanation": "Bez virtual przed destruktorem Base, usunięcie Derived przez wskaźnik Base* wywołuje tylko ~Base() — pomija ~Derived() i powoduje wyciek pamięci. Virtual destruktor gwarantuje poprawny łańcuch destrukcji."
   },
@@ -455,7 +455,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby funkcja była generatorem zwracającym kolejne liczby Fibonacciego:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">fibonacci</span>():\n    a, b = <span class=\"nm\">0</span>, <span class=\"nm\">1</span>\n    <span class=\"kw\">while</span> <span class=\"kw\">True</span>:\n        <span class=\"gap\">___</span> a\n        a, b = b, a + b\n\n<span class=\"kw\">for</span> n <span class=\"kw\">in</span> <span class=\"fn\">fibonacci</span>():\n    <span class=\"kw\">if</span> n > <span class=\"nm\">100</span>: <span class=\"kw\">break</span>\n    <span class=\"fn\">print</span>(n)</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">def</span> <span class=\"fn\">fibonacci</span>():\n    a, b = <span class=\"nm\">0</span>, <span class=\"nm\">1</span>\n    <span class=\"kw\">while</span> <span class=\"kw\">True</span>:\n        <span class=\"gap\">\u200b</span> a\n        a, b = b, a + b\n\n<span class=\"kw\">for</span> n <span class=\"kw\">in</span> <span class=\"fn\">fibonacci</span>():\n    <span class=\"kw\">if</span> n > <span class=\"nm\">100</span>: <span class=\"kw\">break</span>\n    <span class=\"fn\">print</span>(n)</code></pre>",
     "answer": "yield",
     "explanation": "yield zamienia funkcję w generator — zatrzymuje wykonanie, zwraca wartość i wznawia od tego miejsca przy kolejnym next(). Generator nie trzyma wszystkich wartości w pamięci naraz."
   },
@@ -465,7 +465,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby stream zwrócił listę imion dłuższych niż 4 znaki, posortowanych alfabetycznie:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; names = <span class=\"tp\">List</span>.<span class=\"fn\">of</span>(<span class=\"st\">\"Anna\"</span>, <span class=\"st\">\"Bartosz\"</span>, <span class=\"st\">\"Ola\"</span>, <span class=\"st\">\"Krzysztof\"</span>);\n\n<span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; result = names.<span class=\"fn\">stream</span>()\n    .<span class=\"fn\">filter</span>(n -> n.<span class=\"fn\">length</span>() > <span class=\"nm\">4</span>)\n    .<span class=\"gap\">___</span>()\n    .<span class=\"fn\">collect</span>(<span class=\"tp\">Collectors</span>.<span class=\"fn\">toList</span>());</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; names = <span class=\"tp\">List</span>.<span class=\"fn\">of</span>(<span class=\"st\">\"Anna\"</span>, <span class=\"st\">\"Bartosz\"</span>, <span class=\"st\">\"Ola\"</span>, <span class=\"st\">\"Krzysztof\"</span>);\n\n<span class=\"tp\">List</span>&lt;<span class=\"tp\">String</span>&gt; result = names.<span class=\"fn\">stream</span>()\n    .<span class=\"fn\">filter</span>(n -> n.<span class=\"fn\">length</span>() > <span class=\"nm\">4</span>)\n    .<span class=\"gap\">\u200b</span>()\n    .<span class=\"fn\">collect</span>(<span class=\"tp\">Collectors</span>.<span class=\"fn\">toList</span>());</code></pre>",
     "answer": "sorted",
     "explanation": "Stream API: filter() filtruje elementy, sorted() sortuje naturalnie (alfabetycznie dla String), collect(Collectors.toList()) zbiera do listy. Wynik: [Bartosz, Krzysztof]."
   },
@@ -1185,7 +1185,7 @@
     "category": "Bazy danych i SQL",
     "taskType": "fill",
     "question": "Uzupełnij zapytanie, aby pobrać imiona klientów i łączną sumę ich zamówień, uwzględniając tylko klientów z sumą powyżej 1000:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> c.name, <span class=\"fn\">SUM</span>(o.amount) <span class=\"kw\">AS</span> total\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">JOIN</span> orders o <span class=\"kw\">ON</span> c.id = o.customer_id\n<span class=\"kw\">GROUP BY</span> c.name\n<span class=\"gap\">___</span> <span class=\"fn\">SUM</span>(o.amount) > <span class=\"nm\">1000</span>;</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> c.name, <span class=\"fn\">SUM</span>(o.amount) <span class=\"kw\">AS</span> total\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">JOIN</span> orders o <span class=\"kw\">ON</span> c.id = o.customer_id\n<span class=\"kw\">GROUP BY</span> c.name\n<span class=\"gap\">\u200b</span> <span class=\"fn\">SUM</span>(o.amount) > <span class=\"nm\">1000</span>;</code></pre>",
     "answer": "HAVING",
     "explanation": "HAVING filtruje wyniki po agregacji GROUP BY. Nie można tu użyć WHERE, bo WHERE działa przed grupowaniem i nie może odwoływać się do funkcji agregujących jak SUM()."
   },
@@ -1225,7 +1225,7 @@
     "category": "Bazy danych i SQL",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby sprawdzić czy klient złożył jakiekolwiek zamówienia (podzapytanie EXISTS):",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> name\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">WHERE</span> <span class=\"gap\">___</span> (\n    <span class=\"kw\">SELECT</span> <span class=\"nm\">1</span>\n    <span class=\"kw\">FROM</span> orders o\n    <span class=\"kw\">WHERE</span> o.customer_id = c.id\n);</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">SELECT</span> name\n<span class=\"kw\">FROM</span> customers c\n<span class=\"kw\">WHERE</span> <span class=\"gap\">\u200b</span> (\n    <span class=\"kw\">SELECT</span> <span class=\"nm\">1</span>\n    <span class=\"kw\">FROM</span> orders o\n    <span class=\"kw\">WHERE</span> o.customer_id = c.id\n);</code></pre>",
     "answer": "EXISTS",
     "explanation": "EXISTS zwraca TRUE jeśli podzapytanie zwróci choć jeden wiersz. Jest wydajniejszy niż IN dla dużych zbiorów, bo zatrzymuje się po znalezieniu pierwszego dopasowania. NOT EXISTS sprawdza brak powiązanych rekordów."
   },
@@ -1245,7 +1245,7 @@
     "category": "Sieci i systemy",
     "taskType": "fill",
     "question": "Uzupełnij lukę w skrypcie bash, aby nadać plikowi uprawnienia do wykonania dla właściciela:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code><span class=\"gap\">___</span> +x skrypt.sh\n./skrypt.sh</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code><span class=\"gap\">\u200b</span> +x skrypt.sh\n./skrypt.sh</code></pre>",
     "answer": "chmod",
     "explanation": "chmod (change mode) zmienia uprawnienia pliku. +x dodaje prawo wykonania (execute). chmod 755 skrypt.sh to odpowiednik: właściciel ma pełne prawa, reszta ma read+execute. ls -l wyświetla aktualne uprawnienia."
   },
@@ -1295,7 +1295,7 @@
     "category": "Bezpieczeństwo aplikacji",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby poprawnie zahashować hasło i je zweryfikować w Python z użyciem bezpiecznej biblioteki:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> bcrypt\n\npassword = b<span class=\"st\">\"moje_haslo\"</span>\nhashed = bcrypt.<span class=\"fn\">hashpw</span>(password, bcrypt.<span class=\"fn\">gensalt</span>())\n\n<span class=\"kw\">if</span> bcrypt.<span class=\"gap\">___</span>(password, hashed):\n    <span class=\"fn\">print</span>(<span class=\"st\">\"Hasło poprawne\"</span>)</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> bcrypt\n\npassword = b<span class=\"st\">\"moje_haslo\"</span>\nhashed = bcrypt.<span class=\"fn\">hashpw</span>(password, bcrypt.<span class=\"fn\">gensalt</span>())\n\n<span class=\"kw\">if</span> bcrypt.<span class=\"gap\">\u200b</span>(password, hashed):\n    <span class=\"fn\">print</span>(<span class=\"st\">\"Hasło poprawne\"</span>)</code></pre>",
     "answer": "checkpw",
     "explanation": "bcrypt.checkpw(password, hashed) bezpiecznie porównuje hasło z hashem uwzględniając sól (salt). Bcrypt jest zaprojektowany do hashowania haseł — jest celowo powolny, utrudniając ataki brute-force. Nie używaj MD5/SHA do haseł."
   },
@@ -1335,7 +1335,7 @@
     "category": "Zarządzanie projektem",
     "taskType": "fill",
     "question": "Uzupełnij brakujący element definicji User Story w formacie Connextra:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Jako [rola użytkownika]\nChcę [cel / funkcja]\n<span class=\"gap\">___</span> [korzyść / wartość biznesowa]</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"text\"><code>Jako [rola użytkownika]\nChcę [cel / funkcja]\n<span class=\"gap\">\u200b</span> [korzyść / wartość biznesowa]</code></pre>",
     "answer": "Aby / Tak żebym mógł / So that",
     "explanation": "Format User Story: 'Jako [kto] Chcę [co] Aby [dlaczego]'. Trzecia część (korzyść) jest najważniejsza — definiuje wartość biznesową i pomaga zespołowi zrozumieć cel funkcji, nie tylko jej implementację."
   },
@@ -1365,7 +1365,7 @@
     "category": "Projektowanie aplikacji",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby poprawnie zaimplementować wzorzec Dekorator w Pythonie:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">Coffee</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self): <span class=\"kw\">return</span> <span class=\"nm\">5</span>\n\n<span class=\"kw\">class</span> <span class=\"tp\">MilkDecorator</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(self, <span class=\"gap\">___</span>):\n        self._coffee = coffee\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self):\n        <span class=\"kw\">return</span> self._coffee.<span class=\"fn\">cost</span>() + <span class=\"nm\">2</span></code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">class</span> <span class=\"tp\">Coffee</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self): <span class=\"kw\">return</span> <span class=\"nm\">5</span>\n\n<span class=\"kw\">class</span> <span class=\"tp\">MilkDecorator</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(self, <span class=\"gap\">\u200b</span>):\n        self._coffee = coffee\n    <span class=\"kw\">def</span> <span class=\"fn\">cost</span>(self):\n        <span class=\"kw\">return</span> self._coffee.<span class=\"fn\">cost</span>() + <span class=\"nm\">2</span></code></pre>",
     "answer": "coffee",
     "explanation": "Wzorzec Dekorator opakowuje obiekt bazowy (Coffee) dodając nowe zachowanie. MilkDecorator przyjmuje dowolny obiekt z metodą cost() i rozszerza jego funkcjonalność. Można łączyć dekoratory: MilkDecorator(SugarDecorator(Coffee()))."
   },
@@ -1415,7 +1415,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby klasa Stack w JavaScript poprawnie enkapsulowała wewnętrzną tablicę (prywatne pole):",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">class</span> <span class=\"tp\">Stack</span> {\n  <span class=\"gap\">___</span>items = [];\n\n  <span class=\"fn\">push</span>(item) { <span class=\"kw\">this</span>.#items.<span class=\"fn\">push</span>(item); }\n  <span class=\"fn\">pop</span>()  { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.<span class=\"fn\">pop</span>(); }\n  <span class=\"kw\">get</span> <span class=\"fn\">size</span>() { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.length; }\n}</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">class</span> <span class=\"tp\">Stack</span> {\n  <span class=\"gap\">\u200b</span>items = [];\n\n  <span class=\"fn\">push</span>(item) { <span class=\"kw\">this</span>.#items.<span class=\"fn\">push</span>(item); }\n  <span class=\"fn\">pop</span>()  { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.<span class=\"fn\">pop</span>(); }\n  <span class=\"kw\">get</span> <span class=\"fn\">size</span>() { <span class=\"kw\">return</span> <span class=\"kw\">this</span>.#items.length; }\n}</code></pre>",
     "answer": "#",
     "explanation": "Prywatne pola klasy w JS oznacza się # (ES2022). #items nie jest dostępna spoza klasy — próba dostępu rzuca SyntaxError. To prawdziwa enkapsulacja, w odróżnieniu od konwencji podkreślenia _items."
   },
@@ -1455,7 +1455,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby wyrażenie lambda posortowało listę słowników po kluczu 'age' malejąco:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code>people = [\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Alice\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">30</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Bob\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">25</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Carol\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">35</span>}\n]\n\nsorted_people = <span class=\"fn\">sorted</span>(people, key=<span class=\"gap\">___</span>, reverse=<span class=\"kw\">True</span>)</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code>people = [\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Alice\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">30</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Bob\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">25</span>},\n    {<span class=\"st\">\"name\"</span>: <span class=\"st\">\"Carol\"</span>, <span class=\"st\">\"age\"</span>: <span class=\"nm\">35</span>}\n]\n\nsorted_people = <span class=\"fn\">sorted</span>(people, key=<span class=\"gap\">\u200b</span>, reverse=<span class=\"kw\">True</span>)</code></pre>",
     "answer": "lambda x: x['age']",
     "explanation": "Funkcja key= w sorted() przyjmuje funkcję jednoargumentową zwracającą wartość do porównania. Lambda jest anonimową funkcją jednolinijkową. Alternatywa: from operator import itemgetter; key=itemgetter('age')."
   },
@@ -1775,7 +1775,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby metoda equals poprawnie porównywała obiekty Person w Java:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">public</span> <span class=\"kw\">boolean</span> <span class=\"fn\">equals</span>(<span class=\"tp\">Object</span> o) {\n    <span class=\"kw\">if</span> (<span class=\"kw\">this</span> == o) <span class=\"kw\">return</span> <span class=\"kw\">true</span>;\n    <span class=\"kw\">if</span> (!(o <span class=\"kw\">instanceof</span> <span class=\"tp\">Person</span>)) <span class=\"kw\">return</span> <span class=\"kw\">false</span>;\n    <span class=\"tp\">Person</span> p = (<span class=\"tp\">Person</span>) o;\n    <span class=\"kw\">return</span> <span class=\"gap\">___</span>.<span class=\"fn\">equals</span>(p.name) && age == p.age;\n}</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"java\"><code><span class=\"kw\">public</span> <span class=\"kw\">boolean</span> <span class=\"fn\">equals</span>(<span class=\"tp\">Object</span> o) {\n    <span class=\"kw\">if</span> (<span class=\"kw\">this</span> == o) <span class=\"kw\">return</span> <span class=\"kw\">true</span>;\n    <span class=\"kw\">if</span> (!(o <span class=\"kw\">instanceof</span> <span class=\"tp\">Person</span>)) <span class=\"kw\">return</span> <span class=\"kw\">false</span>;\n    <span class=\"tp\">Person</span> p = (<span class=\"tp\">Person</span>) o;\n    <span class=\"kw\">return</span> <span class=\"gap\">\u200b</span>.<span class=\"fn\">equals</span>(p.name) && age == p.age;\n}</code></pre>",
     "answer": "name",
     "explanation": "Poprawna implementacja equals(): (1) sprawdź identyczność referencji (this == o), (2) sprawdź typ (instanceof), (3) rzutuj i porównaj pola. Zawsze nadpisuj hashCode() razem z equals() — kontrakt: równe obiekty muszą mieć ten sam hashCode."
   },
@@ -1795,7 +1795,7 @@
     "category": "Sieci i systemy",
     "taskType": "fill",
     "question": "Uzupełnij brakujące polecenie, aby zatrzymać i usunąć działający kontener Docker o nazwie 'myapp':",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>docker <span class=\"fn\">stop</span> myapp\ndocker <span class=\"gap\">___</span> myapp</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"bash\"><code>docker <span class=\"fn\">stop</span> myapp\ndocker <span class=\"gap\">\u200b</span> myapp</code></pre>",
     "answer": "rm",
     "explanation": "docker stop zatrzymuje działający kontener (wysyła SIGTERM, potem SIGKILL). docker rm usuwa zatrzymany kontener. Skrót: docker rm -f myapp (force - zatrzymuje i usuwa). docker ps -a wyświetla wszystkie kontenery (też zatrzymane)."
   },
@@ -1845,7 +1845,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby klasa Animal stała się abstrakcyjną klasą bazową uniemożliwiającą bezpośrednie tworzenie instancji:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">from</span> abc <span class=\"kw\">import</span> ABC, abstractmethod\n\n<span class=\"kw\">class</span> <span class=\"tp\">Animal</span>(<span class=\"gap\">___</span>):\n    @abstractmethod\n    <span class=\"kw\">def</span> <span class=\"fn\">speak</span>(self):\n        <span class=\"kw\">pass</span></code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">from</span> abc <span class=\"kw\">import</span> ABC, abstractmethod\n\n<span class=\"kw\">class</span> <span class=\"tp\">Animal</span>(<span class=\"gap\">\u200b</span>):\n    @abstractmethod\n    <span class=\"kw\">def</span> <span class=\"fn\">speak</span>(self):\n        <span class=\"kw\">pass</span></code></pre>",
     "answer": "ABC",
     "explanation": "ABC (Abstract Base Class) z modułu abc uniemożliwia tworzenie instancji klasy z metodami @abstractmethod. Klasy pochodne muszą implementować wszystkie metody abstrakcyjne. Animal() rzuci TypeError. Odpowiednik abstract class w Java."
   },
@@ -2085,7 +2085,7 @@
     "category": "Programowanie",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby deklaracja zmiennej blokowała ponowne przypisanie wartości w JavaScript (ES6+):",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"gap\">___</span> PI = <span class=\"nm\">3.14159</span>;\nPI = <span class=\"nm\">3</span>; <span class=\"cm\">// TypeError: Assignment to constant variable</span></code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"gap\">\u200b</span> PI = <span class=\"nm\">3.14159</span>;\nPI = <span class=\"nm\">3</span>; <span class=\"cm\">// TypeError: Assignment to constant variable</span></code></pre>",
     "answer": "const",
     "explanation": "const deklaruje zmienną, której nie można przypisać ponownie. Uwaga: dla obiektów i tablic const chroni referencję, nie zawartość — const arr = []; arr.push(1) działa. Do prawdziwej niemutowalności: Object.freeze()."
   },
@@ -2095,7 +2095,7 @@
     "category": "Bazy danych i SQL",
     "taskType": "fill",
     "question": "Uzupełnij zapytanie, aby dodać nowego użytkownika do tabeli i zwrócić nadane mu ID:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">INSERT INTO</span> users (name, email)\n<span class=\"gap\">___</span> (<span class=\"st\">'Jan Kowalski'</span>, <span class=\"st\">'jan@example.com'</span>)\n<span class=\"kw\">RETURNING</span> id;</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"sql\"><code><span class=\"kw\">INSERT INTO</span> users (name, email)\n<span class=\"gap\">\u200b</span> (<span class=\"st\">'Jan Kowalski'</span>, <span class=\"st\">'jan@example.com'</span>)\n<span class=\"kw\">RETURNING</span> id;</code></pre>",
     "answer": "VALUES",
     "explanation": "VALUES dostarcza dane do INSERT. RETURNING id (PostgreSQL) zwraca wygenerowane ID bez dodatkowego SELECT. W MySQL: LAST_INSERT_ID() po INSERT. Klauzula RETURNING przydatna przy seryjnym wstawianiu powiązanych rekordów."
   },
@@ -2155,7 +2155,7 @@
     "category": "Bezpieczeństwo aplikacji",
     "taskType": "fill",
     "question": "Uzupełnij lukę, aby poprawnie skonfigurować CORS w Express.js — zezwalając tylko na żądania z konkretnej domeny:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> cors = <span class=\"fn\">require</span>(<span class=\"st\">\"cors\"</span>);\napp.<span class=\"fn\">use</span>(<span class=\"fn\">cors</span>({\n  <span class=\"gap\">___</span>: <span class=\"st\">\"https://myapp.com\"</span>,\n  methods: [<span class=\"st\">\"GET\"</span>, <span class=\"st\">\"POST\"</span>]\n}));</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"javascript\"><code><span class=\"kw\">const</span> cors = <span class=\"fn\">require</span>(<span class=\"st\">\"cors\"</span>);\napp.<span class=\"fn\">use</span>(<span class=\"fn\">cors</span>({\n  <span class=\"gap\">\u200b</span>: <span class=\"st\">\"https://myapp.com\"</span>,\n  methods: [<span class=\"st\">\"GET\"</span>, <span class=\"st\">\"POST\"</span>]\n}));</code></pre>",
     "answer": "origin",
     "explanation": "CORS (Cross-Origin Resource Sharing) kontroluje jakie domeny mogą wysyłać żądania do API. origin: 'https://myapp.com' zezwala tylko tej domenie. origin: '*' (wildcard) zezwala wszystkim — niebezpieczne dla chronionych API. Nagłówek: Access-Control-Allow-Origin."
   },
@@ -2175,7 +2175,7 @@
     "category": "Testowanie i debugowanie",
     "taskType": "fill",
     "question": "Uzupełnij test jednostkowy w pytest, aby sprawdzić czy funkcja rzuca odpowiedni wyjątek:",
-    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> pytest\n\n<span class=\"kw\">def</span> <span class=\"fn\">divide</span>(a, b):\n    <span class=\"kw\">if</span> b == <span class=\"nm\">0</span>:\n        <span class=\"kw\">raise</span> <span class=\"tp\">ValueError</span>(<span class=\"st\">\"Cannot divide by zero\"</span>)\n    <span class=\"kw\">return</span> a / b\n\n<span class=\"kw\">def</span> <span class=\"fn\">test_divide_by_zero</span>():\n    <span class=\"kw\">with</span> pytest.<span class=\"gap\">___</span>(<span class=\"tp\">ValueError</span>):\n        <span class=\"fn\">divide</span>(<span class=\"nm\">10</span>, <span class=\"nm\">0</span>)</code></pre>",
+    "snippet": "<pre class=\"code-snippet\" data-lang=\"python\"><code><span class=\"kw\">import</span> pytest\n\n<span class=\"kw\">def</span> <span class=\"fn\">divide</span>(a, b):\n    <span class=\"kw\">if</span> b == <span class=\"nm\">0</span>:\n        <span class=\"kw\">raise</span> <span class=\"tp\">ValueError</span>(<span class=\"st\">\"Cannot divide by zero\"</span>)\n    <span class=\"kw\">return</span> a / b\n\n<span class=\"kw\">def</span> <span class=\"fn\">test_divide_by_zero</span>():\n    <span class=\"kw\">with</span> pytest.<span class=\"gap\">\u200b</span>(<span class=\"tp\">ValueError</span>):\n        <span class=\"fn\">divide</span>(<span class=\"nm\">10</span>, <span class=\"nm\">0</span>)</code></pre>",
     "answer": "raises",
     "explanation": "pytest.raises(ExceptionType) jako context manager weryfikuje że blok kodu rzuca oczekiwany wyjątek. Jeśli wyjątek nie zostanie rzucony lub będzie innego typu — test nie przechodzi. Można też sprawdzić treść wyjątku: exc_info.match('Cannot divide')."
   },

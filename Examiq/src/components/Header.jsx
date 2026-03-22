@@ -5,8 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 
 const NAV_LINKS = [
-  { path: '/',      label: 'Home'      },
-  { path: '/exam',  label: 'Dashboard' },
+  { path: '/',      label: 'Strona główna'      },
   { path: '/about', label: 'O nas'     },
 ];
 
@@ -78,7 +77,7 @@ export default function Header() {
           style={navLinkStyle(location.pathname === '/')}
           onMouseEnter={e => { if (location.pathname !== '/') { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
           onMouseLeave={e => { if (location.pathname !== '/') { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
-        >Home</Link>
+        >Strona Główna</Link>
 
         {/* DROPDOWN: Nauka */}
         <div ref={dropdownRef} style={{ position: 'relative' }}>
@@ -151,13 +150,6 @@ export default function Header() {
           )}
         </div>
 
-        {/* Dashboard */}
-        <Link to="/exam"
-          style={navLinkStyle(location.pathname === '/exam')}
-          onMouseEnter={e => { if (location.pathname !== '/exam') { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)'; } }}
-          onMouseLeave={e => { if (location.pathname !== '/exam') { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
-        >Dashboard</Link>
-
         {/* O nas */}
         <Link to="/about"
           style={navLinkStyle(location.pathname === '/about')}
@@ -180,7 +172,7 @@ export default function Header() {
         }}
         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(124,58,237,0.4)'; }}
         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 10px rgba(124,58,237,0.3)'; }}
-        >Mój dashboard →</button>
+        >Panel użytkownika →</button>
       </Link>
 
       {/* HAMBURGER */}
@@ -212,7 +204,7 @@ export default function Header() {
         }}
         className="mobile-menu"
         >
-          {[{ path: '/', label: 'Home' }].map(({ path, label }) => {
+          {[{ path: '/', label: 'Strona główna' }].map(({ path, label }) => {
             const active = location.pathname === path;
             return (
               <Link key={path} to={path} onClick={() => setMenuOpen(false)} style={{
@@ -249,7 +241,7 @@ export default function Header() {
             );
           })}
 
-          {[{ path: '/exam', label: 'Dashboard' }, { path: '/about', label: 'O nas' }].map(({ path, label }) => {
+          {[{ path: '/exam', label: 'Panel użytkownika' }, { path: '/about', label: 'O nas' }].map(({ path, label }) => {
             const active = location.pathname === path;
             return (
               <Link key={path} to={path} onClick={() => setMenuOpen(false)} style={{
@@ -270,7 +262,7 @@ export default function Header() {
               color: '#fff', border: 'none', borderRadius: 12,
               fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
               fontFamily: "'Sora', sans-serif",
-            }}>Mój dashboard →</button>
+            }}>Panel użytkownika →</button>
           </Link>
         </div>
       )}

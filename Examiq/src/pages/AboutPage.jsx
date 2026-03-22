@@ -7,11 +7,13 @@
 
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const AUTHORS = [
-  { name: 'Marcel Turwanicki',  role: 'FullStack / DevOps',      emoji: '💻' },
-  { name: 'Filip Czepiel', role: 'FullStack / DevOps',     emoji: '🧠' },
-  { name: 'Piotr Lipiński', role: 'Design & UX / DevOps / Docs',             emoji: '🎨' },
+  { name: 'Marcel Turwanicki', role: 'FullStack / DevOps',           github: 'DragonFireEx' },
+  { name: 'Filip Czepiel',     role: 'FullStack / DevOps',           github: 'filekk' },
+  { name: 'Piotr Lipiński',    role: 'Design & UX / DevOps / Docs', github: 'PIotrr23' },
+  { name: 'Bartosz Wryszcz',   role: 'FullStack / DevOps',           github: 'BartoszBartoszewski' },
 ];
 
 const HOW_IT_WORKS = [
@@ -41,9 +43,27 @@ const HOW_IT_WORKS = [
   },
 ];
 
-const TECH = ['React 18', 'Vite', 'React Router', 'JavaScript ES2023', 'CSS-in-JS', 'LocalStorage API', 'Cookie API'];
+const TECH = ['React 18', 'Vite', 'React Router', 'JavaScript ES2023', 'CSS-in-JS', 'LocalStorage API', 'Cookie API', 'Monaco Editor', 'Google Gemini'];
+
+// GitHub SVG icon
+function GitHubIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="currentColor"
+
+      
+    >
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    </svg>
+  );
+}
 
 export default function AboutPage() {
+  usePageTitle('O nas');
   return (
     <div style={{
       minHeight: '100vh',
@@ -186,10 +206,10 @@ export default function AboutPage() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '1rem', marginBottom: '3rem',
         }}>
-          {AUTHORS.map(({ name, role, emoji }) => (
+          {AUTHORS.map(({ name, role, github }) => (
             <div key={name} style={{
               background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(14px)',
               borderRadius: 20, padding: '1.75rem',
@@ -197,19 +217,52 @@ export default function AboutPage() {
               boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
               textAlign: 'center',
               transition: 'transform 0.2s, box-shadow 0.2s',
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
             }}
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 36px rgba(124,58,237,0.14)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.05)'; }}
             >
-              <div style={{
-                width: 64, height: 64, borderRadius: '50%',
-                background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.75rem', margin: '0 auto 1rem',
-                boxShadow: '0 4px 16px rgba(124,58,237,0.3)',
-              }}>{emoji}</div>
-              <div style={{ fontWeight: 800, fontSize: '1rem', color: '#4c1d95', marginBottom: '0.3rem' }}>{name}</div>
-              <div style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 600, letterSpacing: '0.04em' }}>{role}</div>
+              {/* Avatar z GitHuba */}
+              <img
+                src={`https://github.com/${github}.png`}
+                alt={name}
+                style={{
+                  width: 72, height: 72, borderRadius: '50%',
+                  objectFit: 'cover',
+                  margin: '0 auto 1rem',
+                  display: 'block',
+                  border: '3px solid rgba(124,58,237,0.25)',
+                  boxShadow: '0 4px 16px rgba(124,58,237,0.2)',
+                }}
+              />
+
+              <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.3rem', marginBottom: '0.9rem' }}>
+                <div style={{ fontWeight: 800, fontSize: '1rem', color: '#4c1d95' }}>{name}</div>
+                <div style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 600, letterSpacing: '0.04em' }}>{role}</div>
+              </div>
+
+              {/* Link do GitHuba */}
+              <a
+                href={`https://github.com/${github}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '0.35rem 0.85rem',
+                  background: 'rgba(124,58,237,0.08)',
+                  color: '#7c3aed',
+                  border: '1px solid rgba(124,58,237,0.2)',
+                  borderRadius: 99,
+                  fontSize: '0.78rem', fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'background 0.15s, color 0.15s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#7c3aed'; e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.color = '#7c3aed'; }}
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
             </div>
           ))}
         </div>
@@ -253,7 +306,7 @@ export default function AboutPage() {
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.background = 'rgba(255,255,255,0.25)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; }}
-              >📊 Dashboard</button>
+              >📊 Panel użytkownika</button>
             </Link>
           </div>
         </div>

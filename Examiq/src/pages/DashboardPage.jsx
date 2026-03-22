@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
 import Header from '../components/Header';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 // ─── shared glass-card style object ───────────────────────────────────────────
 const glassCard = {
@@ -333,6 +334,7 @@ function ResultScreen({ score, total, duration, onBack }) {
 // ─── DashboardPage ────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
+  usePageTitle('Panel użytkownika')
   const { session, history, categoryProgress, stats, setName, saveExamResult, resetAll } = useUserSession();
   const [examPool, setExamPool]         = useState(null);
   const [examCategory, setExamCategory] = useState('all');
