@@ -459,7 +459,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: '0.92rem', color: timerColor, letterSpacing: 1, transition: 'color 0.3s' }}>
             {timerMode === 'none' ? timer.fmt(null) : timer.fmt(timer.remaining)}
           </span>
-          {timerMode === 'none' && <span style={{ fontSize: '0.68rem', color: '#9ca3af', fontWeight: 600 }}>elapsed</span>}
+          {timerMode === 'none' && <span style={{ fontSize: '0.68rem', color: '#9ca3af', fontWeight: 600 }}>minęło</span>}
         </div>
 
         {/* Right: lang selector + actions */}
