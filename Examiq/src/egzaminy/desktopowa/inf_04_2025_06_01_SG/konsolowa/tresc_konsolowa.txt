@@ -1,0 +1,33 @@
+Za pomocą narzędzi do tworzenia aplikacji konsolowych wykonaj 
+program loterii liczbowej polegającej na losowaniu zestawów 
+składających się z sześciu liczb 
+Założenia aplikacji: 
+− Zastosowany obiektowy język programowania zgodny 
+z zainstalowanym na stanowisku egzaminacyjnym: C++ lub C#, 
+lub Java, lub Python 
+− Fragment działania programu przedstawiono na obrazie 1 
+− Program wczytuje z klawiatury ile zestawów należy wylosować 
+− Program generuje podaną liczbę zestawów składających się 
+z sześciu losowanych liczb całkowitych ze zbioru <1, 49>. W 
+jednym zestawie liczby nie mogą się powtarzać. Zestawy są 
+wyświetlone na ekranie 
+− Program zlicza we wszystkich zestawach ile jest wystąpień każdej 
+liczby od 1 do 49, co zostaje wyświetlone na ekranie 
+− W programie należy użyć funkcji do generowania liczb 
+pseudolosowych 
+− Do przechowywania wyników losowań należy użyć 
+dwuwymiarowej tablicy liczb całkowitych składającej się 
+z n wierszy i 6 kolumn (n – liczba wczytana z klawiatury) lub innej 
+dowolnej kolekcji pasującej do problemu 
+− W programie należy zdefiniować przynajmniej dwie funkcje: 
+− Wypełniającą tablicę lub kolekcję danymi losowań 
+− Wyświetlającą wyniki wszystkich losowań na ekranie 
+− W podejściu strukturalnym nie można stosować zmiennych globalnych 
+− Program powinien podejmować zrozumiałą komunikację z użytkownikiem 
+− W programie należy stosować znaczące, angielskie lub polskie nazewnictwo 
+− Program powinien być zapisany czytelnie, z zachowaniem zasad czystego formatowania kodu  
+− Podejmij próbę uruchomienia aplikacji. Informacje dotyczące dokumentacji i zrzutów ekranowych 
+umieszczono w części III arkusza egzaminacyjnego
+Kod aplikacji przygotuj do nagrania na płytę. W folderze konsolowa powinno znaleźć się archiwum całego 
+projektu o nazwie konsola.zip, skopiowany z projektu plik z kodem źródłowym programu oraz plik 
+wykonywalny, jeżeli istnieje.

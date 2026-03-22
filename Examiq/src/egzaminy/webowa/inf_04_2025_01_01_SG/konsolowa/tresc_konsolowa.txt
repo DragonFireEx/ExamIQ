@@ -1,0 +1,20 @@
+Za pomocą narzędzi do tworzenia aplikacji konsolowych zaimplementuj program realizujący różne operacje 
+na tablicach. 
+Założenia aplikacji: ‒ Zastosowany obiektowy język programowania zgodny z zainstalowanym na stanowisku 
+egzaminacyjnym: C++ lub C#, lub Java, lub Python ‒ Tablica oraz operacje na niej wykonywane są implementowane z wykorzystaniem klasy ‒ Pola klasy: ‒ Tablica liczb całkowitych (ma być tradycyjną tablicą, a w Python listą) ‒ Liczba elementów tablicy zapisana jako liczba całkowita. Pole 
+przechowuje faktyczną liczbę elementów. Wszystkie operacje 
+są ograniczone wartością tego pola ‒ Oba pola są dostępne tylko w tej klasie oraz niedostępne dla 
+klas potomnych ‒ Konstruktor klasy: ‒ Przyjmuje jako argument rozmiar tablicy ‒ Ustawia wartość pola liczby elementów tablicy na wartość 
+argumentu ‒ Wypełnia tablicę, będącą polem klasy, pseudolosowymi
+liczbami całkowitymi z zakresu od 1 do 1000‒ Metody klasy: ‒ Wyświetlająca wszystkie elementy tablicy w postaci 
+„<index_tablicy>: <wartość>”. Nie zwraca wartości ‒ Wyszukująca pierwsze wystąpienie wartości, przekazanej 
+jako argument. Metoda zwraca indeks szukanego elementu 
+lub liczbę -1, gdy elementu nie znaleziono ‒ Wyświetlająca wszystkie wartości nieparzyste z tablicy 
+i zwracająca ich liczbę ‒ Licząca średnią arytmetyczną wartości w tablicy i zwracająca 
+tą wartość ‒ Wszystkie metody są dostępne poza klasą ‒ Program główny: (fragment działania jest widoczny na obrazie 1) ‒ Tworzy obiekt klasy z rozmiarem tablicy większym od 20 
+‒ Sprawdza działanie wszystkich metod: ‒ Wyświetlającej wszystkie elementy tablicy ‒ Wyszukującej: jeżeli wartość została wyszukana, wyświetlany jest w programie głównym 
+komunikat z wartością indeksu wyszukanej. W przeciwnym wypadku nic nie jest wyświetlane 
+(taka sytuacja ma miejsce na obrazie 1) ‒ Wyświetlającej liczby nieparzyste oraz wyświetlana jest ich ilość z odpowiednim komentarzem ‒ Liczącej średnią, po czym w programie głównym wyświetlana jest wartość średniej ‒ Komunikacja z użytkownikiem musi być zrozumiała. ‒ Program powinien być zapisany czytelnie, z zachowaniem zasad czystego formatowania kodu ‒ Dla obiektów, pól, metod i zmiennych należy stosować znaczące nazewnictwo angielskie lub polskie. 
+Dopuszcza się dla klasy i pola tablicowego nazewnictwo ogólne (np. tab, tablica, table) ‒ Do kodu należy dołączyć dokumentację, która została opisana w części III zadania egzaminacyjnego. 
+Kod aplikacji przygotuj do nagrania na płytę. W folderze konsolowa powinno znaleźć się archiwum całego 
+projektu o nazwie konsola.zip, plik z kodem źródłowym programu oraz plik wykonywalny, jeżeli istnieje.

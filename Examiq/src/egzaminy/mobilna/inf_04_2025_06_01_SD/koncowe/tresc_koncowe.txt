@@ -1,0 +1,31 @@
+Wykonaj dokumentację do aplikacji utworzonych na egzaminie. W kodzie źródłowym aplikacji konsolowej za 
+pomocą komentarza utwórz nagłówek metody klasy bazowej, według wzoru z listingu 1. Komentarz powinien 
+znaleźć się nad lub pod nazwą metody. W miejscu nawiasów <> należy podać odpowiednie opisy.  
+UWAGA: Dokumentację należy umieścić w komentarzu (wieloliniowym lub kilku jednoliniowych). Znajdujący 
+się w listingu 1 wzór dokumentacji jest bez znaków początku i końca komentarza, gdyż te są różne dla 
+różnych języków programowania.  
+Listing 1. Wzór dokumentacji metody  (liczba gwiazdek dowolna) 
+************************************************ 
+nazwa:     
+<tu wstaw nazwę metody> 
+opis:    
+parametry:    
+<co wykonuje metoda?> 
+<nazwa i opis parametru1, lub „brak”> 
+<nazwa i opis parametru2> 
+...  
+zwracany typ i opis: <nazwa typu i opis co jest zwracane lub „brak”> 
+autor:      
+<numer zdającego> 
+************************************************ 
+Wykonaj zrzuty ekranu dokumentujące uruchomienie aplikacji utworzonych podczas egzaminu. Zrzuty 
+powinny obejmować cały obszar ekranu monitora z widocznym paskiem zadań. Jeżeli aplikacja uruchamia 
+się, na zrzucie należy umieścić okno z wynikiem działania programu oraz otwarte środowisko 
+programistyczne z projektem lub okno terminala z kompilacją projektu. Jeżeli aplikacja nie uruchamia się 
+z powodu błędów kompilacji, należy na zrzucie umieścić okno ze spisem błędów i widocznym otwartym 
+środowiskiem programistycznym. Wykonać należy tyle zrzutów, ile interakcji podejmuje aplikacja. 
+Wymagane zrzuty ekranu: ‒ Aplikacja konsolowa – dowolna liczba zrzutów nazwanych konsola1, konsola2, ...  ‒ Aplikacja mobilna – dowolna liczba zrzutów nazwanych mobile1, mobile2, ... (np. stan początkowy, po 
+wciśnięciu przycisku Zatwierdź”, po wciśnięciu przycisku „Włącz”, następnie „Wyłącz”) 
+W edytorze tekstu pakietu biurowego utwórz plik z dokumentacją i nazwij go egzamin. Dokument powinien 
+zawierać informacje o wykorzystanych w czasie egzaminu narzędziach: ‒ Nazwę systemu operacyjnego ‒ Nazwy środowisk programistycznych ‒ Nazwę emulatora dla aplikacji mobilnej ‒ Nazwy języków programowania 
+Zrzuty ekranu i dokument umieść w podfolderze dokumentacja.

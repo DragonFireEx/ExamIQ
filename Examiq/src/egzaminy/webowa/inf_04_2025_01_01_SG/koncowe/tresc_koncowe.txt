@@ -1,0 +1,33 @@
+Wykonaj dokumentację do aplikacji utworzonych na egzaminie. W kodzie źródłowym aplikacji konsolowej za 
+pomocą komentarza utwórz nagłówek dowolnej metody, według wzoru z listingu 1. Komentarz powinien 
+znaleźć się nad lub pod nazwą metody. W miejscu nawiasów <> należy podać odpowiednie opisy. W sekcji 
+parametry należy umieścić opis wszystkich argumentów metody lub zapisać „brak” w przypadku metody 
+bezparametrowej. 
+UWAGA: Dokumentację należy umieścić w komentarzu (wieloliniowym lub kilku jednoliniowych). Znajdujący 
+się w listingu 1 wzór dokumentacji jest bez znaków początku i końca komentarza, gdyż te są różne dla 
+różnych języków programowania  
+Listing 1. Wzór dokumentacji metody (liczba gwiazdek dowolna) 
+********************************************** 
+nazwa metody: 
+<nazwa> 
+opis metody:  
+parametry:
+<krótki opis, co robi metoda> 
+<nazwa i opis parametru1, lub „brak”> 
+<nazwa i opis parametru2> 
+... 
+zwracany typ i opis: <nazwa typu i opis co jest zwracane lub „brak”> 
+autor:                
+<numer zdającego> 
+*********************************************** 
+Wykonaj zrzuty ekranu dokumentujące uruchomienie aplikacji utworzonych podczas egzaminu. Zrzuty 
+powinny obejmować cały obszar ekranu monitora z widocznym paskiem zadań. Jeżeli aplikacja uruchamia 
+się, na zrzucie należy umieścić okno z wynikiem działania programu oraz otwarte środowisko 
+programistyczne z projektem lub okno terminala z kompilacją projektu. Jeżeli aplikacja nie uruchamia się 
+z powodu błędów kompilacji, należy na zrzucie umieścić okno ze spisem błędów i widocznym otwartym 
+środowiskiem programistycznym. Wykonać należy tyle zrzutów, ile interakcji podejmuje aplikacja. 
+Wymagane zrzuty ekranu: ‒ Aplikacja konsolowa – dowolna liczba zrzutów nazwanych konsola1, konsola2, ...  ‒ Aplikacja webowa – dowolna liczba zrzutów nazwanych web1, web2, ... (stan początkowy, różne 
+kombinacje dla pól switch, działanie przycisku „Pobierz”) 
+W edytorze tekstu pakietu biurowego utwórz plik z dokumentacją i nazwij go egzamin. Dokument powinien 
+zawierać  zapisane informacje o wykorzystanych w czasie egzaminu narzędziach: ‒ Nazwę systemu operacyjnego ‒ Nazwy środowisk programistycznych ‒ Nazwy języków programowania 
+Zrzuty ekranu i dokument umieść w podfolderze dokumentacja.
