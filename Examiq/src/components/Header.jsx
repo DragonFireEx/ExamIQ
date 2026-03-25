@@ -1,17 +1,18 @@
 // components/Header.jsx
-// Nagłówek z menu rozwijanym "Nauka" (Teoria / Praktyka)
+// Nagłówek z menu rozwijanym "Nauka" (Teoria / Praktyka / Egzamin praktyczny)
 
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 
 const NAV_LINKS = [
-  { path: '/',      label: 'Strona główna'      },
-  { path: '/about', label: 'O nas'     },
+  { path: '/',      label: 'Strona główna' },
+  { path: '/about', label: 'O nas' },
 ];
 
 const LEARN_LINKS = [
-  { path: '/learn/teoria',   label: 'Teoria' },
-  { path: '/learn/praktyka', label: 'Praktyka' },
+  { path: '/learn/teoria',             label: 'Teoria',              icon: '📖' },
+  { path: '/learn/praktyka',           label: 'Praktyka',            icon: '🔨' },
+  { path: '/learn/egzamin-praktyczny', label: 'Egzamin praktyczny',  icon: '📋' },
 ];
 
 export default function Header() {
@@ -115,11 +116,12 @@ export default function Header() {
               borderRadius: 14,
               boxShadow: '0 8px 32px rgba(124,58,237,0.15)',
               padding: '0.5rem',
-              minWidth: 160,
+              minWidth: 210,
               animation: 'dropIn 0.18s ease',
             }}>
               {LEARN_LINKS.map(({ path, label, icon }) => {
                 const active = location.pathname === path;
+                const isExam = path === '/learn/egzamin-praktyczny';
                 return (
                   <Link
                     key={path}
@@ -137,12 +139,22 @@ export default function Header() {
                       color: active ? '#7c3aed' : '#4b5563',
                       background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
                       transition: 'all 0.12s',
+                      borderTop: isExam ? '1px solid rgba(124,58,237,0.1)' : 'none',
+                      marginTop: isExam ? '0.25rem' : 0,
+                      paddingTop: isExam ? '0.75rem' : '0.6rem',
                     }}
                     onMouseEnter={e => { if (!active) { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.07)'; } }}
                     onMouseLeave={e => { if (!active) { e.currentTarget.style.color = '#4b5563'; e.currentTarget.style.background = 'transparent'; } }}
                   >
                     <span style={{ fontSize: '1rem' }}>{icon}</span>
-                    {label}
+                    <div>
+                      <div>{label}</div>
+                      {isExam && (
+                        <div style={{ fontSize: '0.65rem', color: '#a78bfa', fontWeight: 600, marginTop: 1 }}>
+                          3 zadania · ocena AI
+                        </div>
+                      )}
+                    </div>
                   </Link>
                 );
               })}
