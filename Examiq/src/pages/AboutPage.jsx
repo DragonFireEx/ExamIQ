@@ -40,7 +40,7 @@ const HOW_IT_WORKS = [
   },
 ];
 
-const TECH = ['React 18', 'Vite', 'React Router', 'JavaScript ES2023', 'CSS-in-JS', 'LocalStorage API', 'Cookie API', 'Monaco Editor', 'Google Gemini'];
+const TECH = ['React 18', 'Vite', 'React Router', 'JavaScript ES2023', 'CSS-in-JS', 'LocalStorage API', 'Cookie API', 'Monaco Editor', 'Google Gemini', "Iconify"];
 
 export default function AboutPage() {
   usePageTitle('O nas');
