@@ -3,6 +3,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { Icon } from '@iconify/react';
 
 const NAV_LINKS = [
   { path: '/',      label: 'Strona główna' },
@@ -10,9 +11,9 @@ const NAV_LINKS = [
 ];
 
 const LEARN_LINKS = [
-  { path: '/learn/teoria',             label: 'Teoria',              icon: '📖' },
-  { path: '/learn/praktyka',           label: 'Praktyka',            icon: '🔨' },
-  { path: '/learn/egzamin-praktyczny', label: 'Egzamin praktyczny',  icon: '📋' },
+  { path: '/learn/teoria',             label: 'Teoria',              icon: 'lucide:book-open' },
+  { path: '/learn/praktyka',           label: 'Praktyka',            icon: 'lucide:hammer' },
+  { path: '/learn/egzamin-praktyczny', label: 'Egzamin praktyczny',  icon: 'lucide:clipboard-list' },
 ];
 
 export default function Header() {
@@ -94,13 +95,15 @@ export default function Header() {
             onMouseLeave={e => { if (!isLearnActive && !dropdownOpen) { e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.background = 'transparent'; } }}
           >
             Nauka
-            <span style={{
-              fontSize: '0.6rem',
-              transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 0.2s',
-              marginLeft: '0.1rem',
-              opacity: 0.7,
-            }}>▼</span>
+            <Icon
+              icon="lucide:chevron-down"
+              style={{
+                fontSize: '0.85rem',
+                transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s',
+                opacity: 0.7,
+              }}
+            />
           </button>
 
           {dropdownOpen && (
@@ -146,7 +149,7 @@ export default function Header() {
                     onMouseEnter={e => { if (!active) { e.currentTarget.style.color = '#7c3aed'; e.currentTarget.style.background = 'rgba(124,58,237,0.07)'; } }}
                     onMouseLeave={e => { if (!active) { e.currentTarget.style.color = '#4b5563'; e.currentTarget.style.background = 'transparent'; } }}
                   >
-                    <span style={{ fontSize: '1rem' }}>{icon}</span>
+                    <Icon icon={icon} style={{ fontSize: '1rem', flexShrink: 0 }} />
                     <div>
                       <div>{label}</div>
                       {isExam && (
@@ -181,10 +184,14 @@ export default function Header() {
           boxShadow: '0 2px 10px rgba(124,58,237,0.3)',
           transition: 'transform 0.15s, box-shadow 0.15s',
           whiteSpace: 'nowrap',
+          display: 'inline-flex', alignItems: 'center', gap: 6,
         }}
         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(124,58,237,0.4)'; }}
         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 10px rgba(124,58,237,0.3)'; }}
-        >Panel użytkownika →</button>
+        >
+          <Icon icon="lucide:layout-dashboard" />
+          Panel użytkownika
+        </button>
       </Link>
 
       {/* HAMBURGER */}
@@ -193,13 +200,13 @@ export default function Header() {
         style={{
           display: 'none',
           background: 'none', border: 'none',
-          fontSize: '1.5rem', cursor: 'pointer',
+          cursor: 'pointer',
           color: '#7c3aed', padding: '0.25rem',
         }}
         className="hamburger-btn"
         aria-label="Menu"
       >
-        {menuOpen ? '✕' : '☰'}
+        <Icon icon={menuOpen ? 'lucide:x' : 'lucide:menu'} style={{ fontSize: '1.5rem' }} />
       </button>
 
       {/* MOBILE MENU */}
@@ -248,7 +255,8 @@ export default function Header() {
                 background: active ? 'rgba(124,58,237,0.1)' : 'transparent',
                 display: 'flex', alignItems: 'center', gap: '0.5rem',
               }}>
-                <span>{icon}</span>{label}
+                <Icon icon={icon} style={{ fontSize: '1rem', flexShrink: 0 }} />
+                {label}
               </Link>
             );
           })}
@@ -274,7 +282,11 @@ export default function Header() {
               color: '#fff', border: 'none', borderRadius: 12,
               fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
               fontFamily: "'Sora', sans-serif",
-            }}>Panel użytkownika →</button>
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            }}>
+              Panel użytkownika
+              <Icon icon="lucide:arrow-right" />
+            </button>
           </Link>
         </div>
       )}

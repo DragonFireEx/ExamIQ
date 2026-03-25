@@ -7,42 +7,43 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { Icon } from '@iconify/react';
 
 // ─── dane ─────────────────────────────────────────────────────────────────────
 
 const FEATURES = [
   {
-    icon: '📚',
+    icon: 'lucide:book-open',
     title: 'Tryb nauki',
     desc: 'Losowane pytania z natychmiastową informacją zwrotną i wyjaśnieniami. Uczysz się na błędach.',
     color: '#7c3aed',
   },
   {
-    icon: '🎯',
+    icon: 'lucide:target',
     title: 'Symulator egzaminu',
     desc: 'Próbny egzamin INF04 z progiem 75%. Sprawdź czy jesteś gotowy zanim przyjdzie ten prawdziwy.',
     color: '#0ea5e9',
   },
   {
-    icon: '📊',
+    icon: 'lucide:bar-chart-2',
     title: 'Dashboard postępów',
     desc: 'Historia sesji, postęp per kategoria, seria dni nauki i statystyki — wszystko w jednym miejscu.',
     color: '#10b981',
   },
   {
-    icon: '🗂️',
+    icon: 'lucide:layout-grid',
     title: 'Kategorie tematyczne',
     desc: 'Pytania podzielone na kategorie — ćwicz tylko to, z czego czujesz się najsłabiej.',
     color: '#f59e0b',
   },
   {
-    icon: '🔥',
+    icon: 'lucide:flame',
     title: 'Streak i motywacja',
     desc: 'Codzienna seria nauki, żebyś nie zapominał. Małe kroki prowadzą do dużych wyników.',
     color: '#ef4444',
   },
   {
-    icon: '💾',
+    icon: 'lucide:hard-drive',
     title: 'Bez rejestracji',
     desc: 'Wszystko zapisywane lokalnie w przeglądarce. Zero konta, zero hasła — po prostu uczysz się.',
     color: '#8b5cf6',
@@ -53,7 +54,7 @@ const STATS = [
   { value: '200+', label: 'pytań w bazie' },
   { value: '9',   label: 'kategorii tematycznych' },
   { value: '75%', label: 'próg zaliczenia' },
-  { value: '∞',   label: 'prób egzaminacyjnych' },
+  { value: <Icon icon="lucide:infinity" style={{ verticalAlign: 'middle', marginRight: 4 }} />,   label: 'prób egzaminacyjnych' },
 ];
 
 const STEPS = [
@@ -112,8 +113,9 @@ function FeatureCard({ icon, title, desc, color }) {
         background: `${color}18`,
         border: `1.5px solid ${color}33`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '1.5rem',
-      }}>{icon}</div>
+      }}>
+        <Icon icon={icon} style={{ fontSize: '1.5rem', color }} />
+      </div>
       <div style={{ fontWeight: 700, fontSize: '1rem', color: '#1e1b4b', fontFamily: "'Sora', sans-serif" }}>{title}</div>
       <div style={{ fontSize: '0.875rem', color: '#6b7280', lineHeight: 1.65 }}>{desc}</div>
     </div>
@@ -209,10 +211,14 @@ export default function HomePage() {
                 boxShadow: '0 6px 20px rgba(124,58,237,0.4)',
                 transition: 'transform 0.15s, box-shadow 0.15s',
                 letterSpacing: '0.01em',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(124,58,237,0.5)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(124,58,237,0.4)'; }}
-              >Zacznij naukę</button>
+              >
+                <Icon icon="lucide:book-open" />
+                Zacznij naukę
+              </button>
             </Link>
             <Link to="/exam">
               <button style={{
@@ -223,10 +229,14 @@ export default function HomePage() {
                 cursor: 'pointer', fontFamily: "'Sora', sans-serif",
                 backdropFilter: 'blur(8px)',
                 transition: 'all 0.15s',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.borderColor = '#7c3aed'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.8)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.3)'; }}
-              >Panel użytkownika →</button>
+              >
+                <Icon icon="lucide:layout-dashboard" />
+                Panel użytkownika
+              </button>
             </Link>
           </div>
         </div>
@@ -247,7 +257,7 @@ export default function HomePage() {
 
           {/* floating badge top-right */}
           <div style={{
-            position: 'absolute', top: 10, right: 0,
+            position: 'absolute', top: 25, right: 0,
             background: 'rgba(255,255,255,0.92)',
             backdropFilter: 'blur(12px)',
             borderRadius: 14, padding: '0.6rem 1rem',
@@ -257,7 +267,10 @@ export default function HomePage() {
             animation: 'floatA 3s ease-in-out infinite',
           }}>
             <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600 }}>Ostatni wynik</div>
-            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#7c3aed' }}>92% ✅</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#7c3aed', display: 'flex', alignItems: 'center', gap: 6 }}>
+              92%
+              <Icon icon="lucide:check-check" />
+            </div>
           </div>
 
           {/* floating badge bottom-left */}
@@ -272,7 +285,10 @@ export default function HomePage() {
             animation: 'floatB 3.5s ease-in-out infinite',
           }}>
             <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600 }}>Seria nauki</div>
-            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ef4444' }}>🔥 7 dni</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ef4444', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icon icon="lucide:flame" />
+              7 dni
+            </div>
           </div>
 
           <style>{`
@@ -390,11 +406,16 @@ export default function HomePage() {
                   fontWeight: 700, fontSize: '0.75rem',
                 }}>{k}</span>
                 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: correct ? '#065f46' : '#4c1d95' }}>{v}</span>
-                {correct && <span style={{ marginLeft: 'auto', fontSize: '0.85rem' }}>✅</span>}
+                {correct && (
+                  <span style={{ marginLeft: 'auto', color: '#059669', display: 'flex', alignItems: 'center' }}>
+                    <Icon icon="lucide:check-circle-2" style={{ fontSize: '1rem' }} />
+                  </span>
+                )}
               </div>
             ))}
-            <div style={{ marginTop: '1rem', padding: '0.8rem', background: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', borderRadius: 10, border: '1px solid #86efac', fontSize: '0.8rem', color: '#166534', lineHeight: 1.5 }}>
-              💡 SELECT służy do odczytywania danych. INSERT dodaje, UPDATE modyfikuje, DELETE usuwa rekordy.
+            <div style={{ marginTop: '1rem', padding: '0.8rem', background: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', borderRadius: 10, border: '1px solid #86efac', fontSize: '0.8rem', color: '#166534', lineHeight: 1.5, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+              <Icon icon="lucide:lightbulb" style={{ fontSize: '1rem', flexShrink: 0, marginTop: 1 }} />
+              SELECT służy do odczytywania danych. INSERT dodaje, UPDATE modyfikuje, DELETE usuwa rekordy.
             </div>
           </div>
         </div>
@@ -420,7 +441,9 @@ export default function HomePage() {
           <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
 
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🎓</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem' }}>
+              <Icon icon="lucide:graduation-cap" style={{ fontSize: '2.5rem', color: '#fff' }} />
+            </div>
             <h2 style={{
               fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
               fontWeight: 800, color: '#fff',
@@ -440,10 +463,14 @@ export default function HomePage() {
                   fontFamily: "'Sora', sans-serif",
                   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                   transition: 'transform 0.15s',
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
                 }}
                 onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-                >📚 Zacznij naukę</button>
+                >
+                  <Icon icon="lucide:book-open" />
+                  Zacznij naukę
+                </button>
               </Link>
               <Link to="/exam">
                 <button style={{
@@ -455,10 +482,14 @@ export default function HomePage() {
                   fontWeight: 700, fontSize: '1rem', cursor: 'pointer',
                   fontFamily: "'Sora', sans-serif",
                   transition: 'all 0.15s',
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.25)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                >📊 Panel użytkownika</button>
+                >
+                  <Icon icon="lucide:bar-chart-2" />
+                  Panel użytkownika
+                </button>
               </Link>
               <Link to="/about">
                 <button style={{
@@ -470,10 +501,14 @@ export default function HomePage() {
                   fontWeight: 600, fontSize: '1rem', cursor: 'pointer',
                   fontFamily: "'Sora', sans-serif",
                   transition: 'all 0.15s',
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.18)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
-                >ℹ️ O nas</button>
+                >
+                  <Icon icon="lucide:info" />
+                  O nas
+                </button>
               </Link>
             </div>
           </div>

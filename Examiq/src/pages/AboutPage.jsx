@@ -1,13 +1,10 @@
 // pages/AboutPage.jsx
-// Strona "O nas" - opis projektu, autorzy, jak działa aplikacja
-//
-// W App.jsx zastąp inline AboutPage tym importem:
-//   import AboutPage from './pages/AboutPage';
-//   <Route path="/about" element={<AboutPage />} />
 
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { Icon } from '@iconify/react';
+import Footer from '../components/Footer';
 
 const AUTHORS = [
   { name: 'Marcel Turwanicki', role: 'FullStack / DevOps',           github: 'DragonFireEx' },
@@ -19,48 +16,31 @@ const AUTHORS = [
 const HOW_IT_WORKS = [
   {
     step: '01',
-    title: 'Tryb nauki',
-    desc: 'Wybierz liczbę pytań i tryb — teoria lub praktyka. Pytania są losowane z bazy INF04 i wyświetlane jedno po drugim z natychmiastową informacją zwrotną.',
-    emoji: '📚',
+    title: 'Tryb teorii',
+    desc: 'Wybierz liczbę pytań i tryb — teoria lub praktyka. Pytania są losowane z bazy INF04 oraz naszej autorskiej bazy pytań, po czym natychmiastowo weryfikowane.',
+    icon: 'lucide:book-open',
   },
   {
     step: '02',
-    title: 'Tryb egzaminu',
-    desc: 'Symuluj prawdziwy egzamin: wybierz kategorię i liczbę pytań. Po zakończeniu widzisz wynik, czas i czy przekroczyłeś próg 75% wymagany do zaliczenia.',
-    emoji: '📝',
+    title: 'Tryb algorytmów',
+    desc: 'Wybierz zadanie lub wylosuj po ustalonych kryteriach zadanie z wykonania algorytmu, użyj jakiego języka chcesz - droga wolna.',
+    icon: 'lucide:file-text',
   },
   {
     step: '03',
     title: 'Dashboard & postępy',
     desc: 'Twoje wyniki zapisywane są lokalnie w przeglądarce. Dashboard pokazuje historię sesji, postęp per kategoria, serię dni nauki i statystyki ogólne.',
-    emoji: '📊',
+    icon: 'lucide:bar-chart-2',
   },
   {
     step: '04',
     title: 'Technologia',
-    desc: 'Aplikacja zbudowana w React + Vite, bez backendu. Sesja użytkownika przechowywana jest w ciasteczkach (nick, streak), a historia egzaminów w localStorage.',
-    emoji: '⚙️',
+    desc: 'Aplikacja zbudowana w React + Vite, bez backendu. Sesja użytkownika przechowywana jest w ciasteczkach (nick, streak), a historia egzaminów w localStorage. Do weryfikacji odpowiedzi utylizujemy Gemini.',
+    icon: 'lucide:cpu',
   },
 ];
 
 const TECH = ['React 18', 'Vite', 'React Router', 'JavaScript ES2023', 'CSS-in-JS', 'LocalStorage API', 'Cookie API', 'Monaco Editor', 'Google Gemini'];
-
-// GitHub SVG icon
-function GitHubIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      fill="currentColor"
-
-      
-    >
-      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-    </svg>
-  );
-}
 
 export default function AboutPage() {
   usePageTitle('O nas');
@@ -86,7 +66,7 @@ export default function AboutPage() {
             marginBottom: '1.25rem',
             border: '1px solid rgba(124,58,237,0.2)',
           }}>
-            Projekt na zaliczenie · 2025
+            O nas
           </div>
           <h1 style={{
             fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
@@ -118,7 +98,7 @@ export default function AboutPage() {
           marginBottom: '2.5rem',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
-            <span style={{ fontSize: '1.5rem' }}>🎯</span>
+            <Icon icon="lucide:target" style={{ fontSize: '1.5rem', color: '#7c3aed' }} />
             <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#4c1d95' }}>Cel projektu</h2>
           </div>
           <p style={{ margin: 0, color: '#4b5563', lineHeight: 1.8, fontSize: '0.975rem' }}>
@@ -141,7 +121,7 @@ export default function AboutPage() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
           gap: '1rem', marginBottom: '3rem',
         }}>
-          {HOW_IT_WORKS.map(({ step, title, desc, emoji }) => (
+          {HOW_IT_WORKS.map(({ step, title, desc, icon }) => (
             <div key={step} style={{
               background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(14px)',
               borderRadius: 20, padding: '1.75rem',
@@ -158,9 +138,10 @@ export default function AboutPage() {
                 width: 52, height: 52, borderRadius: 14,
                 background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.4rem',
                 boxShadow: '0 4px 12px rgba(124,58,237,0.3)',
-              }}>{emoji}</div>
+              }}>
+                <Icon icon={icon} style={{ fontSize: '1.4rem', color: '#fff' }} />
+              </div>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '0.4rem' }}>
                   <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#a78bfa', letterSpacing: '0.1em' }}>{step}</span>
@@ -181,7 +162,7 @@ export default function AboutPage() {
           marginBottom: '2.5rem',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem' }}>
-            <span style={{ fontSize: '1.4rem' }}>🛠️</span>
+            <Icon icon="lucide:wrench" style={{ fontSize: '1.4rem', color: '#7c3aed' }} />
             <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#4c1d95' }}>Stack technologiczny</h2>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -222,7 +203,6 @@ export default function AboutPage() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 36px rgba(124,58,237,0.14)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.05)'; }}
             >
-              {/* Avatar z GitHuba */}
               <img
                 src={`https://github.com/${github}.png`}
                 alt={name}
@@ -241,7 +221,6 @@ export default function AboutPage() {
                 <div style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 600, letterSpacing: '0.04em' }}>{role}</div>
               </div>
 
-              {/* Link do GitHuba */}
               <a
                 href={`https://github.com/${github}`}
                 target="_blank"
@@ -260,7 +239,7 @@ export default function AboutPage() {
                 onMouseEnter={e => { e.currentTarget.style.background = '#7c3aed'; e.currentTarget.style.color = '#fff'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.color = '#7c3aed'; }}
               >
-                <GitHubIcon />
+                <Icon icon="lucide:github" style={{ fontSize: '1rem' }} />
                 GitHub
               </a>
             </div>
@@ -290,10 +269,14 @@ export default function AboutPage() {
                 fontFamily: "'Sora',sans-serif",
                 boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
                 transition: 'transform 0.15s',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
               }}
               onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
               onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-              >📚 Tryb nauki</button>
+              >
+                <Icon icon="lucide:book-open" />
+                Tryb nauki
+              </button>
             </Link>
             <Link to="/exam">
               <button style={{
@@ -303,15 +286,20 @@ export default function AboutPage() {
                 fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer',
                 fontFamily: "'Sora',sans-serif",
                 transition: 'transform 0.15s, background 0.15s',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.background = 'rgba(255,255,255,0.25)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; }}
-              >📊 Panel użytkownika</button>
+              >
+                <Icon icon="lucide:bar-chart-2" />
+                Panel użytkownika
+              </button>
             </Link>
           </div>
         </div>
 
       </main>
+      <Footer></Footer>
     </div>
   );
 }

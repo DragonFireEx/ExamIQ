@@ -3,10 +3,12 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 import Header from '../components/Header';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import practiceData from '../data/practice.json';
 import { usePageTitle } from '../hooks/usePageTitle';
+import Footer from '../components/Footer';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 const LANG_OPTIONS = [
@@ -55,8 +57,9 @@ function SetupScreen({ onStart }) {
             background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)',
             borderRadius: 99, padding: '0.4rem 1.1rem', marginBottom: '1.2rem',
           }}>
+            <Icon icon="lucide:hammer" style={{ fontSize: '0.85rem', color: '#7c3aed' }} />
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              🔨 Tryb praktyki
+              Praktyka
             </span>
           </div>
           <h1 style={{ fontSize: 'clamp(2rem,5vw,2.6rem)', fontWeight: 900, color: '#3b0764', margin: 0, letterSpacing: '-1px', lineHeight: 1.1 }}>
@@ -82,8 +85,8 @@ function SetupScreen({ onStart }) {
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               {[
-                { val: 'random', icon: '🎲', label: 'Losowe zadanie' },
-                { val: 'pick',   icon: '📋', label: 'Wybierz z listy' },
+                { val: 'random', icon: 'lucide:shuffle',    label: 'Losowe zadanie' },
+                { val: 'pick',   icon: 'lucide:list',       label: 'Wybierz z listy' },
               ].map(opt => (
                 <button key={opt.val} onClick={() => setMode(opt.val)} style={{
                   padding: '0.9rem', borderRadius: 14, textAlign: 'center',
@@ -91,8 +94,10 @@ function SetupScreen({ onStart }) {
                   background: mode === opt.val ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.6)',
                   cursor: 'pointer', fontFamily: "'Sora', sans-serif", transition: 'all 0.15s',
                 }}>
-                  <div style={{ fontSize: '1.4rem' }}>{opt.icon}</div>
-                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: mode === opt.val ? '#7c3aed' : '#6b7280', marginTop: 4 }}>{opt.label}</div>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
+                    <Icon icon={opt.icon} style={{ fontSize: '1.4rem', color: mode === opt.val ? '#7c3aed' : '#9ca3af' }} />
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: mode === opt.val ? '#7c3aed' : '#6b7280' }}>{opt.label}</div>
                 </button>
               ))}
             </div>
@@ -148,7 +153,9 @@ function SetupScreen({ onStart }) {
                         <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#1f2937', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{q.title}</div>
                         <div style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: 2 }}>{q.category}</div>
                       </div>
-                      {isSelected && <span style={{ color: '#7c3aed', fontSize: '1.1rem', flexShrink: 0 }}>✓</span>}
+                      {isSelected && (
+                        <Icon icon="lucide:check" style={{ color: '#7c3aed', fontSize: '1.1rem', flexShrink: 0 }} />
+                      )}
                     </button>
                   );
                 })}
@@ -213,14 +220,18 @@ function SetupScreen({ onStart }) {
               fontFamily: "'Sora', sans-serif",
               boxShadow: canStart ? '0 4px 20px rgba(124,58,237,0.35)' : 'none',
               transition: 'all 0.2s',
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             }}
             onMouseEnter={e => { if (canStart) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(124,58,237,0.45)'; } }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = canStart ? '0 4px 20px rgba(124,58,237,0.35)' : 'none'; }}
           >
-            {canStart ? 'Rozpocznij zadanie →' : 'Wybierz zadanie z listy'}
+            {canStart ? (
+              <>Rozpocznij zadanie <Icon icon="lucide:arrow-right" style={{ fontSize: '1rem' }} /></>
+            ) : 'Wybierz zadanie z listy'}
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -295,7 +306,7 @@ function EditorScreen({ question, lang: initialLang, timerMode, onFinish, onAbor
       console.error('Monaco not loaded');
       return;
     }
-    if (monacoRef.current) return; // already initialized
+    if (monacoRef.current) return;
 
     const monacoLang = LANG_OPTIONS.find(l => l.id === lang)?.monaco || 'python';
     monacoRef.current = window.monaco.editor.create(containerRef.current, {
@@ -404,14 +415,14 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
     setSubmitting(false);
   }
 
-  const timerColor = timer.danger ? '#dc2626' : timer.warning ? '#d97706' : '#7c3aed';
-  const timerBg    = timer.danger ? 'rgba(220,38,38,0.08)' : timer.warning ? 'rgba(217,119,6,0.08)' : 'rgba(124,58,237,0.07)';
+  const timerColor  = timer.danger ? '#dc2626' : timer.warning ? '#d97706' : '#7c3aed';
+  const timerBg     = timer.danger ? 'rgba(220,38,38,0.08)' : timer.warning ? 'rgba(217,119,6,0.08)' : 'rgba(124,58,237,0.07)';
   const timerBorder = timer.danger ? 'rgba(220,38,38,0.25)' : timer.warning ? 'rgba(217,119,6,0.25)' : 'rgba(124,58,237,0.2)';
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Sora', sans-serif", background: '#f5f3ff', overflow: 'hidden' }}>
 
-      {/* ── TOP BAR — app colors ── */}
+      {/* ── TOP BAR ── */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 1.25rem', height: 56, flexShrink: 0,
@@ -456,6 +467,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               }} />
             </div>
           )}
+          <Icon icon="lucide:timer" style={{ fontSize: '0.9rem', color: timerColor, transition: 'color 0.3s' }} />
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: '0.92rem', color: timerColor, letterSpacing: 1, transition: 'color 0.3s' }}>
             {timerMode === 'none' ? timer.fmt(null) : timer.fmt(timer.remaining)}
           </span>
@@ -483,11 +495,14 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               background: 'transparent', border: '1.5px solid rgba(124,58,237,0.18)',
               color: '#6b7280', borderRadius: 9, padding: '0.32rem 0.8rem',
               fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', fontFamily: "'Sora', sans-serif",
-              transition: 'all 0.15s',
+              transition: 'all 0.15s', display: 'inline-flex', alignItems: 'center', gap: 5,
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)'; e.currentTarget.style.color = '#7c3aed'; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.18)'; e.currentTarget.style.color = '#6b7280'; }}
-          >← Wyjdź</button>
+          >
+            <Icon icon="lucide:arrow-left" style={{ fontSize: '0.85rem' }} />
+            Wyjdź
+          </button>
 
           <button
             onClick={handleSubmit}
@@ -500,11 +515,15 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               fontFamily: "'Sora', sans-serif",
               boxShadow: submitting ? 'none' : '0 2px 14px rgba(124,58,237,0.4)',
               transition: 'all 0.15s',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
             }}
             onMouseEnter={e => { if (!submitting) { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(124,58,237,0.5)'; } }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = submitting ? 'none' : '0 2px 14px rgba(124,58,237,0.4)'; }}
           >
-            {submitting ? '⏳ Oceniam…' : '▶ Oceń kod'}
+            {submitting
+              ? <><Icon icon="lucide:loader-circle" style={{ fontSize: '0.9rem', animation: 'spin 1s linear infinite' }} /> Oceniam…</>
+              : <><Icon icon="lucide:play" style={{ fontSize: '0.9rem' }} /> Oceń kod</>
+            }
           </button>
         </div>
       </div>
@@ -512,7 +531,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
       {/* ── MAIN SPLIT ── */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
 
-        {/* ══ LEFT PANEL — task description (app style) ══ */}
+        {/* ══ LEFT PANEL ══ */}
         <div style={{
           width: '40%', minWidth: 340, display: 'flex', flexDirection: 'column',
           borderRight: '1px solid rgba(124,58,237,0.1)',
@@ -528,9 +547,9 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
             padding: '0 1rem', flexShrink: 0,
           }}>
             {[
-              { id: 'zadanie',     label: 'Zadanie',     icon: '📄' },
-              { id: 'podpowiedzi', label: 'Podpowiedzi', icon: '💡' },
-              { id: 'przyklad',   label: 'Przykład',    icon: '▶' },
+              { id: 'zadanie',     label: 'Zadanie',     icon: 'lucide:file-text' },
+              { id: 'podpowiedzi', label: 'Podpowiedzi', icon: 'lucide:lightbulb' },
+              { id: 'przyklad',   label: 'Przykład',    icon: 'lucide:play-circle' },
             ].map(t => (
               <button key={t.id} onClick={() => setTab(t.id)} style={{
                 padding: '0.7rem 0.95rem', border: 'none', background: 'none',
@@ -541,7 +560,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                 transition: 'all 0.12s', whiteSpace: 'nowrap',
                 display: 'flex', alignItems: 'center', gap: '0.3rem',
               }}>
-                <span style={{ fontSize: '0.8rem' }}>{t.icon}</span>
+                <Icon icon={t.icon} style={{ fontSize: '0.85rem' }} />
                 {t.label}
               </button>
             ))}
@@ -555,7 +574,6 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               borderBottom: '1px solid rgba(124,58,237,0.08)',
               padding: '1.25rem 1.4rem',
             }}>
-              {/* Badges */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.85rem', flexWrap: 'wrap' }}>
                 <span style={{
                   fontSize: '0.7rem', fontWeight: 800, padding: '0.22rem 0.65rem',
@@ -573,13 +591,12 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                   borderRadius: 6, border: '1px solid rgba(107,114,128,0.15)',
                 }}>dowolny język</span>
               </div>
-              {/* Title */}
               <h2 style={{ color: '#3b0764', fontSize: '1.15rem', fontWeight: 900, margin: 0, lineHeight: 1.3, letterSpacing: '-0.3px' }}>
                 {question.title}
               </h2>
             </div>
 
-            {/* Description — numbered steps rendered nicely */}
+            {/* Description */}
             <div style={{ padding: '1.25rem 1.4rem 2rem', flex: 1 }}>
               {question.description.split('\n').map((line, i) => {
                 const stepMatch = line.match(/^(\d+)\.\s+(.+)/);
@@ -590,45 +607,34 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
 
                 if (stepMatch) {
                   return (
-                    <div key={i} style={{
-                      display: 'flex', gap: '0.75rem', alignItems: 'flex-start',
-                      marginBottom: '0.7rem',
-                    }}>
+                    <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.7rem' }}>
                       <span style={{
                         width: 22, height: 22, borderRadius: 7, flexShrink: 0,
                         background: 'rgba(124,58,237,0.12)', border: '1.5px solid rgba(124,58,237,0.22)',
                         color: '#7c3aed', fontSize: '0.72rem', fontWeight: 900,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginTop: 2,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2,
                       }}>{stepMatch[1]}</span>
-                      <span style={{ color: '#374151', fontSize: '0.88rem', lineHeight: 1.65, flex: 1 }}>
-                        {stepMatch[2]}
-                      </span>
+                      <span style={{ color: '#374151', fontSize: '0.88rem', lineHeight: 1.65, flex: 1 }}>{stepMatch[2]}</span>
                     </div>
                   );
                 }
 
                 if (subMatch) {
                   return (
-                    <div key={i} style={{
-                      display: 'flex', gap: '0.5rem', alignItems: 'flex-start',
-                      marginBottom: '0.4rem', paddingLeft: '2rem',
-                    }}>
-                      <span style={{ color: '#a78bfa', fontSize: '0.75rem', marginTop: 5, flexShrink: 0 }}>▸</span>
+                    <div key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.4rem', paddingLeft: '2rem' }}>
+                      <Icon icon="lucide:chevron-right" style={{ color: '#a78bfa', fontSize: '0.75rem', marginTop: 5, flexShrink: 0 }} />
                       <span style={{ color: '#4b5563', fontSize: '0.85rem', lineHeight: 1.6 }}>{subMatch[2]}</span>
                     </div>
                   );
                 }
 
-                // code-looking lines (indented or starts with special chars)
                 const isCode = line.match(/^\s{2,}/) || line.match(/^[A-Za-z_\[{("].*[:=]/) || line.includes('→');
                 if (isCode) {
                   return (
                     <pre key={i} style={{
                       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                       fontSize: '0.8rem', color: '#6d28d9',
-                      background: 'rgba(124,58,237,0.05)',
-                      border: '1px solid rgba(124,58,237,0.1)',
+                      background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.1)',
                       borderRadius: 7, padding: '0.3rem 0.75rem',
                       margin: '0.25rem 0', whiteSpace: 'pre-wrap', lineHeight: 1.6,
                     }}>{line}</pre>
@@ -651,8 +657,9 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.18)',
               borderRadius: 99, padding: '0.35rem 0.9rem', marginBottom: '1.1rem', alignSelf: 'flex-start',
             }}>
+              <Icon icon="lucide:lightbulb" style={{ fontSize: '0.8rem', color: '#7c3aed' }} />
               <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                💡 Podpowiedzi
+                Podpowiedzi
               </span>
             </div>
             <p style={{ color: '#9ca3af', fontSize: '0.82rem', marginBottom: '1.1rem', lineHeight: 1.5 }}>
@@ -674,11 +681,14 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                   }}
                 >
                   <span>Podpowiedź {i + 1}</span>
-                  <span style={{
-                    fontSize: '0.65rem', opacity: 0.6,
-                    transform: hintsOpen.includes(i) ? 'rotate(180deg)' : 'none',
-                    transition: 'transform 0.2s',
-                  }}>▼</span>
+                  <Icon
+                    icon="lucide:chevron-down"
+                    style={{
+                      fontSize: '0.9rem', opacity: 0.6,
+                      transform: hintsOpen.includes(i) ? 'rotate(180deg)' : 'none',
+                      transition: 'transform 0.2s',
+                    }}
+                  />
                 </button>
                 {hintsOpen.includes(i) && (
                   <div style={{
@@ -700,20 +710,17 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.18)',
               borderRadius: 99, padding: '0.35rem 0.9rem', marginBottom: '1.1rem', alignSelf: 'flex-start',
             }}>
+              <Icon icon="lucide:play-circle" style={{ fontSize: '0.8rem', color: '#7c3aed' }} />
               <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                ▶ Przykład I/O
+                Przykład I/O
               </span>
             </div>
 
             {question.example_input && (
               <div style={{ marginBottom: '1rem' }}>
-                <div style={{
-                  fontSize: '0.72rem', fontWeight: 700, color: '#6b7280',
-                  textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.45rem',
-                }}>Wejście</div>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.45rem' }}>Wejście</div>
                 <pre style={{
-                  background: 'rgba(99,102,241,0.06)',
-                  border: '1px solid rgba(99,102,241,0.18)',
+                  background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.18)',
                   borderRadius: 10, padding: '0.85rem 1rem', margin: 0,
                   fontFamily: "'JetBrains Mono', monospace", fontSize: '0.83rem',
                   color: '#4338ca', overflowX: 'auto', whiteSpace: 'pre-wrap', lineHeight: 1.6,
@@ -723,13 +730,9 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
 
             {question.example_output && (
               <div style={{ marginBottom: '1.25rem' }}>
-                <div style={{
-                  fontSize: '0.72rem', fontWeight: 700, color: '#6b7280',
-                  textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.45rem',
-                }}>Wyjście</div>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.45rem' }}>Wyjście</div>
                 <pre style={{
-                  background: 'rgba(22,163,74,0.05)',
-                  border: '1px solid rgba(22,163,74,0.18)',
+                  background: 'rgba(22,163,74,0.05)', border: '1px solid rgba(22,163,74,0.18)',
                   borderRadius: 10, padding: '0.85rem 1rem', margin: 0,
                   fontFamily: "'JetBrains Mono', monospace", fontSize: '0.83rem',
                   color: '#166534', overflowX: 'auto', whiteSpace: 'pre-wrap', lineHeight: 1.6,
@@ -739,18 +742,11 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
 
             {question.evaluation_criteria && question.evaluation_criteria.length > 0 && (
               <div>
-                <div style={{
-                  fontSize: '0.72rem', fontWeight: 700, color: '#6b7280',
-                  textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.7rem',
-                }}>Kryteria oceny Gemini</div>
-                <div style={{
-                  background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(124,58,237,0.12)',
-                  borderRadius: 12, overflow: 'hidden',
-                }}>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.7rem' }}>Kryteria oceny Gemini</div>
+                <div style={{ background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(124,58,237,0.12)', borderRadius: 12, overflow: 'hidden' }}>
                   {question.evaluation_criteria.map((c, i) => (
                     <div key={i} style={{
-                      display: 'flex', gap: '0.7rem', alignItems: 'flex-start',
-                      padding: '0.75rem 1rem',
+                      display: 'flex', gap: '0.7rem', alignItems: 'flex-start', padding: '0.75rem 1rem',
                       borderBottom: i < question.evaluation_criteria.length - 1 ? '1px solid rgba(124,58,237,0.07)' : 'none',
                       background: i % 2 === 0 ? 'transparent' : 'rgba(124,58,237,0.02)',
                     }}>
@@ -758,8 +754,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                         width: 20, height: 20, borderRadius: 6, flexShrink: 0,
                         background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)',
                         color: '#7c3aed', fontSize: '0.68rem', fontWeight: 900,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginTop: 2,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2,
                       }}>{i + 1}</span>
                       <span style={{ color: '#374151', fontSize: '0.85rem', lineHeight: 1.55 }}>{c}</span>
                     </div>
@@ -776,10 +771,8 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
           {/* Editor topbar */}
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            padding: '0.45rem 1rem',
-            background: '#1e1e2e',
-            borderBottom: '1px solid rgba(255,255,255,0.07)',
-            flexShrink: 0,
+            padding: '0.45rem 1rem', background: '#1e1e2e',
+            borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f57' }} />
@@ -800,8 +793,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               style={{
                 background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
                 color: '#6b7280', borderRadius: 6, padding: '0.2rem 0.65rem',
-                fontSize: '0.73rem', cursor: 'pointer', fontFamily: "'Sora', sans-serif",
-                fontWeight: 600,
+                fontSize: '0.73rem', cursor: 'pointer', fontFamily: "'Sora', sans-serif", fontWeight: 600,
               }}
             >Wyczyść</button>
           </div>
@@ -811,11 +803,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
 
           {/* ── FEEDBACK PANEL ── */}
           {feedback && (
-            <div style={{
-              flex: 1, overflowY: 'auto',
-              background: 'rgba(245,243,255,0.97)',
-              borderTop: '2px solid rgba(124,58,237,0.15)',
-            }}>
+            <div style={{ flex: 1, overflowY: 'auto', background: 'rgba(245,243,255,0.97)', borderTop: '2px solid rgba(124,58,237,0.15)' }}>
               {feedback.error ? (
                 <div style={{ padding: '1.5rem' }}>
                   <div style={{
@@ -823,7 +811,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                     background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.2)',
                     borderRadius: 12, padding: '0.85rem 1rem',
                   }}>
-                    <span style={{ fontSize: '1.1rem' }}>❌</span>
+                    <Icon icon="lucide:x-circle" style={{ fontSize: '1.1rem', color: '#dc2626', flexShrink: 0 }} />
                     <div>
                       <div style={{ color: '#991b1b', fontWeight: 700, fontSize: '0.85rem' }}>Błąd oceniania</div>
                       <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: 2 }}>{feedback.message}</div>
@@ -833,9 +821,8 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
               ) : (
                 <div style={{ padding: '1.1rem 1.4rem 1.5rem' }}>
 
-                  {/* ── Verdict + Score row ── */}
+                  {/* Verdict + Score row */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                    {/* Verdict badge */}
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: '0.5rem',
                       background: feedback.verdict === 'ZALICZONO'
@@ -844,9 +831,13 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                       border: `1.5px solid ${feedback.verdict === 'ZALICZONO' ? 'rgba(22,163,74,0.28)' : feedback.verdict === 'CZĘŚCIOWO' ? 'rgba(217,119,6,0.28)' : 'rgba(220,38,38,0.28)'}`,
                       borderRadius: 10, padding: '0.5rem 1rem',
                     }}>
-                      <span style={{ fontSize: '1.15rem' }}>
-                        {feedback.verdict === 'ZALICZONO' ? '✅' : feedback.verdict === 'CZĘŚCIOWO' ? '⚠️' : '❌'}
-                      </span>
+                      <Icon
+                        icon={feedback.verdict === 'ZALICZONO' ? 'lucide:check-circle' : feedback.verdict === 'CZĘŚCIOWO' ? 'lucide:alert-triangle' : 'lucide:x-circle'}
+                        style={{
+                          fontSize: '1.15rem',
+                          color: feedback.verdict === 'ZALICZONO' ? '#16a34a' : feedback.verdict === 'CZĘŚCIOWO' ? '#d97706' : '#dc2626',
+                        }}
+                      />
                       <span style={{
                         fontWeight: 800, fontSize: '0.92rem',
                         color: feedback.verdict === 'ZALICZONO' ? '#166534' : feedback.verdict === 'CZĘŚCIOWO' ? '#92400e' : '#991b1b',
@@ -874,11 +865,9 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                     </div>
 
                     {feedback.elapsed !== undefined && (
-                      <div style={{
-                        marginLeft: 'auto', color: '#9ca3af', fontSize: '0.78rem',
-                        fontFamily: "'JetBrains Mono', monospace",
-                      }}>
-                        ⏱ {Math.floor(feedback.elapsed/60)}:{String(feedback.elapsed%60).padStart(2,'0')}
+                      <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4, color: '#9ca3af', fontSize: '0.78rem', fontFamily: "'JetBrains Mono', monospace" }}>
+                        <Icon icon="lucide:timer" style={{ fontSize: '0.85rem' }} />
+                        {Math.floor(feedback.elapsed/60)}:{String(feedback.elapsed%60).padStart(2,'0')}
                       </div>
                     )}
                   </div>
@@ -901,14 +890,10 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                       <div style={{ color: '#6b7280', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>
                         Kryteria oceny
                       </div>
-                      <div style={{
-                        background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(124,58,237,0.1)',
-                        borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 6px rgba(124,58,237,0.05)',
-                      }}>
+                      <div style={{ background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(124,58,237,0.1)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 6px rgba(124,58,237,0.05)' }}>
                         {feedback.criteria_results.map((cr, i) => (
                           <div key={i} style={{
-                            display: 'flex', gap: '0.65rem', alignItems: 'flex-start',
-                            padding: '0.65rem 1rem',
+                            display: 'flex', gap: '0.65rem', alignItems: 'flex-start', padding: '0.65rem 1rem',
                             borderBottom: i < feedback.criteria_results.length - 1 ? '1px solid rgba(124,58,237,0.06)' : 'none',
                             background: i % 2 === 0 ? 'transparent' : 'rgba(124,58,237,0.015)',
                           }}>
@@ -919,7 +904,9 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                               border: `1px solid ${cr.passed ? 'rgba(22,163,74,0.25)' : 'rgba(220,38,38,0.25)'}`,
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
                               fontSize: '0.68rem', fontWeight: 900,
-                            }}>{cr.passed ? '✓' : '✗'}</span>
+                            }}>
+                              <Icon icon={cr.passed ? 'lucide:check' : 'lucide:x'} style={{ fontSize: '0.65rem' }} />
+                            </span>
                             <div style={{ flex: 1 }}>
                               <div style={{ color: '#1f2937', fontSize: '0.84rem', fontWeight: 600, lineHeight: 1.4 }}>{cr.criterion}</div>
                               {cr.comment && <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: 2, lineHeight: 1.4 }}>{cr.comment}</div>}
@@ -936,14 +923,14 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                       background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.18)',
                       borderRadius: 12, padding: '0.85rem 1rem', marginBottom: '1rem',
                     }}>
-                      <div style={{ color: '#7c3aed', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem' }}>
-                        💡 Wskazówki do poprawy
+                      <div style={{ color: '#7c3aed', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: 5 }}>
+                        <Icon icon="lucide:lightbulb" style={{ fontSize: '0.85rem' }} />
+                        Wskazówki do poprawy
                       </div>
                       {feedback.tips.map((tip, i) => (
                         <div key={i} style={{
                           color: '#4b5563', fontSize: '0.84rem', marginBottom: i < feedback.tips.length - 1 ? '0.45rem' : 0,
-                          paddingLeft: '0.8rem', borderLeft: '2px solid rgba(124,58,237,0.35)',
-                          lineHeight: 1.55,
+                          paddingLeft: '0.8rem', borderLeft: '2px solid rgba(124,58,237,0.35)', lineHeight: 1.55,
                         }}>
                           {tip}
                         </div>
@@ -960,10 +947,14 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                         background: 'rgba(255,255,255,0.9)', border: '1.5px solid rgba(124,58,237,0.2)',
                         borderRadius: 10, color: '#7c3aed', fontWeight: 700, fontSize: '0.85rem',
                         cursor: 'pointer', fontFamily: "'Sora', sans-serif", transition: 'all 0.15s',
+                        display: 'inline-flex', alignItems: 'center', gap: 6,
                       }}
                       onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.07)'; }}
                       onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.9)'; }}
-                    >✏️ Popraw kod</button>
+                    >
+                      <Icon icon="lucide:pencil" style={{ fontSize: '0.85rem' }} />
+                      Popraw kod
+                    </button>
                     <button
                       onClick={() => onFinish(feedback)}
                       style={{
@@ -972,12 +963,15 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
                         border: 'none', borderRadius: 10,
                         color: '#fff', fontWeight: 700, fontSize: '0.85rem',
                         cursor: 'pointer', fontFamily: "'Sora', sans-serif",
-                        boxShadow: '0 2px 12px rgba(124,58,237,0.35)',
-                        transition: 'all 0.15s',
+                        boxShadow: '0 2px 12px rgba(124,58,237,0.35)', transition: 'all 0.15s',
+                        display: 'inline-flex', alignItems: 'center', gap: 6,
                       }}
                       onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 18px rgba(124,58,237,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
                       onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 12px rgba(124,58,237,0.35)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                    >Następne zadanie →</button>
+                    >
+                      Następne zadanie
+                      <Icon icon="lucide:arrow-right" style={{ fontSize: '0.85rem' }} />
+                    </button>
                   </div>
                 </div>
               )}
@@ -991,6 +985,7 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.25); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.45); }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
     </div>
   );
@@ -998,22 +993,36 @@ Oceń kod zgodnie z kryteriami. Odpowiedz TYLKO w formacie JSON (bez markdown, b
 
 // ─── SUMMARY SCREEN ───────────────────────────────────────────────────────────
 function SummaryScreen({ feedback, onRestart }) {
-  const passed = feedback.verdict === 'ZALICZONO';
+  const passed  = feedback.verdict === 'ZALICZONO';
   const partial = feedback.verdict === 'CZĘŚCIOWO';
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
       <Header />
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '3rem 1.5rem 6rem', textAlign: 'center' }}>
-        <div style={{ fontSize: '4rem', marginBottom: '0.5rem', animation: 'pop 0.5s ease' }}>
-          {passed ? '🎉' : partial ? '⚠️' : '😓'}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem', animation: 'pop 0.5s ease' }}>
+          <Icon
+            icon={passed ? 'lucide:party-popper' : partial ? 'lucide:alert-triangle' : 'lucide:frown'}
+            style={{
+              fontSize: '4rem',
+              color: passed ? '#16a34a' : partial ? '#d97706' : '#dc2626',
+            }}
+          />
         </div>
         <h1 style={{
           fontSize: 'clamp(2.5rem,8vw,4rem)', fontWeight: 900, letterSpacing: '-2px',
           color: passed ? '#166534' : partial ? '#92400e' : '#991b1b', margin: '0.25rem 0',
         }}>{feedback.score}%</h1>
-        <p style={{ color: passed ? '#16a34a' : partial ? '#d97706' : '#dc2626', fontWeight: 700, fontSize: '1rem', marginBottom: '2rem' }}>
-          {passed ? '✅ Zaliczono!' : partial ? '⚠️ Częściowo poprawne' : '❌ Nie zaliczono — spróbuj jeszcze raz'}
+        <p style={{
+          color: passed ? '#16a34a' : partial ? '#d97706' : '#dc2626',
+          fontWeight: 700, fontSize: '1rem', marginBottom: '2rem',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+        }}>
+          <Icon
+            icon={passed ? 'lucide:check-circle' : partial ? 'lucide:alert-triangle' : 'lucide:x-circle'}
+            style={{ fontSize: '1rem' }}
+          />
+          {passed ? 'Zaliczono!' : partial ? 'Częściowo poprawne' : 'Nie zaliczono — spróbuj jeszcze raz'}
         </p>
 
         {/* Criteria summary */}
@@ -1027,7 +1036,10 @@ function SummaryScreen({ feedback, onRestart }) {
             <div style={{ fontWeight: 700, color: '#374151', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>Kryteria</div>
             {feedback.criteria_results.map((cr, i) => (
               <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', padding: '0.5rem 0', borderBottom: i < feedback.criteria_results.length - 1 ? '1px solid rgba(124,58,237,0.06)' : 'none' }}>
-                <span style={{ color: cr.passed ? '#16a34a' : '#dc2626', fontWeight: 900, flexShrink: 0, marginTop: 2 }}>{cr.passed ? '✓' : '✗'}</span>
+                <Icon
+                  icon={cr.passed ? 'lucide:check' : 'lucide:x'}
+                  style={{ color: cr.passed ? '#16a34a' : '#dc2626', fontSize: '0.9rem', flexShrink: 0, marginTop: 2 }}
+                />
                 <div style={{ color: '#4b5563', fontSize: '0.85rem' }}>{cr.criterion}</div>
               </div>
             ))}
@@ -1039,14 +1051,21 @@ function SummaryScreen({ feedback, onRestart }) {
             padding: '0.9rem 2rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)',
             color: '#fff', border: 'none', borderRadius: 14, fontWeight: 800, fontSize: '0.95rem',
             cursor: 'pointer', fontFamily: "'Sora', sans-serif", boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
-          }}>Nowe zadanie →</button>
+            display: 'inline-flex', alignItems: 'center', gap: 7,
+          }}>
+            Nowe zadanie
+            <Icon icon="lucide:arrow-right" style={{ fontSize: '1rem' }} />
+          </button>
           <Link to="/exam" style={{ textDecoration: 'none' }}>
             <button style={{
               padding: '0.9rem 2rem', background: 'rgba(255,255,255,0.85)',
               border: '1px solid rgba(124,58,237,0.2)', borderRadius: 14,
               color: '#7c3aed', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
-              fontFamily: "'Sora', sans-serif",
-            }}>Dashboard</button>
+              fontFamily: "'Sora', sans-serif", display: 'inline-flex', alignItems: 'center', gap: 7,
+            }}>
+              <Icon icon="lucide:layout-dashboard" style={{ fontSize: '1rem' }} />
+              Dashboard
+            </button>
           </Link>
         </div>
       </div>

@@ -1,10 +1,12 @@
 // pages/DashboardPage.jsx
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
 import Header from '../components/Header';
 import { usePageTitle } from '../hooks/usePageTitle';
+import Footer from '../components/Footer';
 
 // ─── shared glass-card style object ───────────────────────────────────────────
 const glassCard = {
@@ -67,7 +69,7 @@ function StatCard({ icon, label, value, sub, accent }) {
       onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
       style={{ background: accent ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : glassCard.background, backdropFilter: glassCard.backdropFilter, WebkitBackdropFilter: glassCard.WebkitBackdropFilter, borderRadius: 18, padding: '1.25rem 1.5rem', border: accent ? 'none' : glassCard.border, boxShadow: accent ? '0 8px 32px rgba(124,58,237,0.3)' : glassCard.boxShadow, transition: 'transform .2s' }}
     >
-      <span style={{ fontSize: '1.4rem' }}>{icon}</span>
+      <Icon icon={icon} style={{ fontSize: '1.4rem', color: accent ? 'rgba(255,255,255,0.9)' : '#7c3aed' }} />
       <div style={{ fontSize: '1.75rem', fontWeight: 800, color: accent ? '#fff' : '#4c1d95', letterSpacing: '-0.5px', fontFamily: "'Sora',sans-serif", marginTop: 4 }}>{value}</div>
       <div style={{ fontSize: '0.78rem', fontWeight: 600, color: accent ? 'rgba(255,255,255,0.8)' : '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
       {sub && <div style={{ fontSize: '0.72rem', color: accent ? 'rgba(255,255,255,0.6)' : '#9ca3af', marginTop: 2 }}>{sub}</div>}
@@ -101,7 +103,9 @@ function WelcomeScreen({ onSave }) {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#f5f3ff,#ede9fe,#ddd6fe)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', fontFamily: "'Sora',sans-serif" }}>
       <div style={{ width: '100%', maxWidth: 440, textAlign: 'center', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(16px)', borderRadius: 28, padding: '3rem 2.5rem', boxShadow: '0 20px 60px rgba(124,58,237,0.18)', border: '1px solid rgba(167,139,250,0.25)' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👋</div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+          <Icon icon="lucide:hand-metal" style={{ fontSize: '3rem', color: '#7c3aed' }} />
+        </div>
         <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#4c1d95', margin: '0 0 0.5rem', letterSpacing: '-0.5px' }}>Witaj w ExamIQ!</h1>
         <p style={{ color: '#9ca3af', fontSize: '0.9rem', marginBottom: '2rem', lineHeight: 1.6 }}>Zanim zaczniesz, ustaw swój nick.<br />Twoje postępy będą zapisywane lokalnie.</p>
         <input
@@ -118,8 +122,11 @@ function WelcomeScreen({ onSave }) {
         <button
           disabled={!valid}
           onClick={() => onSave(val)}
-          style={{ width: '100%', padding: '0.9rem', background: valid ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : '#e5e7eb', color: valid ? '#fff' : '#9ca3af', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.95rem', cursor: valid ? 'pointer' : 'not-allowed', fontFamily: "'Sora',sans-serif" }}
-        >Zaczynamy 🚀</button>
+          style={{ width: '100%', padding: '0.9rem', background: valid ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : '#e5e7eb', color: valid ? '#fff' : '#9ca3af', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.95rem', cursor: valid ? 'pointer' : 'not-allowed', fontFamily: "'Sora',sans-serif", display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+        >
+          Zaczynamy
+          <Icon icon="lucide:rocket" style={{ fontSize: '1rem' }} />
+        </button>
       </div>
     </div>
   );
@@ -135,8 +142,11 @@ function NameEditor({ current, onSave }) {
       onClick={() => { setVal(current); setEditing(true); }}
       onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.08)'}
       onMouseLeave={e => e.currentTarget.style.background = 'none'}
-      style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#7c3aed', fontSize: '0.8rem', fontWeight: 600, padding: '0.2rem 0.5rem', borderRadius: 6, fontFamily: "'Sora',sans-serif" }}
-    >✏️ Zmień nick</button>
+      style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#7c3aed', fontSize: '0.8rem', fontWeight: 600, padding: '0.2rem 0.5rem', borderRadius: 6, fontFamily: "'Sora',sans-serif", display: 'inline-flex', alignItems: 'center', gap: 5 }}
+    >
+      <Icon icon="lucide:pencil" style={{ fontSize: '0.85rem' }} />
+      Zmień nick
+    </button>
   );
   return (
     <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -146,7 +156,9 @@ function NameEditor({ current, onSave }) {
         style={{ border: '1.5px solid rgba(124,58,237,0.4)', borderRadius: 8, padding: '0.3rem 0.6rem', fontSize: '0.875rem', fontFamily: "'Sora',sans-serif", color: '#4c1d95', background: '#f5f3ff', outline: 'none', width: 150 }}
       />
       <button onClick={() => { if (val.trim()) { onSave(val); setEditing(false); } }} style={{ background: '#7c3aed', color: '#fff', border: 'none', borderRadius: 7, padding: '0.3rem 0.7rem', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif" }}>Zapisz</button>
-      <button onClick={() => setEditing(false)} style={{ background: 'none', border: '1px solid #e5e7eb', color: '#9ca3af', borderRadius: 7, padding: '0.3rem 0.6rem', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif" }}>✕</button>
+      <button onClick={() => setEditing(false)} style={{ background: 'none', border: '1px solid #e5e7eb', color: '#9ca3af', borderRadius: 7, padding: '0.3rem 0.6rem', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif", display: 'inline-flex', alignItems: 'center' }}>
+        <Icon icon="lucide:x" style={{ fontSize: '0.85rem' }} />
+      </button>
     </div>
   );
 }
@@ -180,7 +192,7 @@ function QuickExamWidget({ onStart }) {
   return (
     <div style={{ ...glassCard, padding: '1.75rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1.25rem' }}>
-        <span style={{ fontSize: '1.3rem' }}>⚡</span>
+        <Icon icon="lucide:zap" style={{ fontSize: '1.3rem', color: '#7c3aed' }} />
         <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#4c1d95', fontFamily: "'Sora',sans-serif" }}>Szybki egzamin</h3>
       </div>
 
@@ -214,8 +226,11 @@ function QuickExamWidget({ onStart }) {
         onClick={() => onStart(safeCount, category)}
         onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
         onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-        style={{ width: '100%', padding: '0.85rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontSize: '0.95rem', fontWeight: 700, cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)', transition: 'transform 0.15s' }}
-      >Rozpocznij egzamin 🚀</button>
+        style={{ width: '100%', padding: '0.85rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontSize: '0.95rem', fontWeight: 700, cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)', transition: 'transform 0.15s', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+      >
+        Rozpocznij egzamin
+        <Icon icon="lucide:rocket" style={{ fontSize: '1rem' }} />
+      </button>
     </div>
   );
 }
@@ -286,15 +301,19 @@ function ExamRunner({ pool, category, onFinish }) {
           </div>
         )}
         {confirmed && q.explanation && (
-          <div style={{ marginTop: '1rem', padding: '0.85rem 1rem', background: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', borderRadius: 12, border: '1px solid #86efac', fontSize: '0.82rem', color: '#166534', lineHeight: 1.5 }}>
-            💡 {q.explanation}
+          <div style={{ marginTop: '1rem', padding: '0.85rem 1rem', background: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', borderRadius: 12, border: '1px solid #86efac', fontSize: '0.82rem', color: '#166534', lineHeight: 1.5, display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <Icon icon="lucide:lightbulb" style={{ fontSize: '1rem', flexShrink: 0, marginTop: 1 }} />
+            {q.explanation}
           </div>
         )}
         <div style={{ marginTop: '1.5rem' }}>
           {!confirmed
             ? <button onClick={confirm} disabled={!selected} style={{ width: '100%', padding: '0.9rem', background: selected ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : '#e5e7eb', color: selected ? '#fff' : '#9ca3af', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.9rem', cursor: selected ? 'pointer' : 'not-allowed', fontFamily: "'Sora',sans-serif" }}>Sprawdź odpowiedź</button>
-            : <button onClick={next} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)' }}>
-                {current === pool.length - 1 ? 'Zakończ ✅' : 'Następne →'}
+            : <button onClick={next} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                {current === pool.length - 1
+                  ? <><Icon icon="lucide:check-circle" style={{ fontSize: '1rem' }} /> Zakończ</>
+                  : <>Następne <Icon icon="lucide:arrow-right" style={{ fontSize: '1rem' }} /></>
+                }
               </button>
           }
         </div>
@@ -311,7 +330,12 @@ function ResultScreen({ score, total, duration, onBack }) {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#f5f3ff,#ede9fe,#ddd6fe)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', fontFamily: "'Sora',sans-serif" }}>
       <div style={{ width: '100%', maxWidth: 480, textAlign: 'center', background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(16px)', borderRadius: 28, padding: '3rem 2.5rem', boxShadow: '0 20px 60px rgba(124,58,237,0.15)', border: '1px solid rgba(167,139,250,0.2)' }}>
-        <div style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>{pass ? '🏆' : '📚'}</div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}>
+          <Icon
+            icon={pass ? 'lucide:trophy' : 'lucide:book-open'}
+            style={{ fontSize: '3.5rem', color: pass ? '#7c3aed' : '#a78bfa' }}
+          />
+        </div>
         <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#4c1d95', margin: '0 0 0.25rem', fontFamily: "'Sora',sans-serif" }}>{pass ? 'Świetny wynik!' : 'Jeszcze trochę!'}</h2>
         <p style={{ color: '#9ca3af', marginBottom: '2rem', fontSize: '0.875rem' }}>{pass ? 'Zdałeś próbny egzamin INF04!' : 'Wymagane min. 75% do zaliczenia.'}</p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
@@ -322,9 +346,13 @@ function ResultScreen({ score, total, duration, onBack }) {
             </div>
           ))}
         </div>
-        <p style={{ fontSize: '0.8rem', color: '#a78bfa', marginBottom: '1.5rem' }}>✅ Wynik zapisany w Twoim profilu</p>
-        <button onClick={onBack} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)' }}>
-          ← Wróć do dashboardu
+        <p style={{ fontSize: '0.8rem', color: '#a78bfa', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+          <Icon icon="lucide:check-circle" style={{ fontSize: '0.9rem' }} />
+          Wynik zapisany w Twoim profilu
+        </p>
+        <button onClick={onBack} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', color: '#fff', border: 'none', borderRadius: 12, fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer', fontFamily: "'Sora',sans-serif", boxShadow: '0 4px 16px rgba(124,58,237,0.35)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+          <Icon icon="lucide:arrow-left" style={{ fontSize: '1rem' }} />
+          Wróć do dashboardu
         </button>
       </div>
     </div>
@@ -368,7 +396,6 @@ export default function DashboardPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff,#ede9fe 40%,#e0e7ff)', fontFamily: "'Sora',sans-serif" }}>
 
-      {/* POPRAWKA: używamy wspólnego komponentu Header zamiast własnego nav */}
       <Header />
 
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2.5rem 2rem' }}>
@@ -376,12 +403,15 @@ export default function DashboardPage() {
         {/* GREETING + streak */}
         <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#4c1d95', margin: '0 0 0.2rem', letterSpacing: '-0.5px' }}>Cześć, {session.name}! 👋</h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#4c1d95', margin: '0 0 0.2rem', letterSpacing: '-0.5px', display: 'flex', alignItems: 'center', gap: 10 }}>
+              Cześć, {session.name}!
+              <Icon icon="lucide:hand-metal" style={{ fontSize: '1.75rem', color: '#7c3aed' }} />
+            </h1>
             <p style={{ color: '#9ca3af', fontSize: '0.9rem', margin: 0 }}>Ostatnia aktywność: {session.lastActive}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <div style={{ background: 'rgba(124,58,237,0.08)', borderRadius: 99, padding: '0.4rem 0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span>🔥</span>
+              <Icon icon="lucide:flame" style={{ fontSize: '1rem', color: '#f97316' }} />
               <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#7c3aed' }}>{session.streak} dni z rzędu</span>
             </div>
             <NameEditor current={session.name} onSave={setName} />
@@ -390,11 +420,11 @@ export default function DashboardPage() {
 
         {/* STAT CARDS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: '1rem', marginBottom: '2rem' }}>
-          <StatCard icon="📝" label="Egzaminów" value={stats.total} sub="wykonanych" accent />
-          <StatCard icon="🏆" label="Rekord" value={stats.total ? `${stats.best}%` : '—'} sub="najlepszy wynik" />
-          <StatCard icon="📊" label="Średnia" value={stats.total ? `${stats.avg}%` : '—'} sub="ze wszystkich sesji" />
-          <StatCard icon="✅" label="Zdanych" value={stats.total ? `${stats.passRate}%` : '—'} sub="sesji ≥ 75%" />
-          <StatCard icon="🔥" label="Seria" value={`${session.streak}d`} sub="dni nauki z rzędu" />
+          <StatCard icon="lucide:file-text"   label="Egzaminów"  value={stats.total}                        sub="wykonanych"           accent />
+          <StatCard icon="lucide:trophy"       label="Rekord"     value={stats.total ? `${stats.best}%` : '—'}  sub="najlepszy wynik" />
+          <StatCard icon="lucide:bar-chart-2"  label="Średnia"    value={stats.total ? `${stats.avg}%` : '—'}   sub="ze wszystkich sesji" />
+          <StatCard icon="lucide:check-circle" label="Zdanych"    value={stats.total ? `${stats.passRate}%` : '—'} sub="sesji ≥ 75%" />
+          <StatCard icon="lucide:flame"        label="Seria"      value={`${session.streak}d`}               sub="dni nauki z rzędu" />
         </div>
 
         {/* MAIN GRID */}
@@ -406,10 +436,16 @@ export default function DashboardPage() {
             {/* chart */}
             <div style={{ ...glassCard, padding: '1.75rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>📈 Ostatnie sesje</h3>
+                <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#4c1d95', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Icon icon="lucide:trending-up" style={{ fontSize: '1.1rem', color: '#7c3aed' }} />
+                  Ostatnie sesje
+                </h3>
                 {stats.total > 0 && (
-                  <span style={{ fontSize: '0.72rem', fontWeight: 600, padding: '0.2rem 0.6rem', borderRadius: 99, background: stats.avg >= 75 ? '#d1fae5' : '#fee2e2', color: stats.avg >= 75 ? '#065f46' : '#991b1b' }}>
-                    {stats.avg >= 75 ? '✓ Powyżej progu' : '↑ Poniżej progu'}
+                  <span style={{ fontSize: '0.72rem', fontWeight: 600, padding: '0.2rem 0.6rem', borderRadius: 99, background: stats.avg >= 75 ? '#d1fae5' : '#fee2e2', color: stats.avg >= 75 ? '#065f46' : '#991b1b', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {stats.avg >= 75
+                      ? <><Icon icon="lucide:check" style={{ fontSize: '0.7rem' }} /> Powyżej progu</>
+                      : <><Icon icon="lucide:arrow-up" style={{ fontSize: '0.7rem' }} /> Poniżej progu</>
+                    }
                   </span>
                 )}
               </div>
@@ -426,7 +462,10 @@ export default function DashboardPage() {
 
             {/* category progress */}
             <div style={{ ...glassCard, padding: '1.75rem' }}>
-              <h3 style={{ margin: '0 0 1.25rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>🗂️ Postęp per kategoria</h3>
+              <h3 style={{ margin: '0 0 1.25rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Icon icon="lucide:layers" style={{ fontSize: '1.1rem', color: '#7c3aed' }} />
+                Postęp per kategoria
+              </h3>
               {Object.keys(categoryProgress).length === 0
                 ? <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', padding: '1rem 0' }}>Brak danych — zrób egzamin żeby zobaczyć postęp!</p>
                 : Object.entries(categoryProgress).map(([cat, data]) => (
@@ -437,7 +476,10 @@ export default function DashboardPage() {
 
             {/* history */}
             <div style={{ ...glassCard, padding: '1.75rem' }}>
-              <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>📋 Historia egzaminów</h3>
+              <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Icon icon="lucide:clipboard-list" style={{ fontSize: '1.1rem', color: '#7c3aed' }} />
+                Historia egzaminów
+              </h3>
               {history.length === 0
                 ? <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', padding: '1.5rem 0' }}>Brak historii. Zacznij pierwszy egzamin!</p>
                 : (
@@ -450,7 +492,6 @@ export default function DashboardPage() {
                       </thead>
                       <tbody>
                         {[...history].reverse().map((s, i) => {
-                          // POPRAWKA: stabilny klucz zamiast indeksu
                           const rowKey = `${s.date}-${s.score}-${s.total}-${i}`;
                           const pct = Math.round((s.score / s.total) * 100);
                           const pass = pct >= 75;
@@ -465,8 +506,11 @@ export default function DashboardPage() {
                               <td style={{ padding: '0.7rem 0.75rem', color: '#4c1d95' }}>{s.score}/{s.total}</td>
                               <td style={{ padding: '0.7rem 0.75rem', color: '#6b7280' }}>{formatDuration(s.duration)}</td>
                               <td style={{ padding: '0.7rem 0.75rem' }}>
-                                <span style={{ fontSize: '0.7rem', fontWeight: 600, padding: '0.15rem 0.5rem', borderRadius: 99, background: pass ? '#d1fae5' : '#fee2e2', color: pass ? '#065f46' : '#991b1b' }}>
-                                  {pass ? '✓ Zaliczony' : '✗ Niezaliczony'}
+                                <span style={{ fontSize: '0.7rem', fontWeight: 600, padding: '0.15rem 0.5rem', borderRadius: 99, background: pass ? '#d1fae5' : '#fee2e2', color: pass ? '#065f46' : '#991b1b', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                  {pass
+                                    ? <><Icon icon="lucide:check" style={{ fontSize: '0.65rem' }} /> Zaliczony</>
+                                    : <><Icon icon="lucide:x" style={{ fontSize: '0.65rem' }} /> Niezaliczony</>
+                                  }
                                 </span>
                               </td>
                             </tr>
@@ -486,7 +530,10 @@ export default function DashboardPage() {
 
             {/* trenuj kategorię */}
             <div style={{ ...glassCard, padding: '1.75rem' }}>
-              <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95' }}>⚡ Trenuj kategorię</h3>
+              <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontWeight: 700, color: '#4c1d95', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Icon icon="lucide:zap" style={{ fontSize: '1.1rem', color: '#7c3aed' }} />
+                Trenuj kategorię
+              </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {CATEGORIES.map(cat => {
                   const catQ = ALL_QUESTIONS.filter(item => item.category === cat);
@@ -511,7 +558,10 @@ export default function DashboardPage() {
 
             {/* tip */}
             <div style={{ background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', borderRadius: 18, padding: '1.25rem 1.5rem', boxShadow: '0 8px 24px rgba(124,58,237,0.3)' }}>
-              <p style={{ margin: '0 0 0.4rem', fontSize: '0.75rem', fontWeight: 700, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>💡 Wskazówka</p>
+              <p style={{ margin: '0 0 0.4rem', fontSize: '0.75rem', fontWeight: 700, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Icon icon="lucide:lightbulb" style={{ fontSize: '0.9rem' }} />
+                Wskazówka
+              </p>
               <p style={{ margin: 0, fontSize: '0.82rem', color: '#fff', lineHeight: 1.55 }}>
                 Regularne powtórki po 20 pytań są skuteczniejsze niż sesje maratońskie. Cel: <strong>75%</strong> = zdany egzamin!
               </p>
@@ -523,8 +573,9 @@ export default function DashboardPage() {
                 ? <button onClick={() => setShowReset(true)}
                     onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
                     onMouseLeave={e => e.currentTarget.style.color = '#d1d5db'}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#d1d5db', fontSize: '0.75rem', fontFamily: "'Sora',sans-serif" }}>
-                    🗑️ Zresetuj wszystkie dane
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#d1d5db', fontSize: '0.75rem', fontFamily: "'Sora',sans-serif", display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    <Icon icon="lucide:trash-2" style={{ fontSize: '0.85rem' }} />
+                    Zresetuj wszystkie dane
                   </button>
                 : (
                   <div style={{ background: '#fff', borderRadius: 12, padding: '1rem', border: '1px solid #fca5a5' }}>
@@ -540,6 +591,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

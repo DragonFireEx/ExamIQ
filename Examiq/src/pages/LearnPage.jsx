@@ -6,7 +6,9 @@ import questions from '../data/questions.json';
 import { useUserSession } from '../hooks/useUserSession';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { Icon } from '@iconify/react';
 import './LearnPage.css'
+import Footer from '../components/Footer';
 
 const JAMIQ_HAPPY = '/happy_jamiq.png';
 const JAMIQ_SAD   = '/sad_jamiq.png';
@@ -39,7 +41,7 @@ function SetupScreen({ onStart }) {
             borderRadius: 99, padding: '0.4rem 1.1rem', marginBottom: '1.2rem',
           }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Tryb nauki
+              <Icon icon="lucide:book-open" style={{ verticalAlign: 'middle', marginRight: 4 }} /> Teoria
             </span>
           </div>
           <h1 style={{ fontSize: 'clamp(2rem,5vw,2.8rem)', fontWeight: 900, color: '#3b0764', margin: 0, letterSpacing: '-1px', lineHeight: 1.1 }}>
@@ -79,10 +81,10 @@ function SetupScreen({ onStart }) {
             <label style={{ display: 'block', color: '#374151', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Czas na pytanie</label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8 }}>
               {[
-                { val: 'none', label: '∞',   sub: 'bez limitu' },
-                { val: '15',   label: '15s',  sub: 'szybki' },
-                { val: '30',   label: '30s',  sub: 'normalny' },
-                { val: '60',   label: '60s',  sub: 'spokojny' },
+                { val: 'none', label: 'lucide:infinity', text: '∞',  sub: 'bez limitu' },
+                { val: '15',   label: null, text: '15s',              sub: 'szybki' },
+                { val: '30',   label: null, text: '30s',              sub: 'normalny' },
+                { val: '60',   label: null, text: '60s',              sub: 'spokojny' },
               ].map(opt => (
                 <button key={opt.val} onClick={() => setTimeMode(opt.val)} style={{
                   padding: '0.75rem 0.5rem', borderRadius: 12, textAlign: 'center',
@@ -90,7 +92,9 @@ function SetupScreen({ onStart }) {
                   background: timeMode === opt.val ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.6)',
                   cursor: 'pointer', transition: 'all 0.15s', fontFamily: "'Sora', sans-serif",
                 }}>
-                  <div style={{ fontWeight: 800, fontSize: '1rem', color: timeMode === opt.val ? '#7c3aed' : '#9ca3af' }}>{opt.label}</div>
+                  <div style={{ fontWeight: 800, fontSize: '1rem', color: timeMode === opt.val ? '#7c3aed' : '#9ca3af', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    {opt.label ? <Icon icon={opt.label} /> : opt.text}
+                  </div>
                   <div style={{ fontSize: '0.68rem', marginTop: 2, color: timeMode === opt.val ? '#a78bfa' : '#c4b5fd' }}>{opt.sub}</div>
                 </button>
               ))}
@@ -102,9 +106,9 @@ function SetupScreen({ onStart }) {
             <label style={{ display: 'block', color: '#374151', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Typ pytań</label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
               {[
-                { val: 'both',   label: '🎲 Oba typy' },
-                { val: 'closed', label: '🔘 Zamknięte' },
-                { val: 'open',   label: '✏️ Otwarte' },
+                { val: 'both',   label: 'Oba typy',   icon: 'lucide:shuffle' },
+                { val: 'closed', label: 'Zamknięte',  icon: 'lucide:circle-dot' },
+                { val: 'open',   label: 'Otwarte',    icon: 'lucide:pencil' },
               ].map(opt => (
                 <button key={opt.val} onClick={() => setTypeMode(opt.val)} style={{
                   padding: '0.75rem 0.5rem', borderRadius: 12, fontWeight: 600, fontSize: '0.85rem',
@@ -112,7 +116,11 @@ function SetupScreen({ onStart }) {
                   background: typeMode === opt.val ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.6)',
                   color: typeMode === opt.val ? '#7c3aed' : '#6b7280',
                   cursor: 'pointer', transition: 'all 0.15s', fontFamily: "'Sora', sans-serif",
-                }}>{opt.label}</button>
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                }}>
+                  <Icon icon={opt.icon} style={{ fontSize: '0.9rem' }} />
+                  {opt.label}
+                </button>
               ))}
             </div>
           </div>
@@ -127,14 +135,17 @@ function SetupScreen({ onStart }) {
               fontFamily: "'Sora', sans-serif",
               boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
               transition: 'transform 0.15s, box-shadow 0.15s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             }}
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(124,58,237,0.45)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)';   e.currentTarget.style.boxShadow = '0 4px 20px rgba(124,58,237,0.3)'; }}
           >
-            Rozpocznij quiz →
+            Rozpocznij quiz
+            <Icon icon="lucide:arrow-right" />
           </button>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
@@ -228,7 +239,7 @@ function QuizScreen({ config, onFinish }) {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
 
-      {/* PROGRESS BAR — pod headerem, marginTop -5px + z-index wyższy niż header (1000) */}
+      {/* PROGRESS BAR */}
       <div style={{ position: 'relative', height: 5, background: 'rgba(124,58,237,0.1)', marginTop: -5, zIndex: 1001 }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0,
@@ -261,12 +272,16 @@ function QuizScreen({ config, onFinish }) {
               border: showFlame ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(124,58,237,0.12)',
               borderRadius: 99, padding: '0.3rem 0.8rem', transition: 'all 0.3s',
             }}>
-              <span style={{
-                fontSize: '1rem', display: 'inline-block',
-                filter: showFlame ? 'none' : 'grayscale(1) opacity(0.3)',
-                animation: showFlame ? 'flameDance 0.5s ease' : 'none',
-                transition: 'filter 0.3s',
-              }}>🔥</span>
+              <Icon
+                icon="lucide:flame"
+                style={{
+                  fontSize: '1rem',
+                  color: showFlame ? '#f59e0b' : '#c4b5fd',
+                  filter: showFlame ? 'none' : 'opacity(0.3)',
+                  animation: showFlame ? 'flameDance 0.5s ease' : 'none',
+                  transition: 'color 0.3s',
+                }}
+              />
               <span style={{ fontSize: '0.82rem', fontWeight: 800, color: showFlame ? '#d97706' : '#c4b5fd', transition: 'color 0.3s' }}>{streak}</span>
             </div>
             {config.timeLimit && (
@@ -277,7 +292,7 @@ function QuizScreen({ config, onFinish }) {
                 borderRadius: 99, padding: '0.3rem 0.8rem', transition: 'all 0.3s',
                 animation: timerPulse && !revealed ? 'timerBlink 0.5s infinite' : 'none',
               }}>
-                <span style={{ fontSize: '0.85rem' }}>⏱</span>
+                <Icon icon="lucide:timer" style={{ fontSize: '0.85rem', color: timerColor }} />
                 <span style={{ fontWeight: 900, fontSize: '1rem', color: timerColor, minWidth: 24, textAlign: 'center' }}>{timeLeft}</span>
               </div>
             )}
@@ -377,7 +392,7 @@ function QuizScreen({ config, onFinish }) {
               }}>
                 {isChecking ? (
                   <>
-                    <span style={{ display: 'inline-block', animation: 'spin 0.8s linear infinite', fontSize: '0.9rem' }}>⏳</span>
+                    <Icon icon="lucide:loader-2" style={{ animation: 'spin 0.8s linear infinite', fontSize: '0.9rem' }} />
                     Weryfikuje Gemini...
                   </>
                 ) : 'Sprawdź'}
@@ -399,10 +414,25 @@ function QuizScreen({ config, onFinish }) {
               <img src={isCorrect ? JAMIQ_HAPPY : JAMIQ_SAD} alt="Jamiq"
                 style={{ width: 68, height: 68, objectFit: 'contain', flexShrink: 0, animation: 'jamiqPop 0.5s ease' }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: isCorrect ? '#166534' : '#991b1b', marginBottom: '0.4rem' }}>
-                  {isCorrect
-                    ? (streak >= 2 ? `🔥 Streak ×${streak}! Świetnie!` : '✓ Poprawna odpowiedź!')
-                    : `✗ Błąd${q.type === 'closed' ? ` — poprawna: ${q.answer}` : ''}`}
+                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: isCorrect ? '#166534' : '#991b1b', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {isCorrect ? (
+                    streak >= 2 ? (
+                      <>
+                        <Icon icon="lucide:flame" style={{ color: '#f59e0b' }} />
+                        Streak ×{streak}! Świetnie!
+                      </>
+                    ) : (
+                      <>
+                        <Icon icon="lucide:check-circle-2" />
+                        Poprawna odpowiedź!
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <Icon icon="lucide:x-circle" />
+                      Błąd{q.type === 'closed' ? ` — poprawna: ${q.answer}` : ''}
+                    </>
+                  )}
                 </div>
                 {q.type === 'open' && !isCorrect && (
                   <div style={{ color: '#7c3aed', fontSize: '0.83rem', marginBottom: '0.4rem', fontWeight: 600 }}>
@@ -428,11 +458,13 @@ function QuizScreen({ config, onFinish }) {
             boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
             animation: 'slideUp 0.3s ease',
             transition: 'transform 0.15s, box-shadow 0.15s',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(124,58,237,0.45)'; }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)';   e.currentTarget.style.boxShadow = '0 4px 20px rgba(124,58,237,0.3)'; }}
           >
-            {idx + 1 >= pool.length ? 'Zobacz wyniki →' : 'Następne pytanie →'}
+            {idx + 1 >= pool.length ? 'Zobacz wyniki' : 'Następne pytanie'}
+            <Icon icon="lucide:arrow-right" />
           </button>
         )}
       </div>
@@ -461,7 +493,6 @@ function QuizScreen({ config, onFinish }) {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
-        /* style snippetów obsługuje learnpage.css */
       `}</style>
     </div>
   );
@@ -498,31 +529,46 @@ function ResultsScreen({ results, onRestart }) {
             alt="Jamiq"
             style={{ width: 110, height: 110, objectFit: 'contain', animation: 'jamiqPop 0.6s ease' }}
           />
-          <div style={{ marginTop: '0.5rem', fontSize: '1.6rem', letterSpacing: 4 }}>
-            {'⭐'.repeat(stars)}{'☆'.repeat(3 - stars)}
+          {/* stars */}
+          <div style={{ marginTop: '0.5rem', display: 'flex', justifyContent: 'center', gap: 4 }}>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Icon
+                key={i}
+                icon={i < stars ? 'lucide:star' : 'lucide:star'}
+                style={{ fontSize: '1.6rem', color: i < stars ? '#f59e0b' : '#e5e7eb', fill: i < stars ? '#f59e0b' : 'none' }}
+              />
+            ))}
           </div>
           <h1 style={{
             fontSize: 'clamp(2.5rem,8vw,4rem)', fontWeight: 900,
             color: passed ? '#166534' : '#991b1b',
             margin: '0.4rem 0 0', letterSpacing: '-2px', lineHeight: 1,
           }}>{pct}%</h1>
-          <p style={{ color: passed ? '#16a34a' : '#dc2626', margin: '0.4rem 0 0', fontWeight: 700, fontSize: '1rem' }}>
-            {passed ? '🎉 Zaliczono! Próg 75% osiągnięty.' : '😓 Nie zaliczono — próg to 75%'}
+          <p style={{ color: passed ? '#16a34a' : '#dc2626', margin: '0.4rem 0 0', fontWeight: 700, fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            {passed ? (
+              <><Icon icon="lucide:party-popper" /> Zaliczono! Próg 75% osiągnięty.</>
+            ) : (
+              <><Icon icon="lucide:frown" /> Nie zaliczono — próg to 75%</>
+            )}
           </p>
-          <p style={{ color: '#9ca3af', margin: '0.2rem 0 0', fontSize: '0.82rem' }}>Wynik zapisano w historii</p>
+          <p style={{ color: '#9ca3af', margin: '0.2rem 0 0', fontSize: '0.82rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+            <Icon icon="lucide:save" style={{ fontSize: '0.8rem' }} />
+            Wynik zapisano w historii
+          </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: '1.5rem', animation: 'riseIn 0.6s ease' }}>
           {[
-            { label: 'Poprawne',   val: correct,        color: '#166534', bg: 'rgba(22,163,74,0.08)',   border: 'rgba(22,163,74,0.2)' },
-            { label: 'Błędne',     val: total - correct, color: '#991b1b', bg: 'rgba(220,38,38,0.08)',  border: 'rgba(220,38,38,0.2)' },
-            { label: 'Wszystkich', val: total,           color: '#5b21b6', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.2)' },
+            { label: 'Poprawne',   val: correct,        color: '#166534', bg: 'rgba(22,163,74,0.08)',   border: 'rgba(22,163,74,0.2)',   icon: 'lucide:check-circle-2' },
+            { label: 'Błędne',     val: total - correct, color: '#991b1b', bg: 'rgba(220,38,38,0.08)',  border: 'rgba(220,38,38,0.2)',   icon: 'lucide:x-circle' },
+            { label: 'Wszystkich', val: total,           color: '#5b21b6', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.2)',  icon: 'lucide:list' },
           ].map(s => (
             <div key={s.label} style={{
               background: s.bg, border: `1px solid ${s.border}`,
               borderRadius: 16, padding: '1.2rem', textAlign: 'center',
               boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             }}>
+              <Icon icon={s.icon} style={{ fontSize: '1.1rem', color: s.color, marginBottom: 4 }} />
               <div style={{ fontSize: '2rem', fontWeight: 900, color: s.color }}>{s.val}</div>
               <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: 4 }}>{s.label}</div>
             </div>
@@ -575,14 +621,17 @@ function ResultsScreen({ results, onRestart }) {
                 color: r.correct ? '#166534' : '#991b1b',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '0.72rem', fontWeight: 900,
-              }}>{r.correct ? '✓' : '✗'}</span>
+              }}>
+                <Icon icon={r.correct ? 'lucide:check' : 'lucide:x'} style={{ fontSize: '0.75rem' }} />
+              </span>
               <div style={{ flex: 1 }}>
                 <p style={{ color: r.correct ? '#9ca3af' : '#374151', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>
                   {r.q.question.slice(0, 90)}{r.q.question.length > 90 ? '…' : ''}
                 </p>
                 {!r.correct && (
-                  <p style={{ color: '#7c3aed', fontSize: '0.75rem', margin: '2px 0 0', fontWeight: 600 }}>
-                    ✓ {r.q.answer}
+                  <p style={{ color: '#7c3aed', fontSize: '0.75rem', margin: '2px 0 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <Icon icon="lucide:check" style={{ fontSize: '0.7rem' }} />
+                    {r.q.answer}
                   </p>
                 )}
               </div>
@@ -599,10 +648,14 @@ function ResultsScreen({ results, onRestart }) {
             fontFamily: "'Sora', sans-serif",
             boxShadow: '0 4px 20px rgba(124,58,237,0.3)',
             transition: 'transform 0.15s',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           }}
           onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-          >Zagraj ponownie</button>
+          >
+            <Icon icon="lucide:refresh-cw" />
+            Zagraj ponownie
+          </button>
           <Link to="/exam" style={{ flex: 1, textDecoration: 'none' }}>
             <button style={{
               width: '100%', padding: '1rem',
@@ -611,10 +664,14 @@ function ResultsScreen({ results, onRestart }) {
               color: '#7c3aed', borderRadius: 14,
               fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
               fontFamily: "'Sora', sans-serif", transition: 'all 0.15s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; }}
-            >Dashboard →</button>
+            >
+              Dashboard
+              <Icon icon="lucide:arrow-right" />
+            </button>
           </Link>
         </div>
       </div>
