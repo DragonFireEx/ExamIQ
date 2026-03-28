@@ -20,7 +20,7 @@ function AppContent() {
       <Route path="/learn"                     element={<Navigate to="/learn/teoria" replace />} />
       <Route path="/learn/teoria"              element={<LearnPage />} />
       <Route path="/learn/praktyka"            element={<PracticePage />} />
-      <Route path="/learn/egzamin-praktyczny"  element={<ExamPracticePage />} />
+      <Route path="/learn/egzamin"             element={<ExamPracticePage />} />
       <Route path="/exam"                      element={<DashboardPage />} />
       <Route path="/about"                     element={<AboutPage />} />
     </Routes>

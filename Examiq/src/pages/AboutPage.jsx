@@ -66,7 +66,7 @@ export default function AboutPage() {
             marginBottom: '1.25rem',
             border: '1px solid rgba(124,58,237,0.2)',
           }}>
-            O nas
+            <Icon icon='lucide:users' width={14} /> O nas
           </div>
           <h1 style={{
             fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',

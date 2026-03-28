@@ -1,5 +1,5 @@
 // components/Header.jsx
-// Nagłówek z menu rozwijanym "Nauka" (Teoria / Praktyka / Egzamin praktyczny)
+// Nagłówek z menu rozwijanym "Nauka" (Teoria / Praktyka / Egzamin)
 
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -13,7 +13,7 @@ const NAV_LINKS = [
 const LEARN_LINKS = [
   { path: '/learn/teoria',             label: 'Teoria',              icon: 'lucide:book-open' },
   { path: '/learn/praktyka',           label: 'Praktyka',            icon: 'lucide:hammer' },
-  { path: '/learn/egzamin-praktyczny', label: 'Egzamin praktyczny',  icon: 'lucide:clipboard-list' },
+  { path: '/learn/egzamin', label: 'Egzamin',  icon: 'lucide:clipboard-list' },
 ];
 
 export default function Header() {
@@ -124,7 +124,7 @@ export default function Header() {
             }}>
               {LEARN_LINKS.map(({ path, label, icon }) => {
                 const active = location.pathname === path;
-                const isExam = path === '/learn/egzamin-praktyczny';
+                const isExam = path === '/learn/egzamin';
                 return (
                   <Link
                     key={path}
@@ -152,11 +152,6 @@ export default function Header() {
                     <Icon icon={icon} style={{ fontSize: '1rem', flexShrink: 0 }} />
                     <div>
                       <div>{label}</div>
-                      {isExam && (
-                        <div style={{ fontSize: '0.65rem', color: '#a78bfa', fontWeight: 600, marginTop: 1 }}>
-                          3 zadania · ocena AI
-                        </div>
-                      )}
                     </div>
                   </Link>
                 );

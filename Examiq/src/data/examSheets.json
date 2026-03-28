@@ -17,7 +17,7 @@
         "number": 1,
         "type": "konsola",
         "typeLabel": "Aplikacja konsolowa",
-        "typeIcon": "💻",
+        "typeIcon": "lucide:terminal",
         "title": "Loteria liczbowa",
         "fullText": "Za pomocą narzędzi do tworzenia aplikacji konsolowych wykonaj program loterii liczbowej polegającej na losowaniu zestawów składających się z sześciu liczb.\n\nZałożenia aplikacji:\n- Zastosowany obiektowy język programowania: C++, C#, Java lub Python\n- Program wczytuje z klawiatury ile zestawów należy wylosować\n- Program generuje podaną liczbę zestawów składających się z sześciu losowanych liczb całkowitych ze zbioru <1, 49>\n- W jednym zestawie liczby nie mogą się powtarzać\n- Zestawy są wyświetlone na ekranie\n- Program zlicza we wszystkich zestawach ile jest wystąpień każdej liczby od 1 do 49\n- Zliczenia są wyświetlone na ekranie\n\nWymagania techniczne:\n- W programie należy użyć funkcji do generowania liczb pseudolosowych\n- Do przechowywania wyników losowań należy użyć dwuwymiarowej tablicy n×6 lub innej kolekcji\n- W programie należy zdefiniować przynajmniej dwie funkcje:\n  - wypełniającą tablicę lub kolekcję danymi losowań\n  - wyświetlającą wyniki wszystkich losowań na ekranie\n- W podejściu strukturalnym nie można stosować zmiennych globalnych\n- Program powinien podejmować zrozumiałą komunikację z użytkownikiem\n- Znaczące, angielskie lub polskie nazewnictwo\n- Czyste formatowanie kodu",
         "hints": [
@@ -46,7 +46,7 @@
         "number": 2,
         "type": "desktopowa",
         "typeLabel": "Aplikacja desktopowa",
-        "typeIcon": "🖥️",
+        "typeIcon": "lucide:computer",
         "title": "Wzornik kolorów RGB",
         "fullText": "Za pomocą dostępnego na stanowisku egzaminacyjnym środowiska programistycznego wykonaj aplikację desktopową wybierania kolorów z palety RGB.\n\nOpis wyglądu aplikacji:\n- Tytuł okna: \"Wzornik kolorów RGB. Wykonał\" dalej wstawiony numer zdającego\n- Tło okna: Cornsilk (#FFF8DC)\n- Duży prostokąt o białym kolorze tła (podgląd koloru)\n- Napis: \"Dobierz kolor suwakami i zapisz przyciskiem:\"\n- Trzy suwaki, każdy o wartości początkowej 255 oraz zakresie wartości od 0 do 255\n- Z lewej strony suwaków kolejno etykiety: R, G, B\n- Z prawej strony suwaków etykiety z aktualną wartością suwaka, początkowo ustawione na 255\n- Przycisk \"Pobierz\" koloru Peru (#CD853F)\n- Etykieta z pobraną wartością suwaków, domyślnie \"255, 255, 255\" o kolorze tła białym (mały prostokąt)\n\nDziałanie aplikacji:\n- Zmiany położenia suwaków powodują zmianę wartości RGB po prawej stronie suwaka oraz ustawiają kolor dużego prostokąta\n- Po wciśnięciu przycisku \"Pobierz\" mały prostokąt przyjmuje kolor i wyświetla wartości RGB\n- Dalsze ruchy suwakami zmieniają tylko duży prostokąt\n- Mały prostokąt zmienia się wyłącznie po kliknięciu \"Pobierz\"",
         "hints": [
@@ -80,7 +80,7 @@
         "number": 3,
         "type": "dokumentacja",
         "typeLabel": "Dokumentacja",
-        "typeIcon": "📄",
+        "typeIcon": "lucide:file-text",
         "title": "Dokumentacja funkcji + plik egzamin + zrzuty ekranu",
         "fullText": "Wykonaj dokumentację do aplikacji utworzonych na egzaminie.\n\nCZESC A - Komentarz dokumentacyjny funkcji (w kodzie konsolowym):\nW kodzie źródłowym aplikacji konsolowej za pomocą komentarza utwórz nagłówek jednej dowolnej funkcji/metody według wzoru:\n\n**********************************************\nnazwa funkcji:\n  <nazwa>\nopis funkcji:\n  <krótki opis co robi funkcja>\nparametry:\n  <nazwa i opis parametru1, lub brak>\n  <nazwa i opis parametru2>\n  ...\nzwracany typ i opis: <nazwa typu i opis co jest zwracane lub brak>\nautor:\n  <numer zdającego>\n**********************************************\n\nUWAGA: Dokumentację umieść w komentarzu (wieloliniowym lub kilku jednoliniowych).\n\nCZESC B - Plik egzamin (w edytorze tekstu pakietu biurowego):\nUtwórz plik o nazwie egzamin zawierający:\n- Nazwę systemu operacyjnego\n- Nazwy środowisk programistycznych\n- Nazwy języków programowania\n\nCZESC C - Zrzuty ekranu:\n- konsola1.png, konsola2.png - działanie aplikacji konsolowej\n- desktop1.png, desktop2.png, desktop3.png - stan początkowy, zmiana suwaków, po kliknięciu Pobierz\n\nWszystkie zrzuty i plik egzamin umieść w folderze dokumentacja.",
         "hints": [
@@ -120,7 +120,7 @@
         "number": 1,
         "type": "konsola",
         "typeLabel": "Aplikacja konsolowa",
-        "typeIcon": "💻",
+        "typeIcon": "lucide:terminal",
         "title": "Klasy OOP - Urządzenia domowe",
         "fullText": "Napisz program implementujący klasę i dwie klasy potomne, który obsługuje działanie urządzeń domowych.\n\nKlasa bazowa Urzadzenie:\n- Implementuje jedną ogólnodostępną metodę wyswietl(komunikat), która wyświetla treść komunikatu\n- Komunikat jest argumentem metody, metoda nie zwraca wartości\n\nKlasa Pralka (dziedziczy po Urzadzenie):\n- Prywatne pole nrProgramu (int), inicjowane wartością 0, niedostępne w klasach potomnych\n- Metoda ustawProgram(nr): jeśli nr z przedziału 1-12 ustawia pole i zwraca nr; w p.p. ustawia 0 i zwraca 0\n\nKlasa Odkurzacz (dziedziczy po Urzadzenie):\n- Prywatne pole bool wlaczony = false, niedostępne w klasach potomnych\n- Metoda on(): działa TYLKO gdy wyłączony - ustawia true, wywołuje wyswietl(\"Odkurzacz włączono\")\n- Metoda off(): działa TYLKO gdy włączony - ustawia false, wywołuje wyswietl(\"Odkurzacz wyłączono\")\n\nProgram główny:\n- Inicjuje obiekty Pralka i Odkurzacz\n- Na Pralce testuje ustawienie programu z wartościami poprawnymi i niepoprawnymi\n- Na Odkurzaczu:\n  - Wywołuje on() trzykrotnie (komunikat wyświetla się tylko raz)\n  - Wywołuje wyswietl(\"Odkurzacz wyładował się\")\n  - Wywołuje off()\n\nOczekiwane wyjście:\nPodaj numer prania 1..12: 11\nProgram został ustawiony\nPodaj numer prania 1..12: 44\nPodano niepoprawny numer programu\nOdkurzacz włączono\nOdkurzacz wyładował się\nOdkurzacz wyłączono",
         "hints": [
@@ -152,7 +152,7 @@
         "number": 2,
         "type": "mobilna",
         "typeLabel": "Aplikacja mobilna",
-        "typeIcon": "📱",
+        "typeIcon": "lucide:smartphone",
         "title": "Aplikacja Android - Urządzenia domowe",
         "fullText": "Za pomocą środowiska programistycznego dostępnego na stanowisku egzaminacyjnym wykonaj aplikację mobilną do obsługi urządzeń domowych (Android Studio).\n\nElementy aplikacji:\n- Napis \"Urządzenia Domowe\" - duża czcionka, wyśrodkowany, margines 5\n- Napis \"Autor: [numer zdającego]\" - wyśrodkowany, margines 5\n\nRozkład Pralka (LinearLayout poziomy):\n- Obraz pralka.jpg (wysokość 150, marginesy L/R/D: 20, góra: 0)\n- LinearLayout pionowy:\n  - TextView \"Pralka\" - duża czcionka\n  - EditText z podpowiedzią \"Podaj nr prania 1..12\", inputType=number, tło SkyBlue (#87CEEB), kolor tekstu Navy (#000080)\n  - Button \"Zatwierdź\", tło RoyalBlue (#4169E1), margines 10\n  - TextView \"Numer prania: nie podano\"\n\nRozkład Odkurzacz (LinearLayout poziomy):\n- Obraz odkurzacz.jpg (wysokość 150, marginesy L/R/D: 20, góra: 0)\n- LinearLayout pionowy:\n  - TextView \"Odkurzacz\" - duża czcionka\n  - Button \"Włącz\", tło RoyalBlue (#4169E1), margines 10\n  - TextView \"Odkurzacz wyłączony\"\n  - TextView \"Status: naładowany\"\n\nTło głównego layoutu: LightBlue (#ADD8E6)\n\nDziałanie:\n- Przycisk \"Zatwierdź\": jeśli liczba z przedziału 1-12 to napis zmienia się na \"Numer prania: X\"\n- Toggle Włącz/Wyłącz: zmienia tekst przycisku i etykietę stanu odkurzacza",
         "hints": [
@@ -186,7 +186,7 @@
         "number": 3,
         "type": "dokumentacja",
         "typeLabel": "Dokumentacja",
-        "typeIcon": "📄",
+        "typeIcon": "lucide:file-text",
         "title": "Dokumentacja metody klasy bazowej + plik egzamin + zrzuty ekranu",
         "fullText": "Wykonaj dokumentację do aplikacji utworzonych na egzaminie.\n\nCZESC A - Komentarz dokumentacyjny metody klasy bazowej (w kodzie konsolowym):\n\n**********************************************\nnazwa:\n  <tu wstaw nazwę metody>\nopis:\n  <co wykonuje metoda?>\nparametry:\n  <nazwa i opis parametru1, lub brak>\nzwracany typ i opis: <nazwa typu i opis co jest zwracane lub brak>\nautor:\n  <numer zdającego>\n**********************************************\n\nCZESC B - Plik egzamin zawierający:\n- Nazwę systemu operacyjnego\n- Nazwy środowisk programistycznych\n- Nazwę emulatora dla aplikacji mobilnej (np. Pixel 5 API 33)\n- Nazwy języków programowania\n\nCZESC C - Zrzuty ekranu:\n- konsola1.png, konsola2.png - działanie programu konsolowego\n- mobile1.png - stan początkowy\n- mobile2.png - po kliknięciu Zatwierdź\n- mobile3.png - po kliknięciu Włącz\n- mobile4.png - po kliknięciu Wyłącz",
         "hints": [
@@ -226,7 +226,7 @@
         "number": 1,
         "type": "konsola",
         "typeLabel": "Aplikacja konsolowa",
-        "typeIcon": "💻",
+        "typeIcon": "lucide:terminal",
         "title": "Operacje na tablicy - klasa",
         "fullText": "Za pomocą narzędzi do tworzenia aplikacji konsolowych zaimplementuj program realizujący różne operacje na tablicach.\n\nPola klasy (oba prywatne, niedostępne dla klas potomnych):\n- Tablica liczb całkowitych (tradycyjna tablica; w Pythonie lista)\n- Liczba elementów tablicy (int)\n\nKonstruktor klasy:\n- Przyjmuje jako argument rozmiar tablicy\n- Ustawia wartość pola liczby elementów na wartość argumentu\n- Wypełnia tablicę pseudolosowymi liczbami całkowitymi z zakresu od 1 do 1000\n\nMetody klasy (wszystkie publiczne):\n- Wyświetlająca wszystkie elementy jako \"<index>: <wartość>\" - nie zwraca wartości\n- Wyszukująca pierwsze wystąpienie wartości - zwraca indeks lub -1\n- Wyświetlająca liczby nieparzyste - zwraca ich liczbę\n- Licząca średnią arytmetyczną - zwraca tę wartość\n\nProgram główny (rozmiar tablicy > 20):\n- Wywołuje metodę wyświetlającą wszystkie elementy\n- Wyszukuje wartość: jeśli znaleziono wyświetla indeks; jeśli nie - nic nie wyświetla\n- Wyświetla liczby nieparzyste i ich ilość z komentarzem\n- Wyświetla średnią",
         "hints": [
@@ -256,7 +256,7 @@
         "number": 2,
         "type": "webowa",
         "typeLabel": "Aplikacja webowa",
-        "typeIcon": "🌐",
+        "typeIcon": "lucide:globe",
         "title": "Galeria zdjęć z kategoriami - React / Angular",
         "fullText": "Z zastosowaniem frameworka Angular lub biblioteki React.js wykonaj aplikację internetową realizującą funkcję kategoryzacji zdjęć w galerii.\n\nDane zdjęć (skopiuj jako tablicę):\n- id, alt, filename, category (1=kwiaty, 2=zwierzęta, 3=samochody), downloads\n\nKomponent składa się z:\n- Nagłówka h1: \"Kategorie zdjęć\"\n- Trzech przełączników (switch/checkbox) domyślnie włączonych: Kwiaty, Zwierzęta, Samochody\n- Bloków zdjęć wyświetlanych warunkowo (jeden obok drugiego):\n  - Zdjęcie (marginesy 5px, zaokrąglone rogi)\n  - Nagłówek h4 z liczbą pobrań\n  - Przycisk \"Pobierz\"\n\nDziałanie:\n- Wyświetlane są tylko zdjęcia z włączonych kategorii\n- Kliknięcie \"Pobierz\" zwiększa o 1 liczbę pobrań (widoczne na bieżąco)\n- Aplikacja używa pętli i warunków - działa dla dowolnej liczby zdjęć",
         "hints": [
@@ -290,7 +290,7 @@
         "number": 3,
         "type": "dokumentacja",
         "typeLabel": "Dokumentacja",
-        "typeIcon": "📄",
+        "typeIcon": "lucide:file-text",
         "title": "Dokumentacja metody + plik egzamin + zrzuty ekranu",
         "fullText": "Wykonaj dokumentację do aplikacji utworzonych na egzaminie.\n\nCZESC A - Komentarz dokumentacyjny metody (w kodzie konsolowym):\n\n**********************************************\nnazwa metody:\n  <nazwa>\nopis metody:\n  <krótki opis, co robi metoda>\nparametry:\n  <nazwa i opis parametru1, lub brak>\nzwracany typ i opis: <nazwa typu i opis co jest zwracane lub brak>\nautor:\n  <numer zdającego>\n**********************************************\n\nCZESC B - Plik egzamin zawierający:\n- Nazwę systemu operacyjnego\n- Nazwy środowisk programistycznych\n- Nazwy języków programowania\n\nCZESC C - Zrzuty ekranu:\n- konsola1.png, konsola2.png - działanie aplikacji konsolowej\n- web1.png, web2.png, web3.png - stan początkowy, toggle kategorii, działanie Pobierz",
         "hints": [

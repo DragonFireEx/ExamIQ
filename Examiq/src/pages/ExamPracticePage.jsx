@@ -1,15 +1,13 @@
 // pages/ExamPracticePage.jsx
-// Arkusze egzaminacyjne INF04 — menu kategorii, 3 zadania, obrazy poglądowe,
-// wskazówki akordeon, dropzone (plik kodu lub obraz) + ocena AI 0–100
-
 import { useState, useRef } from 'react';
 import Header from '../components/Header';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { usePageTitle } from '../hooks/usePageTitle';
 import examSheets from '../data/examSheets.json';
+import Footer from '../components/Footer';
+import { Icon } from '@iconify/react';
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
-
 const TYPE_COLOR = {
   konsola:      { bg: 'rgba(124,58,237,0.1)',  text: '#7c3aed', border: 'rgba(124,58,237,0.25)'  },
   webowa:       { bg: 'rgba(59,130,246,0.1)',  text: '#2563eb', border: 'rgba(59,130,246,0.25)'  },
@@ -18,7 +16,6 @@ const TYPE_COLOR = {
   dokumentacja: { bg: 'rgba(107,114,128,0.1)', text: '#4b5563', border: 'rgba(107,114,128,0.25)' },
 };
 function typeStyle(type) { return TYPE_COLOR[type] || TYPE_COLOR.dokumentacja; }
-
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const r = new FileReader();
@@ -57,12 +54,11 @@ function HintAccordion({ hints }) {
                 fontSize: '0.65rem', fontWeight: 800, color: '#a78bfa',
                 background: 'rgba(124,58,237,0.1)', padding: '0.15rem 0.5rem',
                 borderRadius: 99, letterSpacing: '0.05em',
-              }}>💡 WSKAZÓWKA {i + 1}</span>
-              <span style={{
-                fontSize: '0.75rem', color: '#a78bfa', flexShrink: 0,
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s',
-              }}>▼</span>
+                display: 'flex', alignItems: 'center', gap: '0.3rem',
+              }}>
+                <Icon icon="lucide:lightbulb" width={11} /> WSKAZÓWKA {i + 1}
+              </span>
+              <Icon icon="lucide:chevron-down" width={14} color="#a78bfa" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
             </button>
             {isOpen && (
               <div style={{
@@ -168,16 +164,12 @@ function FileDropzone({ task, onResult }) {
       const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
       const criteriaText = task.criteria.map((c, i) => `${i + 1}. ${c}`).join('\n');
       const systemPrompt = `Jesteś egzaminatorem oceniającym pracę ucznia z egzaminu zawodowego INF.04 (technik programista).
-
 ZADANIE: ${task.title}
 TYP: ${task.typeLabel}
-
 TREŚĆ ZADANIA:
 ${task.fullText}
-
 KRYTERIA OCENY:
 ${criteriaText}`;
-
       let parts = [];
       if (isImageFile(file)) {
         const b64 = await fileToBase64(file);
@@ -189,7 +181,6 @@ ${criteriaText}`;
         const text = await file.text();
         parts = [{ text: `${systemPrompt}\n\nKOD/PLIK UCZNIA (${file.name}):\n\`\`\`\n${text.slice(0, 12000)}\n\`\`\`\n\nOceń kod ściśle według kryteriów.\n\nOdpowiedz TYLKO w formacie JSON (bez markdown):\n{"score":<0-100>,"verdict":"<ZALICZONO|CZĘŚCIOWO|NIEZALICZONO>","criteria_results":[{"criterion":"<treść>","passed":<bool>,"comment":"<komentarz>"}],"general_comment":"<2-3 zdania po polsku>","improvements":["<co poprawić>"]}` }];
       }
-
       const res  = await model.generateContent({ contents: [{ role: 'user', parts }] });
       const raw  = res.response.text().replace(/```json|```/g, '').trim();
       const data = JSON.parse(raw);
@@ -202,10 +193,8 @@ ${criteriaText}`;
   }
 
   const sc = result ? (result.score >= 75 ? '#16a34a' : result.score >= 50 ? '#d97706' : '#dc2626') : '#7c3aed';
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {/* Drop zone */}
       <div
         onDragOver={e => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
@@ -225,13 +214,15 @@ ${criteriaText}`;
           onChange={e => handleFile(e.target.files[0])} />
         {file ? (
           <>
-            <div style={{ fontSize: '1.75rem' }}>{isImageFile(file) ? '🖼️' : '📄'}</div>
+            {isImageFile(file)
+              ? <Icon icon="lucide:image" width={28} color="#7c3aed" />
+              : <Icon icon="lucide:file-text" width={28} color="#7c3aed" />}
             <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#374151' }}>{file.name}</div>
             <div style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{(file.size / 1024).toFixed(1)} KB · kliknij aby zmienić</div>
           </>
         ) : (
           <>
-            <div style={{ fontSize: '2rem' }}>📁</div>
+            <Icon icon="lucide:folder-open" width={32} color="#9ca3af" />
             <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#6b7280' }}>Przeciągnij plik lub kliknij aby wybrać</div>
             <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Kod (.py .java .cs .cpp .js...) lub zdjęcie (.png .jpg)</div>
           </>
@@ -251,20 +242,19 @@ ${criteriaText}`;
         onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
         >
           {loading
-            ? <><span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⏳</span> AI ocenia plik...</>
-            : <>▶ Oceń plik z AI</>}
+            ? <><Icon icon="lucide:loader" width={15} style={{ animation: 'spin 1s linear infinite' }} /> AI ocenia plik...</>
+            : <><Icon icon="lucide:play" width={15} /> Oceń plik z AI</>}
         </button>
       )}
 
       {error && (
-        <div style={{ padding: '0.85rem 1rem', borderRadius: 10, background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.2)', fontSize: '0.8rem', color: '#dc2626' }}>
-          ⚠️ {error}
+        <div style={{ padding: '0.85rem 1rem', borderRadius: 10, background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.2)', fontSize: '0.8rem', color: '#dc2626', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Icon icon="lucide:alert-triangle" width={15} /> {error}
         </div>
       )}
 
       {result && (
         <div style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 16, border: `1px solid ${sc}40`, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
-          {/* Score header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: `${sc}12`, borderBottom: `1px solid ${sc}20` }}>
             <div>
               <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 3 }}>Ocena AI</div>
@@ -275,15 +265,15 @@ ${criteriaText}`;
               <span style={{ fontSize: '1rem', color: sc, opacity: 0.5, fontWeight: 600 }}>/100</span>
             </div>
           </div>
-          {/* Progress */}
           <div style={{ height: 4, background: 'rgba(0,0,0,0.06)' }}>
             <div style={{ height: '100%', width: `${result.score}%`, background: `linear-gradient(90deg,${sc},${sc}99)`, transition: 'width 0.8s ease' }} />
           </div>
-          {/* Criteria */}
           <div style={{ padding: '0.75rem 1.25rem' }}>
             {result.criteria_results?.map((cr, i) => (
               <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', padding: '0.45rem 0', borderBottom: i < result.criteria_results.length - 1 ? '1px solid rgba(0,0,0,0.04)' : 'none' }}>
-                <span style={{ flexShrink: 0, fontWeight: 900, fontSize: '0.85rem', marginTop: 1, color: cr.passed ? '#16a34a' : '#dc2626' }}>{cr.passed ? '✓' : '✗'}</span>
+                {cr.passed
+                  ? <Icon icon="lucide:check" width={15} color="#16a34a" style={{ flexShrink: 0, marginTop: 2 }} />
+                  : <Icon icon="lucide:x" width={15} color="#dc2626" style={{ flexShrink: 0, marginTop: 2 }} />}
                 <div>
                   <div style={{ fontSize: '0.78rem', color: '#374151', fontWeight: cr.passed ? 400 : 600 }}>{cr.criterion}</div>
                   {cr.comment && <div style={{ fontSize: '0.7rem', color: '#9ca3af', marginTop: 2, fontStyle: 'italic' }}>{cr.comment}</div>}
@@ -319,7 +309,6 @@ function TaskCard({ task, index }) {
   const [aiResults, setAiResults] = useState({});
   const tc = typeStyle(task.type);
   const scored = aiResults[task.id];
-
   return (
     <div style={{
       background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(16px)',
@@ -330,7 +319,6 @@ function TaskCard({ task, index }) {
     onMouseEnter={e => e.currentTarget.style.boxShadow = '0 6px 32px rgba(124,58,237,0.1)'}
     onMouseLeave={e => e.currentTarget.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)'}
     >
-      {/* Header */}
       <button onClick={() => setExpanded(v => !v)} style={{
         width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
         padding: '1.25rem 1.5rem', background: 'none', border: 'none',
@@ -343,21 +331,23 @@ function TaskCard({ task, index }) {
           fontWeight: 900, fontSize: '1rem', color: '#fff',
           boxShadow: '0 4px 12px rgba(124,58,237,0.3)',
         }}>{index + 1}</div>
-
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 4, flexWrap: 'wrap' }}>
             <span style={{
               fontSize: '0.65rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 6,
               background: tc.bg, color: tc.text, border: `1px solid ${tc.border}`,
               letterSpacing: '0.05em', textTransform: 'uppercase',
-            }}>{task.typeIcon} {task.typeLabel}</span>
+            }}><Icon icon={task.typeIcon}width={14} /> {task.typeLabel}</span>
             {scored && (
               <span style={{
                 fontSize: '0.65rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 6,
                 background: scored.score >= 75 ? 'rgba(22,163,74,0.1)' : 'rgba(220,38,38,0.1)',
                 color: scored.score >= 75 ? '#16a34a' : '#dc2626',
                 border: `1px solid ${scored.score >= 75 ? 'rgba(22,163,74,0.25)' : 'rgba(220,38,38,0.25)'}`,
-              }}>✓ {scored.score}/100</span>
+                display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+              }}>
+                <Icon icon="lucide:check" width={10} /> {scored.score}/100
+              </span>
             )}
           </div>
           <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#1f2937', lineHeight: 1.3 }}>{task.title}</div>
@@ -366,18 +356,16 @@ function TaskCard({ task, index }) {
             {task.images?.length > 0 && ` · ${task.images.length} obraz${task.images.length > 1 ? 'y' : ''}`}
           </div>
         </div>
-
-        <span style={{ fontSize: '0.8rem', color: '#a78bfa', flexShrink: 0, transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s' }}>▼</span>
+        <Icon icon="lucide:chevron-down" width={16} color="#a78bfa" style={{ flexShrink: 0, transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s' }} />
       </button>
 
       {expanded && (
         <div style={{ borderTop: '1px solid rgba(124,58,237,0.08)' }}>
-          {/* Tabs */}
           <div style={{ display: 'flex', borderBottom: '1px solid rgba(124,58,237,0.08)' }}>
             {[
-              { id: 'tresc',     label: '📋 Treść' },
-              { id: 'wskazowki', label: `💡 Wskazówki (${task.hints?.length || 0})` },
-              { id: 'ocen',      label: '🤖 Oceń plik' },
+              { id: 'tresc',     label: 'Treść',        icon: 'lucide:clipboard-list' },
+              { id: 'wskazowki', label: `Wskazówki (${task.hints?.length || 0})`, icon: 'lucide:lightbulb' },
+              { id: 'ocen',      label: 'Oceń plik',    icon: 'lucide:play' },
             ].map(tab => (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
                 flex: 1, padding: '0.7rem 0.5rem', background: 'none', border: 'none',
@@ -385,12 +373,14 @@ function TaskCard({ task, index }) {
                 cursor: 'pointer', fontFamily: "'Sora', sans-serif",
                 fontWeight: activeTab === tab.id ? 700 : 500, fontSize: '0.78rem',
                 color: activeTab === tab.id ? '#7c3aed' : '#9ca3af', transition: 'all 0.12s',
-              }}>{tab.label}</button>
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem',
+              }}>
+                <Icon icon={tab.icon} width={13} />
+                {tab.label}
+              </button>
             ))}
           </div>
-
           <div style={{ padding: '1.25rem 1.5rem' }}>
-            {/* TREŚĆ */}
             {activeTab === 'tresc' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div style={{
@@ -400,14 +390,12 @@ function TaskCard({ task, index }) {
                   whiteSpace: 'pre-wrap', wordBreak: 'break-word',
                   maxHeight: 420, overflowY: 'auto',
                 }}>{task.fullText}</div>
-
                 {task.images?.length > 0 && (
                   <div>
                     <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem' }}>Obrazy poglądowe</div>
                     <ImageGallery images={task.images} captions={task.imagesCaptions} />
                   </div>
                 )}
-
                 <div>
                   <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem' }}>
                     Kryteria oceny ({task.criteria?.length})
@@ -425,15 +413,11 @@ function TaskCard({ task, index }) {
                 </div>
               </div>
             )}
-
-            {/* WSKAZÓWKI */}
             {activeTab === 'wskazowki' && (
               task.hints?.length
                 ? <HintAccordion hints={task.hints} />
                 : <div style={{ fontSize: '0.82rem', color: '#9ca3af', textAlign: 'center', padding: '1.5rem' }}>Brak wskazówek</div>
             )}
-
-            {/* OCEŃ PLIK */}
             {activeTab === 'ocen' && (
               <div>
                 <div style={{
@@ -469,32 +453,33 @@ function SheetView({ sheet, onBack }) {
             fontFamily: "'Sora', sans-serif", fontSize: '0.8rem',
             color: '#a78bfa', fontWeight: 600, padding: 0, marginBottom: '0.5rem',
             display: 'flex', alignItems: 'center', gap: '0.3rem',
-          }}>← Wróć do wyboru arkusza</button>
+          }}>
+            <Icon icon="lucide:arrow-left" width={14} /> Wróć do wyboru arkusza
+          </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '0.5rem' }}>
-            <span style={{ fontSize: '0.68rem', fontWeight: 800, padding: '0.25rem 0.7rem', borderRadius: 6, background: 'rgba(124,58,237,0.08)', color: '#7c3aed', border: '1px solid rgba(124,58,237,0.2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              📋 {sheet.title}
+            <span style={{ fontSize: '0.68rem', fontWeight: 800, padding: '0.25rem 0.7rem', borderRadius: 6, background: 'rgba(124,58,237,0.08)', color: '#7c3aed', border: '1px solid rgba(124,58,237,0.2)', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+              <Icon icon="lucide:clipboard-list" width={11} /> {sheet.title}
             </span>
           </div>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#1f2937', margin: '0 0 0.35rem', lineHeight: 1.3 }}>{sheet.subtitle}</h2>
           <p style={{ fontSize: '0.82rem', color: '#6b7280', margin: 0, lineHeight: 1.6 }}>{sheet.description}</p>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: 6, alignItems: 'flex-end', flexShrink: 0 }}>
+          {sheet.tasks.map(t => {
+            const tc = typeStyle(t.type);
+            return (
+              <div key={t.id} style={{ fontSize: '0.72rem', fontWeight: 600, padding: '0.25rem 0.65rem', borderRadius: 7, background: tc.bg, color: tc.text, border: `1px solid ${tc.border}` }}>
+                <Icon icon={t.typeIcon} width={14} /> Zad. {t.number}: {t.typeLabel}
+              </div>
+            );
+          })}
+        </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: '0.6rem' }}>
             {sheet.tags?.map(tag => (
               <span key={tag} style={{ fontSize: '0.68rem', fontWeight: 600, padding: '0.2rem 0.55rem', borderRadius: 99, background: 'rgba(124,58,237,0.06)', color: '#a78bfa', border: '1px solid rgba(124,58,237,0.15)' }}>{tag}</span>
             ))}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end', flexShrink: 0 }}>
-          {sheet.tasks.map(t => {
-            const tc = typeStyle(t.type);
-            return (
-              <div key={t.id} style={{ fontSize: '0.72rem', fontWeight: 600, padding: '0.25rem 0.65rem', borderRadius: 7, background: tc.bg, color: tc.text, border: `1px solid ${tc.border}` }}>
-                {t.typeIcon} Zad. {t.number}: {t.typeLabel}
-              </div>
-            );
-          })}
-        </div>
       </div>
-
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {sheet.tasks.map((task, i) => <TaskCard key={task.id} task={task} index={i} />)}
       </div>
@@ -510,7 +495,6 @@ function SheetSelector({ onSelect }) {
         <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.4rem' }}>Dostępne arkusze</div>
         <h2 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#1f2937', margin: 0 }}>Wybierz arkusz egzaminacyjny</h2>
       </div>
-
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {examSheets.map((sheet, i) => (
           <button key={sheet.id} onClick={() => onSelect(sheet)} style={{
@@ -518,7 +502,7 @@ function SheetSelector({ onSelect }) {
             padding: '1.5rem', borderRadius: 20, textAlign: 'left',
             border: '1px solid rgba(124,58,237,0.12)',
             background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(16px)',
-            cursor: 'pointer', fontFamily: "'Sora', sans-serif',",
+            cursor: 'pointer', fontFamily: "'Sora', sans-serif",
             transition: 'all 0.15s', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', width: '100%',
           }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(124,58,237,0.13)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.3)'; }}
@@ -531,7 +515,6 @@ function SheetSelector({ onSelect }) {
               fontWeight: 900, fontSize: '1.3rem', color: '#fff',
               boxShadow: '0 4px 16px rgba(124,58,237,0.3)',
             }}>{i + 1}</div>
-
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 5 }}>{sheet.title}</div>
               <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1f2937', marginBottom: 4, lineHeight: 1.3 }}>{sheet.subtitle}</div>
@@ -541,7 +524,7 @@ function SheetSelector({ onSelect }) {
                   const tc = typeStyle(t.type);
                   return (
                     <span key={t.id} style={{ fontSize: '0.68rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: 7, background: tc.bg, color: tc.text, border: `1px solid ${tc.border}` }}>
-                      {t.typeIcon} {t.typeLabel}
+                      <Icon icon={t.typeIcon} width={14} /> {t.typeLabel}
                     </span>
                   );
                 })}
@@ -552,14 +535,12 @@ function SheetSelector({ onSelect }) {
                 ))}
               </div>
             </div>
-
-            <span style={{ flexShrink: 0, color: '#d1d5db', fontSize: '1.1rem', alignSelf: 'center' }}>→</span>
+            <Icon icon="lucide:arrow-right" width={18} color="#d1d5db" style={{ alignSelf: 'center', flexShrink: 0 }} />
           </button>
         ))}
       </div>
-
       <div style={{ marginTop: '1.5rem', padding: '1rem 1.25rem', borderRadius: 14, background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.12)', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-        <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>ℹ️</span>
+        <Icon icon="lucide:info" width={18} color="#a78bfa" style={{ flexShrink: 0, marginTop: 1 }} />
         <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.65 }}>
           Każdy arkusz zawiera 3 zadania. Przeczytaj treść, skorzystaj z wskazówek, a następnie wgraj swój plik — AI oceni go według kryteriów i wyświetli wynik 0–100 z komentarzem.
         </div>
@@ -570,18 +551,16 @@ function SheetSelector({ onSelect }) {
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function ExamPracticePage() {
-  usePageTitle('Egzamin praktyczny');
+  usePageTitle('Egzamin');
   const [selectedSheet, setSelectedSheet] = useState(null);
-
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f5f3ff 0%,#ede9fe 45%,#e0e7ff 100%)', fontFamily: "'Sora', sans-serif" }}>
       <Header />
       <main style={{ maxWidth: 860, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
-
-        {/* Hero */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 99, padding: '0.4rem 1.1rem', marginBottom: '1rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>📋 INF04 · Egzamin praktyczny</span>
+            <Icon icon="lucide:clipboard-list" width={14} color="#7c3aed" />
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Egzamin</span>
           </div>
           <h1 style={{ fontSize: 'clamp(1.8rem,5vw,2.6rem)', fontWeight: 900, color: '#3b0764', margin: '0 0 0.6rem', letterSpacing: '-1px', lineHeight: 1.15 }}>
             Arkusze egzaminacyjne
@@ -590,18 +569,17 @@ export default function ExamPracticePage() {
             Pełne treści zadań, obrazy poglądowe, wskazówki i ocena Twojego rozwiązania przez AI.
           </p>
         </div>
-
         {selectedSheet
           ? <SheetView sheet={selectedSheet} onBack={() => setSelectedSheet(null)} />
           : <SheetSelector onSelect={setSelectedSheet} />
         }
       </main>
-
       <style>{`
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.25); border-radius: 3px; }
       `}</style>
+      <Footer />
     </div>
   );
 }
