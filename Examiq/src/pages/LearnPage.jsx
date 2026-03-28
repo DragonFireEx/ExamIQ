@@ -30,7 +30,7 @@ function SetupScreen({ onStart }) {
   const maxCount = Math.min(available, 40);
 
   return (
-    <div className="learn-root">
+    <div className="page-root">
       <Header />
       <div className="learn-container learn-container--setup">
         <div className="setup-hero">
