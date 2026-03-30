@@ -1,6 +1,31 @@
 /* ─── ExamPracticePage.css ──────────────────────────────── */
 
-/* ─── Page header ───────────────────────────────────────── */
+/* ─── GLOBAL CLASSES TO USE IN JSX:
+   Replace:
+   - .sheet-btn -> .card (or .card.card--md)
+   - .sheet-index -> .icon-box
+   - .sheet-view-header -> .card
+   - .task-card -> .card
+   - .task-index -> .icon-box.icon-box--sm
+   - .task-tabs -> .tabs
+   - .task-tab -> .tab
+   - .hint-item -> .accordion-item
+   - .hint-trigger -> .accordion-trigger
+   - .hint-body -> .accordion-body
+   - .gallery-thumb -> .gallery__thumb
+   - .lightbox -> .modal (similar, but keep local for now)
+   - .exam-btn-evaluate -> .btn.btn--solid
+   - .exam-error -> .alert.alert--error
+   Note: .dropzone stays page-specific (different styling)
+*/
+
+/* ─── Ensure page-root background ─────────────────────────────────── */
+.page-root {
+  /* Override/ensure gradient background */
+  background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 35%, var(--purple-200) 70%, #f0fdf4 100%) !important;
+}
+
+/* ─── Page header (page-specific) ─────────────────────────────── */
 .exam-page-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -8,20 +33,20 @@
 .exam-page-title {
   font-size: clamp(1.8rem, 5vw, 2.6rem);
   font-weight: 900;
-  color: #3b0764;
+  color: var(--purple-deep);
   margin: 0 0 0.6rem;
   letter-spacing: -1px;
   line-height: 1.15;
 }
 .exam-page-subtitle {
-  color: #6b7280;
+  color: var(--gray-500);
   font-size: 0.95rem;
   max-width: 520px;
   margin: 0 auto;
   line-height: 1.65;
 }
 
-/* ─── Sheet selector ────────────────────────────────────── */
+/* ─── Sheet selector (page-specific card styling) ─────────────── */
 .sheet-btn {
   display: flex;
   align-items: flex-start;
@@ -29,7 +54,7 @@
   padding: 1.5rem;
   border-radius: 20px;
   text-align: left;
-  border: 1px solid rgba(124, 58, 237, 0.12);
+  border: 1px solid var(--accent-border-medium);
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -41,40 +66,46 @@
 }
 .sheet-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.13);
-  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-border);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .sheet-index {
+  /* Replace with: .icon-box */
   flex-shrink: 0;
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
   font-size: 1.3rem;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  box-shadow: var(--shadow-icon);
+}
+.sheet-index svg {
+  color: #fff;
+  font-size: 1.3rem;
 }
 
 .sheet-info-note {
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
   border-radius: 14px;
-  background: rgba(124, 58, 237, 0.05);
-  border: 1px solid rgba(124, 58, 237, 0.12);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border-medium);
   display: flex;
   gap: 0.75rem;
   align-items: flex-start;
   font-size: 0.78rem;
-  color: #6b7280;
+  color: var(--gray-500);
   line-height: 1.65;
 }
 
-/* ─── Sheet view header ─────────────────────────────────── */
+/* ─── Sheet view header (page-specific) ─────────────────────────── */
 .sheet-view-header {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
@@ -82,7 +113,7 @@
   border-radius: 20px;
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(124, 58, 237, 0.12);
+  border: 1px solid var(--accent-border-medium);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 .sheet-back-btn {
@@ -91,7 +122,7 @@
   cursor: pointer;
   font-family: var(--sans);
   font-size: 0.8rem;
-  color: var(--purple-light);
+  color: var(--accent-light);
   font-weight: 600;
   padding: 0;
   margin-bottom: 0.5rem;
@@ -99,20 +130,23 @@
   align-items: center;
   gap: 0.3rem;
 }
-.sheet-back-btn:hover { color: var(--purple-mid); }
+.sheet-back-btn:hover { color: var(--accent); }
 
-/* ─── Task card ─────────────────────────────────────────── */
+/* ─── Task card (page-specific) ───────────────────────────────────── */
 .task-card {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 20px;
-  border: 1px solid rgba(124, 58, 237, 0.1);
+  border: 1px solid var(--accent-border-medium);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, background 0.2s;
 }
-.task-card:hover { box-shadow: 0 6px 32px rgba(124, 58, 237, 0.1); }
+.task-card:hover {
+  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.95);
+}
 
 .task-card__trigger {
   width: 100%;
@@ -132,15 +166,21 @@
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
   font-size: 1rem;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  box-shadow: var(--shadow-icon);
 }
+.task-index svg {
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Use global .icon-box.icon-box--sm for task index */
 
 .task-type-badge {
   font-size: 0.65rem;
@@ -163,49 +203,24 @@
   align-items: center;
   gap: 0.25rem;
 }
-.task-score-badge--pass { background: rgba(22, 163, 74, 0.1);  color: #16a34a; border: 1px solid rgba(22, 163, 74, 0.25); }
-.task-score-badge--fail { background: rgba(220, 38, 38, 0.1);  color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.25); }
+.task-score-badge--pass { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+.task-score-badge--fail { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); }
 
-/* ─── Task tabs ─────────────────────────────────────────── */
-.task-tabs {
-  display: flex;
-  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
-}
-.task-tab {
-  flex: 1;
-  padding: 0.7rem 0.5rem;
-  background: none;
-  border: none;
-  border-bottom: 2.5px solid transparent;
-  cursor: pointer;
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  color: #9ca3af;
-  font-weight: 500;
-  transition: all 0.12s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-}
-.task-tab--active {
-  border-bottom-color: var(--purple-mid);
-  color: var(--purple-mid);
-  font-weight: 700;
-}
+/* ─── Task tabs (use global .tabs, .tab) ───────────────────────── */
+/* Use global .tabs and .tab */
 
-/* ─── Task content ──────────────────────────────────────── */
+/* ─── Task content (page-specific) ─────────────────────────────── */
 .task-content {
   padding: 1.25rem 1.5rem;
 }
 
 .task-text-block {
-  background: rgba(124, 58, 237, 0.03);
+  background: var(--accent-bg);
   border-radius: 12px;
   padding: 1rem 1.25rem;
-  border: 1px solid rgba(124, 58, 237, 0.08);
+  border: 1px solid var(--accent-border-medium);
   font-size: 0.83rem;
-  color: #374151;
+  color: var(--gray-700);
   line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-word;
@@ -216,7 +231,7 @@
 .task-section-label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #9ca3af;
+  color: var(--gray-400);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.6rem;
@@ -227,39 +242,23 @@
   gap: 0.6rem;
   align-items: flex-start;
   font-size: 0.8rem;
-  color: #4b5563;
+  color: var(--gray-600);
   padding: 0.35rem 0;
 }
 .task-criteria-num {
-  color: var(--purple-light);
+  color: var(--accent-light);
   font-weight: 700;
   flex-shrink: 0;
   margin-top: 1px;
 }
 
-/* ─── Hint accordion ────────────────────────────────────── */
-.hint-item {
-  border-radius: 12px;
-  overflow: hidden;
-  transition: border-color 0.15s, background 0.15s;
-}
-.hint-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--sans);
-  gap: 0.5rem;
-}
+/* ─── Hint accordion (use global .accordion-*) ─────────────────── */
+/* Use .accordion-item, .accordion-trigger, .accordion-body */
 .hint-label {
   font-size: 0.65rem;
   font-weight: 800;
-  color: var(--purple-light);
-  background: rgba(124, 58, 237, 0.1);
+  color: var(--purple-600);
+  background: var(--accent-bg);
   padding: 0.15rem 0.5rem;
   border-radius: 99px;
   letter-spacing: 0.05em;
@@ -267,31 +266,9 @@
   align-items: center;
   gap: 0.3rem;
 }
-.hint-body {
-  padding: 0.75rem 1rem 0.85rem;
-  font-size: 0.82rem;
-  color: #374151;
-  line-height: 1.75;
-  white-space: pre-wrap;
-  word-break: break-word;
-  border-top: 1px solid rgba(124, 58, 237, 0.08);
-  font-family: var(--sans);
-}
 
-/* ─── Image gallery ─────────────────────────────────────── */
-.gallery-thumb {
-  cursor: zoom-in;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(124, 58, 237, 0.15);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s, box-shadow 0.15s;
-  flex-shrink: 0;
-}
-.gallery-thumb:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.18);
-}
+/* ─── Image gallery (use global .gallery__thumb) ─────────────── */
+/* Use global .gallery__thumb */
 
 .lightbox {
   position: fixed;
@@ -317,7 +294,7 @@
   transition: background 0.15s;
 }
 
-/* ─── File dropzone ─────────────────────────────────────── */
+/* ─── Dropzone (page-specific) ─────────────────────────────────── */
 .dropzone {
   border-radius: 16px;
   padding: 1.5rem 1rem;
@@ -332,45 +309,10 @@
   gap: 8px;
 }
 
-.exam-btn-evaluate {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
-  color: #fff;
-  font-weight: 800;
-  font-size: 0.88rem;
-  cursor: pointer;
-  font-family: var(--sans);
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.exam-btn-evaluate:hover { transform: translateY(-1px); }
-.exam-btn-evaluate:disabled {
-  background: rgba(124, 58, 237, 0.4);
-  box-shadow: none;
-  cursor: not-allowed;
-  transform: none;
-}
+/* ─── Buttons (use global .btn) ───────────────────────────────── */
+/* Use .btn.btn--solid.btn--block and .alert.alert--error */
 
-.exam-error {
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  background: rgba(220, 38, 38, 0.07);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  font-size: 0.8rem;
-  color: #dc2626;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* ─── AI result card ────────────────────────────────────── */
+/* ─── AI result card (page-specific) ───────────────────────────── */
 .ai-result {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
@@ -386,7 +328,7 @@
 .ai-result__verdict {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #9ca3af;
+  color: var(--gray-400);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 3px;
@@ -415,44 +357,54 @@
 }
 .ai-result__comment {
   padding: 0.85rem 1.25rem;
-  background: rgba(124, 58, 237, 0.03);
-  border-top: 1px solid rgba(124, 58, 237, 0.08);
+  background: var(--accent-bg);
+  border-top: 1px solid var(--accent-border-medium);
 }
 .ai-result__section-label {
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--purple-light);
+  color: var(--accent-light);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.4rem;
 }
 .ai-result__improvements {
   padding: 0.85rem 1.25rem;
-  border-top: 1px solid rgba(124, 58, 237, 0.08);
+  border-top: 1px solid var(--accent-border-medium);
 }
 .ai-result__improvement-item {
   font-size: 0.78rem;
-  color: #4b5563;
+  color: var(--gray-600);
   line-height: 1.6;
   padding: 0.3rem 0 0.3rem 0.75rem;
-  border-left: 2px solid rgba(124, 58, 237, 0.3);
+  border-left: 2px solid var(--accent-border);
 }
 
 .exam-upload-hint {
   padding: 0.75rem 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
-  background: rgba(124, 58, 237, 0.05);
-  border: 1px solid rgba(124, 58, 237, 0.12);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border-medium);
   font-size: 0.78rem;
-  color: #6b7280;
+  color: var(--gray-500);
   line-height: 1.65;
 }
 
-/* ─── Scrollbar ─────────────────────────────────────────── */
+.tech-badge {
+  /* Match .about-tech-badge */
+  padding: 0.4rem 0.9rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.82rem;
+  border-radius: 99px;
+  border: 1px solid var(--accent-border);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Scrollbar (page-specific? keep) ─────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
-/* ─── Animacje ──────────────────────────────────────────── */
-@keyframes spin { to { transform: rotate(360deg); } }

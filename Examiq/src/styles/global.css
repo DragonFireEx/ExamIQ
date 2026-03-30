@@ -1,59 +1,22 @@
 /* styles/global.css */
 
-/* ─── Reset ─────────────────────────────────────────────── */
+/* ─── Import Design System ─────────────────────────────────────────────────── */
+@import './design-system.css';
+
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ─── Zmienne ────────────────────────────────────────────── */
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #7c3aed;
-  --accent-light: #a78bfa;
-  --accent-bg: rgba(124, 58, 237, 0.08);
-  --accent-border: rgba(124, 58, 237, 0.25);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: 'Sora', 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: 'Sora', 'Poppins', system-ui, sans-serif;
-  --mono: 'Fira Code', 'Cascadia Code', 'Consolas', ui-monospace, monospace;
-
-  /* App colors */
-  --purple-deep: #4c1d95;
-  --purple-mid: #7c3aed;
-  --purple-light: #a78bfa;
-  --purple-pale: #f5f3ff;
-  --purple-bg: linear-gradient(160deg, #f5f3ff 0%, #ede9fe 45%, #e0e7ff 100%);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #a78bfa;
-    --accent-light: #c084fc;
-    --accent-bg: rgba(167, 139, 250, 0.12);
-    --accent-border: rgba(167, 139, 250, 0.35);
-    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-}
-
-/* ─── Base ───────────────────────────────────────────────── */
+/* ─── Base ───────────────────────────────────────────────────────────────── */
 html {
   font: 18px/1.45 var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text, var(--gray-500));
+  background: var(--bg, #fff);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -66,12 +29,12 @@ html {
 body {
   font-family: var(--sans);
   line-height: 1.6;
-  color: var(--text);
-  background-color: var(--bg);
+  color: inherit;
+  background-color: inherit;
 }
 
 a { transition: color 0.3s ease; }
-button { font-family: var(--sans); transition: all 0.15s; }
+button { font-family: var(--sans); }
 
 #root {
   max-width: 100%;
@@ -82,7 +45,14 @@ button { font-family: var(--sans); transition: all 0.15s; }
   flex-direction: column;
 }
 
-/* ─── Typografia ─────────────────────────────────────────── */
+/* ─── Page root (common layout wrapper) ───────────────────────────────────── */
+.page-root {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 45%, var(--purple-200) 100%);
+  font-family: var(--sans);
+}
+
+/* ─── Typografia ─────────────────────────────────────────────────────────── */
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
@@ -108,146 +78,53 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   border-radius: 4px;
-  background: var(--code-bg);
-  color: var(--text-h);
+  background: var(--code-bg, #f4f3ec);
+  color: var(--text-h, #08060d);
   display: inline-flex;
 }
 
-/* ─── Wspólne komponenty ─────────────────────────────────── */
+/* ─── Page layout ───────────────────────────────────────────────────────── */
 
-/* Szklana karta */
-.glass-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 22px;
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-}
-
-/* Tło całej strony (wszystkie app pages) */
-.page-root {
+/* Page wrapper - all pages should use this */
+.page {
   min-height: 100vh;
-  background: var(--purple-bg);
-  font-family: var(--sans);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #60a5fa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Badge z etykietą (np. "Teoria", "INF.04") */
-.tag-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  border-radius: 99px;
-  padding: 0.4rem 1.1rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--purple-mid);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* Tech badge (mniejszy) */
-.tech-badge {
-  padding: 0.4rem 0.9rem;
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.82rem;
-  border-radius: 99px;
-  border: 1px solid var(--accent-border);
-  letter-spacing: 0.02em;
-}
-
-/* Icon wrapper */
-.icon-wrapper {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-  flex-shrink: 0;
+  flex-direction: column;
 }
 
-/* Section containers */
-.section-container {
-  max-width: 1100px;
+/* Section spacing */
+.section {
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.section--lg {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+.section--sm {
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Content container - use inside .section */
+.section__content {
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 5rem 2rem;
 }
 
-.section-container-narrow {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 4rem 2rem 6rem;
-}
+/* Centered text utility */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
 
-/* Gridy */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  @media (max-width: 768px) { grid-template-columns: 1fr; gap: 2rem; }
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-
-.grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-/* Pattern background */
-.pattern-bg {
-  background-image: url('/cs_pattern_rotated.svg');
-  background-size: cover;
-  background-repeat: repeat-y;
-  background-attachment: fixed;
-  animation: patternUp 50s linear infinite;
-}
-
-/* ─── Animacje ───────────────────────────────────────────── */
-@keyframes patternUp {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: 0% 100%; }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideInCenter {
-  0%   { opacity: 0; transform: translateX(-100px) scale(0.8); }
-  50%  { opacity: 0.5; transform: translateX(50px) scale(1.05); }
-  100% { opacity: 1; transform: translateX(0) scale(1); }
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40%  { transform: translateY(-10px); }
-  60%  { transform: translateY(-5px); }
-}
-@keyframes floatA {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
-}
-@keyframes floatB {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(8px); }
-}
-
-.fade-in-up      { animation: fadeInUp 0.6s ease-out; }
-.slide-in-center { animation: slideInCenter 0.8s ease-out forwards; }
-.bounce          { animation: bounce 2s infinite; }
-.float-a         { animation: floatA 3s ease-in-out infinite; }
-.float-b         { animation: floatB 3.5s ease-in-out infinite; }

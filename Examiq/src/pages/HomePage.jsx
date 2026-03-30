@@ -3,7 +3,7 @@
 // Zastępuje HomePage.jsx + HeroSection + FeaturesSection + CallToActionSection
 // Header i Footer pozostają bez zmian
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { usePageTitle } from '../hooks/usePageTitle';
@@ -116,6 +116,7 @@ function StepCard({ n, title, desc }) {
 // ─── strona główna ────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const navigate = useNavigate();
   return (
     <div className="homepage-container">
       <Header />
@@ -141,18 +142,14 @@ export default function HomePage() {
           </p>
 
           <div className="home-hero-buttons">
-            <Link to="/learn">
-              <button className="home-hero-primary-btn">
-                <Icon icon="lucide:book-open" />
-                Zacznij naukę
-              </button>
-            </Link>
-            <Link to="/exam">
-              <button className="home-hero-secondary-btn">
-                <Icon icon="lucide:layout-dashboard" />
-                Panel użytkownika
-              </button>
-            </Link>
+            <button className="home-hero-primary-btn" onClick={() => navigate('/learn')}>
+              <Icon icon="lucide:book-open" />
+              Zacznij naukę
+            </button>
+            <button className="home-hero-secondary-btn" onClick={() => navigate('/exam')}>
+              <Icon icon="lucide:layout-dashboard" />
+              Panel użytkownika
+            </button>
           </div>
         </div>
 
@@ -275,24 +272,18 @@ export default function HomePage() {
               Twoje wyniki czekają na Ciebie w dashboardzie.
             </p>
             <div className="home-cta-buttons">
-              <Link to="/learn">
-                <button className="home-cta-primary-btn">
-                  <Icon icon="lucide:book-open" />
-                  Zacznij naukę
-                </button>
-              </Link>
-              <Link to="/exam">
-                <button className="home-cta-secondary-btn">
-                  <Icon icon="lucide:bar-chart-2" />
-                  Panel użytkownika
-                </button>
-              </Link>
-              <Link to="/about">
-                <button className="home-cta-tertiary-btn">
-                  <Icon icon="lucide:info" />
-                  O nas
-                </button>
-              </Link>
+              <button className="home-cta-primary-btn" onClick={() => navigate('/learn')}>
+                <Icon icon="lucide:book-open" />
+                Zacznij naukę
+              </button>
+              <button className="home-cta-secondary-btn" onClick={() => navigate('/exam')}>
+                <Icon icon="lucide:bar-chart-2" />
+                Panel użytkownika
+              </button>
+              <button className="home-cta-tertiary-btn" onClick={() => navigate('/about')}>
+                <Icon icon="lucide:info" />
+                O nas
+              </button>
             </div>
           </div>
         </div>

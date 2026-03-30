@@ -1,7 +1,7 @@
 // pages/ExamPracticePage.jsx
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Icon } from "@iconify/react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import examSheets from "../data/examSheets.json";
@@ -11,28 +11,28 @@ import "./ExamPracticePage.css";
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 const TYPE_COLOR = {
   konsola: {
-    bg: "rgba(124,58,237,0.1)",
-    text: "#7c3aed",
-    border: "rgba(124,58,237,0.25)",
+    bg: "var(--accent-bg)",
+    text: "var(--accent)",
+    border: "var(--accent-border)",
   },
   webowa: {
     bg: "rgba(59,130,246,0.1)",
-    text: "#2563eb",
+    text: "var(--blue-500)",
     border: "rgba(59,130,246,0.25)",
   },
   mobilna: {
     bg: "rgba(16,185,129,0.1)",
-    text: "#059669",
+    text: "var(--green-500)",
     border: "rgba(16,185,129,0.25)",
   },
   desktopowa: {
     bg: "rgba(245,158,11,0.1)",
-    text: "#d97706",
+    text: "var(--orange-500)",
     border: "rgba(245,158,11,0.25)",
   },
   dokumentacja: {
     bg: "rgba(107,114,128,0.1)",
-    text: "#4b5563",
+    text: "var(--gray-500)",
     border: "rgba(107,114,128,0.25)",
   },
 };
@@ -62,7 +62,7 @@ function HintAccordion({ hints }) {
         return (
           <div
             key={i}
-            className="hint-item"
+            className="accordion-item"
             style={{
               border: `1px solid ${isOpen ? "rgba(124,58,237,0.25)" : "rgba(124,58,237,0.1)"}`,
               background: isOpen
@@ -71,7 +71,7 @@ function HintAccordion({ hints }) {
             }}
           >
             <button
-              className="hint-trigger"
+              className="accordion-trigger"
               onClick={() => setOpen(isOpen ? null : i)}
             >
               <span className="hint-label">
@@ -80,7 +80,7 @@ function HintAccordion({ hints }) {
               <Icon
                 icon="lucide:chevron-down"
                 width={14}
-                color="#a78bfa"
+                color="var(--purple-400)"
                 style={{
                   flexShrink: 0,
                   transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -88,7 +88,7 @@ function HintAccordion({ hints }) {
                 }}
               />
             </button>
-            {isOpen && <div className="hint-body">{hint}</div>}
+            {isOpen && <div className="accordion-body">{hint}</div>}
           </div>
         );
       })}
@@ -104,7 +104,7 @@ function ImageGallery({ images, captions }) {
     <>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         {images.map((src, i) => (
-          <div key={i} className="gallery-thumb" onClick={() => setLightbox(i)}>
+          <div key={i} className="gallery__thumb" onClick={() => setLightbox(i)}>
             <img
               src={`/exam-images/${src}`}
               alt={captions?.[i] || `Obraz ${i + 1}`}
@@ -122,7 +122,7 @@ function ImageGallery({ images, captions }) {
               key={i}
               style={{
                 fontSize: "0.68rem",
-                color: "#9ca3af",
+                color: "var(--gray-400)",
                 fontStyle: "italic",
                 maxWidth: 200,
                 lineHeight: 1.4,
@@ -169,7 +169,7 @@ function ImageGallery({ images, captions }) {
                   }}
                   style={{
                     background:
-                      i === lightbox ? "#a78bfa" : "rgba(255,255,255,0.3)",
+                      i === lightbox ? "var(--accent-light)" : "rgba(255,255,255,0.3)",
                   }}
                 />
               ))}
@@ -189,6 +189,15 @@ function FileDropzone({ task, onResult }) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
+  const geminiClient = useMemo(() => {
+    const key = import.meta.env.VITE_GEMINI_KEY;
+    if (!key) return null;
+    try {
+      return new GoogleGenerativeAI(key);
+    } catch {
+      return null;
+    }
+  }, []);
 
   function handleFile(f) {
     if (!f) return;
@@ -202,8 +211,10 @@ function FileDropzone({ task, onResult }) {
     setLoading(true);
     setError(null);
     try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      if (!geminiClient) {
+        throw new Error("Brak klucza API Gemini. Skonfiguruj VITE_GEMINI_KEY.");
+      }
+      const model = geminiClient.getGenerativeModel({ model: "gemini-2.0-flash" });
       const criteriaText = task.criteria
         .map((c, i) => `${i + 1}. ${c}`)
         .join("\n");
@@ -249,11 +260,11 @@ ${criteriaText}`;
 
   const sc = result
     ? result.score >= 75
-      ? "#16a34a"
+      ? "var(--success)"
       : result.score >= 50
-        ? "#d97706"
-        : "#dc2626"
-    : "#7c3aed";
+        ? "var(--warning)"
+        : "var(--danger)"
+    : "var(--accent)";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -271,9 +282,9 @@ ${criteriaText}`;
         }}
         onClick={() => inputRef.current?.click()}
         style={{
-          border: `2px dashed ${dragging ? "#7c3aed" : file ? "rgba(124,58,237,0.4)" : "rgba(124,58,237,0.2)"}`,
+          border: `2px dashed ${dragging ? "var(--accent)" : file ? "var(--accent-border)" : "var(--accent-border-light)"}`,
           background: dragging
-            ? "rgba(124,58,237,0.07)"
+            ? "var(--accent-bg)"
             : file
               ? "rgba(124,58,237,0.04)"
               : "rgba(255,255,255,0.5)",
@@ -289,28 +300,28 @@ ${criteriaText}`;
         {file ? (
           <>
             {isImageFile(file) ? (
-              <Icon icon="lucide:image" width={28} color="#7c3aed" />
+              <Icon icon="lucide:image" width={28} color="var(--accent)" />
             ) : (
-              <Icon icon="lucide:file-text" width={28} color="#7c3aed" />
+              <Icon icon="lucide:file-text" width={28} color="var(--accent)" />
             )}
             <div
-              style={{ fontWeight: 700, fontSize: "0.85rem", color: "#374151" }}
+              style={{ fontWeight: 700, fontSize: "0.85rem", color: "var(--gray-700)" }}
             >
               {file.name}
             </div>
-            <div style={{ fontSize: "0.72rem", color: "#9ca3af" }}>
+            <div style={{ fontSize: "0.72rem", color: "var(--gray-400)" }}>
               {(file.size / 1024).toFixed(1)} KB · kliknij aby zmienić
             </div>
           </>
         ) : (
           <>
-            <Icon icon="lucide:folder-open" width={32} color="#9ca3af" />
+            <Icon icon="lucide:folder-open" width={32} color="var(--gray-400)" />
             <div
-              style={{ fontWeight: 700, fontSize: "0.85rem", color: "#6b7280" }}
+              style={{ fontWeight: 700, fontSize: "0.85rem", color: "var(--gray-500)" }}
             >
               Przeciągnij plik lub kliknij aby wybrać
             </div>
-            <div style={{ fontSize: "0.7rem", color: "#9ca3af" }}>
+            <div style={{ fontSize: "0.7rem", color: "var(--gray-400)" }}>
               Kod (.py .java .cs .cpp .js...) lub zdjęcie (.png .jpg)
             </div>
           </>
@@ -321,7 +332,7 @@ ${criteriaText}`;
         <button
           onClick={handleEvaluate}
           disabled={loading}
-          className="exam-btn-evaluate"
+          className="btn btn--solid btn--block"
         >
           {loading ? (
             <>
@@ -341,7 +352,7 @@ ${criteriaText}`;
       )}
 
       {error && (
-        <div className="exam-error">
+        <div className="alert alert--error">
           <Icon icon="lucide:alert-triangle" width={15} /> {error}
         </div>
       )}
@@ -350,7 +361,21 @@ ${criteriaText}`;
         <div className="ai-result" style={{ border: `1px solid ${sc}40` }}>
           <div
             className="ai-result__header"
-            style={{ background: `${sc}12`, borderBottom: `1px solid ${sc}20` }}
+            style={{
+              background:
+                result.score >= 75
+                  ? "var(--success-bg)"
+                  : result.score >= 50
+                  ? "var(--warning-bg)"
+                  : "var(--danger-bg)",
+              borderBottom: `1px solid ${
+                result.score >= 75
+                  ? "var(--success-border)"
+                  : result.score >= 50
+                  ? "var(--warning-border)"
+                  : "var(--danger-border)"
+              }`,
+            }}
           >
             <div>
               <div className="ai-result__verdict">Ocena AI</div>
@@ -401,14 +426,14 @@ ${criteriaText}`;
                   <Icon
                     icon="lucide:check"
                     width={15}
-                    color="#16a34a"
+                    color="var(--success)"
                     style={{ flexShrink: 0, marginTop: 2 }}
                   />
                 ) : (
                   <Icon
                     icon="lucide:x"
                     width={15}
-                    color="#dc2626"
+                    color="var(--danger)"
                     style={{ flexShrink: 0, marginTop: 2 }}
                   />
                 )}
@@ -416,7 +441,7 @@ ${criteriaText}`;
                   <div
                     style={{
                       fontSize: "0.78rem",
-                      color: "#374151",
+                      color: "var(--gray-700)",
                       fontWeight: cr.passed ? 400 : 600,
                     }}
                   >
@@ -426,7 +451,7 @@ ${criteriaText}`;
                     <div
                       style={{
                         fontSize: "0.7rem",
-                        color: "#9ca3af",
+                        color: "var(--gray-400)",
                         marginTop: 2,
                         fontStyle: "italic",
                       }}
@@ -445,7 +470,7 @@ ${criteriaText}`;
               <div
                 style={{
                   fontSize: "0.8rem",
-                  color: "#4b5563",
+                  color: "var(--gray-600)",
                   lineHeight: 1.65,
                 }}
               >
@@ -523,13 +548,13 @@ function TaskCard({ task, index }) {
             style={{
               fontWeight: 800,
               fontSize: "0.95rem",
-              color: "#1f2937",
+              color: "var(--gray-800)",
               lineHeight: 1.3,
             }}
           >
             {task.title}
           </div>
-          <div style={{ fontSize: "0.73rem", color: "#9ca3af", marginTop: 2 }}>
+          <div style={{ fontSize: "0.73rem", color: "var(--gray-400)", marginTop: 2 }}>
             {task.criteria?.length} kryteriów · {task.hints?.length} wskazówek
             {task.images?.length > 0 &&
               ` · ${task.images.length} obraz${task.images.length > 1 ? "y" : ""}`}
@@ -538,7 +563,7 @@ function TaskCard({ task, index }) {
         <Icon
           icon="lucide:chevron-down"
           width={16}
-          color="#a78bfa"
+          color="var(--purple-400)"
           style={{
             flexShrink: 0,
             transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
@@ -549,7 +574,7 @@ function TaskCard({ task, index }) {
 
       {expanded && (
         <div style={{ borderTop: "1px solid rgba(124,58,237,0.08)" }}>
-          <div className="task-tabs">
+          <div className="tabs">
             {[
               { id: "tresc", label: "Treść", icon: "lucide:clipboard-list" },
               {
@@ -562,7 +587,7 @@ function TaskCard({ task, index }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`task-tab${activeTab === tab.id ? " task-tab--active" : ""}`}
+                className={`tab${activeTab === tab.id ? " tab--active" : ""}`}
               >
                 <Icon icon={tab.icon} width={13} />
                 {tab.label}
@@ -600,7 +625,7 @@ function TaskCard({ task, index }) {
                       style={{
                         borderBottom:
                           i < task.criteria.length - 1
-                            ? "1px solid rgba(124,58,237,0.05)"
+                            ? "1px solid var(--accent-border-light)"
                             : "none",
                       }}
                     >
@@ -619,7 +644,7 @@ function TaskCard({ task, index }) {
                 <div
                   style={{
                     fontSize: "0.82rem",
-                    color: "#9ca3af",
+                    color: "var(--gray-400)",
                     textAlign: "center",
                     padding: "1.5rem",
                   }}
@@ -667,7 +692,7 @@ function SheetView({ sheet, onBack }) {
             marginBottom: "0.5rem",
           }}
         >
-          <span className="tag-badge">
+          <span className="badge badge--primary">
             <Icon icon="lucide:clipboard-list" width={11} /> {sheet.title}
           </span>
         </div>
@@ -675,7 +700,7 @@ function SheetView({ sheet, onBack }) {
           style={{
             fontSize: "1.2rem",
             fontWeight: 900,
-            color: "#1f2937",
+            color: "var(--gray-800)",
             margin: "0 0 0.35rem",
             lineHeight: 1.3,
           }}
@@ -685,7 +710,7 @@ function SheetView({ sheet, onBack }) {
         <p
           style={{
             fontSize: "0.82rem",
-            color: "#6b7280",
+            color: "var(--gray-500)",
             margin: 0,
             lineHeight: 1.6,
           }}
@@ -756,7 +781,7 @@ function SheetSelector({ onSelect }) {
           style={{
             fontSize: "0.72rem",
             fontWeight: 700,
-            color: "#a78bfa",
+            color: "var(--accent-light)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             marginBottom: "0.4rem",
@@ -768,7 +793,7 @@ function SheetSelector({ onSelect }) {
           style={{
             fontSize: "1.3rem",
             fontWeight: 900,
-            color: "#1f2937",
+            color: "var(--gray-800)",
             margin: 0,
           }}
         >
@@ -782,13 +807,13 @@ function SheetSelector({ onSelect }) {
             onClick={() => onSelect(sheet)}
             className="sheet-btn"
           >
-            <div className="sheet-index">{i + 1}</div>
+            <div className="icon-box">{i + 1}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
                 style={{
                   fontSize: "0.68rem",
                   fontWeight: 700,
-                  color: "#a78bfa",
+                  color: "var(--accent-light)",
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
                   marginBottom: 5,
@@ -800,7 +825,7 @@ function SheetSelector({ onSelect }) {
                 style={{
                   fontWeight: 800,
                   fontSize: "1rem",
-                  color: "#1f2937",
+                  color: "var(--gray-800)",
                   marginBottom: 4,
                   lineHeight: 1.3,
                 }}
@@ -810,7 +835,7 @@ function SheetSelector({ onSelect }) {
               <div
                 style={{
                   fontSize: "0.78rem",
-                  color: "#6b7280",
+                  color: "var(--gray-500)",
                   marginBottom: "0.75rem",
                   lineHeight: 1.5,
                 }}
@@ -853,7 +878,7 @@ function SheetSelector({ onSelect }) {
             <Icon
               icon="lucide:arrow-right"
               width={18}
-              color="#d1d5db"
+              color="var(--gray-300)"
               style={{ alignSelf: "center", flexShrink: 0 }}
             />
           </button>
@@ -863,7 +888,7 @@ function SheetSelector({ onSelect }) {
         <Icon
           icon="lucide:info"
           width={18}
-          color="#a78bfa"
+          color="var(--purple-400)"
           style={{ flexShrink: 0, marginTop: 1 }}
         />
         Każdy arkusz zawiera 3 zadania. Przeczytaj treść, skorzystaj z
@@ -885,7 +910,7 @@ export default function ExamPracticePage() {
         style={{ maxWidth: 860, margin: "0 auto", padding: "3rem 1.5rem 6rem" }}
       >
         <div className="exam-page-header">
-          <div className="tag-badge" style={{ marginBottom: "1rem" }}>
+          <div className="badge badge--primary" style={{ marginBottom: "1rem" }}>
             <Icon icon="lucide:clipboard-list" width={14} />
             Egzamin
           </div>

@@ -1,13 +1,14 @@
 /* ─── DashboardPage.css ─────────────────────────────────── */
 
-/* ─── Przyciski (kontekst dashboardu) ───────────────────── */
-.dash-btn-primary {
+/* ─── Buttons (use design system .btn variants) ───────────────────── */
+/* .btn--solid is the base for primary actions */
+.dash-btn-primary:not(.btn--solid) {
   width: 100%;
   padding: 0.85rem;
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
@@ -19,59 +20,44 @@
   justify-content: center;
   gap: 8px;
 }
-.dash-btn-primary:hover { transform: translateY(-2px); }
-.dash-btn-primary:disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
+.dash-btn-primary:not(.btn--solid):hover { transform: translateY(-2px); }
+.dash-btn-primary:not(.btn--solid):disabled {
+  background: var(--gray-200);
+  color: var(--gray-400);
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
 }
 
-/* ─── Stat Card ─────────────────────────────────────────── */
-.stat-card {
-  background: var(--glass-bg, rgba(255, 255, 255, 0.75));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 18px;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s;
-}
-.stat-card:hover { transform: translateY(-3px); }
+/* ─── Card variants (extending global .card) ─────────────────────────────── */
+/* Using .card from design-system as base; child classes retained from component */
 
-.stat-card--accent {
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
-  border: none;
-  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
-}
-
+/* StatCard content typography */
 .stat-card__value {
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--purple-deep);
+  color: var(--purple-900);
   letter-spacing: -0.5px;
   font-family: var(--sans);
   margin-top: 4px;
 }
-.stat-card--accent .stat-card__value { color: #fff; }
+.card--accent .stat-card__value { color: #fff; }
 
 .stat-card__label {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--purple-mid);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.stat-card--accent .stat-card__label { color: rgba(255, 255, 255, 0.8); }
+.card--accent .stat-card__label { color: rgba(255, 255, 255, 0.8); }
 
 .stat-card__sub {
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: var(--gray-400);
   margin-top: 2px;
 }
-.stat-card--accent .stat-card__sub { color: rgba(255, 255, 255, 0.6); }
+.card--accent .stat-card__sub { color: rgba(255, 255, 255, 0.6); }
 
 /* ─── Category Bar ──────────────────────────────────────── */
 .category-bar { margin-bottom: 0.75rem; }
@@ -83,29 +69,29 @@
 }
 .category-bar__name {
   font-size: 0.78rem;
-  color: var(--purple-deep);
+  color: var(--purple-900);
   font-weight: 500;
 }
 .category-bar__pct {
   font-size: 0.75rem;
   font-weight: 700;
 }
-.category-bar__pct--pass  { color: var(--purple-mid); }
-.category-bar__pct--fail  { color: #ef4444; }
+.category-bar__pct--pass  { color: var(--purple-600); }
+.category-bar__pct--fail  { color: var(--danger); }
 
 .category-bar__track {
   height: 7px;
-  background: #ede9fe;
-  border-radius: 99px;
+  background: var(--purple-100);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 .category-bar__fill {
   height: 100%;
-  border-radius: 99px;
+  border-radius: var(--radius-pill);
   transition: width 0.6s ease;
 }
-.category-bar__fill--pass { background: linear-gradient(90deg, var(--purple-mid), var(--purple-light)); }
-.category-bar__fill--fail { background: linear-gradient(90deg, #f87171, #fca5a5); }
+.category-bar__fill--pass { background: linear-gradient(90deg, var(--purple-600), var(--purple-400)); }
+.category-bar__fill--fail { background: linear-gradient(90deg, var(--danger), #f87171); }
 
 /* ─── Tabela historii ───────────────────────────────────── */
 .history-table {
@@ -116,7 +102,7 @@
 .history-table th {
   text-align: left;
   padding: 0.5rem 0.75rem;
-  color: #9ca3af;
+  color: var(--gray-400);
   font-weight: 600;
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -132,61 +118,60 @@
 }
 .history-table tr:hover { background: rgba(124, 58, 237, 0.03); }
 
+/* ─── Status badges ───────────────────────────────────────── */
 .status-badge {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 99px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
 }
-.status-badge--pass { background: #d1fae5; color: #065f46; }
-.status-badge--fail { background: #fee2e2; color: #991b1b; }
+.status-badge--pass { background: var(--success-bg); color: var(--success); }
+.status-badge--fail { background: var(--danger-bg); color: var(--danger); }
 
 /* ─── ExamRunner / WelcomeScreen / ResultScreen ─────────── */
 /* Ekrany które zajmują cały viewport (bez headera) */
 .dash-fullscreen {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f3ff, #ede9fe, #ddd6fe);
+  background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 35%, var(--purple-200) 70%, #f0fdf4 100%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  flex-direction: column;
   font-family: var(--sans);
 }
 
 .dash-modal {
   width: 100%;
   background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 28px;
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.15);
+  backdrop-filter: var(--blur-xl);
+  -webkit-backdrop-filter: var(--blur-xl);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--accent-border-medium);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ─── Progress bar (ExamRunner) ─────────────────────────── */
 .exam-progress-track {
   height: 6px;
-  background: #ede9fe;
-  border-radius: 99px;
+  background: var(--purple-100);
+  border-radius: var(--radius-pill);
   margin-bottom: 1.75rem;
   overflow: hidden;
 }
 .exam-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--purple-mid), var(--purple-light));
-  border-radius: 99px;
+  background: linear-gradient(90deg, var(--purple-600), var(--purple-400));
+  border-radius: var(--radius-pill);
   transition: width 0.4s ease;
 }
 
-/* ─── Tip card (fioletowy gradient) ─────────────────────── */
+/* ─── Tip card (accent card variant) ───────────────────────── */
 .tip-card {
-  background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
-  border-radius: 18px;
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
+  border-radius: var(--radius-xl);
   padding: 1.25rem 1.5rem;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 .tip-card__title {
   margin: 0 0 0.4rem;
@@ -210,12 +195,12 @@
 .dash-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  border: 2px solid rgba(124, 58, 237, 0.35);
-  border-radius: 12px;
+  border: 2px solid var(--accent-border-medium);
+  border-radius: var(--radius-lg);
   font-size: 1rem;
   font-family: var(--sans);
-  color: #4c1d95;
-  background: #f5f3ff;
+  color: var(--purple-900);
+  background: var(--purple-50);
   outline: none;
   box-sizing: border-box;
 }
@@ -223,7 +208,7 @@
   width: 150px;
   padding: 0.3rem 0.6rem;
   font-size: 0.875rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   border-width: 1.5px;
 }
 .dash-input--center { text-align: center; font-weight: 700; font-size: 1rem; }
@@ -231,10 +216,10 @@
 .dash-select {
   width: 100%;
   padding: 0.6rem 0.75rem;
-  border-radius: 10px;
-  border: 1.5px solid rgba(167, 139, 250, 0.35);
-  background: #f5f3ff;
-  color: #4c1d95;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--accent-border);
+  background: var(--purple-50);
+  color: var(--purple-900);
   font-size: 0.875rem;
   font-weight: 500;
   font-family: var(--sans);
@@ -245,17 +230,19 @@
 
 .dash-range {
   width: 100%;
-  accent-color: var(--purple-mid);
+  accent-color: var(--purple-600);
   margin-bottom: 1.25rem;
   cursor: pointer;
   display: block;
 }
 
+/* dash-range is custom; design system uses .form-range */
+
 .dash-label {
   display: block;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--purple-mid);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 4px;
@@ -266,7 +253,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--purple-mid);
+  color: var(--accent);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.2rem 0.5rem;
@@ -280,7 +267,7 @@
 .dash-btn-ghost:hover { background: rgba(124, 58, 237, 0.08); }
 
 .dash-btn-save {
-  background: var(--purple-mid);
+  background: var(--purple-400);
   color: #fff;
   border: none;
   border-radius: 7px;
@@ -292,8 +279,8 @@
 
 .dash-btn-cancel {
   background: none;
-  border: 1px solid #e5e7eb;
-  color: #9ca3af;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-400);
   border-radius: 7px;
   padding: 0.3rem 0.6rem;
   font-size: 0.8rem;
@@ -307,7 +294,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #d1d5db;
+  color: var(--gray-300);
   font-size: 0.75rem;
   font-family: var(--sans);
   display: inline-flex;
@@ -315,12 +302,12 @@
   gap: 6px;
   transition: color 0.15s;
 }
-.dash-btn-danger:hover { color: #ef4444; }
+.dash-btn-danger:hover { color: var(--danger); }
 
 .dash-btn-confirm-delete {
   flex: 1;
   padding: 0.5rem;
-  background: #ef4444;
+  background: var(--danger);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -333,8 +320,8 @@
 .dash-btn-cancel-delete {
   flex: 1;
   padding: 0.5rem;
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--gray-100);
+  color: var(--gray-700);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -344,20 +331,21 @@
 }
 
 /* ─── Category button ────────────────────────────────────── */
+/* Category button - custom but using design system tokens */
 .dash-cat-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.6rem 0.9rem;
   background: rgba(245, 243, 255, 0.8);
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  border-radius: 10px;
+  border: 1px solid var(--accent-border-medium);
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-family: var(--sans);
   text-align: left;
-  transition: all 0.15s;
+  transition: var(--transition-fast);
 }
 .dash-cat-btn:hover {
-  background: rgba(124, 58, 237, 0.08);
-  border-color: rgba(124, 58, 237, 0.3);
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
 }

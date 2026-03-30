@@ -62,15 +62,15 @@ export default function AboutPage() {
           </h1>
           <p className="about-description">
             ExamIQ to interaktywna platforma do nauki i samodzielnego przygotowania
-            się do egzaminu zawodowego <strong style={{ color: '#7c3aed' }}>INF04</strong> — kwalifikacji
+            się do egzaminu zawodowego <strong style={{ color: 'var(--accent)' }}>INF04</strong> — kwalifikacji
             z zakresu programowania, baz danych i administracji systemami.
           </p>
         </div>
 
         {/* CEL PROJEKTU */}
-        <div className="about-info-card">
+        <div className="about-info-card card card--lg">
           <div className="about-card-header">
-            <Icon icon="lucide:target" style={{ fontSize: '1.5rem', color: '#7c3aed' }} />
+            <Icon icon="lucide:target" style={{ fontSize: '1.5rem', color: 'var(--accent)' }} />
             <h2 className="about-card-title">Cel projektu</h2>
           </div>
           <p className="about-card-content">
@@ -88,7 +88,7 @@ export default function AboutPage() {
         <div className="about-how-it-works-grid">
           {HOW_IT_WORKS.map(({ step, title, desc, icon }) => (
             <div key={step} className="about-step-card">
-              <div className="about-step-icon-wrapper">
+              <div className="about-step-icon-wrapper icon-box">
                 <Icon icon={icon} className="about-step-icon" />
               </div>
               <div className="about-step-content">
@@ -103,14 +103,14 @@ export default function AboutPage() {
         </div>
 
         {/* TECHNOLOGIE */}
-        <div className="about-info-card-compact">
+        <div className="about-info-card-compact card card--md">
           <div className="about-card-header-compact">
-            <Icon icon="lucide:wrench" style={{ fontSize: '1.4rem', color: '#7c3aed' }} />
+            <Icon icon="lucide:wrench" style={{ fontSize: '1.4rem', color: 'var(--accent)' }} />
             <h2 className="about-card-title">Stack technologiczny</h2>
           </div>
           <div className="about-tech-container">
             {TECH.map(t => (
-              <span key={t} className="about-tech-badge">{t}</span>
+              <span key={t} className="about-tech-badge badge badge--primary">{t}</span>
             ))}
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
         </div>
 
         {/* CTA */}
-        <div className="about-cta-card">
+        <div className="about-cta-card cta-card">
           <h3 className="about-cta-heading">
             Gotowy żeby zacząć?
           </h3>
@@ -155,13 +155,13 @@ export default function AboutPage() {
           </p>
           <div className="about-cta-buttons">
             <Link to="/learn">
-              <button className="about-cta-primary-btn">
+              <button className="about-cta-primary-btn btn btn--primary">
                 <Icon icon="lucide:book-open" />
                 Tryb nauki
               </button>
             </Link>
             <Link to="/exam">
-              <button className="about-cta-secondary-btn">
+              <button className="about-cta-secondary-btn btn btn--secondary">
                 <Icon icon="lucide:bar-chart-2" />
                 Panel użytkownika
               </button>

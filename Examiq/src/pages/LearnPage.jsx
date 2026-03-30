@@ -1,7 +1,7 @@
 // pages/LearnPage.jsx
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Icon } from "@iconify/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -15,7 +15,12 @@ const JAMIQ_SAD = "/sad_jamiq.png";
 const JAMIQ_ANGRY = "/angry_jamiq.png";
 
 function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 }
 
 // ─── SETUP ────────────────────────────────────────────────────────────────────
@@ -30,7 +35,7 @@ function SetupScreen({ onStart }) {
   const maxCount = Math.min(available, 40);
 
   return (
-    <div className="page-root">
+    <div className="learn-root">
       <Header />
       <div className="learn-container learn-container--setup">
         <div className="setup-hero">
@@ -44,7 +49,7 @@ function SetupScreen({ onStart }) {
           </p>
         </div>
 
-        <div className="learn-card setup-card">
+        <div className="card setup-card">
           {/* Liczba pytań */}
           <div className="setup-section">
             <label className="setup-label">
@@ -124,7 +129,7 @@ function SetupScreen({ onStart }) {
           </div>
 
           <button
-            className="btn-primary"
+            className="btn btn--solid"
             onClick={() =>
               onStart({
                 count: Math.min(count, maxCount),
@@ -164,11 +169,26 @@ function QuizScreen({ config, onFinish }) {
   const [timerPulse, setTimerPulse] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const timerRef = useRef(null);
+  const geminiClient = useMemo(() => {
+    const key = import.meta.env.VITE_GEMINI_KEY;
+    if (!key) return null;
+    try {
+      return new GoogleGenerativeAI(key);
+    } catch {
+      return null;
+    }
+  }, []);
 
   const checkWithGemini = async (question, correctAnswer, userAnswer) => {
+    if (!geminiClient) {
+      console.warn("Gemini client unavailable, falling back to substring check");
+      return userAnswer
+        .trim()
+        .toLowerCase()
+        .includes(correctAnswer.trim().toLowerCase());
+    }
     try {
-      const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
-      const model = ai.getGenerativeModel({ model: "gemini-flash-latest" });
+      const model = geminiClient.getGenerativeModel({ model: "gemini-flash-latest" });
       const prompt = `Jesteś weryfikatorem odpowiedzi na pytania egzaminacyjne z IT (egzamin INF04).\n\nPytanie: ${question}\nWzorcowa odpowiedź: ${correctAnswer}\nOdpowiedź ucznia: ${userAnswer}\n\nOceń czy odpowiedź ucznia jest merytorycznie poprawna. Nie wymagaj identycznego brzmienia — liczy się sens i kluczowe pojęcia techniczne. Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
       const result = await model.generateContent(prompt);
       return result.response.text().trim().toUpperCase().startsWith("TAK");
@@ -185,7 +205,7 @@ function QuizScreen({ config, onFinish }) {
   const progress = idx / pool.length;
 
   const handleReveal = useCallback(
-    (correct) => {
+    (correct, question) => {
       clearInterval(timerRef.current);
       setRevealed(true);
       setIsCorrect(correct);
@@ -199,9 +219,9 @@ function QuizScreen({ config, onFinish }) {
         setStreak(0);
         setShowFlame(false);
       }
-      setResults((prev) => [...prev, { q, correct }]);
+      setResults((prev) => [...prev, { q: question, correct }]);
     },
-    [q],
+    [],
   );
 
   useEffect(() => {
@@ -212,7 +232,7 @@ function QuizScreen({ config, onFinish }) {
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(timerRef.current);
-          handleReveal(false);
+          handleReveal(false, q);
           return 0;
         }
         if (t <= 6) setTimerPulse(true);
@@ -228,7 +248,7 @@ function QuizScreen({ config, onFinish }) {
     clearInterval(timerRef.current);
     const correct = await checkWithGemini(q.question, q.answer, openAnswer);
     setIsChecking(false);
-    handleReveal(correct);
+    handleReveal(correct, q);
   };
 
   const handleNext = () => {
@@ -252,12 +272,12 @@ function QuizScreen({ config, onFinish }) {
   return (
     <div className="learn-root">
       {/* PROGRESS BAR */}
-      <div className="progress-track">
+      <div className="progress">
         <div
-          className="progress-fill"
+          className="progress__fill"
           style={{ width: `${progress * 100}%` }}
         />
-        <div className="progress-dot" style={{ left: `${progress * 100}%` }} />
+        <div className="progress__dot" style={{ left: `${progress * 100}%` }} />
       </div>
 
       <Header />
@@ -293,7 +313,7 @@ function QuizScreen({ config, onFinish }) {
         </div>
 
         {/* PYTANIE */}
-        <div className="learn-card quiz-question">
+        <div className="card quiz-question">
           <div className="question-category">{q.category}</div>
           <p className="question-text">{q.question}</p>
           {q.snippet && (
@@ -324,7 +344,7 @@ function QuizScreen({ config, onFinish }) {
                   onClick={() => {
                     if (!revealed) {
                       setSelected(key);
-                      handleReveal(key === q.answer);
+                      handleReveal(key === q.answer, q);
                     }
                   }}
                 >
@@ -345,7 +365,7 @@ function QuizScreen({ config, onFinish }) {
               onChange={(e) => setOpenAnswer(e.target.value)}
               disabled={revealed || isChecking}
               rows={3}
-              placeholder="Wpisz odpowiedź... (Ctrl+Enter aby sprawdzić)"
+              placeholder="Wpisz odpowiedź..."
               onKeyDown={(e) => {
                 if (e.key === "Enter" && e.ctrlKey) handleOpenSubmit();
               }}
@@ -419,7 +439,7 @@ function QuizScreen({ config, onFinish }) {
         )}
 
         {revealed && (
-          <button className="btn-primary" onClick={handleNext}>
+          <button className="btn btn--solid" onClick={handleNext}>
             {idx + 1 >= pool.length ? "Zobacz wyniki" : "Następne pytanie"}
             <Icon icon="lucide:arrow-right" />
           </button>
@@ -453,7 +473,7 @@ function ResultsScreen({ results, onRestart }) {
         wasCorrect: r.correct,
       })),
     });
-  }, []);
+  }, [results, saveExamResult]);
 
   const STATS = [
     {
@@ -514,7 +534,7 @@ function ResultsScreen({ results, onRestart }) {
 
         <div className="stat-grid">
           {STATS.map((s) => (
-            <div key={s.label} className="stat-card" data-mod={s.mod}>
+            <div key={s.label} className="result-card" data-mod={s.mod}>
               <Icon icon={s.icon} className="stat-icon" />
               <div className="stat-val">{s.val}</div>
               <div className="stat-label">{s.label}</div>
@@ -522,7 +542,7 @@ function ResultsScreen({ results, onRestart }) {
           ))}
         </div>
 
-        <div className="learn-card learn-card--sm score-bar-card">
+        <div className="card card--sm score-bar-card">
           <div className="score-bar-header">
             <span>Wynik końcowy</span>
             <span>próg 75%</span>
@@ -537,7 +557,7 @@ function ResultsScreen({ results, onRestart }) {
           </div>
         </div>
 
-        <div className="learn-card learn-card--sm review-card">
+        <div className="card card--sm review-card">
           <h3 className="review-title">Przegląd odpowiedzi</h3>
           {results.map((r, i) => (
             <div
@@ -566,7 +586,7 @@ function ResultsScreen({ results, onRestart }) {
 
         <div className="results-actions">
           <button
-            className="btn-primary"
+            className="btn btn--solid"
             onClick={onRestart}
             style={{ flex: 1 }}
           >
@@ -574,7 +594,7 @@ function ResultsScreen({ results, onRestart }) {
             Zagraj ponownie
           </button>
           <Link to="/exam" style={{ flex: 1, textDecoration: "none" }}>
-            <button className="btn-secondary" style={{ width: "100%" }}>
+            <button className="btn btn--secondary" style={{ width: "100%" }}>
               Dashboard
               <Icon icon="lucide:arrow-right" />
             </button>
