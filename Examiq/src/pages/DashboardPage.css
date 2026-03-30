@@ -138,6 +138,8 @@
   background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 35%, var(--purple-200) 70%, #f0fdf4 100%);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: var(--sans);
 }
 

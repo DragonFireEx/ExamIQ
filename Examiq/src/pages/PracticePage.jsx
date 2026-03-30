@@ -161,7 +161,7 @@ function SetupScreen({ onStart }) {
             </label>
             <div className="practice-grid-5">
               {[
-                { val: 'none', label: '∞',    sub: 'bez limitu' },
+                { val: 'none', label: <Icon icon="lucide:infinity" className="timer-btn__icon" />, sub: 'bez limitu' },
                 { val: '15',   label: '15min', sub: 'sprint'     },
                 { val: '30',   label: '30min', sub: 'normalny'   },
                 { val: '45',   label: '45min', sub: 'egzamin'    },
