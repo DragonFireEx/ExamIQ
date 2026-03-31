@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Build artifacts
+.vite
+
+# Claude Code workspace
+.claude
