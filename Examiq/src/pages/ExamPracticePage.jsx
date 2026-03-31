@@ -214,7 +214,7 @@ function FileDropzone({ task, onResult }) {
       if (!geminiClient) {
         throw new Error("Brak klucza API Gemini. Skonfiguruj VITE_GEMINI_KEY.");
       }
-      const model = geminiClient.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
       const criteriaText = task.criteria
         .map((c, i) => `${i + 1}. ${c}`)
         .join("\n");

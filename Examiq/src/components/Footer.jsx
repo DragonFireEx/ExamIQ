@@ -25,7 +25,7 @@ const LINKS = [
 const SOCIALS = [
   { icon: 'lucide:github',       href: 'https://github.com/DragonFireEx/ExamIQ', label: 'GitHub' },
   { icon: 'lucide:mail',         href: '#', label: 'Kontakt' },
-  { icon: 'lucide:file-text',    href: '#', label: 'Dokumentacja' },
+  { icon: 'lucide:file-text',    href: 'examiq_dokumentacja.html', label: 'Dokumentacja' },
 ];
 
 export default function Footer() {

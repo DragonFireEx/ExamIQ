@@ -22,6 +22,7 @@ function formatDate(iso) {
 }
 
 const ALL_QUESTIONS = questions;
+const CLOSED_QUESTIONS = ALL_QUESTIONS.filter(q => q.type === 'closed');
 const CATEGORIES = [...new Set(ALL_QUESTIONS.map(q => q.category))];
 
 // ─── MiniBarChart ─────────────────────────────────────────────────────────────
@@ -182,17 +183,19 @@ function QuickExamWidget({ onStart }) {
   const [category, setCategory] = useState('all');
   const [count, setCount] = useState(20);
 
+  const CLOSED = CLOSED_QUESTIONS;
+
   const poolSize = category === 'all'
-      ? ALL_QUESTIONS.length
-      : ALL_QUESTIONS.filter(q => q.category === category).length;
+    ? CLOSED.length
+    : CLOSED.filter(q => q.category === category).length;
 
   const safeCount = Math.min(count, poolSize);
 
   function handleCategoryChange(newCat) {
     setCategory(newCat);
     const newPoolSize = newCat === 'all'
-      ? ALL_QUESTIONS.length
-      : ALL_QUESTIONS.filter(q => q.category === newCat).length;
+      ? CLOSED.length
+      : CLOSED.filter(q => q.category === newCat).length;
     setCount(Math.min(count, newPoolSize));
   }
 
@@ -215,9 +218,9 @@ function QuickExamWidget({ onStart }) {
         onChange={e => handleCategoryChange(e.target.value)}
         className="dash-select"
       >
-        <option value="all">Wszystkie kategorie ({ALL_QUESTIONS.length})</option>
+        <option value="all">Wszystkie kategorie ({CLOSED.length})</option>
         {CATEGORIES.map(c => (
-          <option key={c} value={c}>{c} ({ALL_QUESTIONS.filter(q => q.category === c).length})</option>
+          <option key={c} value={c}>{c} ({CLOSED.filter(q => q.category === c).length})</option>
         ))}
       </select>
 
@@ -397,9 +400,10 @@ export default function DashboardPage() {
   const [showReset,    setShowReset]    = useState(false);
 
   function startExam(count, category) {
+    const closedQuestions = ALL_QUESTIONS.filter(q => q.type === 'closed');
     const base = category === 'all'
-      ? ALL_QUESTIONS.slice()
-      : ALL_QUESTIONS.filter(q => q.category === category);
+      ? closedQuestions
+      : closedQuestions.filter(q => q.category === category);
     const pool = base
       .map(q => ({ q, r: Math.random() }))
       .sort((a, b) => a.r - b.r)
@@ -564,7 +568,7 @@ export default function DashboardPage() {
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {CATEGORIES.map(cat => {
-                  const catQ = ALL_QUESTIONS.filter(item => item.category === cat);
+                  const catQ = ALL_QUESTIONS.filter(item => item.category === cat && item.type === 'closed');
                   const prog = categoryProgress[cat];
                   const pct  = prog ? Math.round((prog.correct / prog.attempts) * 100) : null;
                   return (

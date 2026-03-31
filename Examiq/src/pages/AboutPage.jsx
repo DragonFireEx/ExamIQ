@@ -10,8 +10,8 @@ import './AboutPage.css';
 const AUTHORS = [
   { name: 'Marcel Turwanicki', role: 'FullStack / DevOps',           github: 'DragonFireEx' },
   { name: 'Filip Czepiel',     role: 'FullStack / DevOps',           github: 'filekk' },
-  { name: 'Piotr Lipiński',    role: 'Design & UX / DevOps / Docs', github: 'PIotrr23' },
-  { name: 'Bartosz Wryszcz',   role: 'FullStack / DevOps',           github: 'BartoszBartoszewski' },
+  { name: 'Piotr Lipiński',    role: 'DevOps / Docs',                 github: 'PIotrr23' },
+  { name: 'Bartosz Wryszcz',   role: 'CSS Implementer / Docs',           github: 'BartoszBartoszewski' },
 ];
 
 const HOW_IT_WORKS = [
