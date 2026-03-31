@@ -1,0 +1,410 @@
+/* ─── ExamPracticePage.css ──────────────────────────────── */
+
+/* ─── GLOBAL CLASSES TO USE IN JSX:
+   Replace:
+   - .sheet-btn -> .card (or .card.card--md)
+   - .sheet-index -> .icon-box
+   - .sheet-view-header -> .card
+   - .task-card -> .card
+   - .task-index -> .icon-box.icon-box--sm
+   - .task-tabs -> .tabs
+   - .task-tab -> .tab
+   - .hint-item -> .accordion-item
+   - .hint-trigger -> .accordion-trigger
+   - .hint-body -> .accordion-body
+   - .gallery-thumb -> .gallery__thumb
+   - .lightbox -> .modal (similar, but keep local for now)
+   - .exam-btn-evaluate -> .btn.btn--solid
+   - .exam-error -> .alert.alert--error
+   Note: .dropzone stays page-specific (different styling)
+*/
+
+/* ─── Ensure page-root background ─────────────────────────────────── */
+.page-root {
+  /* Override/ensure gradient background */
+  background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 35%, var(--purple-200) 70%, #f0fdf4 100%) !important;
+}
+
+/* ─── Page header (page-specific) ─────────────────────────────── */
+.exam-page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.exam-page-title {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 900;
+  color: var(--purple-deep);
+  margin: 0 0 0.6rem;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+.exam-page-subtitle {
+  color: var(--gray-500);
+  font-size: 0.95rem;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ─── Sheet selector (page-specific card styling) ─────────────── */
+.sheet-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: left;
+  border: 1px solid var(--accent-border-medium);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.15s;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  width: 100%;
+}
+.sheet-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-border);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.sheet-index {
+  /* Replace with: .icon-box */
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: #fff;
+  box-shadow: var(--shadow-icon);
+}
+.sheet-index svg {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.sheet-info-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border-medium);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  line-height: 1.65;
+}
+
+/* ─── Sheet view header (page-specific) ─────────────────────────── */
+.sheet-view-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent-border-medium);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+.sheet-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--accent-light);
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.sheet-back-btn:hover { color: var(--accent); }
+
+/* ─── Task card (page-specific) ───────────────────────────────────── */
+.task-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  border: 1px solid var(--accent-border-medium);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.task-card:hover {
+  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.task-card__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  text-align: left;
+}
+
+.task-index {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #fff;
+  box-shadow: var(--shadow-icon);
+}
+.task-index svg {
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Use global .icon-box.icon-box--sm for task index */
+
+.task-type-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.task-score-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.task-score-badge--pass { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+.task-score-badge--fail { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); }
+
+/* ─── Task tabs (use global .tabs, .tab) ───────────────────────── */
+/* Use global .tabs and .tab */
+
+/* ─── Task content (page-specific) ─────────────────────────────── */
+.task-content {
+  padding: 1.25rem 1.5rem;
+}
+
+.task-text-block {
+  background: var(--accent-bg);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--accent-border-medium);
+  font-size: 0.83rem;
+  color: var(--gray-700);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.task-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+
+.task-criteria-item {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  padding: 0.35rem 0;
+}
+.task-criteria-num {
+  color: var(--accent-light);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── Hint accordion (use global .accordion-*) ─────────────────── */
+/* Use .accordion-item, .accordion-trigger, .accordion-body */
+.hint-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--purple-600);
+  background: var(--accent-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ─── Image gallery (use global .gallery__thumb) ─────────────── */
+/* Use global .gallery__thumb */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  cursor: zoom-out;
+}
+.lightbox-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s;
+}
+
+/* ─── Dropzone (page-specific) ─────────────────────────────────── */
+.dropzone {
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ─── Buttons (use global .btn) ───────────────────────────────── */
+/* Use .btn.btn--solid.btn--block and .alert.alert--error */
+
+/* ─── AI result card (page-specific) ───────────────────────────── */
+.ai-result {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+.ai-result__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+}
+.ai-result__verdict {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.ai-result__score {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.ai-result__bar-track {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.06);
+}
+.ai-result__bar-fill {
+  height: 100%;
+  transition: width 0.8s ease;
+}
+.ai-result__criteria {
+  padding: 0.75rem 1.25rem;
+}
+.ai-result__criterion {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.45rem 0;
+}
+.ai-result__comment {
+  padding: 0.85rem 1.25rem;
+  background: var(--accent-bg);
+  border-top: 1px solid var(--accent-border-medium);
+}
+.ai-result__section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.ai-result__improvements {
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--accent-border-medium);
+}
+.ai-result__improvement-item {
+  font-size: 0.78rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  padding: 0.3rem 0 0.3rem 0.75rem;
+  border-left: 2px solid var(--accent-border);
+}
+
+.exam-upload-hint {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border-medium);
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  line-height: 1.65;
+}
+
+.tech-badge {
+  /* Match .about-tech-badge */
+  padding: 0.4rem 0.9rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.82rem;
+  border-radius: 99px;
+  border: 1px solid var(--accent-border);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Scrollbar (page-specific? keep) ─────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+

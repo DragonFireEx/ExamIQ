@@ -1,0 +1,148 @@
+/* styles/background.css */
+/* Animowane tło — latające kulki/orby */
+/* Importuj w main.jsx: import './styles/background.css' */
+
+/* ── orby ─────────────────────────────────────────────────────────────────── */
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orbs::before,
+.bg-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+}
+
+/* duży fioletowy orb — górny lewy */
+.bg-orbs::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #a78bfa, #7c3aed);
+  top: -180px;
+  left: -160px;
+  animation: orbDrift1 18s ease-in-out infinite;
+}
+
+/* duży niebieski orb — prawy dół */
+.bg-orbs::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #93c5fd, #3b82f6);
+  bottom: -120px;
+  right: -140px;
+  animation: orbDrift2 22s ease-in-out infinite;
+}
+
+/* dodatkowe orby przez pseudo-elementy na body */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* różowo-fioletowy — środek prawo */
+body::before {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #f0abfc, #c084fc);
+  opacity: 0.3;
+  top: 40%;
+  right: 5%;
+  animation: orbDrift3 26s ease-in-out infinite;
+}
+
+/* zielono-miętowy — środek lewo */
+body::after {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #6ee7b7, #34d399);
+  opacity: 0.2;
+  top: 55%;
+  left: 8%;
+  animation: orbDrift4 20s ease-in-out infinite;
+}
+
+/* ── keyframes ────────────────────────────────────────────────────────────── */
+
+@keyframes orbDrift1 {
+  0%   { transform: translate(0px,    0px)   scale(1);    }
+  25%  { transform: translate(80px,   60px)  scale(1.08); }
+  50%  { transform: translate(40px,   120px) scale(0.96); }
+  75%  { transform: translate(-40px,  70px)  scale(1.04); }
+  100% { transform: translate(0px,    0px)   scale(1);    }
+}
+
+@keyframes orbDrift2 {
+  0%   { transform: translate(0px,    0px)   scale(1);    }
+  25%  { transform: translate(-70px, -50px)  scale(1.06); }
+  50%  { transform: translate(-30px, -110px) scale(0.94); }
+  75%  { transform: translate(50px,  -60px)  scale(1.05); }
+  100% { transform: translate(0px,    0px)   scale(1);    }
+}
+
+@keyframes orbDrift3 {
+  0%   { transform: translate(0px,   0px)   scale(1);    }
+  33%  { transform: translate(-60px, 80px)  scale(1.1);  }
+  66%  { transform: translate(50px,  50px)  scale(0.92); }
+  100% { transform: translate(0px,   0px)   scale(1);    }
+}
+
+@keyframes orbDrift4 {
+  0%   { transform: translate(0px,  0px)   scale(1);    }
+  40%  { transform: translate(90px, -60px) scale(1.07); }
+  70%  { transform: translate(30px, -90px) scale(0.95); }
+  100% { transform: translate(0px,  0px)   scale(1);    }
+}
+
+/* ── małe pływające cząsteczki ────────────────────────────────────────────── */
+
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10vh) scale(1.2);
+  }
+}
+
+/* ── upewnij się że treść jest nad tłem ───────────────────────────────────── */
+
+#root > * {
+  position: relative;
+  z-index: 1;
+}

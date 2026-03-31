@@ -1,0 +1,130 @@
+/* styles/global.css */
+
+/* ─── Import Design System ─────────────────────────────────────────────────── */
+@import './design-system.css';
+
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+html {
+  font: 18px/1.45 var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text, var(--gray-500));
+  background: var(--bg, #fff);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+
+  @media (max-width: 1024px) { font-size: 16px; }
+}
+
+body {
+  font-family: var(--sans);
+  line-height: 1.6;
+  color: inherit;
+  background-color: inherit;
+}
+
+a { transition: color 0.3s ease; }
+button { font-family: var(--sans); }
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Page root (common layout wrapper) ───────────────────────────────────── */
+.page-root {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--purple-50) 0%, var(--purple-100) 45%, var(--purple-200) 100%);
+  font-family: var(--sans);
+}
+
+/* ─── Typografia ─────────────────────────────────────────────────────────── */
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) { font-size: 36px; margin: 20px 0; }
+  @media (max-width: 768px)  { font-size: 2rem; }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) { font-size: 20px; }
+  @media (max-width: 768px)  { font-size: 1.5rem; }
+}
+
+p { margin: 0; }
+
+code {
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--code-bg, #f4f3ec);
+  color: var(--text-h, #08060d);
+  display: inline-flex;
+}
+
+/* ─── Page layout ───────────────────────────────────────────────────────── */
+
+/* Page wrapper - all pages should use this */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section spacing */
+.section {
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.section--lg {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+.section--sm {
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Content container - use inside .section */
+.section__content {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+/* Centered text utility */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
