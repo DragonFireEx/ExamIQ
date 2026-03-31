@@ -6,10 +6,10 @@
 ## Kroki
 
 1. Sklonuj repozytorium:
-   git clone https://github.com/twoj-login/twoj-projekt.git
+   git clone https://github.com/DragonFireEx/ExamIQ.git
 
 2. Przejdź do folderu:
-   cd twoj-projekt
+   cd ExamIQ
 
 3. Otwórz plik:
    docs/examiq_dokumentacja.html
