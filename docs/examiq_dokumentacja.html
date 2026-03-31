@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ExamIQ — Dokumentacja</title>
+  <style>
+:root{
+  --bg:#0b1020;
+  --bg2:#111a33;
+  --panel:#121a2f;
+  --panel2:#17213b;
+  --text:#e8ecf5;
+  --muted:#b6c0d6;
+  --accent:#8b5cf6;
+  --accent2:#22c55e;
+  --line:rgba(255,255,255,.08);
+  --codebg:#0a0f1d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(139,92,246,.18), transparent 26%),
+    radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 24%),
+    linear-gradient(180deg, var(--bg), #090d18 100%);
+  color:var(--text);
+  line-height:1.65;
+}
+a{color:#c4b5fd;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1180px;margin:0 auto;padding:32px 20px 64px}
+.hero{
+  background:linear-gradient(135deg, rgba(139,92,246,.16), rgba(34,197,94,.08));
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:34px 30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+  margin-bottom:26px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid var(--line);
+  color:#d9d6ff;font-size:.92rem;
+}
+h1{margin:16px 0 10px;font-size:clamp(2rem,4vw,3.4rem);line-height:1.1}
+.lead{margin:0;color:var(--muted);max-width:920px;font-size:1.04rem}
+.grid{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:start}
+.toc{
+  position:sticky;top:18px;
+  background:rgba(18,26,47,.88);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px;
+}
+.toc h2{font-size:1rem;margin:0 0 10px;color:#fff}
+.toc a{
+  display:block;padding:9px 10px;border-radius:12px;
+  color:var(--muted);font-size:.95rem;
+}
+.toc a:hover{background:rgba(255,255,255,.06);color:#fff}
+main{display:flex;flex-direction:column;gap:18px}
+.card{
+  background:rgba(18,26,47,.82);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 16px 40px rgba(0,0,0,.22);
+}
+section h2{
+  margin:0 0 10px;
+  font-size:1.6rem;
+}
+section h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  color:#f2f4ff;
+}
+section p{margin:0 0 12px;color:var(--text)}
+section p:last-child{margin-bottom:0}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.badge{
+  padding:7px 12px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid var(--line);
+  color:#d8def4;font-size:.9rem
+}
+.code-title{
+  margin:18px 0 10px;font-size:.92rem;
+  color:#cbd5e1;text-transform:uppercase;letter-spacing:.08em
+}
+pre{
+  margin:0 0 14px;
+  padding:18px 18px;
+  background:linear-gradient(180deg, rgba(10,15,29,.98), rgba(10,15,29,.92));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  overflow:auto;
+  font-size:.92rem;
+  line-height:1.6;
+}
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+pre code{color:#e5e7eb}
+.note{
+  margin-top:12px;
+  padding:14px 16px;
+  border-left:4px solid var(--accent);
+  background:rgba(139,92,246,.08);
+  border-radius:14px;
+  color:#dee3f7;
+}
+hr{
+  border:none;border-top:1px solid var(--line);margin:18px 0;
+}
+.footer{
+  color:var(--muted);
+  text-align:center;
+  padding:16px 0 0;
+  font-size:.92rem;
+}
+.small{font-size:.95rem;color:var(--muted)}
+@media (max-width: 920px){
+  .grid{grid-template-columns:1fr}
+  .toc{position:static}
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <span class="kicker">Dokumentacja projektu • ExamIQ</span>
+      <h1>ExamIQ — dokumentacja techniczna i funkcjonalna</h1>
+      <p class="lead">
+        
+      </p>
+      <div class="badges">
+        <span class="badge">React 18</span>
+        <span class="badge">Vite</span>
+        <span class="badge">Monaco Editor</span>
+        <span class="badge">Google Gemini API</span>
+        <span class="badge">LocalStorage</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="toc">
+        <h2>Spis treści</h2>
+        <a href="#wstep">1. Wstęp</a>
+        <a href="#technologie">2. Technologie</a>
+        <a href="#funkcjonalnosci">3. Opis głównych funkcjonalności</a>
+        <a href="#home">3.1 Strona główna</a>
+        <a href="#learn">3.2 Tryb nauki — teoria</a>
+        <a href="#practice">3.3 Tryb praktyki — kodowanie</a>
+        <a href="#exampractice">3.4 Egzamin praktyczny z arkuszami</a>
+        <a href="#dashboard">3.5 Dashboard i egzamin</a>
+        <a href="#about">3.6 Strona „O nas”</a>
+      </aside>
+
+      <main>
+        <section id="wstep" class="card">
+          <h2>1. Wstęp</h2>
+
+          <h3>Cel aplikacji</h3>
+          <p>ExamIQ to interaktywna aplikacja webowa stworzona z myślą o uczniach technikum informatycznego przygotowujących się do egzaminu zawodowego INF.04 – Projektowanie, programowanie i testowanie aplikacji. Głównym celem projektu jest dostarczenie uczniowi nowoczesnego, angażującego narzędzia do systematycznej i efektywnej nauki, które łączy klasyczne podejście do quizów z elementami grywalizacji oraz oceną kodu przez sztuczną inteligencję.</p>
+
+          <h3>Dla kogo jest przeznaczona</h3>
+          <p>Aplikacja skierowana jest przede wszystkim do uczniów pięcioletnich techników o profilu programistycznym, którzy przystępują do egzaminu potwierdzającego kwalifikację INF.04. Może być również pomocna dla osób uzupełniających wykształcenie zawodowe, nauczycieli chcących demonstrować materiał na lekcjach oraz wszystkich zainteresowanych utrwaleniem wiedzy z zakresu programowania, baz danych i administrowania systemami.</p>
+
+          <h3>Co umożliwia aplikacja</h3>
+          <p>ExamIQ oferuje trzy główne tryby pracy. Tryb nauki pozwala na rozwiązywanie pytań testowych (zamkniętych i otwartych) z natychmiastową informacją zwrotną, konfigurowalne limity czasowe oraz system serii poprawnych odpowiedzi motywujący do regularnej nauki. Tryb egzaminu symuluje warunki rzeczywistego egzaminu zawodowego — użytkownik rozwiązuje zadania w określonym czasie, a po zakończeniu widzi swój wynik, czas pracy oraz informację, czy przekroczył wymagany próg zaliczenia wynoszący 75%. Tryb praktyki to środowisko w stylu LeetCode z edytorem kodu Monaco, w którym uczeń rozwiązuje zadania programistyczne w wybranym języku (Python, C++, Java lub JavaScript), a jego kod jest automatycznie oceniany przez model Gemini według kryteriów egzaminacyjnych. Aplikacja śledzi ponadto postępy użytkownika — przechowuje historię sesji, statystyki per kategoria oraz serię dni nauki.</p>
+
+          <div class="note">Projekt stawia na czytelność, automatyzację i naukę przez praktykę, a nie tylko na bierne czytanie teorii.</div>
+        </section>
+
+        <section id="technologie" class="card">
+          <h2>2. Technologie</h2>
+          <p>Aplikacja ExamIQ zbudowana jest wyłącznie po stronie klienta — nie posiada własnego backendu ani bazy danych. Cały stos technologiczny opiera się na nowoczesnych standardach frontendowych.</p>
+
+          <p><strong>React 18 + Vite</strong> stanowią fundament projektu. React odpowiada za deklaratywne budowanie interfejsu użytkownika w oparciu o komponenty funkcyjne i hooki, natomiast Vite pełni rolę narzędzia do budowania i serwowania aplikacji, zapewniając błyskawiczne odświeżanie widoku podczas developmentu (HMR) oraz zoptymalizowany bundle produkcyjny.</p>
+
+          <p><strong>JavaScript (JSX)</strong> jest jedynym językiem programowania użytym w projekcie. Kod napisany jest zgodnie ze standardem ES2023 — wykorzystywane są m.in. destrukturyzacja, moduły ES, async/await oraz opcjonalne wiązanie. Składnia JSX umożliwia wygodne łączenie logiki komponentów z opisem struktury UI bezpośrednio w plikach .jsx.</p>
+
+          <p><strong>CSS-in-JS (style inline)</strong> — warstwa wizualna aplikacji realizowana jest niemal w całości przez obiekty stylów przekazywane bezpośrednio do właściwości style komponentów React, uzupełnione lokalnie osadzonymi blokami &lt;style&gt; z definicjami animacji kluczowych (@keyframes). Takie podejście eliminuje zewnętrzne zależności od bibliotek stylów i zapewnia pełną enkapsulację wyglądu każdego komponentu.</p>
+
+          <p><strong>LocalStorage API</strong> służy do trwałego przechowywania danych użytkownika po stronie przeglądarki. Zapisywana jest tam historia sesji egzaminacyjnych, statystyki nauki per kategoria oraz wyniki z trybu praktyki. Dane nie są nigdy wysyłane na serwer — użytkownik zachowuje pełną kontrolę nad swoją historią.</p>
+
+          <p><strong>Cookie API</strong> przechowuje lżejsze dane sesyjne, takie jak nick użytkownika oraz licznik serii dni nauki (streak), które muszą być dostępne przy każdym odwiedzeniu aplikacji.</p>
+
+          <p><strong>Plik questions.json oraz practice.json</strong> pełnią rolę lokalnej bazy danych z pytaniami. Pytania testowe i zadania programistyczne zakodowane są statycznie w formacie JSON i dołączane do aplikacji w trakcie budowania przez Vite.</p>
+
+          <p><strong>Google Gemini API (@google/generative-ai)</strong> integruje model językowy bezpośrednio z aplikacją. Gemini używany jest dwutorowo: do oceny odpowiedzi na pytania otwarte w trybie nauki (porównanie merytoryczne zamiast dosłownego dopasowania) oraz do szczegółowej ewaluacji kodu ucznia w trybie praktyki według predefiniowanych kryteriów egzaminacyjnych.</p>
+
+          <p><strong>Monaco Editor</strong> (edytor Visual Studio Code osadzony w przeglądarce) zapewnia pełnoprawne środowisko do pisania kodu w trybie praktyki — z podświetlaniem składni, autouzupełnianiem i numeracją linii.</p>
+
+          <p><strong>React Router</strong> obsługuje nawigację między stronami aplikacji (trasy /learn, /exam, /about i inne) bez przeładowania strony, realizując model Single Page Application.</p>
+        </section>
+
+        <section id="funkcjonalnosci" class="card">
+          <h2>3. Opis głównych funkcjonalności</h2>
+          <p>Poniżej opisano najważniejsze widoki i mechanizmy, które budują działanie aplikacji ExamIQ.</p>
+
+          <hr>
+
+          <h3 id="home">3.1 Strona główna (HomePage)</h3>
+          <p>Strona główna pełni rolę punktu wejścia do aplikacji i prezentuje użytkownikowi wszystkie dostępne tryby oraz statystyki aplikacji. Sekcja Hero zawiera nagłówek, opis i dwa przyciski nawigacyjne. Dane statystyczne (liczba pytań, kategorii, próg zaliczenia) są zakodowane jako stała tablica STATS i renderowane przez komponent StatPill. Sekcja „Jak to działa?” prezentuje cztery kroki w układzie dwukolumnowym z wizualnym podglądem przykładowego pytania SQL — jest to statyczny mock demonstrujący wygląd quizu bez żadnej interakcji z danymi.</p>
+
+          <div class="code-title">Kluczowy fragment</div>
+          <pre><code class="language-jsx">jsxconst STATS = [
+  { value: &#x27;200+&#x27;, label: &#x27;pytań w bazie&#x27; },
+  { value: &#x27;9&#x27;,   label: &#x27;kategorii tematycznych&#x27; },
+  { value: &#x27;75%&#x27;, label: &#x27;próg zaliczenia&#x27; },
+  { value: &#x27;∞&#x27;,   label: &#x27;prób egzaminacyjnych&#x27; },
+];</code></pre>
+
+          <p>Tablica STATS jest iterowana przez metodę .map() i każdy element przekazywany jest do komponentu StatPill przez spread operator {...s}. Komponent renderuje wartość i etykietę w stylizowanej karcie ze szklanym efektem (backdrop-filter: blur). Dzięki temu dane statystyczne są łatwe do zaktualizowania — wystarczy zmienić wartości w jednym miejscu, a zmiana automatycznie pojawi się we wszystkich kartach.</p>
+
+          <h3 id="learn">3.2 Tryb nauki — teoria (LearnPage)</h3>
+          <p>LearnPage składa się z trzech faz zarządzanych przez zmienną stanu phase: konfiguracji (setup), quizu (quiz) i ekranu wyników (results). Przejścia między fazami realizowane są przez przekazywanie callbacków (onStart, onFinish, onRestart) między komponentami.</p>
+
+          <h3>Konfiguracja quizu (SetupScreen)</h3>
+          <pre><code class="language-jsx">jsxconst available = questions.filter(q =&gt;
+  typeMode === &#x27;both&#x27; ? true : q.type === typeMode
+).length;
+const maxCount = Math.min(available, 40);</code></pre>
+          <p>Zmienna available jest obliczana przy każdym renderze reaktywnie — filtruje tablicę pytań z pliku questions.json na podstawie aktualnie wybranego trybu (typeMode). Gdy użytkownik zmienia filtr na „zamknięte” lub „otwarte”, available automatycznie maleje, a suwak liczby pytań dostosowuje swój maksymalny zasięg do Math.min(available, 40). Zabezpiecza to przed sytuacją, w której użytkownik wybierze więcej pytań niż istnieje w bazie dla danego typu.</p>
+
+          <h3>Losowanie pytań</h3>
+          <pre><code class="language-jsx">jsxconst [pool] = useState(() =&gt; {
+  const filtered = questions.filter(q =&gt;
+    config.typeMode === &#x27;both&#x27; ? true : q.type === config.typeMode
+  );
+  return shuffle(filtered).slice(0, config.count);
+});</code></pre>
+          <p>Pula pytań jest inicjalizowana jednorazowo przy pierwszym renderze komponentu QuizScreen — dzięki leniwej inicjalizacji useState z funkcją inicjalizującą (zamiast wartości). Funkcja shuffle implementuje losowanie przez porównanie losowych wartości:</p>
+          <pre><code class="language-jsx">jsxfunction shuffle(arr) {
+  return [...arr].sort(() =&gt; Math.random() - 0.5);
+}</code></pre>
+          <p>Spread operator [...arr] tworzy płytką kopię tablicy, nie modyfikując oryginału. Komparator () => Math.random() - 0.5 zwraca losowo wartości ujemne lub dodatnie, co powoduje losowe przestawienie elementów przez algorytm sortowania. Następnie .slice(0, config.count) przycina tablicę do wybranej liczby pytań.</p>
+
+          <h3>Timer per pytanie</h3>
+          <pre><code class="language-jsx">jsxuseEffect(() =&gt; {
+  if (!config.timeLimit || revealed) return;
+  setTimeLeft(config.timeLimit);
+  timerRef.current = setInterval(() =&gt; {
+    setTimeLeft(t =&gt; {
+      if (t &lt;= 1) { clearInterval(timerRef.current); handleReveal(false); return 0; }
+      if (t &lt;= 6) setTimerPulse(true);
+      return t - 1;
+    });
+  }, 1000);
+  return () =&gt; clearInterval(timerRef.current);
+}, [idx, config.timeLimit, revealed, handleReveal]);</code></pre>
+          <p>useEffect uruchamia się za każdym razem, gdy zmienia się numer pytania (idx) lub stan revealed. Warunek wyjścia if (!config.timeLimit || revealed) return sprawia, że timer nie startuje w trybie bez limitu ani po ujawnieniu odpowiedzi. Interwał odlicza sekundy przez aktualizator funkcyjny setTimeLeft(t => t - 1) — jest to bezpieczna forma zapisu, która gwarantuje odczytanie najnowszej wartości stanu, a nie stałej z zamknięcia (closure). Gdy t <= 6, ustawiana jest flaga timerPulse, która dodaje animację migania CSS. Gdy t <= 1, interwał jest czyszczony i wywoływana jest funkcja handleReveal(false) — pytanie zostaje zaliczone jako błędne. Funkcja zwrócona z useEffect (cleanup) czyści interwał przy odmontowaniu komponentu lub przy ponownym uruchomieniu efektu, zapobiegając wyciekom pamięci.</p>
+
+          <h3>Ocena pytań otwartych przez Gemini</h3>
+          <pre><code class="language-jsx">jsxconst checkWithGemini = async (question, correctAnswer, userAnswer) =&gt; {
+  try {
+    const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
+    const model = ai.getGenerativeModel({ model: &#x27;gemini-flash-latest&#x27; });
+    const prompt = `Jesteś weryfikatorem odpowiedzi... Odpowiedz TYLKO jednym słowem: TAK lub NIE.`;
+    const result = await model.generateContent(prompt);
+    const text = result.response.text().trim().toUpperCase();
+    return text.startsWith(&#x27;TAK&#x27;);
+  } catch (err) {
+    return userAnswer.trim().toLowerCase().includes(correctAnswer.trim().toLowerCase());
+  }
+};</code></pre>
+          <p>Klucz API jest pobierany ze zmiennych środowiskowych Vite (import.meta.env.VITE_GEMINI_KEY), dzięki czemu nigdy nie trafia do repozytorium kodu. Prompt jest sformułowany tak, żeby model odpowiedział wyłącznie słowem „TAK” lub „NIE” — ogranicza to zużycie tokenów i eliminuje konieczność parsowania długiej odpowiedzi. Blok catch implementuje fallback — jeśli wywołanie API się nie powiedzie (brak internetu, wyczerpany limit), odpowiedź oceniana jest prostym porównaniem includes(). Nie jest to idealne, ale zapobiega całkowitemu zawieszeniu się funkcji oceniania.</p>
+
+          <h3>Sekwencja ujawniania odpowiedzi</h3>
+          <pre><code class="language-jsx">jsxconst handleReveal = useCallback((correct) =&gt; {
+  clearInterval(timerRef.current);
+  setRevealed(true);
+  setIsCorrect(correct);
+  if (correct) {
+    setStreak(prev =&gt; { const n = prev + 1; if (n &gt;= 2) setShowFlame(true); return n; });
+  } else {
+    setStreak(0);
+    setShowFlame(false);
+  }
+  setResults(prev =&gt; [...prev, { q, correct }]);
+}, [q]);</code></pre>
+          <p>Funkcja opakowana w useCallback z zależnością [q] jest memoizowana — nie jest tworzona od nowa przy każdym renderze, co jest konieczne, ponieważ jest przekazywana jako zależność do useEffect timera. Wewnątrz funkcji najpierw czyszczony jest interwał timera, aby zapobiec podwójnemu wywołaniu. Streak (seria) jest aktualizowany przez funkcjonalny updater setStreak(prev => ...) — gwarantuje to odczyt aktualnej wartości w sytuacjach asynchronicznych. Wyniki są dodawane do tablicy immutowalnie przez spread [...prev, { q, correct }].</p>
+
+          <h3>Zapis wyników</h3>
+          <pre><code class="language-jsx">jsxuseEffect(() =&gt; {
+  if (saved.current) return;
+  saved.current = true;
+  saveExamResult({
+    score: correct, total, duration: 0, category: &#x27;Nauka&#x27;,
+    questions: results.map(r =&gt; ({ categoryName: r.q.category, wasCorrect: r.correct })),
+  });
+}, []);</code></pre>
+          <p>Ref saved.current pełni rolę flagi jednorazowego wykonania — bez niej useEffect z pustą tablicą zależności mógłby w trybie React Strict Mode uruchomić się dwukrotnie, co spowodowałoby podwójny zapis do historii. Wyniki per kategoria są mapowane do uproszczonej struktury { categoryName, wasCorrect }, którą hook useUserSession przetwarza na statystyki dashboardu.</p>
+
+          <h3 id="practice">3.3 Tryb praktyki — kodowanie (PracticePage)</h3>
+          <p>PracticePage implementuje środowisko do pisania kodu wzorowane na LeetCode. Aplikacja zarządza trzema fazami: setup, editor i summary.</p>
+
+          <h3>Integracja edytora Monaco</h3>
+          <pre><code class="language-jsx">jsxuseEffect(() =&gt; {
+  if (!window.monaco) { console.error(&#x27;Monaco not loaded&#x27;); return; }
+  if (monacoRef.current) return;
+
+  monacoRef.current = window.monaco.editor.create(containerRef.current, {
+    value: code,
+    language: monacoLang,
+    theme: &#x27;vs-dark&#x27;,
+    fontSize: 14,
+    fontFamily: &quot;&#x27;JetBrains Mono&#x27;, &#x27;Fira Code&#x27;, monospace&quot;,
+    minimap: { enabled: false },
+    automaticLayout: true,
+  });
+
+  monacoRef.current.onDidChangeModelContent(() =&gt; {
+    setCode(monacoRef.current.getValue());
+  });
+
+  return () =&gt; {
+    if (monacoRef.current) {
+      monacoRef.current.dispose();
+      monacoRef.current = null;
+    }
+  };
+}, []);</code></pre>
+          <p>Monaco Editor jest inicjalizowany jako zewnętrzna biblioteka ładowana przez window.monaco (nie przez npm), co pozwala uniknąć problemów z bundlowaniem. Ref monacoRef.current przechowuje instancję edytora poza cyklem życia Reacta — gdyby instancja była trzymana w stanie, każda zmiana kodu wywoływałaby ponowne renderowanie całego komponentu. Warunek if (monacoRef.current) return zapobiega tworzeniu duplikatów edytora przy ponownych renderach. Listener onDidChangeModelContent synchronizuje zawartość edytora ze stanem React code — dzięki temu kod jest dostępny podczas wysyłania do Gemini. Cleanup function wywołuje dispose(), które zwalnia zasoby DOM i wewnętrzne zasoby Monaco — bez tego przy odmontowaniu komponentu pozostałyby w pamięci osierocone instancje edytora.</p>
+
+          <h3>Zmiana języka z potwierdzeniem</h3>
+          <pre><code class="language-jsx">jsxfunction handleLangChange(newLang) {
+  if (newLang === lang) return;
+  const template = LANG_OPTIONS.find(l =&gt; l.id === newLang)?.comment || &#x27;&#x27;;
+  const isEmpty = code.trim() === &#x27;&#x27; || code.trim() === 
+    (LANG_OPTIONS.find(l =&gt; l.id === lang)?.comment || &#x27;&#x27;).trim();
+  if (!isEmpty &amp;&amp; !window.confirm(&#x27;Zmiana języka wyczyści edytor. Kontynuować?&#x27;)) return;
+  setLang(newLang);
+  setCode(template);
+  if (monacoRef.current) {
+    monacoRef.current.setValue(template);
+    window.monaco.editor.setModelLanguage(model, monacoLang);
+  }
+}</code></pre>
+          <p>Zmienna isEmpty sprawdza, czy użytkownik napisał już jakiś kod — porównuje aktualną zawartość z domyślnym szablonem języka. Jeśli edytor nie jest pusty, wyświetlane jest natywne okno potwierdzenia window.confirm. Zarówno stan React (setCode), jak i instancja Monaco (setValue) muszą być zaktualizowane oddzielnie — Monaco trzyma własny model danych niezależnie od React. Zmiana podświetlania składni wymaga wywołania setModelLanguage na modelu edytora.</p>
+
+          <h3>Ocena kodu przez Gemini</h3>
+          <pre><code class="language-jsx">jsxconst criteriaList = (question.evaluation_criteria || [])
+  .map((c, i) =&gt; `${i+1}. ${c}`).join(&#x27;\n&#x27;);
+
+const prompt = `Jesteś egzaminatorem... Oceń kod zgodnie z kryteriami.
+Odpowiedz TYLKO w formacie JSON (bez markdown, bez backticks):
+{
+  &quot;score&quot;: &lt;liczba 0-100&gt;,
+  &quot;verdict&quot;: &quot;&lt;ZALICZONO|CZĘŚCIOWO|NIEZALICZONO&gt;&quot;,
+  &quot;criteria_results&quot;: [...],
+  &quot;general_comment&quot;: &quot;...&quot;,
+  &quot;tips&quot;: [...]
+}`;
+
+const result = await model.generateContent(prompt);
+const text = result.response.text().replace(/```json|```/g, &#x27;&#x27;).trim();
+const parsed = JSON.parse(text);</code></pre>
+          <p>Kryteria oceny są numerowane i formatowane jako lista w prompcie, co zwiększa precyzję oceny — model dostaje jasno zdefiniowane punkty kontrolne zamiast ogólnego polecenia. Instrukcja „bez markdown, bez backticks” zapobiega owijaniu odpowiedzi JSON w bloki kodu, co uniemożliwiłoby parsowanie. Regex .replace(/```json|```/g, '') stanowi dodatkowe zabezpieczenie na wypadek, gdyby model mimo instrukcji dodał znaczniki markdown. JSON.parse(text) parsuje odpowiedź do obiektu JavaScript — cały blok jest opakowany w try/catch, który w razie błędu parsowania ustawia feedback.error = true i wyświetla komunikat o błędzie.</p>
+
+          <h3>Hook timera</h3>
+          <pre><code class="language-jsx">jsxfunction useTimer(timerMode, onExpire) {
+  const totalSeconds = timerMode === &#x27;none&#x27; ? null : parseInt(timerMode) * 60;
+  const [elapsed, setElapsed] = useState(0);
+  const [running, setRunning] = useState(true);
+
+  useEffect(() =&gt; {
+    if (!running) return;
+    intervalRef.current = setInterval(() =&gt; {
+      setElapsed(prev =&gt; {
+        const next = prev + 1;
+        if (totalSeconds !== null &amp;&amp; next &gt;= totalSeconds) {
+          clearInterval(intervalRef.current);
+          setRunning(false);
+          onExpire();
+        }
+        return next;
+      });
+    }, 1000);
+    return () =&gt; clearInterval(intervalRef.current);
+  }, [running, totalSeconds, onExpire]);
+
+  return { remaining, elapsed, pct, fmt, danger, warning,
+           pause: () =&gt; setRunning(false), resume: () =&gt; setRunning(true) };
+}</code></pre>
+          <p>Hook jest wydzielony jako osobna funkcja useTimer, co pozwala na jego reużycie i izolację logiki. Gdy timerMode === 'none', zmienna totalSeconds ustawiana jest na null, a timer pracuje jako stoper (zlicza czas w górę). Eksponowane funkcje pause i resume pozwalają komponentowi EditorScreen zatrzymać timer podczas oczekiwania na ocenę Gemini i wznowić go po zamknięciu panelu feedbacku. Właściwość danger (czas < 2 minuty) i warning (czas < 5 minut) służą do dynamicznej zmiany koloru timera w interfejsie.</p>
+
+          <h3 id="exampractice">3.4 Egzamin praktyczny z arkuszami (ExamPracticePage)</h3>
+          <p>Strona arkuszy egzaminacyjnych umożliwia pracę z pełnymi zadaniami egzaminacyjnymi INF.04 i ocenę przesłanych plików przez AI.</p>
+
+          <h3>Dropzone z obsługą plików i obrazów</h3>
+          <pre><code class="language-jsx">jsxasync function handleEvaluate() {
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
+  const model = genAI.getGenerativeModel({ model: &#x27;gemini-2.0-flash&#x27; });
+
+  if (isImageFile(file)) {
+    const b64 = await fileToBase64(file);
+    parts = [
+      { inlineData: { mimeType: file.type, data: b64 } },
+      { text: `${systemPrompt}\n\nNa powyższym obrazie...` },
+    ];
+  } else {
+    const text = await file.text();
+    parts = [{ text: `${systemPrompt}\n\nKOD UCZNIA:\n\`\`\`\n${text.slice(0, 12000)}\n\`\`\`` }];
+  }
+
+  const res = await model.generateContent({ contents: [{ role: &#x27;user&#x27;, parts }] });
+}</code></pre>
+          <p>Funkcja isImageFile(file) sprawdza file.type.startsWith('image/'). Dla obrazów stosowany jest format inlineData z base64 — Gemini Vision przyjmuje obraz bezpośrednio w zapytaniu jako dane binarne, co pozwala modelowi ocenić wygląd aplikacji ze zrzutu ekranu. Dla plików tekstowych używana jest metoda file.text() (Web API), która odczytuje zawartość pliku jako string. Limit .slice(0, 12000) zapobiega przekroczeniu okna kontekstu modelu przy bardzo dużych plikach. Multimodalny format parts (tablica obiektów) pozwala łączyć obraz z tekstem w jednym żądaniu API.</p>
+
+          <pre><code class="language-jsx">jsxfunction fileToBase64(file) {
+  return new Promise((resolve, reject) =&gt; {
+    const r = new FileReader();
+    r.onload  = () =&gt; resolve(r.result.split(&#x27;,&#x27;)[1]);
+    r.onerror = () =&gt; reject(new Error(&#x27;Nie można odczytać pliku&#x27;));
+    r.readAsDataURL(file);
+  });
+}</code></pre>
+          <p>FileReader.readAsDataURL zwraca string w formacie data:image/png;base64,AAAA.... Metoda .split(',')[1] wyodrębnia samą część base64, odcinając nagłówek MIME, który jest wymagany przez przeglądarkę, ale nieoczekiwany przez Gemini API.</p>
+
+          <h3>Drag-and-drop</h3>
+          <pre><code class="language-jsx">jsx&lt;div
+  onDragOver={e =&gt; { e.preventDefault(); setDragging(true); }}
+  onDragLeave={() =&gt; setDragging(false)}
+  onDrop={e =&gt; { e.preventDefault(); setDragging(false); handleFile(e.dataTransfer.files[0]); }}
+  onClick={() =&gt; inputRef.current?.click()}
+&gt;
+  &lt;input ref={inputRef} type=&quot;file&quot; style={{ display: &#x27;none&#x27; }}
+    accept=&quot;.py,.java,.cs,.cpp,.js,.jsx,.ts,.html,.css,.kt,.txt,.zip,image/*&quot;
+    onChange={e =&gt; handleFile(e.target.files[0])} /&gt;</code></pre>
+          <p>e.preventDefault() w onDragOver jest konieczne — bez niego przeglądarka domyślnie otworzyłaby plik (np. wyświetliła obraz lub pobrała plik tekstowy). Zdarzenia onDragOver i onDragLeave zmieniają stan dragging, który wpływa na styl obramowania strefy upuszczania. e.dataTransfer.files[0] pobiera pierwszy plik z przeciągniętej kolekcji. Ukryty &lt;input type="file"&gt; jest wywoływany programatycznie przez inputRef.current?.click() po kliknięciu na strefę — to standardowy pattern do stylizowania inputów plikowych, ponieważ natywny element &lt;input&gt; jest trudny do ostylowania.</p>
+
+          <h3 id="dashboard">3.5 Dashboard i egzamin (DashboardPage)</h3>
+          <p>Dashboard jest centralnym miejscem do śledzenia postępów, uruchamiania egzaminów i przeglądania historii sesji.</p>
+
+          <h3>Losowanie puli egzaminacyjnej</h3>
+          <pre><code class="language-jsx">jsxfunction startExam(count, category) {
+  const base = category === &#x27;all&#x27;
+    ? ALL_QUESTIONS.slice()
+    : ALL_QUESTIONS.filter(q =&gt; q.category === category);
+  const pool = base
+    .map(q =&gt; ({ q, r: Math.random() }))
+    .sort((a, b) =&gt; a.r - b.r)
+    .map(x =&gt; x.q)
+    .slice(0, count);
+  setExamPool(pool);
+}</code></pre>
+          <p>Jest to implementacja algorytmu tasowania metodą Fishera-Yatesa przez dołączanie wartości losowej — każdemu pytaniu przypisywana jest losowa liczba r, tablica jest sortowana po r, a następnie wartości losowe są odrzucane. Podejście to jest prostsze niż klasyczny Fisher-Yates, lecz nieco mniej równomiernie rozłożone statystycznie; dla potrzeb aplikacji edukacyjnej jest w zupełności wystarczające.</p>
+
+          <h3>Liczenie wyników i zapis</h3>
+          <pre><code class="language-jsx">jsxconst confirm = () =&gt; {
+  if (!selected || confirmed) return;
+  const correct = selected === q.answer;
+  if (correct) scoreRef.current += 1;
+  resultsRef.current.push({ categoryName: q.category, wasCorrect: correct });
+  setConfirmed(true);
+};</code></pre>
+          <p>scoreRef i resultsRef są Refami (nie stanem), ponieważ nie muszą wywoływać rerenderów — są jedynie akumulatorami zbierającymi dane przez całą sesję egzaminacyjną. Dopiero po zakończeniu ostatniego pytania dane są przekazywane do onFinish, który wywołuje saveExamResult i zapisuje wynik do localStorage przez hook useUserSession.</p>
+
+          <h3>Wykres Mini Bar</h3>
+          <pre><code class="language-jsx">jsxfunction MiniBarChart({ sessions }) {
+  const last6 = sessions.slice(-6);
+  if (!last6.length) return (/* komunikat o braku danych */);
+  const max = Math.max(...last6.map(s =&gt; s.score), 1);
+  return (
+    &lt;div style={{ display: &#x27;flex&#x27;, alignItems: &#x27;flex-end&#x27;, gap: 6, height: 80 }}&gt;
+      {last6.map((s, i) =&gt; {
+        const pct = (s.score / max) * 100;
+        const pass = s.score / s.total &gt;= 0.75;
+        return (
+          &lt;div key={i} style={{ flex: 1, ... }}&gt;
+            &lt;div style={{ height: `${Math.max(pct * 0.5, 4)}px`,
+              background: pass ? &#x27;linear-gradient(180deg,#a78bfa,#7c3aed)&#x27;
+                               : &#x27;linear-gradient(180deg,#f87171,#b91c1c)&#x27; }} /&gt;
+          &lt;/div&gt;
+        );
+      })}
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p>sessions.slice(-6) pobiera maksymalnie sześć ostatnich sesji. Wartość max jest obliczana przez Math.max(...last6.map(...), 1) — spread operator rozpakowuje tablicę do argumentów Math.max, a dodatkowe 1 zabezpiecza przed dzieleniem przez zero gdy wszystkie wyniki wynoszą 0. Wysokość każdego słupka jest obliczana jako pct * 0.5 (czyli połowa kontenera), a Math.max(..., 4) gwarantuje minimalną widoczną wysokość 4px nawet dla wyniku 0. Kolor słupka zależy od tego, czy wynik przekraczał 75% (pass).</p>
+
+          <h3>Postęp per kategoria</h3>
+          <pre><code class="language-jsx">jsxfunction CategoryBar({ name, attempts, correct }) {
+  const pct = attempts &gt; 0 ? Math.round((correct / attempts) * 100) : 0;
+  const pass = pct &gt;= 75;
+  return (
+    &lt;div&gt;
+      &lt;div style={{ ... }}&gt;
+        &lt;span&gt;{name}&lt;/span&gt;
+        &lt;span style={{ color: pass ? &#x27;#7c3aed&#x27; : &#x27;#ef4444&#x27; }}&gt;
+          {pct}% ({correct}/{attempts})
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div style={{ height: 7, background: &#x27;#ede9fe&#x27;, borderRadius: 99, overflow: &#x27;hidden&#x27; }}&gt;
+        &lt;div style={{
+          width: `${pct}%`,
+          background: pass ? &#x27;linear-gradient(90deg,#7c3aed,#a78bfa)&#x27;
+                           : &#x27;linear-gradient(90deg,#f87171,#fca5a5)&#x27;,
+          transition: &#x27;width 0.6s ease&#x27;
+        }} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p>Warunek attempts > 0 zapobiega dzieleniu przez zero dla kategorii, z których użytkownik nie rozwiązał jeszcze żadnego pytania. transition: 'width 0.6s ease' tworzy płynną animację wypełniania paska przy pierwszym renderze lub przy zmianie danych. Kolor i kolor tekstu zmieniają się dynamicznie w zależności od tego, czy wynik przekracza próg 75%.</p>
+
+          <h3 id="about">3.6 Strona „O nas" (AboutPage)</h3>
+          <p>Strona dokumentuje projekt, autorów i stos technologiczny. Dane są zakodowane jako stałe tablice AUTHORS, HOW_IT_WORKS i TECH na początku pliku.</p>
+
+          <pre><code class="language-jsx">jsxconst AUTHORS = [
+  { name: &#x27;Marcel Turwanicki&#x27;, role: &#x27;FullStack / DevOps&#x27;, github: &#x27;DragonFireEx&#x27; },
+  { name: &#x27;Filip Czepiel&#x27;,     role: &#x27;FullStack / DevOps&#x27;, github: &#x27;filekk&#x27; },
+  ...
+];</code></pre>
+
+          <p>Każdy autor renderowany jest jako karta z awatarem pobieranym bezpośrednio z GitHub API:</p>
+
+          <pre><code class="language-jsx">jsx&lt;img
+  src={`https://github.com/${github}.png`}
+  alt={name}
+  style={{ width: 72, height: 72, borderRadius: &#x27;50%&#x27; }}
+/&gt;</code></pre>
+
+          <p>GitHub udostępnia awatary użytkowników pod adresem https://github.com/{username}.png bez konieczności autoryzacji. Literał szablonowy https://github.com/${github}.png dynamicznie wstawia login z tablicy AUTHORS. Dzięki temu zdjęcia autorów zawsze są aktualne — aplikacja nie przechowuje żadnych obrazów lokalnie.</p>
+        </section>
+
+        <div class="footer">• ExamIQ</div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
